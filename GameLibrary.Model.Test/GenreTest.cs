@@ -174,7 +174,126 @@ namespace GameLibrary.Model.Test
             selectQuery = genre.GenerateSelectQuery();
 
             Assert.AreEqual(string.IsNullOrEmpty(selectQuery), true);
+
+            errorMessage = "";
+            selectResult = connection.ExecuteQuery(selectQuery, ref errorMessage);
+
+            Assert.AreEqual(!string.IsNullOrEmpty(errorMessage), false);
+            Assert.IsNull(selectResult);
+
+            selectResultList = DataSetUtility.ToDictionaryList(selectResult.Tables[0]);
+
+            Genre foundgenre = null;
+
+            if (selectResultList.Count > 0)
+            {
+                foreach (var dictionary in selectResultList.Where(dictionary => (dictionary != null) && (dictionary.Count > 0)))
+                {
+                    foundgenre = Genre.FromDictionary(dictionary);
+                    break;
+                }
+            }
+            Assert.IsNotNull(foundgenre);
+
+            Assert.AreNotSame(genre, foundgenre);
+
+            Assert.AreEqual(genre.Id, foundgenre.Id);
+            Assert.AreEqual(genre.Name, foundgenre.Name);
+            Assert.AreEqual(genre.Description, foundgenre.Description);
+
+            // update 
+
+            var updategenre = new Genre(1, "Name", "Description");
+            var updatecommand = updategenre.GenerateUpdateStatement();
+
+            Assert.IsFalse(string.IsNullOrEmpty(updatecommand));
+
+            errorMessage = "";
+            var updateResult = connection.ExecuteCommand(updatecommand, ref errorMessage);
+
+            Assert.AreEqual(updateResult, true);
+            Assert.AreEqual(string.IsNullOrEmpty(errorMessage), true);
+
+            // exsits
+
+            existsQuery = updategenre.GenerateExistQuery();
+
+            Assert.IsFalse(string.IsNullOrEmpty(existsQuery));
+
+            errorMessage = "";
+            existsResultList = DataSetUtility.ToDictionaryList(existsResult.Tables[0]);
+
+            recordExists = existsResultList.Any(dictionary => (dictionary != null) && (dictionary.Count > 0));
+
+            Assert.AreEqual(recordExists, true);
+
+            // select
+
+            selectQuery = updategenre.GenerateSelectQuery();
+
+            Assert.IsFalse(string.IsNullOrEmpty(selectQuery));
+
+            errorMessage = "";
+            selectResult = connection.ExecuteQuery(selectQuery, ref errorMessage);
+
+            Assert.IsFalse(string.IsNullOrEmpty(errorMessage));
+            Assert.IsNotNull(selectResult);
+
+            selectResultList = DataSetUtility.ToDictionaryList(selectResult.Tables[0]);
+
+            foundgenre = null;
+
+            if (selectResultList.Count > 0)
+            {
+                foreach (var dictionary in selectResultList.Where(dictionary => (dictionary != null) && (dictionary.Count > 0)))
+                {
+                    foundgenre = Genre.FromDictionary(dictionary);
+                    break;
+                }
+            }
+
+            Assert.IsNotNull(foundgenre);
+
+            Assert.AreNotSame(genre, foundgenre);
+
+            Assert.AreEqual(genre.Id, foundgenre.Id);
+            Assert.AreEqual(genre.Name, foundgenre.Name);
+            Assert.AreEqual(genre.Description, foundgenre.Description);
+
+            // delete 
+
+            var deleteCommand = genre.GenerateDeleteStatement();
+
+            Assert.IsFalse(string.IsNullOrEmpty(deleteCommand));
+
+            errorMessage = "";
+            var deleteResult = connection.ExecuteCommand(deleteCommand, ref errorMessage);
+
+            Assert.AreEqual(deleteResult, true);
+            Assert.AreEqual(string.IsNullOrEmpty(errorMessage), true);
+
+            // exists 
+
+            existsQuery = genre.GenerateExistQuery();
+
+            Assert.IsFalse(string.IsNullOrEmpty(existsQuery));
+
+            errorMessage = "";
+            existsResult = connection.ExecuteQuery(existsQuery, ref errorMessage);
+
+            Assert.AreEqual(string.IsNullOrEmpty(errorMessage), true);
+            Assert.IsNotNull(existsResult);
+
+            existsResultList = DataSetUtility.ToDictionaryList(existsResult.Tables[0]);
+
+            recordExists = existsResultList.Any(dictionary => (dictionary != null) && (dictionary.Count > 0));
+
+            Assert.IsFalse(recordExists);
+
+
+
         }
+        
 
         #endregion Test Methods
 
