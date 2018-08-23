@@ -1,0 +1,62 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
+    <RuntimeIdentifiers>win7-x86;win7-x64</RuntimeIdentifiers>
+    <Authors>Ron Wells</Authors>
+    <RequireLicenseAcceptance>false</RequireLicenseAcceptance>
+    <Language>en-US</Language>
+    <AssemblyName>GreenFolders.Sql</AssemblyName>
+    <AssemblyTitle>GreenFolders.Sql</AssemblyTitle>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <PackageId>GreenFolders.Sql</PackageId>
+    <RootNamespace>GreenFolders.Sql</RootNamespace>
+    <Title>GreenFolders SQL</Title>
+    <Description>
+    </Description>
+    <Summary>
+    </Summary>
+    <PackageCopyright>Copyright © Daffinity Technologies 2008-2018</PackageCopyright>
+    <PackageTags>
+    </PackageTags>
+    <PackageReleaseNotes>
+    </PackageReleaseNotes>
+    <PackageIconUrl>
+    </PackageIconUrl>
+    <PackageProjectUrl>
+    </PackageProjectUrl>
+    <PackageLicenseUrl>
+    </PackageLicenseUrl>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <Copyright>Copyright © Daffinity Technologies 2008-2018</Copyright>
+    <RepositoryType>
+    </RepositoryType>
+    <Company>Daffinity Technologies</Company>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Version>5.1.74</Version>
+    <AssemblyVersion>5.1.0.74</AssemblyVersion>
+    <FileVersion>5.1.0.74</FileVersion>
+    <RepositoryUrl>
+    </RepositoryUrl>
+    <Platforms>AnyCPU;x64;x86</Platforms>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+    <DefineConstants>TRACE;DEBUG;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DefineConstants>RELEASE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0'">
+    <DefineConstants>NETCORE;NETSTANDARD;NETSTANDARD2_0</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net461' ">
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Data.SqlClient" Version="4.5.1" />
+  </ItemGroup>
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net461'">
+    <DefineConstants>NET461;NETFULL</DefineConstants>
+  </PropertyGroup>
+</Project>
