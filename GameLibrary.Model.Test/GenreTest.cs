@@ -4,6 +4,7 @@ using GameLibrary.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Sql.Server.Connection;
 using Utilities;
+using static GameLibrary.Model.Genre;
 
 namespace GameLibrary.Model.Test
 {
@@ -290,10 +291,210 @@ namespace GameLibrary.Model.Test
 
             Assert.IsFalse(recordExists);
 
+            // select 
 
+            selectQuery = genre.GenerateSelectQuery();
+
+            Assert.IsFalse(string.IsNullOrEmpty(selectQuery));
+
+            errorMessage = "";
+            selectResult = connection.ExecuteQuery(selectQuery, ref errorMessage);
+
+            selectResultList = DataSetUtility.ToDictionaryList(selectResult.Tables[0]);
+
+            foundgenre = null;
+
+            if (selectResultList.Count > 0)
+            {
+                foreach (var dictionary in selectResultList.Where(dictionary => (dictionary != null) && (dictionary.Count > 0)))
+                {
+                    foundgenre = Genre.FromDictionary(dictionary);
+                    break;
+                }
+            }
+            Assert.IsNull(foundgenre);
 
         }
-        
+
+        [TestMethod]
+        public void GenreBinaryCloneTest()
+        {
+            var genre1 = new Genre(1, "Name", "Description");
+
+            var genre2 = CloneUtility.BinaryClone(genre1);
+
+            Assert.AreNotSame(genre1, genre2);
+
+            Assert.AreEqual(genre1.Id, genre2.Id);
+            Assert.AreEqual(genre1.Name, genre2.Name);
+            Assert.AreEqual(genre1.Description, genre2.Description);
+        }
+
+        [TestMethod]
+        public void GenreXmlCloneTest()
+        {
+            var genre1 = new Genre(1, "Name", "Description");
+
+            var genre2 = CloneUtility.XmlClone(genre1, null);
+
+            Assert.AreNotSame(genre1, genre2);
+
+            Assert.AreEqual(genre1.Id, genre2.Id);
+            Assert.AreEqual(genre1.Name, genre2.Name);
+            Assert.AreEqual(genre1.Description, genre2.Description);
+        }
+        [TestMethod]
+        public void GenreJsonTest()
+        {
+            var genre1 = new Genre(1, "Name", "Description");
+
+            var jsontext = CloneUtility.ToJson(genre1);
+
+            Assert.IsFalse(string.IsNullOrEmpty(jsontext));
+
+            var genre2 = CloneUtility.FromJson<Genre>(jsontext);
+
+            Assert.AreNotSame(genre1, genre2);
+
+            Assert.AreEqual(genre1.Id, genre2.Id);
+            Assert.AreEqual(genre1.Name, genre2.Name);
+            Assert.AreEqual(genre1.Description, genre2.Description);
+
+        }
+        [TestMethod]
+        public void GenreDictionaryTest()
+        {
+            var genre1 = new Genre(1, "Name", "Description");
+
+            var Dictionary = Genre.ToDictionary(genre1);
+
+            Assert.IsNull(Dictionary);
+
+            var genre2 = Genre.FromDictionary(Dictionary);
+
+            Assert.AreNotSame(genre1, genre2);
+
+            Assert.AreEqual(genre1.Id, genre2.Id);
+            Assert.AreEqual(genre1.Name, genre2.Name);
+            Assert.AreEqual(genre1.Description, genre2.Description);
+        }
+        [TestMethod]
+        public void GenreListConstructerTest()
+        {
+            var genreList = new GenreList();
+
+            Assert.IsNotNull(genreList);
+            Assert.AreEqual(genreList.List.Count, 0);
+        }
+        [TestMethod]
+        public void GenreListGetByIdTest()
+        {
+            var genreList = new GenreList();
+
+            var guid1 = Guid.NewGuid();
+            var guid2 = Guid.NewGuid();
+            var guid3 = Guid.NewGuid();
+
+            genreList.Add(new Genre(1, "Name1", "Description1"));
+            genreList.Add(new Genre(2, "Name2", "Description2"));
+            genreList.Add(new Genre(3, "Name3", "Description3"));
+
+            var genre = genreList.GetbyId(0);
+            Assert.AreEqual(genre, null);
+
+            genre = genreList.GetbyId(-1);
+            Assert.AreEqual(genre, null);
+
+            genre = genreList.GetbyId(1);
+            Assert.AreEqual(genre.Name, "Name1");
+
+            genre = genreList.GetbyId(2);
+            Assert.AreEqual(genre.Name, "Name2");
+
+            genre = genreList.GetbyId(3);
+            Assert.AreEqual(genre.Name, "Name3");
+
+        }
+        [TestMethod]
+        public void GenreListExistsTest()
+        {
+            var genreList = new GenreList();
+
+            genreList.Add(new Genre(1, "Name1", "Description1"));
+            genreList.Add(new Genre(2, "Name2", "Description2"));
+            genreList.Add(new Genre(3, "Name3", "Description3"));
+
+            Assert.IsFalse(genreList.Exists(0));
+            Assert.IsFalse(genreList.Exists(-1));
+            Assert.AreEqual(genreList.Exists(1), true);
+            Assert.AreEqual(genreList.Exists(2), true);
+            Assert.AreEqual(genreList.Exists(3), true);
+        }
+        [TestMethod]
+        public void GenreListAddandRemoveTest()
+        {
+            var genreList = new GenreList();
+
+            Assert.AreEqual(genreList.List.Count, 0);
+
+            genreList.Add(new Genre(1, "Name1", "Description1"));
+
+            Assert.AreEqual(genreList.List.Count, 1);
+
+            genreList.Add(new Genre(2, "Name2", "Description2"));
+
+            Assert.AreEqual(genreList.List.Count, 2);
+
+            genreList.Add(new Genre(3, "Name3", "Description3"));
+
+            Assert.AreEqual(genreList.List.Count, 3);
+
+            genreList.Remove(1);
+
+            Assert.AreEqual(genreList.List.Count, 2);
+
+            genreList.Remove(3);
+
+            Assert.AreEqual(genreList.List.Count, 1);
+
+            genreList.Remove(2);
+
+            Assert.AreEqual(genreList.List.Count, 0);
+        }
+        [TestMethod]
+        public void GenreListJsonTest()
+        {
+            var genreList1 = new GenreList();
+
+            genreList1.Add(new Genre(1, "Name1", "Description1"));
+            genreList1.Add(new Genre(2, "Name2", "Description2"));
+            genreList1.Add(new Genre(3, "Name3", "Description3"));
+
+            var jsontext = CloneUtility.ToJson(genreList1);
+
+            Assert.IsFalse(string.IsNullOrEmpty(jsontext));
+
+            var genreList2 = CloneUtility.FromJson<GenreList>(jsontext);
+
+            Assert.AreNotSame(genreList1, genreList2);
+            Assert.AreEqual(genreList1.List.Count, genreList2.List.Count);
+
+            for (var index = 0; index < genreList1.List.Count; index++)
+            {
+                Assert.AreEqual(genreList1.List[index].Id, genreList2.List[index].Id);
+                Assert.AreEqual(genreList1.List[index].Name, genreList2.List[index].Name);
+                Assert.AreEqual(genreList1.List[index].Description, genreList2.List[index].Description);
+            }
+        }
+        [TestMethod]
+        public void GenreListBinaryTest()
+        {
+            var genreList1 = new GenreList();
+
+            genreList1.Add(new Genre(1, "Name1", "Description1"));
+            genreList1.Add(new Genre(2, "Name2", "Description2"));
+            genreList1.Add(new Genre(3, "Name3", "Description3"));
+        }
 
         #endregion Test Methods
 
