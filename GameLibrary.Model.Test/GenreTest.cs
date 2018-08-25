@@ -494,6 +494,66 @@ namespace GameLibrary.Model.Test
             genreList1.Add(new Genre(1, "Name1", "Description1"));
             genreList1.Add(new Genre(2, "Name2", "Description2"));
             genreList1.Add(new Genre(3, "Name3", "Description3"));
+
+            var genreList2 = CloneUtility.BinaryClone(genreList1);
+
+            Assert.AreNotSame(genreList1, genreList2);
+            Assert.AreEqual(genreList1.List.Count, genreList2.List.Count);
+
+            for (var index = 0; index < genreList1.List.Count; index++)
+            {
+                Assert.AreEqual(genreList1.List[index].Id, genreList2.List[index].Id);
+                Assert.AreEqual(genreList1.List[index].Name, genreList2.List[index].Name);
+                Assert.AreEqual(genreList1.List[index].Description, genreList2.List[index].Description);
+            }
+        }
+
+        [TestMethod]
+        public void GenreListXmlCloneTest()
+        {
+            var genreList1 = new GenreList();
+
+            genreList1.Add(new Genre(1, "Name1", "Description1"));
+            genreList1.Add(new Genre(2, "Name2", "Description2"));
+            genreList1.Add(new Genre(3, "Name3", "Description3"));
+
+            var genreList2 = CloneUtility.XmlClone(genreList1, null);
+
+            Assert.AreNotSame(genreList1, genreList2);
+            Assert.AreEqual(genreList1.List.Count, genreList2.List.Count);
+
+            for (var index = 0; index < genreList1.List.Count; index++)
+            {
+                Assert.AreEqual(genreList1.List[index].Id, genreList2.List[index].Id);
+                Assert.AreEqual(genreList1.List[index].Name, genreList2.List[index].Name);
+                Assert.AreEqual(genreList1.List[index].Description, genreList2.List[index].Description);
+            }
+
+        }
+        [TestMethod]
+        public void GenreListDictionaryTest()
+        {
+            var genreList1 = new GenreList();
+
+            genreList1.Add(new Genre(1, "Name1", "Description1"));
+            genreList1.Add(new Genre(2, "Name2", "Description2"));
+            genreList1.Add(new Genre(3, "Name3", "Description3"));
+
+            var DictionaryList = GenreList.ToDictionaryList(genreList1);
+
+            Assert.IsNotNull(DictionaryList);
+
+            var genreList2 = GameList.FromDictionaryList(DictionaryList);
+
+            Assert.AreNotSame(genreList1, genreList2);
+            Assert.AreEqual(genreList1.List.Count, genreList2.List.Count);
+
+            for (var index = 0; index < genreList1.List.Count; index++)
+            {
+                Assert.AreEqual(genreList1.List[index].Id, genreList2.List[index].Id);
+                Assert.AreEqual(genreList1.List[index].Name, genreList2.List[index].Name);
+                Assert.AreEqual(genreList1.List[index].Description, genreList2.List[index].Description);
+            }
         }
 
         #endregion Test Methods

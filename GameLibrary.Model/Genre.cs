@@ -326,47 +326,48 @@ namespace GameLibrary.Model
             }
 
             #endregion Public Methods
-        }
 
-        #region Dictionary Methods
+            #region Dictionary Methods
 
-        public static List<Dictionary<string, object>> ToDictionaryList(GenreList genrelist)
-        {
-            var result = new List<Dictionary<string, object>>();
-
-            try
+            public static List<Dictionary<string, object>> ToDictionaryList(GenreList genrelist)
             {
-                result = (from genre in genrelist.List where genre != null select Genre.ToDictionary(genre) into dictionary where dictionary?.Count > 0 select dictionary).ToList();
-            }
-            catch (Exception ex)
-            {
-                Log.Error(ex);
-            }
-            return result;
-        }
+                var result = new List<Dictionary<string, object>>();
 
-        public static GenreList FromDictionaryList(List<Dictionary<string, object>> dictionaryList)
-        {
-            var result = new GenreList();
-
-            try
-            {
-                if (dictionaryList?.Count > 0)
+                try
                 {
-                    foreach (var dataDictionary in dictionaryList.Where(dataDictionary => dataDictionary.Count > 0))
+                    result = (from genre in genrelist.List where genre != null select Genre.ToDictionary(genre) into dictionary where dictionary?.Count > 0 select dictionary).ToList();
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(ex);
+                }
+                return result;
+            }
+
+            public static GenreList FromDictionaryList(List<Dictionary<string, object>> dictionaryList)
+            {
+                var result = new GenreList();
+
+                try
+                {
+                    if (dictionaryList?.Count > 0)
                     {
-                        result.List.Add(Genre.FromDictionary(dataDictionary));
+                        foreach (var dataDictionary in dictionaryList.Where(dataDictionary => dataDictionary.Count > 0))
+                        {
+                            result.List.Add(Genre.FromDictionary(dataDictionary));
+                        }
                     }
                 }
+                catch (Exception ex)
+                {
+                    Log.Error(ex);
+                }
+                return result;
             }
-            catch (Exception ex)
-            {
-                Log.Error(ex);
-            }
-            return result;
-        }
 
-        #endregion Dictionary Methods 
+            #endregion Dictionary Methods 
+
+        }
 
     }
 }
