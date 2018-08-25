@@ -4,39 +4,46 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 
+
 namespace GameLibrary.Model
 {
     [Serializable]
-    public class GameGenre
+    public class GameRating
     {
         #region Constants
 
-        public const string TableName = "GameGenre";
-        
+        public const string TableName = "GameRating";
+
+        public const int NotesSize = 1000;
+
         #endregion Constants
 
         #region Properties 
 
         public int Id { get; set; }
         public int GameId { get; set; }
-        public int GenreId { get; set; }
+        public int RatingId { get; set; }
+        public string Notes { get; set; }
+
 
         #endregion Properties 
 
         #region Constructers 
 
-        public GameGenre()
+        public GameRating()
         {
             Id = 0;
             GameId = 0;
-            GenreId = 0;
+            RatingId = 0;
+            Notes = "";
         }
 
-        public GameGenre(int id, int Gameid, int Genreid)
+        public GameRating(int id, int Gameid, int ratingid, string notes)
         {
             Id = id;
             GameId = Gameid;
-            GenreId = Genreid;
+            RatingId = ratingid;
+            Notes = notes;
         }
 
         #endregion Constructers 
@@ -49,7 +56,7 @@ namespace GameLibrary.Model
 
             try
             {
-                result = $"INSERT INTO {TableName} (GameId, GenreId) VALUES ({GameId}, {GenreId})";
+                result = $"INSERT INTO {TableName} (GameId, RatingId, Notes) VALUES ({GameId}, {RatingId}, '{Notes}')";
             }
             catch (Exception ex)
             {
@@ -65,9 +72,9 @@ namespace GameLibrary.Model
             {
                 var whereClause = GeneratePrimaryKeyWhereClause();
 
-               if (!string.IsNullOrEmpty(whereClause))
+                if (!string.IsNullOrEmpty(whereClause))
                 {
-                    result = $"UPDATE {TableName} SET GameId = {GameId}, GenreId = {GenreId} WHERE {whereClause}";
+                    result = $"UPDATE {TableName} SET GameId = {GameId}, RatingId = {RatingId}, Notes = '{Notes}' WHERE {whereClause}";
                 }
             }
             catch (Exception ex)
@@ -121,11 +128,11 @@ namespace GameLibrary.Model
 
                 if (!string.IsNullOrEmpty(whereClause))
                 {
-                    result = $"SELECT Id, GameId, GenreId FROM {TableName} WHERE {whereClause}";
+                    result = $"SELECT Id, GameId, RatingId, Notes FROM {TableName} WHERE {whereClause}";
                 }
                 else
                 {
-                    result = $"SELECT Id, GameId, GenreId FROM {TableName}";
+                    result = $"SELECT Id, GameId, RatingId, Notes FROM {TableName}";
                 }
             }
             catch (Exception ex)
@@ -155,16 +162,17 @@ namespace GameLibrary.Model
 
         #region Dictionary Methods
 
-        public static Dictionary<string, object> ToDictionary(GameGenre gamegenre)
+        public static Dictionary<string, object> ToDictionary(GameRating gamerating)
         {
             var result = new Dictionary<string, object>();
             try
             {
-                if (gamegenre != null)
+                if (gamerating != null)
                 {
-                    result.Add("Id", gamegenre.Id);
-                    result.Add("GameId", gamegenre.GameId);
-                    result.Add("GenreId", gamegenre.GenreId);
+                    result.Add("Id", gamerating.Id);
+                    result.Add("GameId", gamerating.GameId);
+                    result.Add("RatingId", gamerating.RatingId);
+                    result.Add("Notes", gamerating.Notes);
                 }
             }
             catch (Exception ex)
@@ -172,15 +180,15 @@ namespace GameLibrary.Model
                 Log.Error(ex);
             }
             return result;
-        }  
+        }
 
-        public static GameGenre FromDictionary(IDictionary<string, object> dictionary)
+        public static GameRating FromDictionary(IDictionary<string, object> dictionary)
         {
-            var result = new GameGenre();
+            var result = new GameRating();
 
             try
             {
-                if ((dictionary != null)&&(dictionary.Count > 0))
+                if ((dictionary != null) && (dictionary.Count > 0))
                 {
                     foreach (var key in dictionary.Keys)
                     {
@@ -192,8 +200,11 @@ namespace GameLibrary.Model
                             case "GameId":
                                 result.GameId = Convert.ToInt32(dictionary[key]);
                                 break;
-                            case "GenreId":
-                                result.GenreId = Convert.ToInt32(dictionary[key]);
+                            case "RatingId":
+                                result.RatingId = Convert.ToInt32(dictionary[key]);
+                                break;
+                            case "Notes":
+                                result.Notes = dictionary[key] as string;
                                 break;
                         }
                     }
@@ -208,28 +219,29 @@ namespace GameLibrary.Model
 
         #endregion Dictionary Methods 
     }
+
     [Serializable]
-    public class GameGenreList
+    public class GameRatingList
     {
         #region properties
 
-        public List<GameGenre> List { get; } = new List<GameGenre>();
+        public List<GameRating> List { get; } = new List<GameRating>();
         public string ErrorMessage { get; set; } = "";
 
         #endregion properties
 
         #region Public Methods
 
-        public GameGenre GetById(int Id)
+        public GameRating GetById(int Id)
         {
             try
             {
-                foreach (var gamegenre in List.Where(gamegenre => (gamegenre != null) && (gamegenre.Id == Id)))
+                foreach (var gamerating in List.Where(gamerating => (gamerating != null) && (gamerating.Id == Id)))
                 {
-                    return gamegenre;
+                    return gamerating;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Log.Error(ex);
             }
@@ -248,18 +260,18 @@ namespace GameLibrary.Model
             }
             return result;
         }
-        public bool Add(GameGenre gamegenre)
+        public bool Add(GameRating gamerating)
         {
             var result = false;
             try
             {
-                if (gamegenre != null)
+                if (gamerating != null)
                 {
-                    if (!Exists(gamegenre.Id))
+                    if (!Exists(gamerating.Id))
                     {
-                        List.Add(gamegenre);
+                        List.Add(gamerating);
 
-                        result = Exists(gamegenre.Id);
+                        result = Exists(gamerating.Id);
                     }
                 }
             }
@@ -271,13 +283,13 @@ namespace GameLibrary.Model
         }
         public void Remove(int id)
         {
-            var removegamegenre = GetById(id);
+            var removegamerating = GetById(id);
 
             try
             {
-                if (removegamegenre != null)
+                if (removegamerating != null)
                 {
-                    List.Remove(removegamegenre);
+                    List.Remove(removegamerating);
                 }
             }
             catch (Exception ex)
@@ -290,14 +302,14 @@ namespace GameLibrary.Model
 
         #region Dictionary Methods
 
-        public static List<Dictionary<string, object>> ToDictionaryList(GameGenreList gameGenreList)
+        public static List<Dictionary<string, object>> ToDictionaryList(GameRatingList gameGenreList)
         {
             var result = new List<Dictionary<string, object>>();
             try
             {
                 if (gameGenreList?.List?.Count > 0)
                 {
-                    result = (from gamegenre in gameGenreList.List where gamegenre != null select GameGenre.ToDictionary(gamegenre) into dictionary where dictionary?.Count > 0 select dictionary).ToList();
+                    result = (from gamerating in gameGenreList.List where gamerating != null select GameRating.ToDictionary(gamerating) into dictionary where dictionary?.Count > 0 select dictionary).ToList();
                 }
             }
             catch (Exception ex)
@@ -306,16 +318,16 @@ namespace GameLibrary.Model
             }
             return result;
         }
-        public static GameGenreList FromDictionaryList(List<Dictionary<string, object>> dictionaryList)
+        public static GameRatingList FromDictionaryList(List<Dictionary<string, object>> dictionaryList)
         {
-            var result = new GameGenreList();
+            var result = new GameRatingList();
             try
             {
                 if (dictionaryList?.Count > 0)
                 {
                     foreach (var dataDictionary in dictionaryList.Where(dataDictionary => dataDictionary?.Count > 0))
                     {
-                        result.List.Add(GameGenre.FromDictionary(dataDictionary));
+                        result.List.Add(GameRating.FromDictionary(dataDictionary));
                     }
                 }
             }
@@ -329,3 +341,4 @@ namespace GameLibrary.Model
         #endregion Dictionary Methods
     }
 }
+
