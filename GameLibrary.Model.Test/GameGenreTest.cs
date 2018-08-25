@@ -6,6 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Sql.Server.Connection;
 using Utilities;
 
+
 namespace TitleiOModelTest.UnitTests
 {
     [TestClass]
@@ -14,13 +15,13 @@ namespace TitleiOModelTest.UnitTests
         #region Private Members
 
         // connecting to server
-        private const string ConnectionString = "Server=.;Database=BubbaGame;Trusted_Connection=true;";
+        private const string ConnectionString = "Server=.;Database=BubbaGames;Trusted_Connection=true;";
 
         #endregion Private Members
 
 
         #region Test Cases
-
+       
         [TestMethod]
         public void GameGenreTestConstructorTest()
         {
@@ -126,15 +127,83 @@ namespace TitleiOModelTest.UnitTests
         [TestMethod]
         public void GameGenreDatabaseCommandsTest()
         {
-            Assert.IsTrue(true);
-
-            /*var connection = new SqlServerConnection();
+            var connection = new SqlServerConnection();
 
             Assert.AreEqual(connection.IsConnected, false);
 
             var result = connection.Connect(ConnectionString, 0);
 
             Assert.AreEqual(result, true);
+
+
+            // Add a Games
+
+            var game = new Game(
+                0,
+                "Name",
+                "Description");
+
+            var insertCommand = game.GenerateInsertStatement();
+
+            Assert.IsFalse(string.IsNullOrEmpty(insertCommand));
+
+            var errorMessage = "";
+            var insertResult = connection.ExecuteCommand(insertCommand, ref errorMessage, out var newId);
+
+            Assert.IsTrue(insertResult);
+            Assert.IsTrue(newId > 0);
+            Assert.AreEqual(string.IsNullOrEmpty(errorMessage), true);
+
+            game.Id = newId;
+
+            var updateGame = new Game(
+                0,
+                "Name1",
+                "Description1");
+
+            insertCommand = updateGame.GenerateInsertStatement();
+
+            Assert.IsFalse(string.IsNullOrEmpty(insertCommand));
+
+            errorMessage = "";
+            insertResult = connection.ExecuteCommand(insertCommand, ref errorMessage, out newId);
+
+            Assert.IsTrue(insertResult);
+            Assert.IsTrue(newId > 0);
+            Assert.AreEqual(string.IsNullOrEmpty(errorMessage), true);
+
+            updateGame.Id = newId;
+
+
+            // Add a Genres
+
+            var genre = new Genre(0, "Name", "Description");
+
+            insertCommand = genre.GenerateInsertStatment();
+            Assert.IsFalse(string.IsNullOrEmpty(insertCommand));
+
+            errorMessage = "";
+            insertResult = connection.ExecuteCommand(insertCommand, ref errorMessage, out newId);
+
+            Assert.IsTrue(insertResult);
+            Assert.IsTrue(newId > 0);
+            Assert.AreEqual(string.IsNullOrEmpty(errorMessage), true);
+
+            genre.Id = newId;
+
+            var updateGenre = new Genre(0, "Name", "Description");
+
+            insertCommand = updateGenre.GenerateInsertStatment();
+            Assert.IsFalse(string.IsNullOrEmpty(insertCommand));
+
+            errorMessage = "";
+            insertResult = connection.ExecuteCommand(insertCommand, ref errorMessage, out newId);
+
+            Assert.IsTrue(insertResult);
+            Assert.IsTrue(newId > 0);
+            Assert.AreEqual(string.IsNullOrEmpty(errorMessage), true);
+
+            updateGenre.Id = newId;
 
 
             // Select All
@@ -145,7 +214,7 @@ namespace TitleiOModelTest.UnitTests
 
             Assert.IsFalse(string.IsNullOrEmpty(selectQuery));
 
-            var errorMessage = "";
+            errorMessage = "";
             var selectResult = connection.ExecuteQuery(selectQuery, ref errorMessage);
 
             Assert.AreEqual(string.IsNullOrEmpty(errorMessage), true);
@@ -163,15 +232,16 @@ namespace TitleiOModelTest.UnitTests
 
             gameGenre = new GameGenre(
                 0,
-                "Name",
-                "Description");
+                game.Id,
+                genre.Id);
 
-            var insertCommand = gameGenre.GenerateInsertStatement();
+            insertCommand = gameGenre.GenerateInsertStatement();
 
             Assert.IsFalse(string.IsNullOrEmpty(insertCommand));
 
             errorMessage = "";
-            var insertResult = connection.ExecuteCommand(insertCommand, ref errorMessage, out var newId);
+            
+            insertResult = connection.ExecuteCommand(insertCommand, ref errorMessage, out newId);
 
             Assert.IsTrue(insertResult);
             Assert.IsTrue(newId > 0);
@@ -237,8 +307,8 @@ namespace TitleiOModelTest.UnitTests
 
             var updateGameGenre = new GameGenre(
                 newId,
-                "Name Edited",
-                "Description Edited");
+                updateGame.Id,
+                updateGenre.Id);
 
             var updateCommand = updateGameGenre.GenerateUpdateStatement();
 
@@ -308,6 +378,8 @@ namespace TitleiOModelTest.UnitTests
 
             var deleteCommand = gameGenre.GenerateDeleteStatement();
 
+            var deleteGenre = genre.GenerateDeleteStatement();
+
             Assert.IsFalse(string.IsNullOrEmpty(deleteCommand));
 
             errorMessage = "";
@@ -361,7 +433,53 @@ namespace TitleiOModelTest.UnitTests
                 }
             }
 
-            Assert.IsNull(foundGameGenre);*/
+            Assert.IsNull(foundGameGenre);
+
+
+            // Delete the genres
+
+            deleteCommand = genre.GenerateDeleteStatement();
+
+            Assert.IsFalse(string.IsNullOrEmpty(deleteCommand));
+
+            errorMessage = "";
+            deleteResult = connection.ExecuteCommand(deleteCommand, ref errorMessage);
+
+            Assert.AreEqual(deleteResult, true);
+            Assert.AreEqual(string.IsNullOrEmpty(errorMessage), true);
+
+            deleteCommand = updateGenre.GenerateDeleteStatement();
+
+            Assert.IsFalse(string.IsNullOrEmpty(deleteCommand));
+
+            errorMessage = "";
+            deleteResult = connection.ExecuteCommand(deleteCommand, ref errorMessage);
+
+            Assert.AreEqual(deleteResult, true);
+            Assert.AreEqual(string.IsNullOrEmpty(errorMessage), true);
+
+
+            // Delete the games
+
+            deleteCommand = game.GenerateDeleteStatement();
+
+            Assert.IsFalse(string.IsNullOrEmpty(deleteCommand));
+
+            errorMessage = "";
+            deleteResult = connection.ExecuteCommand(deleteCommand, ref errorMessage);
+
+            Assert.AreEqual(deleteResult, true);
+            Assert.AreEqual(string.IsNullOrEmpty(errorMessage), true);
+
+            deleteCommand = updateGame.GenerateDeleteStatement();
+
+            Assert.IsFalse(string.IsNullOrEmpty(deleteCommand));
+
+            errorMessage = "";
+            deleteResult = connection.ExecuteCommand(deleteCommand, ref errorMessage);
+
+            Assert.AreEqual(deleteResult, true);
+            Assert.AreEqual(string.IsNullOrEmpty(errorMessage), true);
         }
 
         [TestMethod]
