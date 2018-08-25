@@ -55,6 +55,7 @@
     <Compile Include="GameGenreTest.cs" />
     <Compile Include="GameTest.cs" />
     <Compile Include="GenreTest.cs" />
+    <Compile Include="PlatformTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -43,6 +43,7 @@
     <Compile Include="Game.cs" />
     <Compile Include="GameGenre.cs" />
     <Compile Include="Genre.cs" />
+    <Compile Include="Platform.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

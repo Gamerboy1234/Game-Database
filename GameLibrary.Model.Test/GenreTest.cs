@@ -543,7 +543,7 @@ namespace GameLibrary.Model.Test
 
             Assert.IsNotNull(DictionaryList);
 
-            var genreList2 = GameList.FromDictionaryList(DictionaryList);
+            var genreList2 = GenreList.FromDictionaryList(DictionaryList);
 
             Assert.AreNotSame(genreList1, genreList2);
             Assert.AreEqual(genreList1.List.Count, genreList2.List.Count);

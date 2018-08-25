@@ -232,7 +232,6 @@ namespace GameLibrary.Model
 
             #endregion properties
 
-            
             #region Public Methods
 
             public Genre GetbyId(int id)
