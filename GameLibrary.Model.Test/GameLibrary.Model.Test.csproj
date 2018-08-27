@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GameGenreTest.cs" />
+    <Compile Include="GameImageTest.cs" />
     <Compile Include="GamePlatformTest.cs" />
     <Compile Include="GameRatingTest.cs" />
     <Compile Include="GameReviewTest.cs" />
