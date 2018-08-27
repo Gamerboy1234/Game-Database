@@ -32,7 +32,7 @@ namespace GameImageLibrary.Model
             
         }
 
-        public GameImage(int id, int GameImageid, int Genreid)
+        public GameImage(int id, int GameImageid)
         {
             Id = id;
             GameId = GameImageid;
@@ -43,7 +43,7 @@ namespace GameImageLibrary.Model
 
         #region Public Methodsds
 
-        public string GenerateInsertStatement()
+        public string GenerateInsertStatment()
         {
             var result = "";
 
