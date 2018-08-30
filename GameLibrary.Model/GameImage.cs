@@ -19,7 +19,7 @@ namespace GameImageLibrary.Model
 
         public int Id { get; set; }
         public int GameId { get; set; }
-        
+        public byte[] Image { get; set; }
 
         #endregion Properties 
 
@@ -29,14 +29,14 @@ namespace GameImageLibrary.Model
         {
             Id = 0;
             GameId = 0;
-            
+            Image = null;
         }
 
-        public GameImage(int id, int GameImageid)
+        public GameImage(int id, int GameImageid, byte[] image)
         {
             Id = id;
             GameId = GameImageid;
-            
+            Image = image;
         }
 
         #endregion Constructers 
@@ -76,6 +76,7 @@ namespace GameImageLibrary.Model
             }
             return result;
         }
+
         public string GenerateDeleteStatement()
         {
             var result = "";
@@ -94,6 +95,7 @@ namespace GameImageLibrary.Model
             }
             return result;
         }
+
         public string GenerateExistsQuery()
         {
             var result = "";
@@ -112,6 +114,7 @@ namespace GameImageLibrary.Model
             }
             return result;
         }
+
         public string GenerateSelectQuery()
         {
             var result = "";
@@ -134,6 +137,7 @@ namespace GameImageLibrary.Model
             }
             return result;
         }
+
         public string GeneratePrimaryKeyWhereClause()
         {
             var result = "";
@@ -164,7 +168,7 @@ namespace GameImageLibrary.Model
                 {
                     result.Add("Id", gameImage.Id);
                     result.Add("GameId", gameImage.GameId);
-                    
+                    result.Add("Image", gameImage.Image);
                 }
             }
             catch (Exception ex)
@@ -192,7 +196,9 @@ namespace GameImageLibrary.Model
                             case "GameId":
                                 result.GameId = Convert.ToInt32(dictionary[key]);
                                 break;
-                            
+                            case "Image":
+                                result.Image = dictionary[key] as byte[];
+                                break;
                         }
                     }
                 }
@@ -206,6 +212,7 @@ namespace GameImageLibrary.Model
 
         #endregion Dictionary Methods 
     }
+
     [Serializable]
     public class GameImageList
     {

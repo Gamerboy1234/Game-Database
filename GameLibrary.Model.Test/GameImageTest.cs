@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using GameImageLibrary.Model;
 using GameLibrary.Model;
@@ -16,7 +17,38 @@ namespace GameLibrary.Model.Test
         // connecting to server
         private const string ConnectionString = "Server=.;Database=BubbaGames;Trusted_Connection=true;";
 
+        private const string TestImageFilePath = @"D:\UE4 Projects\InsertNameV2\Game-Database\TestData\Elf.jpg";
+        private const string TestUpdateImageFilePath = @"D:\UE4 Projects\InsertNameV2\Game-Database\TestData\Necromancer.jpg";
+
+        private byte[] _imageData;
+        private byte[] _updateImageData;
+
         #endregion Private Members
+
+
+        #region Setup and Teardown
+
+        [TestInitialize]
+        public void GameImageTestSetup()
+        {
+            if (File.Exists(TestImageFilePath))
+            {
+                _imageData = File.ReadAllBytes(TestImageFilePath);
+            }
+
+            if (File.Exists(TestUpdateImageFilePath))
+            {
+                _updateImageData = File.ReadAllBytes(TestUpdateImageFilePath);
+            }
+        }
+
+        [TestCleanup]
+        public void GameImageTestCleanup()
+        {
+            // Nothing needed here.
+        }
+
+        #endregion Setup and Teardown
 
 
         #region Test Cases
@@ -28,7 +60,7 @@ namespace GameLibrary.Model.Test
 
             Assert.AreEqual(gameImage.Id, 0);
             Assert.AreEqual(gameImage.GameId, 0);
-            
+            Assert.IsNull(gameImage.Image);
         }
 
         [TestMethod]
@@ -44,22 +76,23 @@ namespace GameLibrary.Model.Test
             gameImage.GameId = 2;
             Assert.AreEqual(gameImage.GameId, 2);
 
-            
+            Assert.IsNull(gameImage.Image);
+            gameImage.Image = _imageData;
+            Assert.IsTrue(gameImage.Image.SequenceEqual(_imageData));
         }
 
         [TestMethod]
         public void GameImageGenerateInsertStatementTest()
         {
-            var gameImage = new GameImage(1, 1);
+            var gameImage = new GameImage(1, 1, _imageData);
                 
-
             Assert.AreEqual(gameImage.GenerateInsertStatment(), "INSERT INTO GameImage (GameId) VALUES (1)");
         }
 
         [TestMethod]
         public void GameImageGenerateUpdateStatementTest()
         {
-            var gameImage = new GameImage(1, 1);
+            var gameImage = new GameImage(1, 1, _imageData);
 
             Assert.AreEqual(gameImage.GenerateUpdateStatement(), "UPDATE GameImage SET GameId = 1 WHERE Id = 1");
         }
@@ -67,7 +100,7 @@ namespace GameLibrary.Model.Test
         [TestMethod]
         public void GameImageGenerateDeleteStatementTest()
         {
-            var gameImage = new GameImage(1, 1);
+            var gameImage = new GameImage(1, 1, _imageData);
 
             Assert.AreEqual(gameImage.GenerateDeleteStatement(), "DELETE FROM GameImage WHERE Id = 1");
         }
@@ -75,7 +108,7 @@ namespace GameLibrary.Model.Test
         [TestMethod]
         public void GameImageGenerateExistsQueryTest()
         {
-            var gameImage = new GameImage(1, 1);
+            var gameImage = new GameImage(1, 1, _imageData);
 
             Assert.AreEqual(gameImage.GenerateExistsQuery(), "SELECT Id FROM GameImage WHERE Id = 1");
         }
@@ -87,7 +120,7 @@ namespace GameLibrary.Model.Test
 
             Assert.AreEqual(gameImage.GenerateSelectQuery(), "SELECT Id, GameId FROM GameImage");
 
-            gameImage = new GameImage(1, 1);
+            gameImage = new GameImage(1, 1, _imageData);
 
             Assert.AreEqual(gameImage.GenerateSelectQuery(), "SELECT Id, GameId FROM GameImage WHERE Id = 1");
         }
@@ -99,7 +132,7 @@ namespace GameLibrary.Model.Test
 
             Assert.AreEqual(gameImage.GeneratePrimaryKeyWhereClause(), "");
 
-            gameImage = new GameImage(1, 1);
+            gameImage = new GameImage(1, 1, _imageData);
 
             Assert.AreEqual(gameImage.GeneratePrimaryKeyWhereClause(), "Id = 1");
         }
@@ -155,40 +188,9 @@ namespace GameLibrary.Model.Test
             updateGame.Id = newId;
 
 
-            // Add a GameImages
-
-            var gameImage = new GameImage(0,0);
-
-            insertCommand = gameImage.GenerateInsertStatment();
-            Assert.IsFalse(string.IsNullOrEmpty(insertCommand));
-
-            errorMessage = "";
-            insertResult = connection.ExecuteCommand(insertCommand, ref errorMessage, out newId);
-
-            Assert.IsTrue(insertResult);
-            Assert.IsTrue(newId > 0);
-            Assert.AreEqual(string.IsNullOrEmpty(errorMessage), true);
-
-            gameImage.Id = newId;
-
-            var updateGameImage = new GameImage(0, 0);
-
-            insertCommand = updateGameImage.GenerateInsertStatment();
-            Assert.IsFalse(string.IsNullOrEmpty(insertCommand));
-
-            errorMessage = "";
-            insertResult = connection.ExecuteCommand(insertCommand, ref errorMessage, out newId);
-
-            Assert.IsTrue(insertResult);
-            Assert.IsTrue(newId > 0);
-            Assert.AreEqual(string.IsNullOrEmpty(errorMessage), true);
-
-            updateGameImage.Id = newId;
-
-
             // Select All
 
-            gameImage = new GameImage();
+            var gameImage = new GameImage();
 
             var selectQuery = gameImage.GenerateSelectQuery();
 
@@ -210,7 +212,7 @@ namespace GameLibrary.Model.Test
 
             // Insert
 
-            gameImage = new GameImage(0, game.Id);
+            gameImage = new GameImage(0, game.Id, _imageData);
 
 
             insertCommand = gameImage.GenerateInsertStatment();
@@ -226,6 +228,13 @@ namespace GameLibrary.Model.Test
             Assert.AreEqual(string.IsNullOrEmpty(errorMessage), true);
 
             gameImage.Id = newId;
+
+            // Add image BLOB
+
+            var blobUpdateCommand = connection.CreateBlobUpdateStatement(GameImage.TableName, "Image", gameImage.GeneratePrimaryKeyWhereClause());
+            var blobResult = connection.WriteBlobData(blobUpdateCommand, "Image", "varbinary", null, _imageData);
+
+            Assert.IsTrue(blobResult);
 
 
             // Exists
@@ -274,19 +283,32 @@ namespace GameLibrary.Model.Test
 
             Assert.IsNotNull(foundGameImage);
 
+            // Read BLOB Data
+            foundGameImage.Image = connection.ReadBlobData($"SELECT Image FROM {GameImage.TableName} WHERE Id = {foundGameImage.Id}", 0);
+
             Assert.AreNotSame(gameImage, foundGameImage);
 
             Assert.AreEqual(gameImage.Id, foundGameImage.Id);
             Assert.AreEqual(gameImage.GameId, foundGameImage.GameId);
-            
+
+            if (gameImage.Image != null)
+            {
+                Assert.IsTrue(gameImage.Image.SequenceEqual(foundGameImage.Image));
+            }
+
+            else
+            {
+                Assert.IsNull(gameImage.Image);
+                Assert.IsNull(foundGameImage.Image);
+            }
 
 
             // Update
 
-                updateGameImage = new GameImage(
+            var updateGameImage = new GameImage(
                 newId,
-                updateGame.Id
-                );
+                updateGame.Id,
+                _updateImageData);
 
             var updateCommand = updateGameImage.GenerateUpdateStatement();
 
@@ -297,6 +319,13 @@ namespace GameLibrary.Model.Test
 
             Assert.AreEqual(updateResult, true);
             Assert.AreEqual(string.IsNullOrEmpty(errorMessage), true);
+
+            // Update image BLOB
+
+            blobUpdateCommand = connection.CreateBlobUpdateStatement(GameImage.TableName, "Image", updateGameImage.GeneratePrimaryKeyWhereClause());
+            blobResult = connection.WriteBlobData(blobUpdateCommand, "Image", "varbinary", null, _updateImageData);
+
+            Assert.IsTrue(blobResult);
 
 
             // Exists
@@ -347,9 +376,22 @@ namespace GameLibrary.Model.Test
 
             Assert.AreNotSame(updateGameImage, foundGameImage);
 
+            // Read BLOB Data
+            foundGameImage.Image = connection.ReadBlobData($"SELECT Image FROM {GameImage.TableName} WHERE Id = {foundGameImage.Id}", 0);
+
             Assert.AreEqual(updateGameImage.Id, foundGameImage.Id);
             Assert.AreEqual(updateGameImage.GameId, foundGameImage.GameId);
-           
+
+            if (updateGameImage.Image != null)
+            {
+                Assert.IsTrue(updateGameImage.Image.SequenceEqual(foundGameImage.Image));
+            }
+
+            else
+            {
+                Assert.IsNull(updateGameImage.Image);
+                Assert.IsNull(foundGameImage.Image);
+            }
 
 
             // Delete
@@ -414,29 +456,6 @@ namespace GameLibrary.Model.Test
             Assert.IsNull(foundGameImage);
 
 
-            // Delete the gameImages
-
-            deleteCommand = gameImage.GenerateDeleteStatement();
-
-            Assert.IsFalse(string.IsNullOrEmpty(deleteCommand));
-
-            errorMessage = "";
-            deleteResult = connection.ExecuteCommand(deleteCommand, ref errorMessage);
-
-            Assert.AreEqual(deleteResult, true);
-            Assert.AreEqual(string.IsNullOrEmpty(errorMessage), true);
-
-            deleteCommand = updateGameImage.GenerateDeleteStatement();
-
-            Assert.IsFalse(string.IsNullOrEmpty(deleteCommand));
-
-            errorMessage = "";
-            deleteResult = connection.ExecuteCommand(deleteCommand, ref errorMessage);
-
-            Assert.AreEqual(deleteResult, true);
-            Assert.AreEqual(string.IsNullOrEmpty(errorMessage), true);
-
-
             // Delete the games
 
             deleteCommand = game.GenerateDeleteStatement();
@@ -465,8 +484,8 @@ namespace GameLibrary.Model.Test
         {
             var gameImage1 = new GameImage(
                 1,
-                2
-                );
+                2,
+                _imageData);
 
             var gameImage2 = CloneUtility.BinaryClone(gameImage1);
 
@@ -474,7 +493,17 @@ namespace GameLibrary.Model.Test
 
             Assert.AreEqual(gameImage1.Id, gameImage2.Id);
             Assert.AreEqual(gameImage1.GameId, gameImage2.GameId);
-            
+
+            if (gameImage1.Image != null)
+            {
+                Assert.IsTrue(gameImage1.Image.SequenceEqual(gameImage2.Image));
+            }
+
+            else
+            {
+                Assert.IsNull(gameImage1.Image);
+                Assert.IsNull(gameImage2.Image);
+            }
         }
 
         [TestMethod]
@@ -482,8 +511,8 @@ namespace GameLibrary.Model.Test
         {
             var gameImage1 = new GameImage(
                 1,
-                2
-                );
+                2,
+                _imageData);
 
             var gameImage2 = CloneUtility.XmlClone(gameImage1, null);
 
@@ -491,7 +520,17 @@ namespace GameLibrary.Model.Test
 
             Assert.AreEqual(gameImage1.Id, gameImage2.Id);
             Assert.AreEqual(gameImage1.GameId, gameImage2.GameId);
-           
+
+            if (gameImage1.Image != null)
+            {
+                Assert.IsTrue(gameImage1.Image.SequenceEqual(gameImage2.Image));
+            }
+
+            else
+            {
+                Assert.IsNull(gameImage1.Image);
+                Assert.IsNull(gameImage2.Image);
+            }
         }
 
         [TestMethod]
@@ -499,8 +538,8 @@ namespace GameLibrary.Model.Test
         {
             var gameImage1 = new GameImage(
                 1,
-                2
-                );
+                2,
+                _imageData);
 
             var jsonText = CloneUtility.ToJson(gameImage1);
 
@@ -512,7 +551,17 @@ namespace GameLibrary.Model.Test
 
             Assert.AreEqual(gameImage1.Id, gameImage2.Id);
             Assert.AreEqual(gameImage1.GameId, gameImage2.GameId);
-            
+
+            if (gameImage1.Image != null)
+            {
+                Assert.IsTrue(gameImage1.Image.SequenceEqual(gameImage2.Image));
+            }
+
+            else
+            {
+                Assert.IsNull(gameImage1.Image);
+                Assert.IsNull(gameImage2.Image);
+            }
         }
 
         [TestMethod]
@@ -520,8 +569,8 @@ namespace GameLibrary.Model.Test
         {
             var gameImage1 = new GameImage(
                 1,
-                2
-                );
+                2,
+                _imageData);
 
             var dictionary = GameImage.ToDictionary(gameImage1);
 
@@ -533,7 +582,17 @@ namespace GameLibrary.Model.Test
 
             Assert.AreEqual(gameImage1.Id, gameImage2.Id);
             Assert.AreEqual(gameImage1.GameId, gameImage2.GameId);
-            
+
+            if (gameImage1.Image != null)
+            {
+                Assert.IsTrue(gameImage1.Image.SequenceEqual(gameImage2.Image));
+            }
+
+            else
+            {
+                Assert.IsNull(gameImage1.Image);
+                Assert.IsNull(gameImage2.Image);
+            }
         }
 
         [TestMethod]
@@ -550,11 +609,11 @@ namespace GameLibrary.Model.Test
         {
             var gameImageList = new GameImageList();
 
-            gameImageList.Add(new GameImage(1, 2));
+            gameImageList.Add(new GameImage(1, 2, _imageData));
 
-            gameImageList.Add(new GameImage(3, 4));
+            gameImageList.Add(new GameImage(3, 4, null));
 
-            gameImageList.Add(new GameImage(5, 6));
+            gameImageList.Add(new GameImage(5, 6, _imageData));
 
             var gameImage = gameImageList.GetById(0);
             Assert.AreEqual(gameImage, null);
@@ -577,17 +636,17 @@ namespace GameLibrary.Model.Test
         {
             var gameImageList = new GameImageList();
 
-            gameImageList.Add(new GameImage(1, 2));
+            gameImageList.Add(new GameImage(1, 2, _imageData));
 
-            gameImageList.Add(new GameImage(2, 2));
+            gameImageList.Add(new GameImage(3, 4, null));
 
-            gameImageList.Add(new GameImage(3, 2));
+            gameImageList.Add(new GameImage(5, 6, _imageData));
 
             Assert.IsFalse(gameImageList.Exists(0));
             Assert.IsFalse(gameImageList.Exists(-1));
             Assert.AreEqual(gameImageList.Exists(1), true);
-            Assert.AreEqual(gameImageList.Exists(2), true);
             Assert.AreEqual(gameImageList.Exists(3), true);
+            Assert.AreEqual(gameImageList.Exists(5), true);
         }
 
         [TestMethod]
@@ -597,15 +656,15 @@ namespace GameLibrary.Model.Test
 
             Assert.AreEqual(gameImageList.List.Count, 0);
 
-            gameImageList.Add(new GameImage(1, 2));
+            gameImageList.Add(new GameImage(1, 2, _imageData));
 
             Assert.AreEqual(gameImageList.List.Count, 1);
 
-            gameImageList.Add(new GameImage(2, 3));
+            gameImageList.Add(new GameImage(3, 4, null));
 
             Assert.AreEqual(gameImageList.List.Count, 2);
 
-            gameImageList.Add(new GameImage(4, 5));
+            gameImageList.Add(new GameImage(5, 6, _imageData));
 
             Assert.AreEqual(gameImageList.List.Count, 3);
 
@@ -613,13 +672,13 @@ namespace GameLibrary.Model.Test
 
             Assert.AreEqual(gameImageList.List.Count, 2);
 
-            gameImageList.Remove(2);
-
-            Assert.AreEqual(gameImageList.List.Count, 1);
-
             gameImageList.Remove(3);
 
             Assert.AreEqual(gameImageList.List.Count, 1);
+
+            gameImageList.Remove(5);
+
+            Assert.AreEqual(gameImageList.List.Count, 0);
         }
 
         [TestMethod]
@@ -627,11 +686,11 @@ namespace GameLibrary.Model.Test
         {
             var gameImageList1 = new GameImageList();
 
-            gameImageList1.Add(new GameImage(1, 2));
+            gameImageList1.Add(new GameImage(1, 2, _imageData));
 
-            gameImageList1.Add(new GameImage(3, 4));
+            gameImageList1.Add(new GameImage(3, 4, null));
 
-            gameImageList1.Add(new GameImage(5, 6));
+            gameImageList1.Add(new GameImage(5, 6, _imageData));
 
             var jsonText = CloneUtility.ToJson(gameImageList1);
 
@@ -646,7 +705,17 @@ namespace GameLibrary.Model.Test
             {
                 Assert.AreEqual(gameImageList1.List[index].Id, gameImageList2.List[index].Id);
                 Assert.AreEqual(gameImageList1.List[index].GameId, gameImageList2.List[index].GameId);
-               
+
+                if (gameImageList1.List[index].Image != null)
+                {
+                    Assert.IsTrue(gameImageList1.List[index].Image.SequenceEqual(gameImageList2.List[index].Image));
+                }
+
+                else
+                {
+                    Assert.IsNull(gameImageList1.List[index].Image);
+                    Assert.IsNull(gameImageList2.List[index].Image);
+                }
             }
         }
 
@@ -655,11 +724,11 @@ namespace GameLibrary.Model.Test
         {
             var gameImageList1 = new GameImageList();
 
-            gameImageList1.Add(new GameImage(1, 2));
+            gameImageList1.Add(new GameImage(1, 2, _imageData));
 
-            gameImageList1.Add(new GameImage(3, 4));
+            gameImageList1.Add(new GameImage(3, 4, null));
 
-            gameImageList1.Add(new GameImage(5, 6));
+            gameImageList1.Add(new GameImage(5, 6, _imageData));
 
             var gameImageList2 = CloneUtility.BinaryClone(gameImageList1);
 
@@ -670,7 +739,17 @@ namespace GameLibrary.Model.Test
             {
                 Assert.AreEqual(gameImageList1.List[index].Id, gameImageList2.List[index].Id);
                 Assert.AreEqual(gameImageList1.List[index].GameId, gameImageList2.List[index].GameId);
-               
+
+                if (gameImageList1.List[index].Image != null)
+                {
+                    Assert.IsTrue(gameImageList1.List[index].Image.SequenceEqual(gameImageList2.List[index].Image));
+                }
+
+                else
+                {
+                    Assert.IsNull(gameImageList1.List[index].Image);
+                    Assert.IsNull(gameImageList2.List[index].Image);
+                }
             }
         }
 
@@ -679,11 +758,11 @@ namespace GameLibrary.Model.Test
         {
             var gameImageList1 = new GameImageList();
 
-            gameImageList1.Add(new GameImage(1, 2));
+            gameImageList1.Add(new GameImage(1, 2, _imageData));
 
-            gameImageList1.Add(new GameImage(3, 4));
+            gameImageList1.Add(new GameImage(3, 4, null));
 
-            gameImageList1.Add(new GameImage(5, 6));
+            gameImageList1.Add(new GameImage(5, 6, _imageData));
 
             var gameImageList2 = CloneUtility.XmlClone(gameImageList1, null);
 
@@ -694,7 +773,17 @@ namespace GameLibrary.Model.Test
             {
                 Assert.AreEqual(gameImageList1.List[index].Id, gameImageList2.List[index].Id);
                 Assert.AreEqual(gameImageList1.List[index].GameId, gameImageList2.List[index].GameId);
-                
+
+                if (gameImageList1.List[index].Image != null)
+                {
+                    Assert.IsTrue(gameImageList1.List[index].Image.SequenceEqual(gameImageList2.List[index].Image));
+                }
+
+                else
+                {
+                    Assert.IsNull(gameImageList1.List[index].Image);
+                    Assert.IsNull(gameImageList2.List[index].Image);
+                }
             }
         }
 
@@ -703,11 +792,11 @@ namespace GameLibrary.Model.Test
         {
             var gameImageList1 = new GameImageList();
 
-            gameImageList1.Add(new GameImage(1, 2));
+            gameImageList1.Add(new GameImage(1, 2, _imageData));
 
-            gameImageList1.Add(new GameImage(3, 4));
+            gameImageList1.Add(new GameImage(3, 4, null));
 
-            gameImageList1.Add(new GameImage(5, 6));
+            gameImageList1.Add(new GameImage(5, 6, _imageData));
 
             var dictionaryList = GameImageList.ToDictionaryList(gameImageList1);
 
@@ -722,7 +811,17 @@ namespace GameLibrary.Model.Test
             {
                 Assert.AreEqual(gameImageList1.List[index].Id, gameImageList2.List[index].Id);
                 Assert.AreEqual(gameImageList1.List[index].GameId, gameImageList2.List[index].GameId);
-                
+
+                if (gameImageList1.List[index].Image != null)
+                {
+                    Assert.IsTrue(gameImageList1.List[index].Image.SequenceEqual(gameImageList2.List[index].Image));
+                }
+
+                else
+                {
+                    Assert.IsNull(gameImageList1.List[index].Image);
+                    Assert.IsNull(gameImageList2.List[index].Image);
+                }
             }
         }
 
