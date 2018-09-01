@@ -101,6 +101,13 @@ namespace TitleiOModelTest.UnitTests
             Assert.AreEqual(game.GenerateSelectQuery(), "SELECT Id, Name, Description FROM Game");
 
             game = new Game(
+                0,
+                "Name",
+                "Description");
+
+            Assert.AreEqual(game.GenerateSelectQuery(), "SELECT Id, Name, Description FROM Game WHERE Name = 'Name'");
+
+            game = new Game(
                 1,
                 "Name",
                 "Description");

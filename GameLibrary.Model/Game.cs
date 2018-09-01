@@ -144,6 +144,12 @@ namespace GameLibrary.Model
             {
                 var whereClause = GeneratePrimaryKeyWhereClause();
 
+                if (string.IsNullOrEmpty(whereClause) && 
+                    !string.IsNullOrEmpty(Name))
+                {
+                    whereClause = $"Name = '{Name}'";
+                }
+
                 if (!string.IsNullOrEmpty(whereClause))
                 {
                     result = $"SELECT Id, Name, Description FROM {TableName} WHERE {whereClause}";
