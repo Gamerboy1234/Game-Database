@@ -1,8 +1,6 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using GameImageLibrary.Model;
-using GameLibrary.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Sql.Server.Connection;
 using Utilities;
@@ -16,9 +14,8 @@ namespace GameLibrary.Model.Test
 
         // connecting to server
         private const string ConnectionString = "Server=.;Database=BubbaGames;Trusted_Connection=true;";
-
-        private const string TestImageFilePath = @"D:\UE4 Projects\InsertNameV2\Game-Database\TestData\Elf.jpg";
-        private const string TestUpdateImageFilePath = @"D:\UE4 Projects\InsertNameV2\Game-Database\TestData\Necromancer.jpg";
+        private const string TestImageFilePath = @"D:\Programing Projects\GitHub\Game-Database\TestData\Elf.jpg";
+        private const string TestUpdateImageFilePath = @"D:\Programing Projects\GitHub\Game-Database\TestData\Necromancer.jpg";
 
         private byte[] _imageData;
         private byte[] _updateImageData;
@@ -66,6 +63,8 @@ namespace GameLibrary.Model.Test
         [TestMethod]
         public void GameImagePropertiesTest()
         {
+            _imageData = File.ReadAllBytes(TestImageFilePath);
+
             var gameImage = new GameImage();
 
             Assert.AreEqual(gameImage.Id, 0);

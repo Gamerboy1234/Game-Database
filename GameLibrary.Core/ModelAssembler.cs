@@ -1,9 +1,9 @@
-﻿
-using System;
+﻿using System;
 using Logger;
 using GameLibrary.Model;
 using Sql.Server.Connection;
 using Utilities;
+using static GameLibrary.Model.Genre;
 
 namespace GameLibrary.Core
 {
@@ -17,13 +17,11 @@ namespace GameLibrary.Core
 
         #endregion Private Fields
 
-
         #region Public Fields
 
         public bool IsDatabaseConnected => _databaseConnection?.IsConnected ?? false;
 
         #endregion Public Fields
-
 
         #region Constructors
 
@@ -43,7 +41,6 @@ namespace GameLibrary.Core
         }
 
         #endregion Constructors
-
 
         #region Game Public Methods
 
@@ -250,6 +247,210 @@ namespace GameLibrary.Core
 
         #endregion Game Public Methods
 
+        #region Genre Public Methods
+
+        public GenreList GetGenres()
+        {
+            var result = new GenreList();
+
+            try
+            {
+                if (ValidateDatabaseConnection())
+                {
+                    var errorMessage = "";
+
+                    if (DataSetUtility.ValidateQueryResults(_databaseConnection.ExecuteQuery(new Genre().GenerateSelectQuery(), ref errorMessage), out var queryResults))
+                    {
+                        result = GenreList.FromDictionaryList(DataSetUtility.ToDictionaryList(queryResults)) ?? new GenreList();
+                    }
+
+                    result.ErrorMessage = errorMessage;
+                }
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        public Genre GetGenreById(int id, ref string errorMessage)
+        {
+            Genre result = null;
+
+            try
+            {
+                if (id > 0)
+                {
+                    if (ValidateDatabaseConnection())
+                    {
+                        if (DataSetUtility.ValidateQueryResults(_databaseConnection.ExecuteQuery(new Genre { Id = id }.GenerateSelectQuery(), ref errorMessage), out var queryResults))
+                        {
+                            var genres = GenreList.FromDictionaryList(DataSetUtility.ToDictionaryList(queryResults));
+
+                            if (genres?.List?.Count > 0)
+                            {
+                                result = genres.List[0];
+                            }
+                        }
+                    }
+                }
+
+                else
+                {
+                    errorMessage = "Invalid Genre id found";
+                }
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        public Genre GetGenreByName(string name, ref string errorMessage)
+        {
+            Genre result = null;
+
+            try
+            {
+                if (!string.IsNullOrEmpty(name))
+                {
+                    if (ValidateDatabaseConnection())
+                    {
+                        if (DataSetUtility.ValidateQueryResults(_databaseConnection.ExecuteQuery(new Genre { Name = name ?? "" }.GenerateSelectQuery(), ref errorMessage), out var queryResults))
+                        {
+                            var genres = GenreList.FromDictionaryList(DataSetUtility.ToDictionaryList(queryResults));
+
+                            if (genres?.List?.Count > 0)
+                            {
+                                result = genres.List[0];
+                            }
+                        }
+                    }
+                }
+
+                else
+                {
+                    errorMessage = "Invalid Genre name found";
+                }
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        public bool AddOrEditGenre(Genre Genre, ref string errorMessage)
+        {
+            var result = false;
+
+            try
+            {
+                if (!string.IsNullOrEmpty(Genre?.Name))
+                {
+                    if (ValidateDatabaseConnection())
+                    {
+                        // Edit
+                        if (Genre.Id > 0)
+                        {
+                            var foundGenre = GetGenreById(Genre.Id, ref errorMessage);
+
+                            if (foundGenre != null)
+                            {
+                                result = _databaseConnection.ExecuteCommand(Genre.GenerateUpdateStatement(), ref errorMessage);
+                            }
+
+                            else
+                            {
+                                errorMessage = $"Unable to find Genre '{Genre.Name}' to edit";
+                            }
+                        }
+
+                        // Add
+                        else
+                        {
+                            var foundGenre = GetGenreByName(Genre.Name, ref errorMessage);
+
+                            if (foundGenre == null)
+                            {
+                                result = _databaseConnection.ExecuteCommand(Genre.GenerateInsertStatment(), ref errorMessage, out int newId);
+
+                                if (result &&
+                                    (newId > 0))
+                                {
+                                    Genre.Id = newId;
+                                }
+                            }
+
+                            else
+                            {
+                                errorMessage = $"A Genre named '{Genre.Name}' already exists.  Unable to add Genre.";
+                            }
+                        }
+                    }
+                }
+
+                else
+                {
+                    errorMessage = "Invalid Genre name found";
+                }
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        public bool DeleteGenre(int id, ref string errorMessage)
+        {
+            var result = false;
+
+            try
+            {
+                if (id > 0)
+                {
+                    if (ValidateDatabaseConnection())
+                    {
+                        result = _databaseConnection.ExecuteCommand(new Genre { Id = id }.GenerateDeleteStatement(), ref errorMessage);
+                    }
+                }
+
+                else
+                {
+                    errorMessage = "Invalid Genre id found";
+                }
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        #endregion Genre Public Methods
 
         #region Private Methods
 

@@ -18,7 +18,6 @@ namespace TitleiOModelTest.UnitTests
 
         #endregion Private Members
 
-
         #region Test Cases
        
         [TestMethod]
