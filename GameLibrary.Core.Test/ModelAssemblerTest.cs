@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using GameLibrary.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -15,8 +14,7 @@ namespace GameLibrary.Core.Test
 
         #endregion Private Members
 
-
-        #region Test Cases
+        #region Game Test Cases
 
         [TestMethod]
         public void ModelAssemblerConstructorTest()
@@ -157,6 +155,6 @@ namespace GameLibrary.Core.Test
             Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
         }
 
-        #endregion Test Cases
+        #endregion Game Test Cases
     }
 }

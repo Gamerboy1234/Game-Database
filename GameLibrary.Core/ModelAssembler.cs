@@ -452,6 +452,171 @@ namespace GameLibrary.Core
 
         #endregion Genre Public Methods
 
+        #region Rating Public Methods
+
+        public RatingList GetRatings()
+        {
+            var result = new RatingList();
+
+            try
+            {
+                if (ValidateDatabaseConnection())
+                {
+                    var errorMessage = "";
+
+                    if (DataSetUtility.ValidateQueryResults(_databaseConnection.ExecuteQuery(new Rating().GenerateSelectQuery(), ref errorMessage), out var queryResults))
+                    {
+                        result = RatingList.FromDictionaryList(DataSetUtility.ToDictionaryList(queryResults)) ?? new RatingList();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+            return result;
+        }
+
+        public Rating GetRatingById(int id, ref string errorMessage)
+        {
+            Rating result = null;
+            try
+            {
+                if (id > 0)
+                {
+                    if (ValidateDatabaseConnection())
+                    {
+                        if (DataSetUtility.ValidateQueryResults(_databaseConnection.ExecuteQuery(new Rating {Id = id}.GenerateSelectQuery(), ref errorMessage), out var queryResults))
+                        {
+                            var ratings = RatingList.FromDictionaryList(DataSetUtility.ToDictionaryList(queryResults));
+
+                            if (ratings?.List?.Count > 0)
+                            {
+                                result = ratings.List[0];
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+            return result;
+        }
+
+        public Rating GetByName(string name, ref string errorMessage)
+        {
+            Rating result = null;
+
+            try
+            {
+                if (!string.IsNullOrEmpty(name))
+                {
+                    if (ValidateDatabaseConnection())
+                    {
+                        if (DataSetUtility.ValidateQueryResults(_databaseConnection.ExecuteQuery(new Rating { Name = name ?? "" }.GenerateSelectQuery(), ref errorMessage), out var queryResults))
+                        {
+                            var rating = RatingList.FromDictionaryList(DataSetUtility.ToDictionaryList(queryResults));
+
+                            if (rating?.List?.Count > 0)
+                            {
+                                result = rating.List[0];
+                            }
+                        }
+                        else
+                        {
+                            errorMessage = "Invaild Rating name found";
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+            return result;
+
+        }
+
+        public bool AddorEditRating(Rating rating, ref string errorMessage)
+        {
+            var result = false;
+            try
+            {
+                if (!string.IsNullOrEmpty(rating?.Name))
+                {
+                    if (ValidateDatabaseConnection())
+                    {
+                        // Edit
+                        if (rating.Id > 0)
+                        {
+                            var foundRating = GetGenreById(rating.Id, ref errorMessage);
+
+                            if (foundRating != null)
+                            {
+                                result = _databaseConnection.ExecuteCommand(rating.GenerateUpdateStatement(), ref errorMessage);
+                            }
+                            else
+                            {
+                                errorMessage = $"Could not find {rating.Name}";
+                            }
+                        }
+                        // Add 
+                        else
+                        {
+                            var foundRating = GetGameByName(rating.Name, ref errorMessage);
+
+                            if (foundRating == null)
+                            {
+                                result = _databaseConnection.ExecuteCommand(rating.GenerateInsertStatment(), ref errorMessage, out int newId);
+
+                                if (result && newId > 0)
+                                {
+                                    rating.Id = newId;
+                                }
+                            }
+                            else
+                            {
+                                errorMessage = $"A rating named '{rating.Name}' already exists.  Unable to add rating.";
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+            return result;
+        }
+
+        public bool DeleteRating(int id, ref string errorMessage)
+        {
+            var result = false;
+
+            try
+            {
+                if (id > 0)
+                {
+                    if (ValidateDatabaseConnection())
+                    {
+                        result = _databaseConnection.ExecuteCommand(new Rating { Id = id }.GenerateDeleteStatement(), ref errorMessage);
+                    }
+                }
+                else
+                {
+                    errorMessage = "Invalid rating id found";
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+            return result;
+        }
+        #endregion Rating Public Methods
+
         #region Private Methods
 
         private bool ValidateDatabaseConnection()
