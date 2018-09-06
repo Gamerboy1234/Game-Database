@@ -328,11 +328,11 @@ namespace GameLibrary.Core
                     {
                         if (DataSetUtility.ValidateQueryResults(_databaseConnection.ExecuteQuery(new Genre { Name = name ?? "" }.GenerateSelectQuery(), ref errorMessage), out var queryResults))
                         {
-                            var genres = GenreList.FromDictionaryList(DataSetUtility.ToDictionaryList(queryResults));
+                            var genre = GenreList.FromDictionaryList(DataSetUtility.ToDictionaryList(queryResults));
 
-                            if (genres?.List?.Count > 0)
+                            if (genre?.List?.Count > 0)
                             {
-                                result = genres.List[0];
+                                result = genre.List[0];
                             }
                         }
                     }
@@ -340,7 +340,7 @@ namespace GameLibrary.Core
 
                 else
                 {
-                    errorMessage = "Invalid Genre name found";
+                    errorMessage = "Invalid genre name found";
                 }
             }
 
@@ -354,59 +354,58 @@ namespace GameLibrary.Core
             return result;
         }
 
-        public bool AddOrEditGenre(Genre Genre, ref string errorMessage)
+        public bool AddOrEditGenre(Genre genre, ref string errorMessage)
         {
             var result = false;
 
             try
             {
-                if (!string.IsNullOrEmpty(Genre?.Name))
+                if (!string.IsNullOrEmpty(genre?.Name))
                 {
                     if (ValidateDatabaseConnection())
                     {
                         // Edit
-                        if (Genre.Id > 0)
+                        if (genre.Id > 0)
                         {
-                            var foundGenre = GetGenreById(Genre.Id, ref errorMessage);
+                            var foundgenre = GetGenreById(genre.Id, ref errorMessage);
 
-                            if (foundGenre != null)
+                            if (foundgenre != null)
                             {
-                                result = _databaseConnection.ExecuteCommand(Genre.GenerateUpdateStatement(), ref errorMessage);
+                                result = _databaseConnection.ExecuteCommand(genre.GenerateUpdateStatement(), ref errorMessage);
                             }
 
                             else
                             {
-                                errorMessage = $"Unable to find Genre '{Genre.Name}' to edit";
+                                errorMessage = $"Unable to find game '{genre.Name}' to edit";
                             }
                         }
 
                         // Add
                         else
                         {
-                            var foundGenre = GetGenreByName(Genre.Name, ref errorMessage);
+                            var foundgenre = GetGenreByName(genre.Name, ref errorMessage);
 
-                            if (foundGenre == null)
+                            if (foundgenre == null)
                             {
-                                result = _databaseConnection.ExecuteCommand(Genre.GenerateInsertStatment(), ref errorMessage, out int newId);
+                                result = _databaseConnection.ExecuteCommand(genre.GenerateInsertStatment(), ref errorMessage, out int newId);
 
                                 if (result &&
                                     (newId > 0))
                                 {
-                                    Genre.Id = newId;
+                                    genre.Id = newId;
                                 }
                             }
 
                             else
                             {
-                                errorMessage = $"A Genre named '{Genre.Name}' already exists.  Unable to add Genre.";
+                                errorMessage = $"A genre named '{genre.Name}' already exists.  Unable to add genre.";
                             }
                         }
                     }
                 }
-
                 else
                 {
-                    errorMessage = "Invalid Genre name found";
+                    errorMessage = "Invalid genre name found";
                 }
             }
 
@@ -505,7 +504,7 @@ namespace GameLibrary.Core
             return result;
         }
 
-        public Rating GetByName(string name, ref string errorMessage)
+        public Rating GetRatingByName(string name, ref string errorMessage)
         {
             Rating result = null;
 
@@ -524,24 +523,29 @@ namespace GameLibrary.Core
                                 result = rating.List[0];
                             }
                         }
-                        else
-                        {
-                            errorMessage = "Invaild Rating name found";
-                        }
                     }
                 }
+
+                else
+                {
+                    errorMessage = "Invalid rating name found";
+                }
             }
+
             catch (Exception ex)
             {
                 Log.Error(ex);
-            }
-            return result;
 
+                errorMessage = ex.Message;
+            }
+
+            return result;
         }
 
-        public bool AddorEditRating(Rating rating, ref string errorMessage)
+        public bool AddOrEditRating(Rating rating, ref string errorMessage)
         {
             var result = false;
+
             try
             {
                 if (!string.IsNullOrEmpty(rating?.Name))
@@ -551,31 +555,35 @@ namespace GameLibrary.Core
                         // Edit
                         if (rating.Id > 0)
                         {
-                            var foundRating = GetGenreById(rating.Id, ref errorMessage);
+                            var foundGame = GetRatingById(rating.Id, ref errorMessage);
 
-                            if (foundRating != null)
+                            if (foundGame != null)
                             {
                                 result = _databaseConnection.ExecuteCommand(rating.GenerateUpdateStatement(), ref errorMessage);
                             }
+
                             else
                             {
-                                errorMessage = $"Could not find {rating.Name}";
+                                errorMessage = $"Unable to find game '{rating.Name}' to edit";
                             }
                         }
-                        // Add 
+
+                        // Add
                         else
                         {
-                            var foundRating = GetGameByName(rating.Name, ref errorMessage);
+                            var foundGame = GetRatingByName(rating.Name, ref errorMessage);
 
-                            if (foundRating == null)
+                            if (foundGame == null)
                             {
                                 result = _databaseConnection.ExecuteCommand(rating.GenerateInsertStatment(), ref errorMessage, out int newId);
 
-                                if (result && newId > 0)
+                                if (result &&
+                                    (newId > 0))
                                 {
                                     rating.Id = newId;
                                 }
                             }
+
                             else
                             {
                                 errorMessage = $"A rating named '{rating.Name}' already exists.  Unable to add rating.";
@@ -583,11 +591,20 @@ namespace GameLibrary.Core
                         }
                     }
                 }
+
+                else
+                {
+                    errorMessage = "Invalid game name found";
+                }
             }
+
             catch (Exception ex)
             {
                 Log.Error(ex);
+
+                errorMessage = ex.Message;
             }
+
             return result;
         }
 

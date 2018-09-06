@@ -129,17 +129,23 @@ namespace GameLibrary.Model
 
             try
             {
-                var whereclause = GeneratePrimaryKeyWhereClause();
+                var whereClause = GeneratePrimaryKeyWhereClause();
 
-                if (!string.IsNullOrEmpty(whereclause))
+                if (string.IsNullOrEmpty(whereClause) &&
+                    !string.IsNullOrEmpty(Name))
                 {
-                    result = $"SELECT Id, Name, Description, Rating FROM {TableName} WHERE {whereclause}";
+                    whereClause = $"Name = '{Name}'";
                 }
+
+                if (!string.IsNullOrEmpty(whereClause))
+                {
+                    result = $"SELECT Id, Name, Description FROM {TableName} WHERE {whereClause}";
+                }
+
                 else
                 {
-                    result = $"SELECT Id, Name, Description, Rating FROM {TableName}";
+                    result = $"SELECT Id, Name, Description FROM {TableName}";
                 }
-
             }
             catch (Exception ex)
             {

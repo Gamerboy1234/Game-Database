@@ -55,7 +55,7 @@ namespace GameLibrary.Model
 
             try
             {
-                result = $"INSERT INTO {TableName} (Name, Description) VALUES ('{Name}', '{Description}', '{Symbol}')";
+                result = $"INSERT INTO {TableName} (Name, Description, Symbol) VALUES ('{Name}', '{Description}', '{Symbol}')";
             }
             catch (Exception ex)
             {
@@ -71,7 +71,7 @@ namespace GameLibrary.Model
             {
                 var whereClause = GeneratePrimaryKeyWhereClause();
 
-                result = $"UPDATE {TableName} SET Name = '{Name}', Description = '{Description}', Symbol = '{Symbol}' WHERE = {whereClause}";
+                result = $"UPDATE {TableName} SET Name = '{Name}', Description = '{Description}', Symbol = '{Symbol}' WHERE {whereClause}";
             }
             catch (Exception ex)
             {
@@ -129,17 +129,23 @@ namespace GameLibrary.Model
 
             try
             {
-                var whereclause = GeneratePrimaryKeyWhereClause();
+                var whereClause = GeneratePrimaryKeyWhereClause();
 
-                if (!string.IsNullOrEmpty(whereclause))
+                if (string.IsNullOrEmpty(whereClause) &&
+                    !string.IsNullOrEmpty(Name))
                 {
-                    result = $"SELECT Id, Name, Description, Symbol FROM {TableName} WHERE {whereclause}";
+                    whereClause = $"Name = '{Name}'";
                 }
+
+                if (!string.IsNullOrEmpty(whereClause))
+                {
+                    result = $"SELECT Id, Name, Description FROM {TableName} WHERE {whereClause}";
+                }
+
                 else
                 {
-                    result = $"SELECT Id, Name, Description, Symbol FROM {TableName}";
+                    result = $"SELECT Id, Name, Description FROM {TableName}";
                 }
-
             }
             catch (Exception ex)
             {
