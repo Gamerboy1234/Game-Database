@@ -634,6 +634,381 @@ namespace GameLibrary.Core
         }
         #endregion Rating Public Methods
 
+        #region Review Public Methods
+
+        public ReviewList GetReviews()
+        {
+            var result = new ReviewList();
+
+            try
+            {
+                if (ValidateDatabaseConnection())
+                {
+                    var errorMessage = "";
+
+                    if (DataSetUtility.ValidateQueryResults(_databaseConnection.ExecuteQuery(new Review().GenerateSelectQuery(), ref errorMessage), out var queryResults))
+                    {
+                        result = ReviewList.FromDictionaryList(DataSetUtility.ToDictionaryList(queryResults)) ?? new ReviewList();
+                    }
+
+                    result.ErrorMessage = errorMessage;
+                }
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        public Review GetReviewByName(string name, ref string errorMessage)
+        {
+            Review result = null;
+
+            try
+            {
+                if (!string.IsNullOrEmpty(name))
+                {
+                    if (ValidateDatabaseConnection())
+                    {
+                        if (DataSetUtility.ValidateQueryResults(_databaseConnection.ExecuteQuery(new Review { Name = name ?? "" }.GenerateSelectQuery(), ref errorMessage), out var queryResults))
+                        {
+                            var review = ReviewList.FromDictionaryList(DataSetUtility.ToDictionaryList(queryResults));
+
+                            if (review?.List?.Count > 0)
+                            {
+                                result = review.List[0];
+                            }
+                        }
+                    }
+                    else
+                    {
+                        errorMessage = "Invaild review name found";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+            return result;
+        }
+
+        public Review GetReviewById(int id, ref string errorMessage)
+        {
+            Review result = null;
+
+            try
+            {
+                if (id > 0)
+                {
+                    if (ValidateDatabaseConnection())
+                    {
+                        if ((DataSetUtility.ValidateQueryResults(_databaseConnection.ExecuteQuery(new Review { Id = id }.GenerateSelectQuery(), ref errorMessage), out var queryResults)))
+                        {
+                            var review = ReviewList.FromDictionaryList(DataSetUtility.ToDictionaryList(queryResults));
+
+                            if (review?.List?.Count > 0)
+                            {
+                                result = review.List[0];
+                            }
+                        }
+                    }
+                    else
+                    {
+                        errorMessage = "Invalid review Id found";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+            return result;
+        }
+
+        public bool AddOrEditReview(Review review, ref string errorMessage)
+        {
+            var result = false;
+
+            try
+            {
+                if (!string.IsNullOrEmpty(review.Name))
+                {
+                    if (ValidateDatabaseConnection())
+                    {
+                        // edit
+                        if (review.Id > 0)
+                        {
+                            var foundreview = GetReviewById(review.Id, ref errorMessage);
+
+                            if (foundreview != null)
+                            {
+                                result = _databaseConnection.ExecuteCommand(review.GenerateUpdateStatement(), ref errorMessage);
+                            }
+
+                            else
+                            {
+                                errorMessage = $"Unable to find review '{review.Name}' to edit";
+                            }
+                        }
+                        // add
+                        else
+                        {
+                            var foundreview = GetReviewByName(review.Name, ref errorMessage);
+
+                            if (foundreview == null)
+                            {
+                                result = _databaseConnection.ExecuteCommand(review.GenerateInsertStatment(), ref errorMessage, out int newId);
+
+                                if (result && newId > 0)
+                                {
+                                    review.Id = newId;
+                                }
+                            }
+                            else
+                            {
+                                errorMessage = $"A review named '{review.Name}' already exists.  Unable to add review.";
+                            }
+                        }
+                    }
+                    else
+                    {
+                        errorMessage = "Invaild review name found";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+            return result;
+        }
+
+        public bool DeleteReview(int id, ref string errorMessage)
+        {
+            var result = false;
+
+            try
+            {
+                if (id > 0)
+                {
+                    if (ValidateDatabaseConnection())
+                    {
+                        result = _databaseConnection.ExecuteCommand(new Review { Id = id }.GenerateDeleteStatement(), ref errorMessage);
+                    }
+                }
+
+                else
+                {
+                    errorMessage = "Invalid Genre id found";
+                }
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        #endregion Review Public Methods
+
+        #region Platform Public Methods
+
+        public PlatformList GetPlatfomrs()
+        {
+            var result = new PlatformList();
+
+            try
+            {
+
+                if (ValidateDatabaseConnection())
+                {
+                    var errorMessage = "";
+
+                    if (DataSetUtility.ValidateQueryResults(_databaseConnection.ExecuteQuery(new Platform().GenerateSelectQuery(), ref errorMessage), out var queryResults))
+                    {
+                        result = PlatformList.FromDictionaryList(DataSetUtility.ToDictionaryList(queryResults)) ?? new PlatformList();
+                    }
+
+                    result.ErrorMessage = errorMessage;
+                }
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+            return result;
+        }
+
+        public Platform GetPlatformById(int id, ref string errorMessage)
+        {
+            Platform result = null;
+
+            try
+            {
+                if (id > 0)
+                {
+                    if (ValidateDatabaseConnection())
+                    {
+                        if (DataSetUtility.ValidateQueryResults(_databaseConnection.ExecuteQuery(new Platform { Id = id }.GenerateSelectQuery(), ref errorMessage), out var queryResults))
+                        {
+                            var platform = PlatformList.FromDictionaryList(DataSetUtility.ToDictionaryList(queryResults));
+
+                            if (platform?.List?.Count > 0)
+                            {
+                                result = platform.List[0];
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    errorMessage = "Invalid Platform Found";
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+            return result;
+        }
+
+        public Platform GetPlatfomrByName(string name, ref string errorMessage)
+        {
+            Platform result = null;
+            try
+            {
+                if (!string.IsNullOrEmpty(name))
+                {
+                    if (ValidateDatabaseConnection())
+                    {
+                       if (DataSetUtility.ValidateQueryResults(_databaseConnection.ExecuteQuery(new Platform { Name = name ?? ""}.GenerateSelectQuery(), ref errorMessage), out var queryResults))
+                        {
+                            var platforms = PlatformList.FromDictionaryList(DataSetUtility.ToDictionaryList(queryResults));
+
+                            if (platforms?.List?.Count > 0)
+                            {
+                                result = platforms.List[0];
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    errorMessage = "Invalid platform name found";
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+            return result;
+        }
+
+        public bool AddOrEditPlatform(Platform platform, ref string errorMessage)
+        {
+            var result = false;
+
+            try
+            {
+                if (!string.IsNullOrEmpty(platform?.Name))
+                {
+                    if (ValidateDatabaseConnection())
+                    {
+                        // Edit
+                        if (platform.Id > 0)
+                        {
+                            var foundplatform = GetPlatformById(platform.Id, ref errorMessage);
+
+                            if (foundplatform != null)
+                            {
+                                result = _databaseConnection.ExecuteCommand(platform.GenerateUpdateStatement(), ref errorMessage);
+                            }
+
+                            else
+                            {
+                                errorMessage = $"Unable to find platform '{platform.Name}' to edit";
+                            }
+                        }
+
+                        // Add
+                        else
+                        {
+                            var foundplatform = GetPlatfomrByName(platform.Name, ref errorMessage);
+
+                            if (foundplatform == null)
+                            {
+                                result = _databaseConnection.ExecuteCommand(platform.GenerateInsertStatment(), ref errorMessage, out int newId);
+
+                                if (result &&
+                                    (newId > 0))
+                                {
+                                    platform.Id = newId;
+                                }
+                            }
+
+                            else
+                            {
+                                errorMessage = $"A platform named '{platform.Name}' already exists.  Unable to add platform.";
+                            }
+                        }
+                    }
+                }
+
+                else
+                {
+                    errorMessage = "Invalid game name found";
+                }
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            return result;
+        }
+        
+        public bool DeletePlatform(int id, ref string errorMessage)
+        {
+            var result = false;
+
+            try
+            {
+                if (id > 0)
+                {
+                    if (ValidateDatabaseConnection())
+                    {
+                        result = _databaseConnection.ExecuteCommand(new Platform { Id = id }.GenerateDeleteStatement(), ref errorMessage);
+                    }
+                }
+                else
+                {
+                    errorMessage = "Invalid platform id found";
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+            return result;
+        }
+
+        #endregion Platform Public Methods
+
         #region Private Methods
 
         private bool ValidateDatabaseConnection()

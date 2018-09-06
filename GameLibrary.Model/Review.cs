@@ -71,7 +71,7 @@ namespace GameLibrary.Model
             {
                 var whereClause = GeneratePrimaryKeyWhereClause();
 
-                result = $"UPDATE {TableName} SET Name = '{Name}', Description = '{Description}', Rating = {Reviewrating} WHERE = {whereClause}";
+                result = $"UPDATE {TableName} SET Name = '{Name}', Description = '{Description}', Rating = {Reviewrating} WHERE {whereClause}";
             }
             catch (Exception ex)
             {

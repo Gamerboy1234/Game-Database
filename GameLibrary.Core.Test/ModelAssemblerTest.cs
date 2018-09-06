@@ -422,5 +422,267 @@ namespace GenreLibrary.Core.Test
         }
 
         #endregion Ratings Test Cases
+
+        #region Review Test Cases
+
+        [TestMethod]
+        public void ModelAssemblerConstructorTestReview()
+        {
+            var modelAssembler = new ModelAssembler(ConnectionString);
+
+            Assert.IsTrue(modelAssembler.IsDatabaseConnected);
+        }
+
+        [TestMethod]
+        public void ModelAssemblerReviewTest()
+        {
+            var modelAssembler = new ModelAssembler(ConnectionString);
+
+            Assert.IsTrue(modelAssembler.IsDatabaseConnected);
+
+            // get all Reviews 
+
+            var review = modelAssembler.GetReviews();
+
+            if (review.List.Count > 0)
+            {
+                Assert.IsTrue(review.List.Count > 0);
+            }
+
+            // add a review 
+
+            var Review = new Review(0, "Name", "Description", 5);
+
+            Assert.IsNotNull(Review);
+
+            var errorMessage = "";
+
+            var result = modelAssembler.AddOrEditReview(Review, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(Review.Id > 0);
+
+            // find review by id
+
+            var foundReview = modelAssembler.GetReviewById(Review.Id, ref errorMessage);
+
+            Assert.IsNotNull(foundReview);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.AreEqual(Review.Id, foundReview.Id);
+
+            // find review by name 
+
+            foundReview = modelAssembler.GetReviewByName(Review.Name, ref errorMessage);
+
+            Assert.IsNotNull(foundReview);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.AreEqual(Review.Name, foundReview.Name);
+
+            // failed to add review
+
+            var failedreview = new Review(0, "Name", "Description", 5);
+
+            errorMessage = "";
+
+            result = modelAssembler.AddOrEditReview(failedreview, ref errorMessage);
+
+            Assert.IsFalse(result);
+            Assert.IsFalse(string.IsNullOrEmpty(errorMessage));
+            Assert.AreEqual(errorMessage, "A review named 'Name' already exists.  Unable to add review.");
+
+            errorMessage = "";
+
+            // failed to get review by Id
+
+            foundReview = modelAssembler.GetReviewById(789, ref errorMessage);
+
+            Assert.IsNull(foundReview);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+            // failed to get by name 
+
+            foundReview = modelAssembler.GetReviewByName("Bleh", ref errorMessage);
+
+            Assert.IsNull(foundReview);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+            // update review 
+
+            var updateReview = new Review(Review.Id, "Name2", "Description2", 8);
+
+            errorMessage = "";
+
+            result = modelAssembler.AddOrEditReview(updateReview, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.AreEqual(Review.Id, updateReview.Id);
+
+            // get updated reivew by id 
+
+            foundReview = modelAssembler.GetReviewById(updateReview.Id, ref errorMessage);
+
+            Assert.IsNotNull(foundReview);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.AreEqual(updateReview.Id, foundReview.Id);
+
+            // get updated reivew by name
+
+            foundReview = modelAssembler.GetReviewByName(updateReview.Name, ref errorMessage);
+
+            Assert.IsNotNull(foundReview);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.AreEqual(updateReview.Id, foundReview.Id);
+
+            // delete review 
+
+            result = modelAssembler.DeleteReview(updateReview.Id, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+            // find review name should fail 
+
+            foundReview = modelAssembler.GetReviewByName(updateReview.Name, ref errorMessage);
+
+            Assert.IsNull(foundReview);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+        }
+
+        #endregion Review Test Cases
+
+        #region Platform Test Cases
+
+        [TestMethod]
+        public void ModelAssemblerConstructorTestPlatform()
+        {
+            var modelAssembler = new ModelAssembler(ConnectionString);
+
+            Assert.IsTrue(modelAssembler.IsDatabaseConnected);
+        }
+
+        [TestMethod]
+        public void ModelAssemblerPlatformTest()
+        {
+            var modelAssembler = new ModelAssembler(ConnectionString);
+
+            Assert.IsTrue(modelAssembler.IsDatabaseConnected);
+
+            // get all Platforms 
+
+            var platforms = modelAssembler.GetPlatfomrs();
+
+            if (platforms.List.Count > 0)
+            {
+                Assert.IsTrue(platforms.List.Count > 0);
+            }
+
+            // add a platform
+
+            var platform = new Platform(0, "Playstation", "Sony");
+
+            Assert.IsNotNull(platform);
+
+            var errorMessage = "";
+
+            var result = modelAssembler.AddOrEditPlatform(platform, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(platform.Id > 0);
+
+            // find platform id 
+
+            var foundplatform = modelAssembler.GetPlatformById(platform.Id, ref errorMessage);
+
+            Assert.IsNotNull(foundplatform);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.AreEqual(platform.Id, foundplatform.Id);
+
+            // find platform by name
+
+            foundplatform = modelAssembler.GetPlatfomrByName(platform.Name, ref errorMessage);
+
+            Assert.IsNotNull(foundplatform);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.AreEqual(platform.Name, foundplatform.Name);
+
+            // failed to add platform 
+
+            var failedplatform = new Platform(0, "Playstation", "Sony");
+
+            errorMessage = "";
+
+            result = modelAssembler.AddOrEditPlatform(failedplatform, ref errorMessage);
+
+            Assert.IsFalse(result);
+            Assert.IsFalse(string.IsNullOrEmpty(errorMessage));
+            Assert.AreEqual(errorMessage, "A platform named 'Playstation' already exists.  Unable to add platform.");
+
+            errorMessage = "";
+
+            // failed to get id 
+
+            foundplatform = modelAssembler.GetPlatformById(500, ref errorMessage);
+
+            Assert.IsNull(foundplatform);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+            // failed to get by name
+
+            foundplatform = modelAssembler.GetPlatfomrByName("bob", ref errorMessage);
+
+            Assert.IsNull(foundplatform);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+            // edit platform 
+
+            var updatedplatform = new Platform(platform.Id, "Xbox", "Microsoft");
+
+            errorMessage = "";
+
+            result = modelAssembler.AddOrEditPlatform(updatedplatform, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.AreEqual(platform.Id, updatedplatform.Id);
+
+            // get updated platform by id 
+
+            foundplatform = modelAssembler.GetPlatformById(updatedplatform.Id, ref errorMessage);
+
+            Assert.IsNotNull(foundplatform);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.AreEqual(updatedplatform.Id, foundplatform.Id);
+
+            // get updated platform by name
+
+            foundplatform = modelAssembler.GetPlatfomrByName(updatedplatform.Name, ref errorMessage);
+
+            Assert.IsNotNull(foundplatform);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.AreEqual(updatedplatform.Name, foundplatform.Name);
+
+            // delete platform 
+
+            result = modelAssembler.DeletePlatform(updatedplatform.Id, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+            // find platform by name should fail 
+
+            foundplatform = modelAssembler.GetPlatfomrByName(updatedplatform.Name, ref errorMessage);
+
+            Assert.IsNull(foundplatform);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+        }
+
+
+
+        #endregion Platform Test Cases 
+
     }
 }

@@ -68,7 +68,7 @@ namespace GameLibrary.Model
             {
                 var whereClause = GeneratePrimaryKeyWhereClause();
 
-                result = $"UPDATE {TableName} SET Name = '{Name}', Maker = '{Maker}' WHERE = {whereClause}";
+                result = $"UPDATE {TableName} SET Name = '{Name}', Maker = '{Maker}' WHERE {whereClause}";
             }
             catch (Exception ex)
             {
@@ -136,12 +136,12 @@ namespace GameLibrary.Model
 
                 if (!string.IsNullOrEmpty(whereClause))
                 {
-                    result = $"SELECT Id, Name, Description FROM {TableName} WHERE {whereClause}";
+                    result = $"SELECT Id, Name, Maker FROM {TableName} WHERE {whereClause}";
                 }
 
                 else
                 {
-                    result = $"SELECT Id, Name, Description FROM {TableName}";
+                    result = $"SELECT Id, Name, Maker FROM {TableName}";
                 }
             }
             catch (Exception ex)
