@@ -670,6 +670,13 @@ namespace TitleiOModelTest.UnitTests
         }
 
         [TestMethod]
+        public void GameGenreListGenerateSelectQueryTest()
+        {
+            Assert.AreEqual(GameGenreList.GenerateSelectQueryByGameId(1), "SELECT Id, GameId, GenreId FROM GameGenre WHERE GameId = 1");
+            Assert.AreEqual(GameGenreList.GenerateSelectQueryByGenreId(2), "SELECT Id, GameId, GenreId FROM GameGenre WHERE GenreId = 2");
+        }
+
+        [TestMethod]
         public void GameGenreListJsonTest()
         {
             var gameGenreList1 = new GameGenreList();

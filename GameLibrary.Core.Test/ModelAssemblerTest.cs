@@ -1,5 +1,4 @@
-﻿using System;
-using GameLibrary.Core;
+﻿using GameLibrary.Core;
 using GameLibrary.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -177,39 +176,39 @@ namespace GenreLibrary.Core.Test
 
             // Get All Genre
 
-            var genre = modelAssembler.GetGenres();
+            var genres = modelAssembler.GetGenres();
 
-            if (genre.List.Count > 0)
+            if (genres.List.Count > 0)
             {
-                Assert.IsTrue(genre.List.Count > 0);
+                Assert.IsTrue(genres.List.Count > 0);
             }
 
             // Add a Genre
 
-            var Genre = new Genre(0,"Bob","not really a genre");
-            Assert.IsNotNull(Genre);
+            var genre = new Genre(0,"Bob","not really a genre");
+            Assert.IsNotNull(genre);
             var errorMessage = "";
-            var result = modelAssembler.AddOrEditGenre(Genre, ref errorMessage);
+            var result = modelAssembler.AddOrEditGenre(genre, ref errorMessage);
 
             Assert.IsTrue(result);
             Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
-            Assert.IsTrue(Genre.Id > 0);
+            Assert.IsTrue(genre.Id > 0);
 
             // Get Genre by Id 
 
-            var foundGenre = modelAssembler.GetGenreById(Genre.Id, ref errorMessage);
+            var foundGenre = modelAssembler.GetGenreById(genre.Id, ref errorMessage);
 
             Assert.IsNotNull(foundGenre);
             Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
-            Assert.AreEqual(Genre.Id, foundGenre.Id);
+            Assert.AreEqual(genre.Id, foundGenre.Id);
 
             // Get Genre by Name
 
-            foundGenre = modelAssembler.GetGenreByName(Genre.Name, ref errorMessage);
+            foundGenre = modelAssembler.GetGenreByName(genre.Name, ref errorMessage);
           
             Assert.IsNotNull(foundGenre);
             Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
-            Assert.AreEqual(Genre.Name, foundGenre.Name);
+            Assert.AreEqual(genre.Name, foundGenre.Name);
 
             // Fail on genre add attempt because the genre already exists.
             
@@ -241,7 +240,7 @@ namespace GenreLibrary.Core.Test
             // Edit a Genre
 
             var updateGenre = new Genre(
-                Genre.Id,
+                genre.Id,
                 "Joe",
                 "Joe is a Scrub");
 
@@ -250,7 +249,7 @@ namespace GenreLibrary.Core.Test
 
             Assert.IsTrue(result);
             Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
-            Assert.AreEqual(Genre.Id, updateGenre.Id);
+            Assert.AreEqual(genre.Id, updateGenre.Id);
 
             // Get Genre by Id
 
@@ -258,7 +257,7 @@ namespace GenreLibrary.Core.Test
 
             Assert.IsNotNull(foundGenre);
             Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
-            Assert.AreEqual(Genre.Id, foundGenre.Id);
+            Assert.AreEqual(genre.Id, foundGenre.Id);
 
             // Get Genre by Name
 
@@ -571,7 +570,7 @@ namespace GenreLibrary.Core.Test
 
             // get all Platforms 
 
-            var platforms = modelAssembler.GetPlatfomrs();
+            var platforms = modelAssembler.GetPlatforms();
 
             if (platforms.List.Count > 0)
             {
@@ -680,9 +679,225 @@ namespace GenreLibrary.Core.Test
 
         }
 
+        #endregion Platform Test Cases
+
+        #region GameGenre Test Cases
+
+        [TestMethod]
+        public void ModelAssemblerConstructorTestGameGenre()
+        {
+            var modelAssembler = new ModelAssembler(ConnectionString);
+
+            Assert.IsTrue(modelAssembler.IsDatabaseConnected);
+        }
+
+        [TestMethod]
+        public void ModelAssemblerGameGenreTest()
+        {
+            var modelAssembler = new ModelAssembler(ConnectionString);
+
+            Assert.IsTrue(modelAssembler.IsDatabaseConnected);
+
+            
+            // Add Games used for references in GameGenres
+
+            var game = new Game(
+                0,
+                "Defender",
+                "Awesome Space Game");
+
+            var errorMessage = "";
+            var result = modelAssembler.AddOrEditGame(game, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(game.Id > 0);
+
+            var updateGame = new Game(
+                0,
+                "Name1",
+                "Description1");
+
+            errorMessage = "";
+            result = modelAssembler.AddOrEditGame(updateGame, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(updateGame.Id > 0);
 
 
-        #endregion Platform Test Cases 
+            // Add Genres used for references in GameGenres
 
+            var genre = new Genre(0, "Bob", "not really a genre");
+            Assert.IsNotNull(genre);
+            errorMessage = "";
+            result = modelAssembler.AddOrEditGenre(genre, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(genre.Id > 0);
+
+            var updateGenre = new Genre(0, "Billy", "imaginary friend genre");
+            Assert.IsNotNull(updateGenre);
+            errorMessage = "";
+            result = modelAssembler.AddOrEditGenre(updateGenre, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(updateGenre.Id > 0);
+
+            
+            // get all GameGenres 
+
+            var gameGenres = modelAssembler.GetGameGenres();
+
+            if (gameGenres.List.Count > 0)
+            {
+                Assert.IsTrue(gameGenres.List.Count > 0);
+            }
+
+            // add a gameGenre
+
+            var gameGenre = new GameGenre(
+                0,
+                game.Id,
+                genre.Id);
+
+            Assert.IsNotNull(gameGenre);
+
+            errorMessage = "";
+
+            result = modelAssembler.AddOrEditGameGenre(gameGenre, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(gameGenre.Id > 0);
+
+            // find gameGenre id 
+
+            var foundgameGenre = modelAssembler.GetGameGenreById(gameGenre.Id, ref errorMessage);
+
+            Assert.IsNotNull(foundgameGenre);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.AreEqual(gameGenre.Id, foundgameGenre.Id);
+
+            // find gameGenre by ids
+
+            foundgameGenre = modelAssembler.GetGameGenreByIds(gameGenre.GameId, gameGenre.GenreId, ref errorMessage);
+
+            Assert.IsNotNull(foundgameGenre);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.AreEqual(gameGenre.Id, foundgameGenre.Id);
+
+            // find gameGenre by gameId
+
+            var foundgameGenres = modelAssembler.GetGenresOfGame(gameGenre.GameId);
+
+            Assert.IsNotNull(foundgameGenre);
+            Assert.IsTrue(string.IsNullOrEmpty(foundgameGenres.ErrorMessage));
+            Assert.IsTrue(foundgameGenres.List.Count == 1);
+
+            // find gameGenre by genreId
+
+            foundgameGenres = modelAssembler.GetGamesOfGenre(gameGenre.GenreId);
+
+            Assert.IsNotNull(foundgameGenre);
+            Assert.IsTrue(string.IsNullOrEmpty(foundgameGenres.ErrorMessage));
+            Assert.IsTrue(foundgameGenres.List.Count == 1);
+
+            // failed to add gameGenre 
+
+            foundgameGenre.Id = 0;
+
+            errorMessage = "";
+
+            result = modelAssembler.AddOrEditGameGenre(foundgameGenre, ref errorMessage);
+
+            Assert.IsFalse(result);
+            Assert.IsFalse(string.IsNullOrEmpty(errorMessage));
+
+            errorMessage = "";
+
+            // failed to get id 
+
+            foundgameGenre = modelAssembler.GetGameGenreById(500, ref errorMessage);
+
+            Assert.IsNull(foundgameGenre);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+            // edit gameGenre 
+
+            var updatedgameGenre = new GameGenre(gameGenre.Id, updateGame.Id, updateGenre.Id);
+
+            errorMessage = "";
+
+            result = modelAssembler.AddOrEditGameGenre(updatedgameGenre, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.AreEqual(gameGenre.Id, updatedgameGenre.Id);
+
+            // get updated gameGenre by id 
+
+            foundgameGenre = modelAssembler.GetGameGenreById(updatedgameGenre.Id, ref errorMessage);
+
+            Assert.IsNotNull(foundgameGenre);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.AreEqual(updatedgameGenre.Id, foundgameGenre.Id);
+
+            // get updated gameGenre by name
+
+            foundgameGenre = modelAssembler.GetGameGenreByIds(updatedgameGenre.GameId, updatedgameGenre.GenreId, ref errorMessage);
+
+            Assert.IsNotNull(foundgameGenre);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.AreEqual(gameGenre.Id, foundgameGenre.Id);
+
+            // delete gameGenre 
+
+            result = modelAssembler.DeleteGameGenre(updatedgameGenre.Id, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+            // find gameGenre by ids should fail 
+
+            foundgameGenre = modelAssembler.GetGameGenreByIds(updatedgameGenre.GameId, updatedgameGenre.GenreId, ref errorMessage);
+
+            Assert.IsNull(foundgameGenre);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+
+            // Delete the genres
+
+            errorMessage = "";
+            result = modelAssembler.DeleteGenre(genre.Id, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+            errorMessage = "";
+            result = modelAssembler.DeleteGenre(updateGenre.Id, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+
+            // Delete the games
+
+            errorMessage = "";
+            result = modelAssembler.DeleteGame(game.Id, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+            errorMessage = "";
+            result = modelAssembler.DeleteGame(updateGame.Id, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+        }
+
+        #endregion GameGenre Test Cases
     }
 }

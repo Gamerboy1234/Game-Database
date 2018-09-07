@@ -823,7 +823,7 @@ namespace GameLibrary.Core
 
         #region Platform Public Methods
 
-        public PlatformList GetPlatfomrs()
+        public PlatformList GetPlatforms()
         {
             var result = new PlatformList();
 
@@ -1008,6 +1008,269 @@ namespace GameLibrary.Core
         }
 
         #endregion Platform Public Methods
+
+        #region GameGenre Public Methods
+
+        public GameGenreList GetGameGenres()
+        {
+            var result = new GameGenreList();
+
+            try
+            {
+                if (ValidateDatabaseConnection())
+                {
+                    var errorMessage = "";
+
+                    if ((DataSetUtility.ValidateQueryResults(_databaseConnection.ExecuteQuery(new GameGenre().GenerateSelectQuery(), ref errorMessage), out var queryResults)))
+                    {
+                        result = GameGenreList.FromDictionaryList(DataSetUtility.ToDictionaryList(queryResults));
+                    }
+                    result.ErrorMessage = errorMessage;
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+            return result;
+        }
+
+        public GameGenreList GetGenresOfGame(int gameId)
+        {
+            var result = new GameGenreList();
+
+            try
+            {
+                if (gameId > 0)
+                {
+                    if (ValidateDatabaseConnection())
+                    {
+                        var errorMessage = "";
+
+                        if ((DataSetUtility.ValidateQueryResults(_databaseConnection.ExecuteQuery(GameGenreList.GenerateSelectQueryByGameId(gameId), ref errorMessage), out var queryResults)))
+                        {
+                            result = GameGenreList.FromDictionaryList(DataSetUtility.ToDictionaryList(queryResults));
+                        }
+                        result.ErrorMessage = errorMessage;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+            return result;
+        }
+
+        public GameGenreList GetGamesOfGenre(int genreId)
+        {
+            var result = new GameGenreList();
+
+            try
+            {
+                if (genreId > 0)
+                {
+                    if (ValidateDatabaseConnection())
+                    {
+                        var errorMessage = "";
+
+                        if ((DataSetUtility.ValidateQueryResults(_databaseConnection.ExecuteQuery(GameGenreList.GenerateSelectQueryByGenreId(genreId), ref errorMessage), out var queryResults)))
+                        {
+                            result = GameGenreList.FromDictionaryList(DataSetUtility.ToDictionaryList(queryResults));
+                        }
+                        result.ErrorMessage = errorMessage;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+            return result;
+        }
+
+        public GameGenre GetGameGenreById(int id, ref string errorMessage)
+        {
+            GameGenre result = null;
+
+            try
+            {
+                if (id > 0)
+                {
+                    if (ValidateDatabaseConnection())
+                    {
+                        if (DataSetUtility.ValidateQueryResults(_databaseConnection.ExecuteQuery(new GameGenre { Id = id }.GenerateSelectQuery(), ref errorMessage), out var queryResults))
+                        {
+                            var gamegenre = GameGenreList.FromDictionaryList(DataSetUtility.ToDictionaryList(queryResults));
+
+                            if (gamegenre?.List?.Count > 0)
+                            {
+                               result = gamegenre.List[0];
+                            }
+                        }
+
+                    }
+                }
+                else
+                {
+                    errorMessage = "Invaild GameGenre id found";
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+            return result;
+        }
+
+        public GameGenre GetGameGenreByIds(int gameId, int genreId, ref string errorMessage)
+        {
+            GameGenre result = null;
+
+            try
+            {
+                if (gameId > 0)
+                {
+                    if (genreId > 0)
+                    {
+                        if (ValidateDatabaseConnection())
+                        {
+                            if (DataSetUtility.ValidateQueryResults(_databaseConnection.ExecuteQuery(new GameGenre { GameId = gameId, GenreId = genreId }.GenerateSelectQuery(), ref errorMessage), out var queryResults))
+                            {
+                                var gamegenre = GameGenreList.FromDictionaryList(DataSetUtility.ToDictionaryList(queryResults));
+
+                                if (gamegenre?.List?.Count > 0)
+                                {
+                                    result = gamegenre.List[0];
+                                }
+                            }
+
+                        }
+                    }
+                    else
+                    {
+                        errorMessage = "Invaild Genre id found";
+                    }
+                }
+                else
+                {
+                    errorMessage = "Invaild Game id found";
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+            return result;
+        }
+
+        public bool AddOrEditGameGenre(GameGenre gameGenre, ref string errorMessage)
+        {
+            var result = false;
+
+            try
+            {
+                if (gameGenre.GameId > 0)
+                {
+                    if (gameGenre.GenreId > 0)
+                    {
+                        if (ValidateDatabaseConnection())
+                        {
+                            // Edit
+                            if (gameGenre.Id > 0)
+                            {
+                                var foundgameGenre = GetGameGenreById(gameGenre.Id, ref errorMessage);
+
+                                if (foundgameGenre != null)
+                                {
+                                    result = _databaseConnection.ExecuteCommand(gameGenre.GenerateUpdateStatement(), ref errorMessage);
+                                }
+
+                                else
+                                {
+                                    errorMessage = $"Unable to find gameGenre '{gameGenre.Id}' to edit";
+                                }
+                            }
+
+                            // Add
+                            else
+                            {
+                                var foundgameGenre = GetGameGenreByIds(gameGenre.GameId, gameGenre.GenreId, ref errorMessage);
+
+                                if (foundgameGenre == null)
+                                {
+                                    result = _databaseConnection.ExecuteCommand(gameGenre.GenerateInsertStatement(), ref errorMessage, out int newId);
+
+                                    if (result &&
+                                        (newId > 0))
+                                    {
+                                        gameGenre.Id = newId;
+                                    }
+                                }
+
+                                else
+                                {
+                                    errorMessage = $"A game genre with game id '{gameGenre.GameId}' and genre id '{gameGenre.GenreId}' already exists.  Unable to add game genre.";
+                                }
+                            }
+                        }
+                    }
+
+                    else
+                    {
+                        errorMessage = "Invalid genre found";
+                    }
+                }
+
+                else
+                {
+                    errorMessage = "Invalid game found";
+                }
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        public bool DeleteGameGenre(int id, ref string errorMessage)
+        {
+            var result = false;
+
+            try
+            {
+                if (id > 0)
+                {
+                    if (ValidateDatabaseConnection())
+                    {
+                        result = _databaseConnection.ExecuteCommand(new GameGenre { Id = id }.GenerateDeleteStatement(), ref errorMessage);
+                    }
+                }
+                else
+                {
+                    errorMessage = "Invalid GameGenre id Found";
+                }
+            }
+            catch(Exception ex)
+            {
+                Log.Error(ex);
+            }
+
+            return result;
+        }
+
+        #endregion GameGenre Public Methods
 
         #region Private Methods
 

@@ -123,6 +123,10 @@ namespace GameLibrary.Model
                 {
                     result = $"SELECT Id, GameId, GenreId FROM {TableName} WHERE {whereClause}";
                 }
+                else if ((GameId > 0) && (GenreId > 0))
+                {
+                    result = $"SELECT Id, GameId, GenreId FROM {TableName} WHERE GameId = {GameId} AND GenreId = {GenreId}";
+                }
                 else
                 {
                     result = $"SELECT Id, GameId, GenreId FROM {TableName}";
@@ -284,6 +288,40 @@ namespace GameLibrary.Model
             {
                 Log.Error(ex);
             }
+        }
+
+        public static string GenerateSelectQueryByGameId(int gameId)
+        {
+            var result = "";
+            try
+            {
+                if (gameId > 0)
+                {
+                    result = $"SELECT Id, GameId, GenreId FROM {GameGenre.TableName} WHERE GameId = {gameId}";
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+            return result;
+        }
+
+        public static string GenerateSelectQueryByGenreId(int genreId)
+        {
+            var result = "";
+            try
+            {
+                if (genreId > 0)
+                {
+                    result = $"SELECT Id, GameId, GenreId FROM {GameGenre.TableName} WHERE GenreId = {genreId}";
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+            return result;
         }
 
         #endregion Public Methods 
