@@ -9,7 +9,7 @@ using GameLibrary.Model;
 using Grpc.Core;
 using Logger;
 
-namespace Daffinity.Collector.gRPC.Server
+namespace GameLibrary.gRPC.Server
 {
     public class GameLibraryServer : Gamelibrary.GameLibrary.GameLibraryBase
     {

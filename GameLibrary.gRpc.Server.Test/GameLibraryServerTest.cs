@@ -2,12 +2,13 @@
 using System;
 using System.Diagnostics;
 using GameLibrary.Core;
+using GameLibrary.gRPC.Server;
 using Grpc.Core;
-using Xunit;
-using Daffinity.Collector.gRPC.Server;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GameLibrarygRPCServerTest.UnitTests
+namespace GameLibrary.gRpc.Server.Test
 {
+    [TestClass]
     public class GameLibraryServerTest
     {
         #region Constants
@@ -22,33 +23,33 @@ namespace GameLibrarygRPCServerTest.UnitTests
 
         #region Test Cases
 
-        [Fact]
+        [TestMethod]
         public void GameLibrarygRpcServerTests()
         {
-            Assert.True(true);
+            Assert.IsTrue(true);
 
             try
             {
                 GameLibraryAgent.Startup(ConnectionString);
 
-                var daffinityCollectorServer = new Server
+                var gameLibraryServer = new Grpc.Core.Server
                 {
                     Services = { Gamelibrary.GameLibrary.BindService(new GameLibraryServer()) },
                     Ports = { new ServerPort(GrpcHostName, GrpcPort, ServerCredentials.Insecure) }
                 };
 
-                daffinityCollectorServer.Start();
+                gameLibraryServer.Start();
 
-                Assert.True(true);
+                Assert.IsTrue(true);
 
-                daffinityCollectorServer.ShutdownAsync().Wait();
+                gameLibraryServer.ShutdownAsync().Wait();
             }
 
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
 
-                Assert.True(false);
+                Assert.IsTrue(false);
             }
         }
 

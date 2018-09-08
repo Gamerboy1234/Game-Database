@@ -5,21 +5,21 @@
     <Authors>Justin Wells</Authors>
     <RequireLicenseAcceptance>false</RequireLicenseAcceptance>
     <Language>en-US</Language>
-    <AssemblyName>GameLibrary.gRPC.Test</AssemblyName>
-    <AssemblyTitle>GameLibrary.gRPC.Test</AssemblyTitle>
+    <AssemblyName>GameLibrary.gRPC.Client.Test</AssemblyName>
+    <AssemblyTitle>GameLibrary.gRPC.Client.Test</AssemblyTitle>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <PackageId>GameLibrary.gRPC.Test</PackageId>
-    <RootNamespace>GameLibrary.gRPC.Test</RootNamespace>
-    <Title>GameLibrary gRPC Test</Title>
-    <Description>GameLibrary gRPC Test Library</Description>
+    <PackageId>GameLibrary.gRPC.Client.Test</PackageId>
+    <RootNamespace>GameLibrary.gRPC.Client.Test</RootNamespace>
+    <Title>GameLibrary gRPC Client Test</Title>
+    <Description>GameLibrary gRPC Client Test Library</Description>
     <PackageCopyright>Copyright © Bubbasoft Technologies 2018</PackageCopyright>
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
     <Copyright>Copyright © Bubbasoft Technologies 2018</Copyright>
     <Company>Bubbasoft Technologies</Company>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
-    <Version>1.0.0</Version>
-    <AssemblyVersion>1.0.0.0</AssemblyVersion>
-    <FileVersion>1.0.0.0</FileVersion>
+    <Version>5.1.82</Version>
+    <AssemblyVersion>5.1.0.82</AssemblyVersion>
+    <FileVersion>5.1.0.82</FileVersion>
     <Platforms>AnyCPU;x64;x86</Platforms>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)'=='Debug'">
@@ -43,7 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="UnitTests\" />
+    <ProjectReference Include="..\..\GameLibrary.Model\GameLibrary.Model.csproj" />
+    <ProjectReference Include="..\GameLibrary.gRPC.Client\GameLibrary.gRPC.Client.csproj" />
+    <ProjectReference Include="..\GameLibrary.gRPC.Server\GameLibrary.gRPC.Server.csproj" />
+    <ProjectReference Include="..\GameLibrary.gRPC\GameLibrary.gRPC.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Google.Protobuf" Version="3.6.1" />
@@ -53,6 +56,7 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.8.0" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="System.Interactive.Async" Version="3.2.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.5.1" />
     <PackageReference Include="xunit" Version="2.4.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
   </ItemGroup>
