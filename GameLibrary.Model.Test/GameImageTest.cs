@@ -84,7 +84,7 @@ namespace GameLibrary.Model.Test
         public void GameImageGenerateInsertStatementTest()
         {
             var gameImage = new GameImage(1, 1, _imageData);
-                
+
             Assert.AreEqual(gameImage.GenerateInsertStatment(), "INSERT INTO GameImage (GameId) VALUES (1)");
         }
 
@@ -822,8 +822,7 @@ namespace GameLibrary.Model.Test
                     Assert.IsNull(gameImageList2.List[index].Image);
                 }
             }
+            #endregion Test Cases
         }
-
-        #endregion Test Cases
     }
 }

@@ -1,0 +1,66 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>netcoreapp2.0;net461</TargetFrameworks>
+    <RuntimeIdentifiers>win7-x86;win7-x64</RuntimeIdentifiers>
+    <Authors>Justin Wells</Authors>
+    <RequireLicenseAcceptance>false</RequireLicenseAcceptance>
+    <Language>en-US</Language>
+    <AssemblyName>GameLibrary.gRPC.Client.Test</AssemblyName>
+    <AssemblyTitle>GameLibrary.gRPC.Client.Test</AssemblyTitle>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <PackageId>GameLibrary.gRPC.Client.Test</PackageId>
+    <RootNamespace>GameLibrary.gRPC.Client.Test</RootNamespace>
+    <Title>GameLibrary gRPC Client Test</Title>
+    <Description>GameLibrary gRPC Client Test Library</Description>
+    <PackageCopyright>Copyright © Bubbasoft Technologies 2018</PackageCopyright>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <Copyright>Copyright © Bubbasoft Technologies 2018</Copyright>
+    <Company>Bubbasoft Technologies</Company>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <Version>5.1.82</Version>
+    <AssemblyVersion>5.1.0.82</AssemblyVersion>
+    <FileVersion>5.1.0.82</FileVersion>
+    <Platforms>AnyCPU;x64;x86</Platforms>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+    <NoWarn>xUnit2000</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <NoWarn>xUnit2000</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+    <DefineConstants>TRACE;DEBUG;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DefineConstants>RELEASE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.0'">
+    <DefineConstants>NETCORE;NETSTANDARD;NETSTANDARD2_0</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net461' ">
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\GameLibrary.Model\GameLibrary.Model.csproj" />
+    <ProjectReference Include="..\GameLibrary.gRPC.Client\GameLibrary.gRPC.Client.csproj" />
+    <ProjectReference Include="..\GameLibrary.gRPC.Server\GameLibrary.gRPC.Server.csproj" />
+    <ProjectReference Include="..\GameLibrary.gRPC\GameLibrary.gRPC.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="3.6.1" />
+    <PackageReference Include="Grpc" Version="1.14.2" />
+    <PackageReference Include="Grpc.Core" Version="1.14.2" />
+    <PackageReference Include="Grpc.Tools" Version="1.14.2" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.8.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="System.Interactive.Async" Version="3.2.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.5.1" />
+    <PackageReference Include="xunit" Version="2.4.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
+  </ItemGroup>
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net461'">
+    <DefineConstants>NET461;NETFULL</DefineConstants>
+  </PropertyGroup>
+</Project>

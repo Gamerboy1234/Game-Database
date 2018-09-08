@@ -1,4 +1,5 @@
-﻿using GameLibrary.Core;
+﻿using GameImageLibrary.Model;
+using GameLibrary.Core;
 using GameLibrary.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -922,8 +923,8 @@ namespace GenreLibrary.Core.Test
 
             var game = new Game(
                 0,
-                "Defender",
-                "Awesome Space Game");
+                "Defender1",
+                "Awesome Space Game1");
 
             var errorMessage = "";
             var result = modelAssembler.AddOrEditGame(game, ref errorMessage);
@@ -956,7 +957,7 @@ namespace GenreLibrary.Core.Test
             Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
             Assert.IsTrue(rating.Id > 0);
 
-            var updateRating = new Rating(0, "Billy", "imaginary friend rating", "8");
+            var updateRating = new Rating(0, "Billy1", "imaginary friend rating1", "8");
             Assert.IsNotNull(updateRating);
             errorMessage = "";
             result = modelAssembler.AddOrEditRating(updateRating, ref errorMessage);
@@ -1096,7 +1097,7 @@ namespace GenreLibrary.Core.Test
             Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
 
             errorMessage = "";
-            result = modelAssembler.DeleteRating(updatedgameRating.Id, ref errorMessage);
+            result = modelAssembler.DeleteRating(updateRating.Id, ref errorMessage);
 
             Assert.IsTrue(result);
             Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
@@ -1141,8 +1142,8 @@ namespace GenreLibrary.Core.Test
 
             var game = new Game(
                 0,
-                "Defender",
-                "Awesome Space Game");
+                "Defender2",
+                "Awesome Space Game2");
 
             var errorMessage = "";
             var result = modelAssembler.AddOrEditGame(game, ref errorMessage);
@@ -1153,8 +1154,8 @@ namespace GenreLibrary.Core.Test
 
             var updateGame = new Game(
                 0,
-                "Name1",
-                "Description1");
+                "Name2",
+                "Description2");
 
             errorMessage = "";
             result = modelAssembler.AddOrEditGame(updateGame, ref errorMessage);
@@ -1175,7 +1176,7 @@ namespace GenreLibrary.Core.Test
             Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
             Assert.IsTrue(review.Id > 0);
 
-            var updateReview = new Review(0, "Billy", "imaginary friend review", 5);
+            var updateReview = new Review(0, "Billy2", "imaginary friend review2", 5);
             Assert.IsNotNull(updateReview);
             errorMessage = "";
             result = modelAssembler.AddOrEditReview(updateReview, ref errorMessage);
@@ -1315,7 +1316,7 @@ namespace GenreLibrary.Core.Test
             Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
 
             errorMessage = "";
-            result = modelAssembler.DeleteReview(updatedgameReview.Id, ref errorMessage);
+            result = modelAssembler.DeleteReview(updateReview.Id, ref errorMessage);
 
             Assert.IsTrue(result);
             Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
@@ -1360,8 +1361,8 @@ namespace GenreLibrary.Core.Test
 
             var game = new Game(
                 0,
-                "Defender",
-                "Awesome Space Game");
+                "Defender3",
+                "Awesome Space Game3");
 
             var errorMessage = "";
             var result = modelAssembler.AddOrEditGame(game, ref errorMessage);
@@ -1372,8 +1373,8 @@ namespace GenreLibrary.Core.Test
 
             var updateGame = new Game(
                 0,
-                "Name1",
-                "Description1");
+                "Name3",
+                "Description3");
 
             errorMessage = "";
             result = modelAssembler.AddOrEditGame(updateGame, ref errorMessage);
@@ -1394,7 +1395,7 @@ namespace GenreLibrary.Core.Test
             Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
             Assert.IsTrue(platform.Id > 0);
 
-            var updatePlatform = new Platform(0, "Billy", "imaginary friend platform");
+            var updatePlatform = new Platform(0, "Billy3", "imaginary friend platform3");
             Assert.IsNotNull(updatePlatform);
             errorMessage = "";
             result = modelAssembler.AddOrEditPlatform(updatePlatform, ref errorMessage);
@@ -1534,7 +1535,7 @@ namespace GenreLibrary.Core.Test
             Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
 
             errorMessage = "";
-            result = modelAssembler.DeletePlatform(updatedgamePlatform.Id, ref errorMessage);
+            result = modelAssembler.DeletePlatform(updatePlatform.Id, ref errorMessage);
 
             Assert.IsTrue(result);
             Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
@@ -1556,5 +1557,163 @@ namespace GenreLibrary.Core.Test
         }
 
         #endregion GamePlatform Test Cases
+
+        #region GameImage Test Cases
+
+        [TestMethod]
+        public void ModelAssemblerConstructorTestGameImage()
+        {
+            var modelAssembler = new ModelAssembler(ConnectionString);
+
+            Assert.IsTrue(modelAssembler.IsDatabaseConnected);
+        }
+
+        [TestMethod]
+        public void ModelAssemblerImageTest()
+        {
+            var modelAssembler = new ModelAssembler(ConnectionString);
+
+            Assert.IsTrue(modelAssembler.IsDatabaseConnected);
+
+
+            // Add Games used for references in GameImages
+
+            var game = new Game(
+                0,
+                "Defender3",
+                "Awesome Space Game3");
+
+            var errorMessage = "";
+            var result = modelAssembler.AddOrEditGame(game, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(game.Id > 0);
+
+            var updateGame = new Game(
+                0,
+                "Name3",
+                "Description3");
+
+            errorMessage = "";
+            result = modelAssembler.AddOrEditGame(updateGame, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(updateGame.Id > 0);
+
+            // get all GameImages 
+
+            var gameImages = modelAssembler.GetGameImages();
+
+            if (gameImages.List.Count > 0)
+            {
+                Assert.IsTrue(gameImages.List.Count > 0);
+            }
+
+            // add a gameImage
+
+            var gameImage = new GameImage(
+                0,
+                game.Id,
+                null);
+
+            Assert.IsNotNull(gameImage);
+
+            errorMessage = "";
+
+            result = modelAssembler.AddOrEditGameImage(gameImage, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(gameImage.Id > 0);
+
+            // find gameImage id 
+
+            var foundgameImage = modelAssembler.GetGameImageById(gameImage.Id, ref errorMessage);
+
+            Assert.IsNotNull(foundgameImage);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.AreEqual(gameImage.Id, foundgameImage.Id);
+
+            // find gameImage by gameId
+
+            var foundgameImages = modelAssembler.GetGamesOfImage(gameImage.GameId);
+
+            Assert.IsNotNull(foundgameImage);
+            Assert.IsTrue(string.IsNullOrEmpty(foundgameImages.ErrorMessage));
+            Assert.IsTrue(foundgameImages.List.Count == 1);
+
+            // failed to add gameImage 
+
+            foundgameImage.GameId = 0;
+
+            errorMessage = "";
+
+            result = modelAssembler.AddOrEditGameImage(foundgameImage, ref errorMessage);
+
+            Assert.IsFalse(result);
+            Assert.IsFalse(string.IsNullOrEmpty(errorMessage));
+
+            errorMessage = "";
+
+            // failed to get id 
+
+            foundgameImage = modelAssembler.GetGameImageById(500, ref errorMessage);
+
+            Assert.IsNull(foundgameImage);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+            // edit gameImage 
+
+            var updatedgameImage = new GameImage(gameImage.Id, updateGame.Id, null);
+
+            errorMessage = "";
+
+            result = modelAssembler.AddOrEditGameImage(updatedgameImage, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.AreEqual(gameImage.Id, updatedgameImage.Id);
+
+            // get updated gameImage by id 
+
+            foundgameImage = modelAssembler.GetGameImageById(updatedgameImage.Id, ref errorMessage);
+
+            Assert.IsNotNull(foundgameImage);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.AreEqual(updatedgameImage.Id, foundgameImage.Id);
+
+            // delete gameImage 
+
+            result = modelAssembler.DeleteGameImage(updatedgameImage.Id, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+            // find gameImage by id should fail 
+
+            foundgameImage = modelAssembler.GetGameImageById(updatedgameImage.Id, ref errorMessage);
+
+            Assert.IsNull(foundgameImage);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+            // Delete the games
+
+            errorMessage = "";
+            result = modelAssembler.DeleteGame(game.Id, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+            errorMessage = "";
+            result = modelAssembler.DeleteGame(updateGame.Id, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+        }
+
+        #endregion GameImage Test Cases
+
     }
 }

@@ -303,6 +303,23 @@ namespace GameImageLibrary.Model
             }
         }
 
+        public static string GenerateSelectQueryByGameId(int gameId)
+        {
+            var result = "";
+            try
+            {
+                if (gameId > 0)
+                {
+                    result = $"SELECT Id, GameId, Image FROM {GameImage.TableName} WHERE GameId = {gameId}";
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+            return result;
+        }
+
         #endregion Public Methods
 
         #region Dictionary Methods

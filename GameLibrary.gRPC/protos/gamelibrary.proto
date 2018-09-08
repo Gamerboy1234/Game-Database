@@ -1,0 +1,43 @@
+
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "io.grpc.gamelibrary";
+option java_outer_classname = "GameLibraryProto";
+option objc_class_prefix = "GLB";
+
+package gamelibrary;
+
+// Interface exported by the server.
+service GameLibrary {
+
+	// Obtains a list of games that match the request parameters.
+	// Streamed rather than returned at once (e.g. in a response message with a repeated field)
+	rpc SearchGames(GamesSearchRequest) returns (stream GameRecord) {}
+
+	// Add a new game record
+	rpc AddGame(GameRecord) returns (GameResult) {}
+
+	// Edit a game record
+	rpc EditGame(GameRecord) returns (GameResult) {}
+
+	// Delete a game record
+	rpc DeleteGame(GameRecord) returns (GameResult) {}
+}
+
+message GamesSearchRequest {
+	int64 game_id = 1;
+	string game_name = 2;
+}
+
+message GameRecord {
+	int64 game_id = 1;
+	string name = 2;
+	string description = 3;
+}
+
+message GameResult {
+	GameRecord game = 1;
+	bool success = 2;
+	string error_message = 3;
+}

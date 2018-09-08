@@ -4,6 +4,7 @@ using GameLibrary.Model;
 using Sql.Server.Connection;
 using Utilities;
 using static GameLibrary.Model.Genre;
+using GameImageLibrary.Model;
 
 namespace GameLibrary.Core
 {
@@ -1992,6 +1993,186 @@ namespace GameLibrary.Core
 
 
         #endregion GamePlatform Public Methods 
+
+        #region GameImage Public Methods
+
+        public GameImageList GetGameImages()
+        {
+            var result = new GameImageList();
+
+            try
+            {
+                if (ValidateDatabaseConnection())
+                {
+                    var errorMessage = "";
+
+                    if ((DataSetUtility.ValidateQueryResults(_databaseConnection.ExecuteQuery(new GameImage().GenerateSelectQuery(), ref errorMessage), out var queryResults)))
+                    {
+                        result = GameImageList.FromDictionaryList(DataSetUtility.ToDictionaryList(queryResults));
+                    }
+                    result.ErrorMessage = errorMessage;
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+            return result;
+        }
+
+        public GameImageList GetGamesOfImage(int gameId)
+        {
+            var result = new GameImageList();
+
+            try
+            {
+                if (gameId > 0)
+                {
+                    if (ValidateDatabaseConnection())
+                    {
+                        var errorMessage = "";
+
+                        if ((DataSetUtility.ValidateQueryResults(_databaseConnection.ExecuteQuery(GameImageList.GenerateSelectQueryByGameId(gameId), ref errorMessage), out var queryResults)))
+                        {
+                            result = GameImageList.FromDictionaryList(DataSetUtility.ToDictionaryList(queryResults));
+                        }
+                        result.ErrorMessage = errorMessage;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+            return result;
+        }
+
+        public GameImage GetGameImageById(int id, ref string errorMessage)
+        {
+            GameImage result = null;
+
+            try
+            {
+                if (id > 0)
+                {
+                    if (ValidateDatabaseConnection())
+                    {
+                        if (DataSetUtility.ValidateQueryResults(_databaseConnection.ExecuteQuery(new GameImage { Id = id }.GenerateSelectQuery(), ref errorMessage), out var queryResults))
+                        {
+                            var gameImage = GameImageList.FromDictionaryList(DataSetUtility.ToDictionaryList(queryResults));
+
+                            if (gameImage?.List?.Count > 0)
+                            {
+                                result = gameImage.List[0];
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+            return result;
+        }
+
+        public bool AddOrEditGameImage(GameImage gameImage, ref string errorMessage)
+        {
+            var result = false;
+
+            try
+            {
+                if (gameImage.GameId > 0)
+                {
+                    if (ValidateDatabaseConnection())
+                    {
+                        // Edit
+                        if (gameImage.Id > 0)
+                        {
+                            var foundGame = GetGameImageById(gameImage.Id, ref errorMessage);
+
+                            if (foundGame != null)
+                            {
+                                result = _databaseConnection.ExecuteCommand(gameImage.GenerateUpdateStatement(), ref errorMessage);
+                            }
+
+                            else
+                            {
+                                errorMessage = $"Unable to find gameimage '{gameImage.Id}' to edit";
+                            }
+                        }
+
+                        // Add
+                        else
+                        {
+                            var foundGame = GetGameImageById(gameImage.Id, ref errorMessage);
+
+                            if (foundGame == null)
+                            {
+                                result = _databaseConnection.ExecuteCommand(gameImage.GenerateInsertStatment(), ref errorMessage, out int newId);
+
+                                if (result &&
+                                    (newId > 0))
+                                {
+                                    gameImage.Id = newId;
+                                }
+                            }
+
+                            else
+                            {
+                                errorMessage = $"A gameImage with id '{gameImage.Id}' already exists.  Unable to add gameImage.";
+                            }
+                        }
+                    }
+                }
+
+                else
+                {
+                    errorMessage = "Invalid gameImage id found";
+                }
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        public bool DeleteGameImage(int id, ref string errorMessage)
+        {
+            var result = false;
+
+            try
+            {
+                if (id > 0)
+                {
+                    if (ValidateDatabaseConnection())
+                    {
+                        result = _databaseConnection.ExecuteCommand(new GameImage { Id = id }.GenerateDeleteStatement(), ref errorMessage);
+                    }
+                }
+                else
+                {
+                    errorMessage = "Invalid GameImage id Found";
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+            return result;
+        }
+
+
+        #endregion GameImage Public Methods 
 
         #region Private Methods
 

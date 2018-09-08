@@ -1,0 +1,62 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>netcoreapp2.0;net461</TargetFrameworks>
+    <RuntimeIdentifiers>win7-x86;win7-x64</RuntimeIdentifiers>
+    <Authors>Justin Wells</Authors>
+    <RequireLicenseAcceptance>false</RequireLicenseAcceptance>
+    <Language>en-US</Language>
+    <AssemblyName>GameLibrary.gRPC.Test</AssemblyName>
+    <AssemblyTitle>GameLibrary.gRPC.Test</AssemblyTitle>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <PackageId>GameLibrary.gRPC.Test</PackageId>
+    <RootNamespace>GameLibrary.gRPC.Test</RootNamespace>
+    <Title>GameLibrary gRPC Test</Title>
+    <Description>GameLibrary gRPC Test Library</Description>
+    <PackageCopyright>Copyright © Bubbasoft Technologies 2018</PackageCopyright>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <Copyright>Copyright © Bubbasoft Technologies 2018</Copyright>
+    <Company>Bubbasoft Technologies</Company>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <Version>1.0.0</Version>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <Platforms>AnyCPU;x64;x86</Platforms>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+    <NoWarn>xUnit2000</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <NoWarn>xUnit2000</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+    <DefineConstants>TRACE;DEBUG;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DefineConstants>RELEASE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.0'">
+    <DefineConstants>NETCORE;NETSTANDARD;NETSTANDARD2_0</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net461' ">
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="UnitTests\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="3.6.1" />
+    <PackageReference Include="Grpc" Version="1.14.2" />
+    <PackageReference Include="Grpc.Core" Version="1.14.2" />
+    <PackageReference Include="Grpc.Tools" Version="1.14.2" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.8.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="System.Interactive.Async" Version="3.2.0" />
+    <PackageReference Include="xunit" Version="2.4.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
+  </ItemGroup>
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net461'">
+    <DefineConstants>NET461;NETFULL</DefineConstants>
+  </PropertyGroup>
+</Project>
