@@ -32,11 +32,11 @@ namespace GameLibrary.Model
             ReviewId = 0;
         }
 
-        public GameReview(int id, int Gameid, int Genreid)
+        public GameReview(int id, int Gameid, int Reviewid)
         {
             Id = id;
             GameId = Gameid;
-            ReviewId = Genreid;
+            ReviewId = Reviewid;
         }
 
         #endregion Constructers 
@@ -284,6 +284,39 @@ namespace GameLibrary.Model
             {
                 Log.Error(ex);
             }
+        }
+        public static string GenerateSelectQueryByReviewId(int reviewId)
+        {
+            var result = "";
+            try
+            {
+                if (reviewId > 0)
+                {
+                    result = $"SELECT Id, GameId, ReviewId FROM {GameReview.TableName} WHERE ReviewId = {reviewId}";
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+            return result;
+        }
+
+        public static string GenerateSelectQueryByGameId(int gameId)
+        {
+            var result = "";
+            try
+            {
+                if (gameId > 0)
+                {
+                    result = $"SELECT Id, GameId, ReviewId FROM {GameReview.TableName} WHERE GameId = {gameId}";
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+            return result;
         }
 
         #endregion Public Methods 

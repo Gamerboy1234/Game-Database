@@ -285,19 +285,14 @@ namespace GameLibrary.Model
                 Log.Error(ex);
             }
         }
-
-        #endregion Public Methods 
-
-        #region Dictionary Methods
-
-        public static List<Dictionary<string, object>> ToDictionaryList(GamePlatformList gameGenreList)
+        public static string GenerateSelectQueryByPlatfromId(int platformId)
         {
-            var result = new List<Dictionary<string, object>>();
+            var result = "";
             try
             {
-                if (gameGenreList?.List?.Count > 0)
+                if (platformId > 0)
                 {
-                    result = (from gamegenre in gameGenreList.List where gamegenre != null select GamePlatform.ToDictionary(gamegenre) into dictionary where dictionary?.Count > 0 select dictionary).ToList();
+                    result = $"SELECT Id, GameId, PlatformId FROM {GamePlatform.TableName} WHERE PlatformId = {platformId}";
                 }
             }
             catch (Exception ex)
@@ -306,26 +301,64 @@ namespace GameLibrary.Model
             }
             return result;
         }
-        public static GamePlatformList FromDictionaryList(List<Dictionary<string, object>> dictionaryList)
+
+        public static string GenerateSelectQueryByGameId(int gameId)
         {
-            var result = new GamePlatformList();
+            var result = "";
             try
             {
-                if (dictionaryList?.Count > 0)
+                if (gameId > 0)
                 {
-                    foreach (var dataDictionary in dictionaryList.Where(dataDictionary => dataDictionary?.Count > 0))
+                    result = $"SELECT Id, GameId, PlatformId FROM {GamePlatform.TableName} WHERE GameId = {gameId}";
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+            return result;
+        }
+
+            #endregion Public Methods 
+
+            #region Dictionary Methods
+
+            public static List<Dictionary<string, object>> ToDictionaryList(GamePlatformList gameGenreList)
+            {
+                var result = new List<Dictionary<string, object>>();
+                try
+                {
+                    if (gameGenreList?.List?.Count > 0)
                     {
-                        result.List.Add(GamePlatform.FromDictionary(dataDictionary));
+                        result = (from gamegenre in gameGenreList.List where gamegenre != null select GamePlatform.ToDictionary(gamegenre) into dictionary where dictionary?.Count > 0 select dictionary).ToList();
                     }
                 }
+                catch (Exception ex)
+                {
+                    Log.Error(ex);
+                }
+                return result;
             }
-            catch (Exception ex)
+            public static GamePlatformList FromDictionaryList(List<Dictionary<string, object>> dictionaryList)
             {
-                Log.Error(ex);
+                var result = new GamePlatformList();
+                try
+                {
+                    if (dictionaryList?.Count > 0)
+                    {
+                        foreach (var dataDictionary in dictionaryList.Where(dataDictionary => dataDictionary?.Count > 0))
+                        {
+                            result.List.Add(GamePlatform.FromDictionary(dataDictionary));
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(ex);
+                }
+                return result;
             }
-            return result;
-        }
 
-        #endregion Dictionary Methods
-    }
-}
+            #endregion Dictionary Methods
+        }
+    } 

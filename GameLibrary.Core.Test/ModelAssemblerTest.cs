@@ -296,7 +296,7 @@ namespace GenreLibrary.Core.Test
         #region Ratings Test Cases
 
         [TestMethod]
-        public void ModelAssemblerConstructorTestRating()
+        public void ModelAssemblerConstructorTestReview()
         {
             var modelAssembler = new ModelAssembler(ConnectionString);
 
@@ -425,7 +425,7 @@ namespace GenreLibrary.Core.Test
         #region Review Test Cases
 
         [TestMethod]
-        public void ModelAssemblerConstructorTestReview()
+        public void ModelAssemblerConstructorTestReviews()
         {
             var modelAssembler = new ModelAssembler(ConnectionString);
 
@@ -441,11 +441,11 @@ namespace GenreLibrary.Core.Test
 
             // get all Reviews 
 
-            var review = modelAssembler.GetReviews();
+            var platform = modelAssembler.GetReviews();
 
-            if (review.List.Count > 0)
+            if (platform.List.Count > 0)
             {
-                Assert.IsTrue(review.List.Count > 0);
+                Assert.IsTrue(platform.List.Count > 0);
             }
 
             // add a review 
@@ -470,7 +470,7 @@ namespace GenreLibrary.Core.Test
             Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
             Assert.AreEqual(Review.Id, foundReview.Id);
 
-            // find review by name 
+            // find platform by name 
 
             foundReview = modelAssembler.GetReviewByName(Review.Name, ref errorMessage);
 
@@ -480,11 +480,11 @@ namespace GenreLibrary.Core.Test
 
             // failed to add review
 
-            var failedreview = new Review(0, "Name", "Description", 5);
+            var failedplatform = new Review(0, "Name", "Description", 5);
 
             errorMessage = "";
 
-            result = modelAssembler.AddOrEditReview(failedreview, ref errorMessage);
+            result = modelAssembler.AddOrEditReview(failedplatform, ref errorMessage);
 
             Assert.IsFalse(result);
             Assert.IsFalse(string.IsNullOrEmpty(errorMessage));
@@ -899,5 +899,662 @@ namespace GenreLibrary.Core.Test
         }
 
         #endregion GameGenre Test Cases
+
+        #region GameRating Test Cases
+
+        [TestMethod]
+        public void ModelAssemblerConstructorTestGameRating()
+        {
+            var modelAssembler = new ModelAssembler(ConnectionString);
+
+            Assert.IsTrue(modelAssembler.IsDatabaseConnected);
+        }
+
+        [TestMethod]
+        public void ModelAssemblerGameRatingTest()
+        {
+            var modelAssembler = new ModelAssembler(ConnectionString);
+
+            Assert.IsTrue(modelAssembler.IsDatabaseConnected);
+
+
+            // Add Games used for references in GameRatings
+
+            var game = new Game(
+                0,
+                "Defender",
+                "Awesome Space Game");
+
+            var errorMessage = "";
+            var result = modelAssembler.AddOrEditGame(game, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(game.Id > 0);
+
+            var updateGame = new Game(
+                0,
+                "Name1",
+                "Description1");
+
+            errorMessage = "";
+            result = modelAssembler.AddOrEditGame(updateGame, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(updateGame.Id > 0);
+
+
+            // Add Ratings used for references in GameRatings
+
+            var rating = new Rating(0, "Bob", "not really a rating", "5");
+            Assert.IsNotNull(rating);
+            errorMessage = "";
+            result = modelAssembler.AddOrEditRating(rating, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(rating.Id > 0);
+
+            var updateRating = new Rating(0, "Billy", "imaginary friend rating", "8");
+            Assert.IsNotNull(updateRating);
+            errorMessage = "";
+            result = modelAssembler.AddOrEditRating(updateRating, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(updateRating.Id > 0);
+
+
+            // get all GameRatings 
+
+            var gameRatings = modelAssembler.GetGameRatings();
+
+            if (gameRatings.List.Count > 0)
+            {
+                Assert.IsTrue(gameRatings.List.Count > 0);
+            }
+
+            // add a gameRating
+
+            var gameRating = new GameRating(
+                0,
+                game.Id,
+                rating.Id, "Bleh");
+
+            Assert.IsNotNull(gameRating);
+
+            errorMessage = "";
+
+            result = modelAssembler.AddOrEditGameRating(gameRating, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(gameRating.Id > 0);
+
+            // find gameRating id 
+
+            var foundgameRating = modelAssembler.GetGameRatingById(gameRating.Id, ref errorMessage);
+
+            Assert.IsNotNull(foundgameRating);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.AreEqual(gameRating.Id, foundgameRating.Id);
+
+            // find gameRating by ids
+
+            foundgameRating = modelAssembler.GetGameRatingsByIds(gameRating.GameId, gameRating.RatingId, ref errorMessage);
+
+            Assert.IsNotNull(foundgameRating);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.AreEqual(gameRating.Id, foundgameRating.Id);
+
+            // find gameRating by ratingId
+
+            var foundgameRatings = modelAssembler.GetRatingsOfGame(gameRating.RatingId);
+
+            Assert.IsNotNull(foundgameRating);
+            Assert.IsTrue(string.IsNullOrEmpty(foundgameRatings.ErrorMessage));
+            Assert.IsTrue(foundgameRatings.List.Count == 1);
+
+            // find gameRating by gameId
+
+            foundgameRatings = modelAssembler.GetGamesOfRating(gameRating.GameId);
+
+            Assert.IsNotNull(foundgameRating);
+            Assert.IsTrue(string.IsNullOrEmpty(foundgameRatings.ErrorMessage));
+            Assert.IsTrue(foundgameRatings.List.Count == 1);
+
+            // failed to add gameRating 
+
+            foundgameRating.Id = 0;
+
+            errorMessage = "";
+
+            result = modelAssembler.AddOrEditGameRating(foundgameRating, ref errorMessage);
+
+            Assert.IsFalse(result);
+            Assert.IsFalse(string.IsNullOrEmpty(errorMessage));
+
+            errorMessage = "";
+
+            // failed to get id 
+
+            foundgameRating = modelAssembler.GetGameRatingById(500, ref errorMessage);
+
+            Assert.IsNull(foundgameRating);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+            // edit gameRating 
+
+            var updatedgameRating = new GameRating(gameRating.Id, updateGame.Id, updateRating.Id, "Bob");
+
+            errorMessage = "";
+
+            result = modelAssembler.AddOrEditGameRating(updatedgameRating, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.AreEqual(gameRating.Id, updatedgameRating.Id);
+
+            // get updated gameRating by id 
+
+            foundgameRating = modelAssembler.GetGameRatingById(updatedgameRating.Id, ref errorMessage);
+
+            Assert.IsNotNull(foundgameRating);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.AreEqual(updatedgameRating.Id, foundgameRating.Id);
+
+            // get updated gameRating by name
+
+            foundgameRating = modelAssembler.GetGameRatingsByIds(updatedgameRating.GameId, updatedgameRating.RatingId, ref errorMessage);
+
+            Assert.IsNotNull(foundgameRating);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.AreEqual(gameRating.Id, foundgameRating.Id);
+
+            // delete gameRating 
+
+            result = modelAssembler.DeleteGameRating(updatedgameRating.Id, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+            // find gameRating by ids should fail 
+
+            foundgameRating = modelAssembler.GetGameRatingsByIds(updatedgameRating.GameId, updatedgameRating.RatingId, ref errorMessage);
+
+            Assert.IsNull(foundgameRating);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+
+            // Delete the ratings
+
+            errorMessage = "";
+            result = modelAssembler.DeleteRating(rating.Id, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+            errorMessage = "";
+            result = modelAssembler.DeleteRating(updatedgameRating.Id, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+
+            // Delete the games
+
+            errorMessage = "";
+            result = modelAssembler.DeleteGame(game.Id, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+            errorMessage = "";
+            result = modelAssembler.DeleteGame(updateGame.Id, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+        }
+
+        #endregion GameRating Test Cases
+
+        #region GameReview Test Cases
+
+        [TestMethod]
+        public void ModelAssemblerConstructorTestGameReview()
+        {
+            var modelAssembler = new ModelAssembler(ConnectionString);
+
+            Assert.IsTrue(modelAssembler.IsDatabaseConnected);
+        }
+
+        [TestMethod]
+        public void ModelAssemblerGameReviewTest()
+        {
+            var modelAssembler = new ModelAssembler(ConnectionString);
+
+            Assert.IsTrue(modelAssembler.IsDatabaseConnected);
+
+
+            // Add Games used for references in GameReviews
+
+            var game = new Game(
+                0,
+                "Defender",
+                "Awesome Space Game");
+
+            var errorMessage = "";
+            var result = modelAssembler.AddOrEditGame(game, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(game.Id > 0);
+
+            var updateGame = new Game(
+                0,
+                "Name1",
+                "Description1");
+
+            errorMessage = "";
+            result = modelAssembler.AddOrEditGame(updateGame, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(updateGame.Id > 0);
+
+
+            // Add Reviews used for references in GameReviews
+
+            var review = new Review(0, "Bob", "not really a review", 5);
+            Assert.IsNotNull(review);
+            errorMessage = "";
+            result = modelAssembler.AddOrEditReview(review, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(review.Id > 0);
+
+            var updateReview = new Review(0, "Billy", "imaginary friend review", 5);
+            Assert.IsNotNull(updateReview);
+            errorMessage = "";
+            result = modelAssembler.AddOrEditReview(updateReview, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(updateReview.Id > 0);
+
+
+            // get all GameReviews 
+
+            var gameReviews = modelAssembler.GetGameReviews();
+
+            if (gameReviews.List.Count > 0)
+            {
+                Assert.IsTrue(gameReviews.List.Count > 0);
+            }
+
+            // add a gameReview
+
+            var gameReview = new GameReview(
+                0,
+                game.Id,
+                review.Id);
+
+            Assert.IsNotNull(gameReview);
+
+            errorMessage = "";
+
+            result = modelAssembler.AddOrEditGameReview(gameReview, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(gameReview.Id > 0);
+
+            // find gameReview id 
+
+            var foundgameReview = modelAssembler.GetGameReviewById(gameReview.Id, ref errorMessage);
+
+            Assert.IsNotNull(foundgameReview);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.AreEqual(gameReview.Id, foundgameReview.Id);
+
+            // find gameReview by ids
+
+            foundgameReview = modelAssembler.GetGameReviewsByIds(gameReview.GameId, gameReview.ReviewId, ref errorMessage);
+
+            Assert.IsNotNull(foundgameReview);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.AreEqual(gameReview.Id, foundgameReview.Id);
+
+            // find gameReview by reviewId
+
+            var foundgameReviews = modelAssembler.GetReviewsOfGame(gameReview.ReviewId);
+
+            Assert.IsNotNull(foundgameReview);
+            Assert.IsTrue(string.IsNullOrEmpty(foundgameReviews.ErrorMessage));
+            Assert.IsTrue(foundgameReviews.List.Count == 1);
+
+            // find gameReview by gameId
+
+            foundgameReviews = modelAssembler.GetGamesofReview(gameReview.GameId);
+
+            Assert.IsNotNull(foundgameReview);
+            Assert.IsTrue(string.IsNullOrEmpty(foundgameReviews.ErrorMessage));
+            Assert.IsTrue(foundgameReviews.List.Count == 1);
+
+            // failed to add gameReview 
+
+            foundgameReview.Id = 0;
+
+            errorMessage = "";
+
+            result = modelAssembler.AddOrEditGameReview(foundgameReview, ref errorMessage);
+
+            Assert.IsFalse(result);
+            Assert.IsFalse(string.IsNullOrEmpty(errorMessage));
+
+            errorMessage = "";
+
+            // failed to get id 
+
+            foundgameReview = modelAssembler.GetGameReviewById(500, ref errorMessage);
+
+            Assert.IsNull(foundgameReview);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+            // edit gameReview 
+
+            var updatedgameReview = new GameReview(gameReview.Id, updateGame.Id, updateReview.Id);
+
+            errorMessage = "";
+
+            result = modelAssembler.AddOrEditGameReview(updatedgameReview, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.AreEqual(gameReview.Id, updatedgameReview.Id);
+
+            // get updated gameReview by id 
+
+            foundgameReview = modelAssembler.GetGameReviewById(updatedgameReview.Id, ref errorMessage);
+
+            Assert.IsNotNull(foundgameReview);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.AreEqual(updatedgameReview.Id, foundgameReview.Id);
+
+            // get updated gameReview by name
+
+            foundgameReview = modelAssembler.GetGameReviewsByIds(updatedgameReview.GameId, updatedgameReview.ReviewId, ref errorMessage);
+
+            Assert.IsNotNull(foundgameReview);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.AreEqual(gameReview.Id, foundgameReview.Id);
+
+            // delete gameReview 
+
+            result = modelAssembler.DeleteGameReviews(updatedgameReview.Id, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+            // find gameReview by ids should fail 
+
+            foundgameReview = modelAssembler.GetGameReviewsByIds(updatedgameReview.GameId, updatedgameReview.ReviewId, ref errorMessage);
+
+            Assert.IsNull(foundgameReview);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+
+            // Delete the reviews
+
+            errorMessage = "";
+            result = modelAssembler.DeleteReview(review.Id, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+            errorMessage = "";
+            result = modelAssembler.DeleteReview(updatedgameReview.Id, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+
+            // Delete the games
+
+            errorMessage = "";
+            result = modelAssembler.DeleteGame(game.Id, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+            errorMessage = "";
+            result = modelAssembler.DeleteGame(updateGame.Id, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+        }
+
+        #endregion GameReview Test Cases
+
+        #region GamePlatform Test Cases
+
+        [TestMethod]
+        public void ModelAssemblerConstructorTestGamePlatform()
+        {
+            var modelAssembler = new ModelAssembler(ConnectionString);
+
+            Assert.IsTrue(modelAssembler.IsDatabaseConnected);
+        }
+
+        [TestMethod]
+        public void ModelAssemblerGamePlatformTest()
+        {
+            var modelAssembler = new ModelAssembler(ConnectionString);
+
+            Assert.IsTrue(modelAssembler.IsDatabaseConnected);
+
+
+            // Add Games used for references in GamePlatforms
+
+            var game = new Game(
+                0,
+                "Defender",
+                "Awesome Space Game");
+
+            var errorMessage = "";
+            var result = modelAssembler.AddOrEditGame(game, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(game.Id > 0);
+
+            var updateGame = new Game(
+                0,
+                "Name1",
+                "Description1");
+
+            errorMessage = "";
+            result = modelAssembler.AddOrEditGame(updateGame, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(updateGame.Id > 0);
+
+
+            // Add Platform used for references in GamePlatforms
+
+            var platform = new Platform(0, "Bob", "not really a platform");
+            Assert.IsNotNull(platform);
+            errorMessage = "";
+            result = modelAssembler.AddOrEditPlatform(platform, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(platform.Id > 0);
+
+            var updatePlatform = new Platform(0, "Billy", "imaginary friend platform");
+            Assert.IsNotNull(updatePlatform);
+            errorMessage = "";
+            result = modelAssembler.AddOrEditPlatform(updatePlatform, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(updatePlatform.Id > 0);
+
+
+            // get all GamePlatforms 
+
+            var gamePlatforms = modelAssembler.GetGamePlatforms();
+
+            if (gamePlatforms.List.Count > 0)
+            {
+                Assert.IsTrue(gamePlatforms.List.Count > 0);
+            }
+
+            // add a gamePlatform
+
+            var gamePlatform = new GamePlatform(
+                0,
+                game.Id,
+                platform.Id);
+
+            Assert.IsNotNull(gamePlatform);
+
+            errorMessage = "";
+
+            result = modelAssembler.AddOrEditGamePlatform(gamePlatform, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(gamePlatform.Id > 0);
+
+            // find gamePlatform id 
+
+            var foundgamePlatform = modelAssembler.GetGamePlatformById(gamePlatform.Id, ref errorMessage);
+
+            Assert.IsNotNull(foundgamePlatform);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.AreEqual(gamePlatform.Id, foundgamePlatform.Id);
+
+            // find gamePlatform by ids
+
+            foundgamePlatform = modelAssembler.GetGamePlatformsByIds(gamePlatform.GameId, gamePlatform.PlatformId, ref errorMessage);
+
+            Assert.IsNotNull(foundgamePlatform);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.AreEqual(gamePlatform.Id, foundgamePlatform.Id);
+
+            // find gamePlatform by platformId
+
+            var foundgamePlatforms = modelAssembler.GetPlatformsOfGame(gamePlatform.PlatformId);
+
+            Assert.IsNotNull(foundgamePlatform);
+            Assert.IsTrue(string.IsNullOrEmpty(foundgamePlatforms.ErrorMessage));
+            Assert.IsTrue(foundgamePlatforms.List.Count == 1);
+
+            // find gamePlatform by gameId
+
+            foundgamePlatforms = modelAssembler.GetGamesofPlatform(gamePlatform.GameId);
+
+            Assert.IsNotNull(foundgamePlatform);
+            Assert.IsTrue(string.IsNullOrEmpty(foundgamePlatforms.ErrorMessage));
+            Assert.IsTrue(foundgamePlatforms.List.Count == 1);
+
+            // failed to add gamePlatform 
+
+            foundgamePlatform.Id = 0;
+
+            errorMessage = "";
+
+            result = modelAssembler.AddOrEditGamePlatform(foundgamePlatform, ref errorMessage);
+
+            Assert.IsFalse(result);
+            Assert.IsFalse(string.IsNullOrEmpty(errorMessage));
+
+            errorMessage = "";
+
+            // failed to get id 
+
+            foundgamePlatform = modelAssembler.GetGamePlatformById(500, ref errorMessage);
+
+            Assert.IsNull(foundgamePlatform);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+            // edit gamePlatform 
+
+            var updatedgamePlatform = new GamePlatform(gamePlatform.Id, updateGame.Id, updatePlatform.Id);
+
+            errorMessage = "";
+
+            result = modelAssembler.AddOrEditGamePlatform(updatedgamePlatform, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.AreEqual(gamePlatform.Id, updatedgamePlatform.Id);
+
+            // get updated gamePlatform by id 
+
+            foundgamePlatform = modelAssembler.GetGamePlatformById(updatedgamePlatform.Id, ref errorMessage);
+
+            Assert.IsNotNull(foundgamePlatform);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.AreEqual(updatedgamePlatform.Id, foundgamePlatform.Id);
+
+            // get updated gamePlatform by name
+
+            foundgamePlatform = modelAssembler.GetGamePlatformsByIds(updatedgamePlatform.GameId, updatedgamePlatform.PlatformId, ref errorMessage);
+
+            Assert.IsNotNull(foundgamePlatform);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.AreEqual(gamePlatform.Id, foundgamePlatform.Id);
+
+            // delete gamePlatform 
+
+            result = modelAssembler.DeleteGamePlatforms(updatedgamePlatform.Id, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+            // find gamePlatform by ids should fail 
+
+            foundgamePlatform = modelAssembler.GetGamePlatformsByIds(updatedgamePlatform.GameId, updatedgamePlatform.PlatformId, ref errorMessage);
+
+            Assert.IsNull(foundgamePlatform);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+
+            // Delete the platforms
+
+            errorMessage = "";
+            result = modelAssembler.DeletePlatform(platform.Id, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+            errorMessage = "";
+            result = modelAssembler.DeletePlatform(updatedgamePlatform.Id, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+
+            // Delete the games
+
+            errorMessage = "";
+            result = modelAssembler.DeleteGame(game.Id, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+            errorMessage = "";
+            result = modelAssembler.DeleteGame(updateGame.Id, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+        }
+
+        #endregion GamePlatform Test Cases
     }
 }

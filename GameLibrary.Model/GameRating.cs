@@ -130,6 +130,10 @@ namespace GameLibrary.Model
                 {
                     result = $"SELECT Id, GameId, RatingId, Notes FROM {TableName} WHERE {whereClause}";
                 }
+                else if ((GameId > 0) && (RatingId > 0))
+                {
+                    result = $"SELECT Id, GameId, RatingId, Notes FROM {TableName} WHERE GameId = {GameId} AND RatingId = {RatingId}";
+                }
                 else
                 {
                     result = $"SELECT Id, GameId, RatingId, Notes FROM {TableName}";
@@ -296,6 +300,40 @@ namespace GameLibrary.Model
             {
                 Log.Error(ex);
             }
+        }
+
+        public static string GenerateSelectQueryByRatingId(int ratingId)
+        {
+            var result = "";
+            try
+            {
+                if (ratingId > 0)
+                {
+                    result = $"SELECT Id, GameId, RatingId FROM {GameRating.TableName} WHERE RatingId = {ratingId}";
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+            return result;
+        }
+
+        public static string GenerateSelectQueryByGameId(int gameId)
+        {
+            var result = "";
+            try
+            {
+                if (gameId > 0)
+                {
+                    result = $"SELECT Id, GameId, RatingId FROM {GameRating.TableName} WHERE GameId = {gameId}";
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+            return result;
         }
 
         #endregion Public Methods 

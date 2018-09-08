@@ -1272,6 +1272,727 @@ namespace GameLibrary.Core
 
         #endregion GameGenre Public Methods
 
+        #region GameRating Public Methods
+
+        public GameRatingList GetGameRatings()
+        {
+            var result = new GameRatingList();
+
+            try
+            {
+                if (ValidateDatabaseConnection())
+                {
+                    var errorMessage = "";
+
+                    if ((DataSetUtility.ValidateQueryResults(_databaseConnection.ExecuteQuery(new GameRating().GenerateSelectQuery(), ref errorMessage), out var queryResults)))
+                    {
+                        result = GameRatingList.FromDictionaryList(DataSetUtility.ToDictionaryList(queryResults));
+                    }
+                    result.ErrorMessage = errorMessage;
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+            return result;
+        }
+
+        public GameRatingList GetRatingsOfGame(int ratingId)
+        {
+            var result = new GameRatingList();
+
+            try
+            {
+                if (ratingId > 0)
+                {
+                    if (ValidateDatabaseConnection())
+                    {
+                        var errorMessage = "";
+
+                        if ((DataSetUtility.ValidateQueryResults(_databaseConnection.ExecuteQuery(GameRatingList.GenerateSelectQueryByRatingId(ratingId), ref errorMessage), out var queryResults)))
+                        {
+                            result = GameRatingList.FromDictionaryList(DataSetUtility.ToDictionaryList(queryResults));
+                        }
+                        result.ErrorMessage = errorMessage;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+            return result;
+        }
+
+        public GameRatingList GetGamesOfRating(int gameId)
+        {
+            var result = new GameRatingList();
+
+            try
+            {
+                if (gameId > 0)
+                {
+                    if (ValidateDatabaseConnection())
+                    {
+                        var errorMessage = "";
+
+                        if ((DataSetUtility.ValidateQueryResults(_databaseConnection.ExecuteQuery(GameRatingList.GenerateSelectQueryByGameId(gameId), ref errorMessage), out var queryResults)))
+                        {
+                            result = GameRatingList.FromDictionaryList(DataSetUtility.ToDictionaryList(queryResults));
+                        }
+                        result.ErrorMessage = errorMessage;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+            return result;
+        }
+
+        public GameRating GetGameRatingById(int id, ref string errorMessage)
+        {
+            GameRating result = null;
+
+            try
+            {
+                if (id > 0)
+                {
+                    if (ValidateDatabaseConnection())
+                    {
+                        if (DataSetUtility.ValidateQueryResults(_databaseConnection.ExecuteQuery(new GameRating { Id = id }.GenerateSelectQuery(), ref errorMessage), out var queryResults))
+                        {
+                            var gamerating = GameRatingList.FromDictionaryList(DataSetUtility.ToDictionaryList(queryResults));
+
+                            if (gamerating?.List?.Count > 0)
+                            {
+                                result = gamerating.List[0];
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    errorMessage = "Invalid GameRating id found";
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+            return result;
+        }
+
+        public GameRating GetGameRatingsByIds(int gameId, int ratingId, ref string errorMessage)
+        {
+            GameRating result = null;
+
+            try
+            {
+                if (gameId > 0)
+                {
+                    if (ratingId > 0)
+                    {
+                        if (ValidateDatabaseConnection())
+                        {
+                            if (DataSetUtility.ValidateQueryResults(_databaseConnection.ExecuteQuery(new GameRating { GameId = gameId, RatingId = ratingId }.GenerateSelectQuery(), ref errorMessage), out var queryResults))
+                            {
+                                var gamerating = GameRatingList.FromDictionaryList(DataSetUtility.ToDictionaryList(queryResults));
+
+                                if (gamerating?.List?.Count > 0)
+                                {
+                                    result = gamerating.List[0];
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        errorMessage = "Invalid ratingId found";
+                    }
+                }
+                else
+                {
+                    errorMessage = "Invalid gameId found";
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+            return result;
+        }
+
+        public bool AddOrEditGameRating(GameRating gameRating, ref string errorMessage)
+        {
+            var result = false;
+
+            try
+            {
+                if (gameRating.GameId > 0)
+                {
+                    if (gameRating.RatingId > 0)
+                    {
+                        if (ValidateDatabaseConnection())
+                        {
+                            // edit 
+                            if (gameRating.Id > 0)
+                            {
+                                var foundgamerating = GetGameRatingById(gameRating.Id, ref errorMessage);
+                                
+                                if (foundgamerating != null)
+                                {
+                                    result = _databaseConnection.ExecuteCommand(gameRating.GenerateUpdateStatement(), ref errorMessage);
+                                }
+                                else
+                                {
+                                    errorMessage = $"Unable to find gameRating {gameRating.Id} to edit";
+                                }
+                            }
+                            // add 
+                            else
+                            {
+                                var foundgameratings = GetGameRatingsByIds(gameRating.GameId, gameRating.RatingId, ref errorMessage);
+
+                                if (foundgameratings == null)
+                                {
+                                    result = _databaseConnection.ExecuteCommand(gameRating.GenerateInsertStatement(), ref errorMessage, out int newId);
+
+                                    if (result && newId > 0)
+                                    {
+                                        gameRating.Id = newId;
+                                    }
+                                }
+                                else
+                                {
+                                    errorMessage = $"A game rating with game id '{gameRating.GameId}' and rating id '{gameRating.RatingId}' already exists.  Unable to add game rating.";
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+            return result;
+        }
+
+        public bool DeleteGameRating(int id, ref string errorMessage)
+        {
+            var result = false;
+
+            try
+            {
+                if (id > 0)
+                {
+                    if (ValidateDatabaseConnection())
+                    {
+                        result = _databaseConnection.ExecuteCommand(new GameRating { Id = id }.GenerateDeleteStatement(), ref errorMessage);
+                    }
+                }
+                else
+                {
+                    errorMessage = "Invalid GameRating id Found";
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+            return result;
+        }
+
+        #endregion GameRating Public Methods
+
+        #region GameReview Public Methods 
+
+        public GameReviewList GetGameReviews()
+        {
+            var result = new GameReviewList();
+
+            try
+            {
+                if (ValidateDatabaseConnection())
+                {
+                    var errorMessage = "";
+
+                    if ((DataSetUtility.ValidateQueryResults(_databaseConnection.ExecuteQuery(new GameReview().GenerateSelectQuery(), ref errorMessage), out var queryResults)))
+                    {
+                        result = GameReviewList.FromDictionaryList(DataSetUtility.ToDictionaryList(queryResults));
+                    }
+                    result.ErrorMessage = errorMessage;
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+            return result;
+        }
+
+        public GameReviewList GetReviewsOfGame(int reviewId)
+        {
+            var result = new GameReviewList();
+
+            try
+            {
+                if (reviewId > 0)
+                {
+                    if (ValidateDatabaseConnection())
+                    {
+                        var errorMessage = "";
+
+                        if ((DataSetUtility.ValidateQueryResults(_databaseConnection.ExecuteQuery(GameReviewList.GenerateSelectQueryByReviewId(reviewId), ref errorMessage), out var queryResults)))
+                        {
+                            result = GameReviewList.FromDictionaryList(DataSetUtility.ToDictionaryList(queryResults));
+                        }
+                        result.ErrorMessage = errorMessage;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+            return result;
+        }
+
+        public GameReviewList GetGamesofReview(int gameId)
+        {
+            var result = new GameReviewList();
+
+            try
+            {
+                if (gameId > 0)
+                {
+                    if (ValidateDatabaseConnection())
+                    {
+                        var errorMessage = "";
+
+                        if ((DataSetUtility.ValidateQueryResults(_databaseConnection.ExecuteQuery(GameReviewList.GenerateSelectQueryByGameId(gameId), ref errorMessage), out var queryResults)))
+                        {
+                            result = GameReviewList.FromDictionaryList(DataSetUtility.ToDictionaryList(queryResults));
+                        }
+                        result.ErrorMessage = errorMessage;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+            return result;
+        }
+
+        public GameReview GetGameReviewById(int id, ref string errorMessage)
+        {
+            GameReview result = null;
+
+            try
+            {
+                if (id > 0)
+                {
+                    if (ValidateDatabaseConnection())
+                    {
+                        if (DataSetUtility.ValidateQueryResults(_databaseConnection.ExecuteQuery(new GameReview { Id = id }.GenerateSelectQuery(), ref errorMessage), out var queryResults))
+                        {
+                            var gamereview = GameReviewList.FromDictionaryList(DataSetUtility.ToDictionaryList(queryResults));
+
+                            if (gamereview?.List?.Count > 0)
+                            {
+                                result = gamereview.List[0];
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    errorMessage = "Invalid GameReview id found";
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+            return result;
+        }
+
+        public GameReview GetGameReviewsByIds(int gameId, int reviewId, ref string errorMessage)
+        {
+            GameReview result = null;
+
+            try
+            {
+                if (gameId > 0)
+                {
+                    if (reviewId > 0)
+                    {
+                        if (ValidateDatabaseConnection())
+                        {
+                            if (DataSetUtility.ValidateQueryResults(_databaseConnection.ExecuteQuery(new GameReview { GameId = gameId, ReviewId = reviewId }.GenerateSelectQuery(), ref errorMessage), out var queryResults))
+                            {
+                                var gameReview = GameReviewList.FromDictionaryList(DataSetUtility.ToDictionaryList(queryResults));
+
+                                if (gameReview?.List?.Count > 0)
+                                {
+                                    result = gameReview.List[0];
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        errorMessage = "Invalid reviewId found";
+                    }
+                }
+                else
+                {
+                    errorMessage = "Invalid gameId found";
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+            return result;
+        }
+
+        public bool AddOrEditGameReview(GameReview gameReview, ref string errorMessage)
+        {
+            var result = false;
+
+            try
+            {
+                if (gameReview.GameId > 0)
+                {
+                    if (gameReview.ReviewId > 0)
+                    {
+                        if (ValidateDatabaseConnection())
+                        {
+                            // edit 
+                            if (gameReview.Id > 0)
+                            {
+                                var foundgameReview = GetGameReviewById(gameReview.Id, ref errorMessage);
+
+                                if (foundgameReview != null)
+                                {
+                                    result = _databaseConnection.ExecuteCommand(gameReview.GenerateUpdateStatement(), ref errorMessage);
+                                }
+                                else
+                                {
+                                    errorMessage = $"Unable to find gameReview {gameReview.Id} to edit";
+                                }
+                            }
+                            // add 
+                            else
+                            {
+                                var foundgameratings = GetGameReviewsByIds(gameReview.GameId, gameReview.ReviewId, ref errorMessage);
+
+                                if (foundgameratings == null)
+                                {
+                                    result = _databaseConnection.ExecuteCommand(gameReview.GenerateInsertStatement(), ref errorMessage, out int newId);
+
+                                    if (result && newId > 0)
+                                    {
+                                        gameReview.Id = newId;
+                                    }
+                                }
+                                else
+                                {
+                                    errorMessage = $"A game rating with game id '{gameReview.GameId}' and review id '{gameReview.ReviewId}' already exists.  Unable to add game review.";
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+            return result;
+        }
+
+        public bool DeleteGameReviews(int id, ref string errorMessage)
+        {
+            var result = false;
+
+            try
+            {
+                if (id > 0)
+                {
+                    if (ValidateDatabaseConnection())
+                    {
+                        result = _databaseConnection.ExecuteCommand(new GameReview { Id = id }.GenerateDeleteStatement(), ref errorMessage);
+                    }
+                }
+                else
+                {
+                    errorMessage = "Invalid GameReview id Found";
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+            return result;
+        }
+
+        #endregion GameReview Public Methods
+
+        #region GamePlatform Public Methods
+
+        public GamePlatformList GetGamePlatforms()
+        {
+            var result = new GamePlatformList();
+
+            try
+            {
+                if (ValidateDatabaseConnection())
+                {
+                    var errorMessage = "";
+
+                    if ((DataSetUtility.ValidateQueryResults(_databaseConnection.ExecuteQuery(new GamePlatform().GenerateSelectQuery(), ref errorMessage), out var queryResults)))
+                    {
+                        result = GamePlatformList.FromDictionaryList(DataSetUtility.ToDictionaryList(queryResults));
+                    }
+                    result.ErrorMessage = errorMessage;
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+            return result;
+        }
+
+        public GamePlatformList GetPlatformsOfGame(int platformId)
+        {
+            var result = new GamePlatformList();
+
+            try
+            {
+                if (platformId > 0)
+                {
+                    if (ValidateDatabaseConnection())
+                    {
+                        var errorMessage = "";
+
+                        if ((DataSetUtility.ValidateQueryResults(_databaseConnection.ExecuteQuery(GamePlatformList.GenerateSelectQueryByPlatfromId(platformId), ref errorMessage), out var queryResults)))
+                        {
+                            result = GamePlatformList.FromDictionaryList(DataSetUtility.ToDictionaryList(queryResults));
+                        }
+                        result.ErrorMessage = errorMessage;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+            return result;
+        }
+
+        public GamePlatformList GetGamesofPlatform(int gameId)
+        {
+            var result = new GamePlatformList();
+
+            try
+            {
+                if (gameId > 0)
+                {
+                    if (ValidateDatabaseConnection())
+                    {
+                        var errorMessage = "";
+
+                        if ((DataSetUtility.ValidateQueryResults(_databaseConnection.ExecuteQuery(GamePlatformList.GenerateSelectQueryByGameId(gameId), ref errorMessage), out var queryResults)))
+                        {
+                            result = GamePlatformList.FromDictionaryList(DataSetUtility.ToDictionaryList(queryResults));
+                        }
+                        result.ErrorMessage = errorMessage;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+            return result;
+        }
+
+        public GamePlatform GetGamePlatformById(int id, ref string errorMessage)
+        {
+            GamePlatform result = null;
+
+            try
+            {
+                if (id > 0)
+                {
+                    if (ValidateDatabaseConnection())
+                    {
+                        if (DataSetUtility.ValidateQueryResults(_databaseConnection.ExecuteQuery(new GamePlatform { Id = id }.GenerateSelectQuery(), ref errorMessage), out var queryResults))
+                        {
+                            var gameplatform = GamePlatformList.FromDictionaryList(DataSetUtility.ToDictionaryList(queryResults));
+
+                            if (gameplatform?.List?.Count > 0)
+                            {
+                                result = gameplatform.List[0];
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    errorMessage = "Invalid GamePlatform id found";
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+            return result;
+        }
+
+        public GamePlatform GetGamePlatformsByIds(int gameId, int platformId, ref string errorMessage)
+        {
+            GamePlatform result = null;
+
+            try
+            {
+                if (gameId > 0)
+                {
+                    if (platformId > 0)
+                    {
+                        if (ValidateDatabaseConnection())
+                        {
+                            if (DataSetUtility.ValidateQueryResults(_databaseConnection.ExecuteQuery(new GamePlatform { GameId = gameId, PlatformId = platformId }.GenerateSelectQuery(), ref errorMessage), out var queryResults))
+                            {
+                                var gamePlatform = GamePlatformList.FromDictionaryList(DataSetUtility.ToDictionaryList(queryResults));
+
+                                if (gamePlatform?.List?.Count > 0)
+                                {
+                                    result = gamePlatform.List[0];
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        errorMessage = "Invalid platformId found";
+                    }
+                }
+                else
+                {
+                    errorMessage = "Invalid gameId found";
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+            return result;
+        }
+
+        public bool AddOrEditGamePlatform(GamePlatform gamePlatform, ref string errorMessage)
+        {
+            var result = false;
+
+            try
+            {
+                if (gamePlatform.GameId > 0)
+                {
+                    if (gamePlatform.PlatformId > 0)
+                    {
+                        if (ValidateDatabaseConnection())
+                        {
+                            // edit 
+                            if (gamePlatform.Id > 0)
+                            {
+                                var foundgamePlatform = GetGamePlatformById(gamePlatform.Id, ref errorMessage);
+
+                                if (foundgamePlatform != null)
+                                {
+                                    result = _databaseConnection.ExecuteCommand(gamePlatform.GenerateUpdateStatement(), ref errorMessage);
+                                }
+                                else
+                                {
+                                    errorMessage = $"Unable to find gamePlatform {gamePlatform.Id} to edit";
+                                }
+                            }
+                            // add 
+                            else
+                            {
+                                var foundgameratings = GetGamePlatformsByIds(gamePlatform.GameId, gamePlatform.PlatformId, ref errorMessage);
+
+                                if (foundgameratings == null)
+                                {
+                                    result = _databaseConnection.ExecuteCommand(gamePlatform.GenerateInsertStatement(), ref errorMessage, out int newId);
+
+                                    if (result && newId > 0)
+                                    {
+                                        gamePlatform.Id = newId;
+                                    }
+                                }
+                                else
+                                {
+                                    errorMessage = $"A game rating with game id '{gamePlatform.GameId}' and platform id '{gamePlatform.PlatformId}' already exists.  Unable to add game review.";
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+            return result;
+        }
+
+        public bool DeleteGamePlatforms(int id, ref string errorMessage)
+        {
+            var result = false;
+
+            try
+            {
+                if (id > 0)
+                {
+                    if (ValidateDatabaseConnection())
+                    {
+                        result = _databaseConnection.ExecuteCommand(new GamePlatform { Id = id }.GenerateDeleteStatement(), ref errorMessage);
+                    }
+                }
+                else
+                {
+                    errorMessage = "Invalid GamePlatform id Found";
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+            return result;
+        }
+
+
+        #endregion GamePlatform Public Methods 
+
         #region Private Methods
 
         private bool ValidateDatabaseConnection()
