@@ -21,6 +21,9 @@ namespace Gamelibrary {
     static readonly grpc::Marshaller<global::Gamelibrary.GenresSearchRequest> __Marshaller_gamelibrary_GenresSearchRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gamelibrary.GenresSearchRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Gamelibrary.GenreRecord> __Marshaller_gamelibrary_GenreRecord = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gamelibrary.GenreRecord.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Gamelibrary.GenreResult> __Marshaller_gamelibrary_GenreResult = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gamelibrary.GenreResult.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Gamelibrary.RatingsSearchRequest> __Marshaller_gamelibrary_RatingsSearchRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gamelibrary.RatingsSearchRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Gamelibrary.RatingRecord> __Marshaller_gamelibrary_RatingRecord = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gamelibrary.RatingRecord.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Gamelibrary.RatingResult> __Marshaller_gamelibrary_RatingResult = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gamelibrary.RatingResult.Parser.ParseFrom);
 
     static readonly grpc::Method<global::Gamelibrary.GamesSearchRequest, global::Gamelibrary.GameRecord> __Method_SearchGames = new grpc::Method<global::Gamelibrary.GamesSearchRequest, global::Gamelibrary.GameRecord>(
         grpc::MethodType.ServerStreaming,
@@ -77,6 +80,34 @@ namespace Gamelibrary {
         "DeleteGenre",
         __Marshaller_gamelibrary_GenreRecord,
         __Marshaller_gamelibrary_GenreResult);
+
+    static readonly grpc::Method<global::Gamelibrary.RatingsSearchRequest, global::Gamelibrary.RatingRecord> __Method_SearchRatings = new grpc::Method<global::Gamelibrary.RatingsSearchRequest, global::Gamelibrary.RatingRecord>(
+        grpc::MethodType.ServerStreaming,
+        __ServiceName,
+        "SearchRatings",
+        __Marshaller_gamelibrary_RatingsSearchRequest,
+        __Marshaller_gamelibrary_RatingRecord);
+
+    static readonly grpc::Method<global::Gamelibrary.RatingRecord, global::Gamelibrary.RatingResult> __Method_AddRating = new grpc::Method<global::Gamelibrary.RatingRecord, global::Gamelibrary.RatingResult>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "AddRating",
+        __Marshaller_gamelibrary_RatingRecord,
+        __Marshaller_gamelibrary_RatingResult);
+
+    static readonly grpc::Method<global::Gamelibrary.RatingRecord, global::Gamelibrary.RatingResult> __Method_EditRating = new grpc::Method<global::Gamelibrary.RatingRecord, global::Gamelibrary.RatingResult>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "EditRating",
+        __Marshaller_gamelibrary_RatingRecord,
+        __Marshaller_gamelibrary_RatingResult);
+
+    static readonly grpc::Method<global::Gamelibrary.RatingRecord, global::Gamelibrary.RatingResult> __Method_DeleteRating = new grpc::Method<global::Gamelibrary.RatingRecord, global::Gamelibrary.RatingResult>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "DeleteRating",
+        __Marshaller_gamelibrary_RatingRecord,
+        __Marshaller_gamelibrary_RatingResult);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -175,6 +206,52 @@ namespace Gamelibrary {
       /// <param name="context">The context of the server-side call handler being invoked.</param>
       /// <returns>The response to send back to the client (wrapped by a task).</returns>
       public virtual global::System.Threading.Tasks.Task<global::Gamelibrary.GenreResult> DeleteGenre(global::Gamelibrary.GenreRecord request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      /// <summary>
+      /// Obtains a list of ratings that match the request parameters.
+      /// Streamed rather than returned at once (e.g. in a response message with a repeated field)
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="responseStream">Used for sending responses back to the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>A task indicating completion of the handler.</returns>
+      public virtual global::System.Threading.Tasks.Task SearchRatings(global::Gamelibrary.RatingsSearchRequest request, grpc::IServerStreamWriter<global::Gamelibrary.RatingRecord> responseStream, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      /// <summary>
+      /// Add a new rating record
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      public virtual global::System.Threading.Tasks.Task<global::Gamelibrary.RatingResult> AddRating(global::Gamelibrary.RatingRecord request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      /// <summary>
+      /// Edit a rating record
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      public virtual global::System.Threading.Tasks.Task<global::Gamelibrary.RatingResult> EditRating(global::Gamelibrary.RatingRecord request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      /// <summary>
+      /// Delete a rating record
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      public virtual global::System.Threading.Tasks.Task<global::Gamelibrary.RatingResult> DeleteRating(global::Gamelibrary.RatingRecord request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -516,6 +593,162 @@ namespace Gamelibrary {
       {
         return CallInvoker.AsyncUnaryCall(__Method_DeleteGenre, null, options, request);
       }
+      /// <summary>
+      /// Obtains a list of ratings that match the request parameters.
+      /// Streamed rather than returned at once (e.g. in a response message with a repeated field)
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      public virtual grpc::AsyncServerStreamingCall<global::Gamelibrary.RatingRecord> SearchRatings(global::Gamelibrary.RatingsSearchRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return SearchRatings(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Obtains a list of ratings that match the request parameters.
+      /// Streamed rather than returned at once (e.g. in a response message with a repeated field)
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      public virtual grpc::AsyncServerStreamingCall<global::Gamelibrary.RatingRecord> SearchRatings(global::Gamelibrary.RatingsSearchRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncServerStreamingCall(__Method_SearchRatings, null, options, request);
+      }
+      /// <summary>
+      /// Add a new rating record
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
+      public virtual global::Gamelibrary.RatingResult AddRating(global::Gamelibrary.RatingRecord request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return AddRating(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Add a new rating record
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
+      public virtual global::Gamelibrary.RatingResult AddRating(global::Gamelibrary.RatingRecord request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_AddRating, null, options, request);
+      }
+      /// <summary>
+      /// Add a new rating record
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      public virtual grpc::AsyncUnaryCall<global::Gamelibrary.RatingResult> AddRatingAsync(global::Gamelibrary.RatingRecord request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return AddRatingAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Add a new rating record
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      public virtual grpc::AsyncUnaryCall<global::Gamelibrary.RatingResult> AddRatingAsync(global::Gamelibrary.RatingRecord request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_AddRating, null, options, request);
+      }
+      /// <summary>
+      /// Edit a rating record
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
+      public virtual global::Gamelibrary.RatingResult EditRating(global::Gamelibrary.RatingRecord request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return EditRating(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Edit a rating record
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
+      public virtual global::Gamelibrary.RatingResult EditRating(global::Gamelibrary.RatingRecord request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_EditRating, null, options, request);
+      }
+      /// <summary>
+      /// Edit a rating record
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      public virtual grpc::AsyncUnaryCall<global::Gamelibrary.RatingResult> EditRatingAsync(global::Gamelibrary.RatingRecord request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return EditRatingAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Edit a rating record
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      public virtual grpc::AsyncUnaryCall<global::Gamelibrary.RatingResult> EditRatingAsync(global::Gamelibrary.RatingRecord request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_EditRating, null, options, request);
+      }
+      /// <summary>
+      /// Delete a rating record
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
+      public virtual global::Gamelibrary.RatingResult DeleteRating(global::Gamelibrary.RatingRecord request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return DeleteRating(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Delete a rating record
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
+      public virtual global::Gamelibrary.RatingResult DeleteRating(global::Gamelibrary.RatingRecord request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_DeleteRating, null, options, request);
+      }
+      /// <summary>
+      /// Delete a rating record
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      public virtual grpc::AsyncUnaryCall<global::Gamelibrary.RatingResult> DeleteRatingAsync(global::Gamelibrary.RatingRecord request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return DeleteRatingAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Delete a rating record
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      public virtual grpc::AsyncUnaryCall<global::Gamelibrary.RatingResult> DeleteRatingAsync(global::Gamelibrary.RatingRecord request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_DeleteRating, null, options, request);
+      }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override GameLibraryClient NewInstance(ClientBaseConfiguration configuration)
       {
@@ -535,7 +768,11 @@ namespace Gamelibrary {
           .AddMethod(__Method_SearchGenres, serviceImpl.SearchGenres)
           .AddMethod(__Method_AddGenre, serviceImpl.AddGenre)
           .AddMethod(__Method_EditGenre, serviceImpl.EditGenre)
-          .AddMethod(__Method_DeleteGenre, serviceImpl.DeleteGenre).Build();
+          .AddMethod(__Method_DeleteGenre, serviceImpl.DeleteGenre)
+          .AddMethod(__Method_SearchRatings, serviceImpl.SearchRatings)
+          .AddMethod(__Method_AddRating, serviceImpl.AddRating)
+          .AddMethod(__Method_EditRating, serviceImpl.EditRating)
+          .AddMethod(__Method_DeleteRating, serviceImpl.DeleteRating).Build();
     }
 
   }

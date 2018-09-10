@@ -248,6 +248,106 @@ namespace GameLibrary.gRpc.Client.Test
 
             #endregion GenreTest
 
+            #region RatingTest
+
+            // Get all ratings
+
+            var ratings = client.SearchRatings(0, "");
+
+            Assert.IsNotNull(ratings);
+            Assert.AreEqual(ratings.List.Count, 0);
+
+
+            // Add a rating
+
+            var rating = new Rating(0, "Qbert", "A silly penguin", "Symbol");
+
+             errorMessage = "";
+             result = client.AddRating(rating, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(rating.Id > 0);
+
+
+            // Get the new rating by id.
+
+            ratings = client.SearchRatings(rating.Id, "");
+
+            Assert.IsNotNull(rating);
+            Assert.AreEqual(ratings.List.Count, 1);
+
+            var foundRating = ratings.List[0];
+
+            Assert.IsNotNull(foundRating);
+            Assert.AreEqual(foundRating.Id, rating.Id);
+
+
+            // Get the new rating by name.
+
+            ratings = client.SearchRatings(0, rating.Name);
+
+            Assert.IsNotNull(ratings);
+            Assert.AreEqual(ratings.List.Count, 1);
+
+            foundRating = ratings.List[0];
+
+            Assert.IsNotNull(foundRating);
+            Assert.AreEqual(foundRating.Name, rating.Name);
+
+
+            // Edit a rating
+
+            var editRating = new Rating(rating.Id, "Bilbo Baggins", "A silly hobbit who finds a ring", "5");
+
+            errorMessage = "";
+            result = client.EditRating(editRating, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(editRating.Id > 0);
+
+
+            // Get the new rating by name.
+
+            ratings = client.SearchRatings(0, editRating.Name);
+
+            Assert.IsNotNull(ratings);
+            Assert.AreEqual(ratings.List.Count, 1);
+
+            foundRating = ratings.List[0];
+
+            Assert.IsNotNull(foundRating);
+            Assert.AreEqual(foundRating.Name, "Bilbo Baggins");
+            Assert.AreEqual(foundRating.Description, "A silly hobbit who finds a ring");
+
+
+            // Get all ratings
+
+            ratings = client.SearchRatings(0, "");
+
+            Assert.IsNotNull(ratings);
+            Assert.AreEqual(ratings.List.Count, 1);
+
+
+            // Delete a rating
+
+            errorMessage = "";
+            result = client.DeleteRating(foundRating.Id, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+
+            // Get all ratings
+
+            ratings = client.SearchRatings(0, "");
+
+            Assert.IsNotNull(ratings);
+            Assert.AreEqual(ratings.List.Count, 0);
+
+            #endregion RatingTest
+
 
             // Shutdown the gRPC Web Services server.
             gameLibraryServer.ShutdownAsync().Wait();

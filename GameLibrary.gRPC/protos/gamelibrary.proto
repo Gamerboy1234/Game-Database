@@ -44,6 +44,24 @@ service GameLibrary {
 
 	// Delete a genre record
 	rpc DeleteGenre(GenreRecord) returns (GenreResult) {}
+
+	///////////////////////////////////////////////////////////////
+	// Ratings
+	///////////////////////////////////////////////////////////////
+
+	// Obtains a list of ratings that match the request parameters.
+	// Streamed rather than returned at once (e.g. in a response message with a repeated field)
+	rpc SearchRatings(RatingsSearchRequest) returns (stream RatingRecord) {}
+
+	// Add a new rating record
+	rpc AddRating(RatingRecord) returns (RatingResult) {}
+
+	// Edit a rating record
+	rpc EditRating(RatingRecord) returns (RatingResult) {}
+
+	// Delete a rating record
+	rpc DeleteRating(RatingRecord) returns (RatingResult) {}
+
 }
 
 ///////////////////////////////////////////////////////////////
@@ -84,6 +102,28 @@ message GenreRecord {
 
 message GenreResult {
 	GenreRecord genre = 1;
+	bool success = 2;
+	string error_message = 3;
+}
+
+///////////////////////////////////////////////////////////////
+// Rating
+///////////////////////////////////////////////////////////////
+
+message RatingsSearchRequest {
+	int64 rating_id = 1;
+	string rating_name = 2;
+}
+
+message RatingRecord {
+	int64 rating_id = 1;
+	string name = 2;
+	string description = 3;
+	string symbol = 4;
+}
+
+message RatingResult {
+	RatingRecord rating = 1;
 	bool success = 2;
 	string error_message = 3;
 }

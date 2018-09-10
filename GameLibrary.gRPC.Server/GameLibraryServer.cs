@@ -308,6 +308,152 @@ namespace GameLibrary.gRPC.Server
 
         #endregion Genre Methods
 
+        #region Rating Methods
+
+        public override async Task SearchRatings(RatingsSearchRequest request, IServerStreamWriter<RatingRecord> responseStream, ServerCallContext context)
+        {
+            try
+            {
+                if (request != null)
+                {
+                    var errorMessage = "";
+
+                    var ratings = new RatingList();
+
+                    if (request.RatingId > 0)
+                    {
+                        var rating = GameLibraryAgent.ModelAssembler.GetRatingById((int)request.RatingId, ref errorMessage);
+
+                        if (rating?.Id > 0)
+                        {
+                            ratings.Add(rating);
+                        }
+                    }
+
+                    else if (!string.IsNullOrEmpty(request.RatingName))
+                    {
+                        var rating = GameLibraryAgent.ModelAssembler.GetRatingByName(request.RatingName, ref errorMessage);
+
+                        if (!string.IsNullOrEmpty(rating?.Name))
+                        {
+                            ratings.Add(rating);
+                        }
+                    }
+
+                    else // Return all games
+                    {
+                        ratings = GameLibraryAgent.ModelAssembler.GetRatings() ?? new RatingList();
+                    }
+                    if (ratings?.List?.Count > 0)
+                    {
+                        foreach (var rating in ratings.List.Where(rating => !string.IsNullOrEmpty(rating.Name)))
+                        {
+                            await responseStream.WriteAsync(GrpcRating(rating));
+                        }
+                    }
+                }
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+        }
+
+        public override Task<RatingResult> AddRating(RatingRecord request, ServerCallContext context)
+        {
+            var result = new RatingResult();
+
+            try
+            {
+                var errorMessage = "";
+
+                var rating = RatingFromGrpc(request);
+
+                result.Success = GameLibraryAgent.ModelAssembler.AddOrEditRating(rating, ref errorMessage);
+
+                result.Rating = GrpcRating(rating);
+                result.ErrorMessage = errorMessage ?? "";
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+
+            return Task.FromResult(result);
+        }
+
+        public override Task<RatingResult> EditRating(RatingRecord request, ServerCallContext context)
+        {
+            var result = new RatingResult();
+
+            try
+            {
+                var errorMessage = "";
+
+                var rating = RatingFromGrpc(request);
+
+                result.Success = GameLibraryAgent.ModelAssembler.AddOrEditRating(rating, ref errorMessage);
+
+                result.Rating = GrpcRating(rating);
+                result.ErrorMessage = errorMessage ?? "";
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+
+            return Task.FromResult(result);
+        }
+
+        public override Task<RatingResult> DeleteRating(RatingRecord request, ServerCallContext context)
+        {
+            var result = new RatingResult();
+
+            try
+            {
+                var errorMessage = "";
+
+                var rating = RatingFromGrpc(request);
+
+                result.Success = GameLibraryAgent.ModelAssembler.DeleteRating(rating.Id, ref errorMessage);
+
+                result.Rating = GrpcRating(rating);
+                result.ErrorMessage = errorMessage ?? "";
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+
+            return Task.FromResult(result);
+        }
+
+        #endregion Rating Methods
+
         #region Private Methods
 
         private static GameRecord GrpcGame(Game game)
@@ -409,6 +555,66 @@ namespace GameLibrary.gRPC.Server
                         (int)genreRecord.GenreId,
                         genreRecord.Name ?? "",
                         genreRecord.Description ?? "");
+                }
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+
+            return result;
+        }
+
+        private static RatingRecord GrpcRating(Rating rating)
+        {
+            var result = new RatingRecord();
+
+            try
+            {
+                if (rating != null)
+                {
+                    result = new RatingRecord
+                    {
+                        RatingId = rating.Id,
+                        Name = rating.Name ?? "",
+                        Description = rating.Description ?? "",
+                        Symbol = rating.Symbol ?? ""
+                    };
+                }
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+
+            return result;
+        }
+
+        private static Rating RatingFromGrpc(RatingRecord ratingRecord)
+        {
+            var result = new Rating();
+
+            try
+            {
+                if (ratingRecord != null)
+                {
+                    result = new Rating(
+                        (int)ratingRecord.RatingId,
+                        ratingRecord.Name ?? "",
+                        ratingRecord.Description ?? "",
+                        ratingRecord.Symbol ?? "");
                 }
             }
 

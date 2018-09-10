@@ -20,7 +20,6 @@ namespace GameLibrary.gRPC.Client
 
         #endregion Private Fields
 
-
         #region Constructors
 
         public GameLibraryClient(Gamelibrary.GameLibrary.GameLibraryClient client)
@@ -29,7 +28,6 @@ namespace GameLibrary.gRPC.Client
         }
         
         #endregion Constructors
-
 
         #region Game Methods
 
@@ -182,15 +180,14 @@ namespace GameLibrary.gRPC.Client
 
         #endregion Game Methods
 
-        #region Game Methods
-
+        #region Genre Methods
         public GenreList SearchGenres(long genreId, string genreName)
         {
             var result = new GenreList();
 
             try
             {
-                result = AsyncHelper.RunSync(() => SerchGenresAsync(genreId, genreName));
+                result = AsyncHelper.RunSync(() => SearchGenreAsync(genreId, genreName));
             }
 
             catch (RpcException ex)
@@ -330,8 +327,158 @@ namespace GameLibrary.gRPC.Client
 
             return result;
         }
+        #endregion Genre Methods
 
-        #endregion Game Methods
+        #region Rating Methods
+
+        public RatingList SearchRatings(long ratingId, string ratingName)
+        {
+            var result = new RatingList();
+
+            try
+            {
+                result = AsyncHelper.RunSync(() => SerachRatingAsync(ratingId, ratingName));
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        public bool AddRating(Rating rating, ref string errorMessage)
+        {
+            var result = false;
+
+            try
+            {
+                if (_client != null)
+                {
+                    var ratingResult = _client.AddRating(GrpcRating(rating));
+
+                    if (ratingResult != null)
+                    {
+                        result = ratingResult.Success;
+                        errorMessage = ratingResult.ErrorMessage;
+                        rating.Id = (int)(ratingResult.Rating?.RatingId ?? 0);
+                    }
+                }
+
+                else
+                {
+                    errorMessage = "Unable to create gRPC client";
+                }
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        public bool EditRating(Rating rating, ref string errorMessage)
+        {
+            var result = false;
+
+            try
+            {
+                if (_client != null)
+                {
+                    var ratingResult = _client.EditRating(GrpcRating(rating));
+
+                    if (ratingResult != null)
+                    {
+                        result = ratingResult.Success;
+                        errorMessage = ratingResult.ErrorMessage;
+                    }
+                }
+
+                else
+                {
+                    errorMessage = "Unable to create gRPC client";
+                }
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        public bool DeleteRating(long ratingId, ref string errorMessage)
+        {
+            var result = false;
+
+            try
+            {
+                if (_client != null)
+                {
+                    var ratingResult = _client.DeleteRating(GrpcRating(new Rating { Id = (int)ratingId }));
+
+                    if (ratingResult != null)
+                    {
+                        result = ratingResult.Success;
+                        errorMessage = ratingResult.ErrorMessage;
+                    }
+                }
+
+                else
+                {
+                    errorMessage = "Unable to create gRPC client";
+                }
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        #endregion Rating Methods
 
         #region Private Methods
 
@@ -422,20 +569,21 @@ namespace GameLibrary.gRPC.Client
 
             return result;
         }
-
-        private static GenreRecord GrpcGenre(Genre genre)
+       
+        private static RatingRecord GrpcRating(Rating rating)
         {
-            var result = new GenreRecord();
+            var result = new RatingRecord();
 
             try
             {
-                if (genre != null)
+                if (rating != null)
                 {
-                    result = new GenreRecord
+                    result = new RatingRecord
                     {
-                        GenreId = genre.Id,
-                        Name = genre.Name ?? "",
-                        Description = genre.Description ?? ""
+                        RatingId = rating.Id,
+                        Name = rating.Name ?? "",
+                        Description = rating.Description ?? "",
+                        Symbol = rating.Symbol ?? ""
                     };
                 }
             }
@@ -452,7 +600,94 @@ namespace GameLibrary.gRPC.Client
             return result;
         }
 
-        private async Task<GenreList> SerchGenresAsync(long genreId, string genreName)
+        private static GenreRecord GrpcGenre(Genre genre)
+        {
+            var result = new GenreRecord();
+
+            try
+            {
+                if (genre != null)
+                {
+                    result = new GenreRecord
+                    {
+                        GenreId = genre.Id,
+                        Name = genre.Name ?? "",
+                        Description = genre.Description ?? "",
+                    };
+                }
+            }
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+
+            return result;
+        }
+
+        private async Task<RatingList> SerachRatingAsync(long ratingId, string ratingName)
+        {
+            var result = new RatingList();
+
+            try
+            {
+                var errorMessage = "";
+
+                if (_client != null)
+                {
+                    using (var ratingResult = _client.SearchRatings(new RatingsSearchRequest
+                    {
+                        RatingId = ratingId,
+                        RatingName = ratingName ?? ""
+                    }))
+                    {
+                        var responseStream = ratingResult.ResponseStream;
+
+                        while (await responseStream.MoveNext())
+                        {
+                            var ratingRecord = responseStream.Current;
+
+                            if (!string.IsNullOrEmpty(ratingRecord?.Name))
+                            {
+                                result.Add(new Rating(
+                                    (int)ratingRecord.RatingId,
+                                    ratingRecord.Name ?? "",
+                                    ratingRecord.Description ?? "", ratingRecord.Symbol ?? ""));
+                            }
+                        }
+                    }
+                }
+
+                else
+                {
+                    errorMessage = "Unable to create gRPC client";
+                }
+
+                result.ErrorMessage = errorMessage;
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            return result;
+        }
+     
+        private async Task<GenreList> SearchGenreAsync(long genreId, string genreName)
         {
             var result = new GenreList();
 
