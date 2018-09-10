@@ -11,6 +11,10 @@ package gamelibrary;
 // Interface exported by the server.
 service GameLibrary {
 
+	///////////////////////////////////////////////////////////////
+	// Games
+	///////////////////////////////////////////////////////////////
+
 	// Obtains a list of games that match the request parameters.
 	// Streamed rather than returned at once (e.g. in a response message with a repeated field)
 	rpc SearchGames(GamesSearchRequest) returns (stream GameRecord) {}
@@ -23,7 +27,28 @@ service GameLibrary {
 
 	// Delete a game record
 	rpc DeleteGame(GameRecord) returns (GameResult) {}
+
+	///////////////////////////////////////////////////////////////
+	// Genres
+	///////////////////////////////////////////////////////////////
+
+	// Obtains a list of genres that match the request parameters.
+	// Streamed rather than returned at once (e.g. in a response message with a repeated field)
+	rpc SearchGenres(GenresSearchRequest) returns (stream GenreRecord) {}
+
+	// Add a new genre record
+	rpc AddGenre(GenreRecord) returns (GenreResult) {}
+
+	// Edit a genre record
+	rpc EditGenre(GenreRecord) returns (GenreResult) {}
+
+	// Delete a genre record
+	rpc DeleteGenre(GenreRecord) returns (GenreResult) {}
 }
+
+///////////////////////////////////////////////////////////////
+// Games
+///////////////////////////////////////////////////////////////
 
 message GamesSearchRequest {
 	int64 game_id = 1;
@@ -38,6 +63,27 @@ message GameRecord {
 
 message GameResult {
 	GameRecord game = 1;
+	bool success = 2;
+	string error_message = 3;
+}
+
+///////////////////////////////////////////////////////////////
+// Genres
+///////////////////////////////////////////////////////////////
+
+message GenresSearchRequest {
+	int64 genre_id = 1;
+	string genre_name = 2;
+}
+
+message GenreRecord {
+	int64 genre_id = 1;
+	string name = 2;
+	string description = 3;
+}
+
+message GenreResult {
+	GenreRecord genre = 1;
 	bool success = 2;
 	string error_message = 3;
 }

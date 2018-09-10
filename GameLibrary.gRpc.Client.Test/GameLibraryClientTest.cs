@@ -49,6 +49,7 @@ namespace GameLibrary.gRpc.Client.Test
             var client = new GameLibraryClient(new Gamelibrary.GameLibrary.GameLibraryClient(channel));
 
 
+            #region GameTest
             // Get all games
 
             var games = client.SearchGames(0, "");
@@ -144,6 +145,108 @@ namespace GameLibrary.gRpc.Client.Test
 
             Assert.IsNotNull(games);
             Assert.AreEqual(games.List.Count, 0);
+
+            #endregion GameTest
+
+            #region GenreTest
+
+            // Get all genres
+
+            var genres = client.SearchGenres(0, "");
+
+            Assert.IsNotNull(genres);
+            Assert.AreEqual(genres.List.Count, 0);
+
+
+            // Add a genre
+
+            var genre = new Genre(0, "Qbert", "A silly penguin");
+
+             errorMessage = "";
+             result = client.AddGenre(genre, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(genre.Id > 0);
+
+
+            // Get the new genre by id.
+
+            genres = client.SearchGenres(genre.Id, "");
+
+            Assert.IsNotNull(genres);
+            Assert.AreEqual(genres.List.Count, 1);
+
+            var foundGenre = genres.List[0];
+
+            Assert.IsNotNull(foundGenre);
+            Assert.AreEqual(foundGenre.Id, genre.Id);
+
+
+            // Get the new genre by name.
+
+            genres = client.SearchGenres(0, genre.Name);
+
+            Assert.IsNotNull(genres);
+            Assert.AreEqual(genres.List.Count, 1);
+
+            foundGenre = genres.List[0];
+
+            Assert.IsNotNull(foundGenre);
+            Assert.AreEqual(foundGenre.Name, genre.Name);
+
+
+            // Edit a genre
+
+            var editGenre = new Genre(genre.Id, "Bilbo Baggins", "A silly hobbit who finds a ring");
+
+            errorMessage = "";
+            result = client.EditGenre(editGenre, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(editGenre.Id > 0);
+
+
+            // Get the new genre by name.
+
+            genres = client.SearchGenres(0, editGenre.Name);
+
+            Assert.IsNotNull(genres);
+            Assert.AreEqual(genres.List.Count, 1);
+
+            foundGenre = genres.List[0];
+
+            Assert.IsNotNull(foundGenre);
+            Assert.AreEqual(foundGenre.Name, "Bilbo Baggins");
+            Assert.AreEqual(foundGenre.Description, "A silly hobbit who finds a ring");
+
+
+            // Get all genres
+
+            genres = client.SearchGenres(0, "");
+
+            Assert.IsNotNull(genres);
+            Assert.AreEqual(genres.List.Count, 1);
+
+
+            // Delete a genre
+
+            errorMessage = "";
+            result = client.DeleteGenre(foundGenre.Id, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+
+            // Get all genres
+
+            genres = client.SearchGenres(0, "");
+
+            Assert.IsNotNull(genres);
+            Assert.AreEqual(genres.List.Count, 0);
+
+            #endregion GenreTest
 
 
             // Shutdown the gRPC Web Services server.

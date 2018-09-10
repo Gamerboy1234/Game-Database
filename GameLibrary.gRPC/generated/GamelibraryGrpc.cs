@@ -18,6 +18,9 @@ namespace Gamelibrary {
     static readonly grpc::Marshaller<global::Gamelibrary.GamesSearchRequest> __Marshaller_gamelibrary_GamesSearchRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gamelibrary.GamesSearchRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Gamelibrary.GameRecord> __Marshaller_gamelibrary_GameRecord = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gamelibrary.GameRecord.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Gamelibrary.GameResult> __Marshaller_gamelibrary_GameResult = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gamelibrary.GameResult.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Gamelibrary.GenresSearchRequest> __Marshaller_gamelibrary_GenresSearchRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gamelibrary.GenresSearchRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Gamelibrary.GenreRecord> __Marshaller_gamelibrary_GenreRecord = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gamelibrary.GenreRecord.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Gamelibrary.GenreResult> __Marshaller_gamelibrary_GenreResult = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gamelibrary.GenreResult.Parser.ParseFrom);
 
     static readonly grpc::Method<global::Gamelibrary.GamesSearchRequest, global::Gamelibrary.GameRecord> __Method_SearchGames = new grpc::Method<global::Gamelibrary.GamesSearchRequest, global::Gamelibrary.GameRecord>(
         grpc::MethodType.ServerStreaming,
@@ -46,6 +49,34 @@ namespace Gamelibrary {
         "DeleteGame",
         __Marshaller_gamelibrary_GameRecord,
         __Marshaller_gamelibrary_GameResult);
+
+    static readonly grpc::Method<global::Gamelibrary.GenresSearchRequest, global::Gamelibrary.GenreRecord> __Method_SearchGenres = new grpc::Method<global::Gamelibrary.GenresSearchRequest, global::Gamelibrary.GenreRecord>(
+        grpc::MethodType.ServerStreaming,
+        __ServiceName,
+        "SearchGenres",
+        __Marshaller_gamelibrary_GenresSearchRequest,
+        __Marshaller_gamelibrary_GenreRecord);
+
+    static readonly grpc::Method<global::Gamelibrary.GenreRecord, global::Gamelibrary.GenreResult> __Method_AddGenre = new grpc::Method<global::Gamelibrary.GenreRecord, global::Gamelibrary.GenreResult>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "AddGenre",
+        __Marshaller_gamelibrary_GenreRecord,
+        __Marshaller_gamelibrary_GenreResult);
+
+    static readonly grpc::Method<global::Gamelibrary.GenreRecord, global::Gamelibrary.GenreResult> __Method_EditGenre = new grpc::Method<global::Gamelibrary.GenreRecord, global::Gamelibrary.GenreResult>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "EditGenre",
+        __Marshaller_gamelibrary_GenreRecord,
+        __Marshaller_gamelibrary_GenreResult);
+
+    static readonly grpc::Method<global::Gamelibrary.GenreRecord, global::Gamelibrary.GenreResult> __Method_DeleteGenre = new grpc::Method<global::Gamelibrary.GenreRecord, global::Gamelibrary.GenreResult>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "DeleteGenre",
+        __Marshaller_gamelibrary_GenreRecord,
+        __Marshaller_gamelibrary_GenreResult);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -98,6 +129,52 @@ namespace Gamelibrary {
       /// <param name="context">The context of the server-side call handler being invoked.</param>
       /// <returns>The response to send back to the client (wrapped by a task).</returns>
       public virtual global::System.Threading.Tasks.Task<global::Gamelibrary.GameResult> DeleteGame(global::Gamelibrary.GameRecord request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      /// <summary>
+      /// Obtains a list of genres that match the request parameters.
+      /// Streamed rather than returned at once (e.g. in a response message with a repeated field)
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="responseStream">Used for sending responses back to the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>A task indicating completion of the handler.</returns>
+      public virtual global::System.Threading.Tasks.Task SearchGenres(global::Gamelibrary.GenresSearchRequest request, grpc::IServerStreamWriter<global::Gamelibrary.GenreRecord> responseStream, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      /// <summary>
+      /// Add a new genre record
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      public virtual global::System.Threading.Tasks.Task<global::Gamelibrary.GenreResult> AddGenre(global::Gamelibrary.GenreRecord request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      /// <summary>
+      /// Edit a genre record
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      public virtual global::System.Threading.Tasks.Task<global::Gamelibrary.GenreResult> EditGenre(global::Gamelibrary.GenreRecord request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      /// <summary>
+      /// Delete a genre record
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      public virtual global::System.Threading.Tasks.Task<global::Gamelibrary.GenreResult> DeleteGenre(global::Gamelibrary.GenreRecord request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -283,6 +360,162 @@ namespace Gamelibrary {
       {
         return CallInvoker.AsyncUnaryCall(__Method_DeleteGame, null, options, request);
       }
+      /// <summary>
+      /// Obtains a list of genres that match the request parameters.
+      /// Streamed rather than returned at once (e.g. in a response message with a repeated field)
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      public virtual grpc::AsyncServerStreamingCall<global::Gamelibrary.GenreRecord> SearchGenres(global::Gamelibrary.GenresSearchRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return SearchGenres(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Obtains a list of genres that match the request parameters.
+      /// Streamed rather than returned at once (e.g. in a response message with a repeated field)
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      public virtual grpc::AsyncServerStreamingCall<global::Gamelibrary.GenreRecord> SearchGenres(global::Gamelibrary.GenresSearchRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncServerStreamingCall(__Method_SearchGenres, null, options, request);
+      }
+      /// <summary>
+      /// Add a new genre record
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
+      public virtual global::Gamelibrary.GenreResult AddGenre(global::Gamelibrary.GenreRecord request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return AddGenre(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Add a new genre record
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
+      public virtual global::Gamelibrary.GenreResult AddGenre(global::Gamelibrary.GenreRecord request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_AddGenre, null, options, request);
+      }
+      /// <summary>
+      /// Add a new genre record
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      public virtual grpc::AsyncUnaryCall<global::Gamelibrary.GenreResult> AddGenreAsync(global::Gamelibrary.GenreRecord request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return AddGenreAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Add a new genre record
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      public virtual grpc::AsyncUnaryCall<global::Gamelibrary.GenreResult> AddGenreAsync(global::Gamelibrary.GenreRecord request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_AddGenre, null, options, request);
+      }
+      /// <summary>
+      /// Edit a genre record
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
+      public virtual global::Gamelibrary.GenreResult EditGenre(global::Gamelibrary.GenreRecord request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return EditGenre(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Edit a genre record
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
+      public virtual global::Gamelibrary.GenreResult EditGenre(global::Gamelibrary.GenreRecord request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_EditGenre, null, options, request);
+      }
+      /// <summary>
+      /// Edit a genre record
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      public virtual grpc::AsyncUnaryCall<global::Gamelibrary.GenreResult> EditGenreAsync(global::Gamelibrary.GenreRecord request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return EditGenreAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Edit a genre record
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      public virtual grpc::AsyncUnaryCall<global::Gamelibrary.GenreResult> EditGenreAsync(global::Gamelibrary.GenreRecord request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_EditGenre, null, options, request);
+      }
+      /// <summary>
+      /// Delete a genre record
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
+      public virtual global::Gamelibrary.GenreResult DeleteGenre(global::Gamelibrary.GenreRecord request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return DeleteGenre(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Delete a genre record
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
+      public virtual global::Gamelibrary.GenreResult DeleteGenre(global::Gamelibrary.GenreRecord request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_DeleteGenre, null, options, request);
+      }
+      /// <summary>
+      /// Delete a genre record
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      public virtual grpc::AsyncUnaryCall<global::Gamelibrary.GenreResult> DeleteGenreAsync(global::Gamelibrary.GenreRecord request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return DeleteGenreAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Delete a genre record
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      public virtual grpc::AsyncUnaryCall<global::Gamelibrary.GenreResult> DeleteGenreAsync(global::Gamelibrary.GenreRecord request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_DeleteGenre, null, options, request);
+      }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override GameLibraryClient NewInstance(ClientBaseConfiguration configuration)
       {
@@ -298,7 +531,11 @@ namespace Gamelibrary {
           .AddMethod(__Method_SearchGames, serviceImpl.SearchGames)
           .AddMethod(__Method_AddGame, serviceImpl.AddGame)
           .AddMethod(__Method_EditGame, serviceImpl.EditGame)
-          .AddMethod(__Method_DeleteGame, serviceImpl.DeleteGame).Build();
+          .AddMethod(__Method_DeleteGame, serviceImpl.DeleteGame)
+          .AddMethod(__Method_SearchGenres, serviceImpl.SearchGenres)
+          .AddMethod(__Method_AddGenre, serviceImpl.AddGenre)
+          .AddMethod(__Method_EditGenre, serviceImpl.EditGenre)
+          .AddMethod(__Method_DeleteGenre, serviceImpl.DeleteGenre).Build();
     }
 
   }

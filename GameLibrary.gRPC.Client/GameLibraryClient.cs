@@ -8,6 +8,7 @@ using GameLibrary.Model;
 using Grpc.Core;
 using Logger;
 using Utilities;
+using static GameLibrary.Model.Genre;
 
 namespace GameLibrary.gRPC.Client
 {
@@ -181,6 +182,156 @@ namespace GameLibrary.gRPC.Client
 
         #endregion Game Methods
 
+        #region Game Methods
+
+        public GenreList SearchGenres(long genreId, string genreName)
+        {
+            var result = new GenreList();
+
+            try
+            {
+                result = AsyncHelper.RunSync(() => SerchGenresAsync(genreId, genreName));
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        public bool AddGenre(Genre genre, ref string errorMessage)
+        {
+            var result = false;
+
+            try
+            {
+                if (_client != null)
+                {
+                    var gameResult = _client.AddGenre(GrpcGenre(genre));
+
+                    if (gameResult != null)
+                    {
+                        result = gameResult.Success;
+                        errorMessage = gameResult.ErrorMessage;
+                        genre.Id = (int)(gameResult.Genre?.GenreId ?? 0);
+                    }
+                }
+
+                else
+                {
+                    errorMessage = "Unable to create gRPC client";
+                }
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        public bool EditGenre(Genre genre, ref string errorMessage)
+        {
+            var result = false;
+
+            try
+            {
+                if (_client != null)
+                {
+                    var genreResult = _client.EditGenre(GrpcGenre(genre));
+
+                    if (genreResult != null)
+                    {
+                        result = genreResult.Success;
+                        errorMessage = genreResult.ErrorMessage;
+                    }
+                }
+
+                else
+                {
+                    errorMessage = "Unable to create gRPC client";
+                }
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        public bool DeleteGenre(long genreId, ref string errorMessage)
+        {
+            var result = false;
+
+            try
+            {
+                if (_client != null)
+                {
+                    var genreResult = _client.DeleteGenre(GrpcGenre(new Genre { Id = (int)genreId }));
+
+                    if (genreResult != null)
+                    {
+                        result = genreResult.Success;
+                        errorMessage = genreResult.ErrorMessage;
+                    }
+                }
+
+                else
+                {
+                    errorMessage = "Unable to create gRPC client";
+                }
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        #endregion Game Methods
 
         #region Private Methods
 
@@ -267,6 +418,93 @@ namespace GameLibrary.gRPC.Client
             catch (Exception ex)
             {
                 Log.Error(ex);
+            }
+
+            return result;
+        }
+
+        private static GenreRecord GrpcGenre(Genre genre)
+        {
+            var result = new GenreRecord();
+
+            try
+            {
+                if (genre != null)
+                {
+                    result = new GenreRecord
+                    {
+                        GenreId = genre.Id,
+                        Name = genre.Name ?? "",
+                        Description = genre.Description ?? ""
+                    };
+                }
+            }
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+
+            return result;
+        }
+
+        private async Task<GenreList> SerchGenresAsync(long genreId, string genreName)
+        {
+            var result = new GenreList();
+
+            try
+            {
+                var errorMessage = "";
+
+                if (_client != null)
+                {
+                    using (var genreResult = _client.SearchGenres(new GenresSearchRequest
+                    {
+                        GenreId = genreId,
+                        GenreName = genreName ?? ""
+                    }))
+                    {
+                        var responseStream = genreResult.ResponseStream;
+
+                        while (await responseStream.MoveNext())
+                        {
+                            var genreRecord = responseStream.Current;
+
+                            if (!string.IsNullOrEmpty(genreRecord?.Name))
+                            {
+                                result.Add(new Genre(
+                                    (int)genreRecord.GenreId,
+                                    genreRecord.Name ?? "",
+                                    genreRecord.Description ?? ""));
+                            }
+                        }
+                    }
+                }
+
+                else
+                {
+                    errorMessage = "Unable to create gRPC client";
+                }
+
+                result.ErrorMessage = errorMessage;
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
             }
 
             return result;

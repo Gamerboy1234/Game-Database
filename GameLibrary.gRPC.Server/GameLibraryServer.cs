@@ -8,6 +8,7 @@ using GameLibrary.Core;
 using GameLibrary.Model;
 using Grpc.Core;
 using Logger;
+using static GameLibrary.Model.Genre;
 
 namespace GameLibrary.gRPC.Server
 {
@@ -160,6 +161,152 @@ namespace GameLibrary.gRPC.Server
 
         #endregion Game Methods
 
+        #region Genre Methods
+
+        public override async Task SearchGenres(GenresSearchRequest request, IServerStreamWriter<GenreRecord> responseStream, ServerCallContext context)
+        {
+            try
+            {
+                if (request != null)
+                {
+                    var errorMessage = "";
+
+                    var genres = new GenreList();
+
+                    if (request.GenreId > 0)
+                    {
+                        var genre = GameLibraryAgent.ModelAssembler.GetGenreById((int)request.GenreId, ref errorMessage);
+
+                        if (genre?.Id > 0)
+                        {
+                            genres.Add(genre);
+                        }
+                    }
+
+                    else if (!string.IsNullOrEmpty(request.GenreName))
+                    {
+                        var genre = GameLibraryAgent.ModelAssembler.GetGenreByName(request.GenreName, ref errorMessage);
+
+                        if (!string.IsNullOrEmpty(genre?.Name))
+                        {
+                            genres.Add(genre);
+                        }
+                    }
+
+                    else // Return all games
+                    {
+                        genres = GameLibraryAgent.ModelAssembler.GetGenres() ?? new GenreList();
+                    }
+
+                    if (genres?.List?.Count > 0)
+                    {
+                        foreach (var genre in genres.List.Where(genre => !string.IsNullOrEmpty(genre?.Name)))
+                        {
+                            await responseStream.WriteAsync(GrpcGenre(genre));
+                        }
+                    }
+                }
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+        }
+
+        public override Task<GenreResult> AddGenre(GenreRecord request, ServerCallContext context)
+        {
+            var result = new GenreResult();
+
+            try
+            {
+                var errorMessage = "";
+
+                var genre = GenreFromGrpc(request);
+
+                result.Success = GameLibraryAgent.ModelAssembler.AddOrEditGenre(genre, ref errorMessage);
+
+                result.Genre = GrpcGenre(genre);
+                result.ErrorMessage = errorMessage ?? "";
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+
+            return Task.FromResult(result);
+        }
+
+        public override Task<GenreResult> EditGenre(GenreRecord request, ServerCallContext context)
+        {
+            var result = new GenreResult();
+
+            try
+            {
+                var errorMessage = "";
+
+                var genre = GenreFromGrpc(request);
+
+                result.Success = GameLibraryAgent.ModelAssembler.AddOrEditGenre(genre, ref errorMessage);
+
+                result.Genre = GrpcGenre(genre);
+                result.ErrorMessage = errorMessage ?? "";
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+
+            return Task.FromResult(result);
+        }
+
+        public override Task<GenreResult> DeleteGenre(GenreRecord request, ServerCallContext context)
+        {
+            var result = new GenreResult();
+
+            try
+            {
+                var errorMessage = "";
+
+                var genre = GenreFromGrpc(request);
+
+                result.Success = GameLibraryAgent.ModelAssembler.DeleteGenre(genre.Id, ref errorMessage);
+
+                result.Genre = GrpcGenre(genre);
+                result.ErrorMessage = errorMessage ?? "";
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+
+            return Task.FromResult(result);
+        }
+
+        #endregion Genre Methods
 
         #region Private Methods
 
@@ -205,6 +352,63 @@ namespace GameLibrary.gRPC.Server
                         (int)gameRecord.GameId,
                         gameRecord.Name ?? "",
                         gameRecord.Description ?? "");
+                }
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+
+            return result;
+        }
+
+        private static GenreRecord GrpcGenre(Genre genre)
+        {
+            var result = new GenreRecord();
+
+            try
+            {
+                if (genre != null)
+                {
+                    result = new GenreRecord
+                    {
+                        GenreId = genre.Id,
+                        Name = genre.Name ?? "",
+                        Description = genre.Description ?? ""
+                    };
+                }
+            }
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+
+            return result;
+        }
+
+        private static Genre GenreFromGrpc(GenreRecord genreRecord)
+        {
+            var result = new Genre();
+
+            try
+            {
+                if (genreRecord != null)
+                {
+                    result = new Genre(
+                        (int)genreRecord.GenreId,
+                        genreRecord.Name ?? "",
+                        genreRecord.Description ?? "");
                 }
             }
 
