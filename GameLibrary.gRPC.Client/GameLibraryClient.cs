@@ -480,6 +480,157 @@ namespace GameLibrary.gRPC.Client
 
         #endregion Rating Methods
 
+        #region Review Methods
+
+        public ReviewList SearchReview(long reviewId, string reviewName)
+        {
+            var result = new ReviewList();
+
+            try
+            {
+                result = AsyncHelper.RunSync(() => SearchReviewAsync(reviewId, reviewName));
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        public bool AddReview(Review review, ref string errorMessage)
+        {
+            var result = false;
+
+            try
+            {
+                if (_client != null)
+                {
+                    var reviewResult = _client.AddReview(GrpcReview(review));
+
+                    if (reviewResult != null)
+                    {
+                        result = reviewResult.Success;
+                        errorMessage = reviewResult.ErrorMessage;
+                        review.Id = (int)(reviewResult.Review?.ReviewId ?? 0);
+                    }
+                }
+
+                else
+                {
+                    errorMessage = "Unable to create gRPC client";
+                }
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        public bool EditReview(Review review, ref string errorMessage)
+        {
+            var result = false;
+
+            try
+            {
+                if (_client != null)
+                {
+                    var reviewResult = _client.EditReview(GrpcReview(review));
+
+                    if (reviewResult != null)
+                    {
+                        result = reviewResult.Success;
+                        errorMessage = reviewResult.ErrorMessage;
+                    }
+                }
+
+                else
+                {
+                    errorMessage = "Unable to create gRPC client";
+                }
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        public bool DeleteReview(long reviewId, ref string errorMessage)
+        {
+            var result = false;
+
+            try
+            {
+                if (_client != null)
+                {
+                    var reviewResult = _client.DeleteReview(GrpcReview(new Review { Id = (int)reviewId}));
+
+                    if (reviewResult != null)
+                    {
+                        result = reviewResult.Success;
+                        errorMessage = reviewResult.ErrorMessage;
+                    }
+                }
+
+                else
+                {
+                    errorMessage = "Unable to create gRPC client";
+                }
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        #endregion Review Methods
+
         #region Private Methods
 
         private async Task<GameList> SearchGamesAsync(long gameId, string gameName)
@@ -583,7 +734,7 @@ namespace GameLibrary.gRPC.Client
                         RatingId = rating.Id,
                         Name = rating.Name ?? "",
                         Description = rating.Description ?? "",
-                        Symbol = rating.Symbol ?? ""
+                        Symbol = rating.Symbol 
                     };
                 }
             }
@@ -639,13 +790,13 @@ namespace GameLibrary.gRPC.Client
 
                 if (_client != null)
                 {
-                    using (var ratingResult = _client.SearchRatings(new RatingsSearchRequest
+                    using (var reviewResult = _client.SearchRatings(new RatingsSearchRequest
                     {
                         RatingId = ratingId,
                         RatingName = ratingName ?? ""
                     }))
                     {
-                        var responseStream = ratingResult.ResponseStream;
+                        var responseStream = reviewResult.ResponseStream;
 
                         while (await responseStream.MoveNext())
                         {
@@ -656,7 +807,7 @@ namespace GameLibrary.gRPC.Client
                                 result.Add(new Rating(
                                     (int)ratingRecord.RatingId,
                                     ratingRecord.Name ?? "",
-                                    ratingRecord.Description ?? "", ratingRecord.Symbol ?? ""));
+                                    ratingRecord.Description ?? "", ratingRecord.Symbol));
                             }
                         }
                     }
@@ -740,6 +891,96 @@ namespace GameLibrary.gRPC.Client
                 Log.Error(ex);
 
                 result.ErrorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        private async Task<ReviewList> SearchReviewAsync(long reviewId, string reviewName)
+        {
+            var result = new ReviewList();
+
+            try
+            {
+                var errorMessage = "";
+
+                if (_client != null)
+                {
+                    using (var reviewResult = _client.SearchReviews(new ReviewsSearchRequest
+                    {
+                        ReviewId = reviewId,
+                        ReviewName = reviewName ?? ""
+                    }))
+                    {
+                        var responseStream = reviewResult.ResponseStream;
+
+                        while (await responseStream.MoveNext())
+                        {
+                            var reviewRecord = responseStream.Current;
+
+                            if (!string.IsNullOrEmpty(reviewRecord?.Name))
+                            {
+                                result.Add(new Review(
+                                    (int)reviewRecord.ReviewId,
+                                    reviewRecord.Name ?? "",
+                                    reviewRecord.Description ?? "",
+                                    reviewRecord.Rating));
+                            }
+                        }
+                    }
+                }
+
+                else
+                {
+                    errorMessage = "Unable to create gRPC client";
+                }
+
+                result.ErrorMessage = errorMessage;
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        private static ReviewRecord GrpcReview(Review review)
+        {
+            var result = new ReviewRecord();
+
+            try
+            {
+                if (review != null)
+                {
+                    result = new ReviewRecord
+                    {
+                        ReviewId = review.Id,
+                        Name = review.Name ?? "",
+                        Description = review.Description ?? "",
+                        Rating = review.Reviewrating
+                    };
+                }
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
             }
 
             return result;

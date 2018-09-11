@@ -348,6 +348,106 @@ namespace GameLibrary.gRpc.Client.Test
 
             #endregion RatingTest
 
+            #region ReviewTest
+
+            // Get all reviews
+
+            var reviews = client.SearchReview(0, "");
+
+            Assert.IsNotNull(reviews);
+            Assert.AreEqual(reviews.List.Count, 0);
+
+
+            // Add a review
+
+            var review = new Review(0, "Qbert", "A silly penguin", 5);
+
+            errorMessage = "";
+            result = client.AddReview(review, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(review.Id > 0);
+
+
+            // Get the new review by id.
+
+            reviews = client.SearchReview(review.Id, "");
+
+            Assert.IsNotNull(review);
+            Assert.AreEqual(reviews.List.Count, 1);
+
+            var foundReview = reviews.List[0];
+
+            Assert.IsNotNull(foundReview);
+            Assert.AreEqual(foundReview.Id, review.Id);
+
+
+            // Get the new review by name.
+
+            reviews = client.SearchReview(0, review.Name);
+
+            Assert.IsNotNull(reviews);
+            Assert.AreEqual(reviews.List.Count, 1);
+
+            foundReview = reviews.List[0];
+
+            Assert.IsNotNull(foundReview);
+            Assert.AreEqual(foundReview.Name, review.Name);
+
+
+            // Edit a review
+
+            var editReview = new Review(review.Id, "Bilbo Baggins", "A silly hobbit who finds a ring", 6);
+
+            errorMessage = "";
+            result = client.EditReview(editReview, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(editReview.Id > 0);
+
+
+            // Get the new review by name.
+
+            reviews = client.SearchReview(0, editReview.Name);
+
+            Assert.IsNotNull(reviews);
+            Assert.AreEqual(reviews.List.Count, 1);
+
+            foundReview = reviews.List[0];
+
+            Assert.IsNotNull(foundReview);
+            Assert.AreEqual(foundReview.Name, "Bilbo Baggins");
+            Assert.AreEqual(foundReview.Description, "A silly hobbit who finds a ring");
+
+
+            // Get all reviews
+
+            reviews = client.SearchReview(0, "");
+
+            Assert.IsNotNull(reviews);
+            Assert.AreEqual(reviews.List.Count, 1);
+
+
+            // Delete a review
+
+            errorMessage = "";
+            result = client.DeleteReview(foundReview.Id, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+
+            // Get all reviews
+
+            reviews = client.SearchReview(0, "");
+
+            Assert.IsNotNull(reviews);
+            Assert.AreEqual(reviews.List.Count, 0);
+
+            #endregion ReviewTest
+
 
             // Shutdown the gRPC Web Services server.
             gameLibraryServer.ShutdownAsync().Wait();

@@ -23,7 +23,7 @@ namespace GameLibrary.Model
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public int Reviewrating { get; set; }
+        public long Reviewrating { get; set; }
 
         #endregion Properties 
 
@@ -37,7 +37,7 @@ namespace GameLibrary.Model
             Reviewrating = 0;
         }
 
-        public Review(int id, string name, string description, int review)
+        public Review(int id, string name, string description, long review)
         {
             Id = id;
             Name = name;

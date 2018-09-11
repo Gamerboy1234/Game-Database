@@ -40,27 +40,39 @@ namespace Gamelibrary {
             "KAkSEwoLZGVzY3JpcHRpb24YAyABKAkSDgoGc3ltYm9sGAQgASgJImEKDFJh",
             "dGluZ1Jlc3VsdBIpCgZyYXRpbmcYASABKAsyGS5nYW1lbGlicmFyeS5SYXRp",
             "bmdSZWNvcmQSDwoHc3VjY2VzcxgCIAEoCBIVCg1lcnJvcl9tZXNzYWdlGAMg",
-            "ASgJMtsGCgtHYW1lTGlicmFyeRJLCgtTZWFyY2hHYW1lcxIfLmdhbWVsaWJy",
-            "YXJ5LkdhbWVzU2VhcmNoUmVxdWVzdBoXLmdhbWVsaWJyYXJ5LkdhbWVSZWNv",
-            "cmQiADABEj0KB0FkZEdhbWUSFy5nYW1lbGlicmFyeS5HYW1lUmVjb3JkGhcu",
-            "Z2FtZWxpYnJhcnkuR2FtZVJlc3VsdCIAEj4KCEVkaXRHYW1lEhcuZ2FtZWxp",
-            "YnJhcnkuR2FtZVJlY29yZBoXLmdhbWVsaWJyYXJ5LkdhbWVSZXN1bHQiABJA",
-            "CgpEZWxldGVHYW1lEhcuZ2FtZWxpYnJhcnkuR2FtZVJlY29yZBoXLmdhbWVs",
-            "aWJyYXJ5LkdhbWVSZXN1bHQiABJOCgxTZWFyY2hHZW5yZXMSIC5nYW1lbGli",
-            "cmFyeS5HZW5yZXNTZWFyY2hSZXF1ZXN0GhguZ2FtZWxpYnJhcnkuR2VucmVS",
-            "ZWNvcmQiADABEkAKCEFkZEdlbnJlEhguZ2FtZWxpYnJhcnkuR2VucmVSZWNv",
-            "cmQaGC5nYW1lbGlicmFyeS5HZW5yZVJlc3VsdCIAEkEKCUVkaXRHZW5yZRIY",
-            "LmdhbWVsaWJyYXJ5LkdlbnJlUmVjb3JkGhguZ2FtZWxpYnJhcnkuR2VucmVS",
-            "ZXN1bHQiABJDCgtEZWxldGVHZW5yZRIYLmdhbWVsaWJyYXJ5LkdlbnJlUmVj",
-            "b3JkGhguZ2FtZWxpYnJhcnkuR2VucmVSZXN1bHQiABJRCg1TZWFyY2hSYXRp",
-            "bmdzEiEuZ2FtZWxpYnJhcnkuUmF0aW5nc1NlYXJjaFJlcXVlc3QaGS5nYW1l",
-            "bGlicmFyeS5SYXRpbmdSZWNvcmQiADABEkMKCUFkZFJhdGluZxIZLmdhbWVs",
-            "aWJyYXJ5LlJhdGluZ1JlY29yZBoZLmdhbWVsaWJyYXJ5LlJhdGluZ1Jlc3Vs",
-            "dCIAEkQKCkVkaXRSYXRpbmcSGS5nYW1lbGlicmFyeS5SYXRpbmdSZWNvcmQa",
-            "GS5nYW1lbGlicmFyeS5SYXRpbmdSZXN1bHQiABJGCgxEZWxldGVSYXRpbmcS",
-            "GS5nYW1lbGlicmFyeS5SYXRpbmdSZWNvcmQaGS5nYW1lbGlicmFyeS5SYXRp",
-            "bmdSZXN1bHQiAEIvChNpby5ncnBjLmdhbWVsaWJyYXJ5QhBHYW1lTGlicmFy",
-            "eVByb3RvUAGiAgNHTEJiBnByb3RvMw=="));
+            "ASgJIj4KFFJldmlld3NTZWFyY2hSZXF1ZXN0EhEKCXJldmlld19pZBgBIAEo",
+            "AxITCgtyZXZpZXdfbmFtZRgCIAEoCSJUCgxSZXZpZXdSZWNvcmQSEQoJcmV2",
+            "aWV3X2lkGAEgASgDEgwKBG5hbWUYAiABKAkSEwoLZGVzY3JpcHRpb24YAyAB",
+            "KAkSDgoGUmF0aW5nGAQgASgDImEKDFJldmlld1Jlc3VsdBIpCgZyZXZpZXcY",
+            "ASABKAsyGS5nYW1lbGlicmFyeS5SZXZpZXdSZWNvcmQSDwoHc3VjY2VzcxgC",
+            "IAEoCBIVCg1lcnJvcl9tZXNzYWdlGAMgASgJMoEJCgtHYW1lTGlicmFyeRJL",
+            "CgtTZWFyY2hHYW1lcxIfLmdhbWVsaWJyYXJ5LkdhbWVzU2VhcmNoUmVxdWVz",
+            "dBoXLmdhbWVsaWJyYXJ5LkdhbWVSZWNvcmQiADABEj0KB0FkZEdhbWUSFy5n",
+            "YW1lbGlicmFyeS5HYW1lUmVjb3JkGhcuZ2FtZWxpYnJhcnkuR2FtZVJlc3Vs",
+            "dCIAEj4KCEVkaXRHYW1lEhcuZ2FtZWxpYnJhcnkuR2FtZVJlY29yZBoXLmdh",
+            "bWVsaWJyYXJ5LkdhbWVSZXN1bHQiABJACgpEZWxldGVHYW1lEhcuZ2FtZWxp",
+            "YnJhcnkuR2FtZVJlY29yZBoXLmdhbWVsaWJyYXJ5LkdhbWVSZXN1bHQiABJO",
+            "CgxTZWFyY2hHZW5yZXMSIC5nYW1lbGlicmFyeS5HZW5yZXNTZWFyY2hSZXF1",
+            "ZXN0GhguZ2FtZWxpYnJhcnkuR2VucmVSZWNvcmQiADABEkAKCEFkZEdlbnJl",
+            "EhguZ2FtZWxpYnJhcnkuR2VucmVSZWNvcmQaGC5nYW1lbGlicmFyeS5HZW5y",
+            "ZVJlc3VsdCIAEkEKCUVkaXRHZW5yZRIYLmdhbWVsaWJyYXJ5LkdlbnJlUmVj",
+            "b3JkGhguZ2FtZWxpYnJhcnkuR2VucmVSZXN1bHQiABJDCgtEZWxldGVHZW5y",
+            "ZRIYLmdhbWVsaWJyYXJ5LkdlbnJlUmVjb3JkGhguZ2FtZWxpYnJhcnkuR2Vu",
+            "cmVSZXN1bHQiABJRCg1TZWFyY2hSYXRpbmdzEiEuZ2FtZWxpYnJhcnkuUmF0",
+            "aW5nc1NlYXJjaFJlcXVlc3QaGS5nYW1lbGlicmFyeS5SYXRpbmdSZWNvcmQi",
+            "ADABEkMKCUFkZFJhdGluZxIZLmdhbWVsaWJyYXJ5LlJhdGluZ1JlY29yZBoZ",
+            "LmdhbWVsaWJyYXJ5LlJhdGluZ1Jlc3VsdCIAEkQKCkVkaXRSYXRpbmcSGS5n",
+            "YW1lbGlicmFyeS5SYXRpbmdSZWNvcmQaGS5nYW1lbGlicmFyeS5SYXRpbmdS",
+            "ZXN1bHQiABJGCgxEZWxldGVSYXRpbmcSGS5nYW1lbGlicmFyeS5SYXRpbmdS",
+            "ZWNvcmQaGS5nYW1lbGlicmFyeS5SYXRpbmdSZXN1bHQiABJRCg1TZWFyY2hS",
+            "ZXZpZXdzEiEuZ2FtZWxpYnJhcnkuUmV2aWV3c1NlYXJjaFJlcXVlc3QaGS5n",
+            "YW1lbGlicmFyeS5SZXZpZXdSZWNvcmQiADABEkMKCUFkZFJldmlldxIZLmdh",
+            "bWVsaWJyYXJ5LlJldmlld1JlY29yZBoZLmdhbWVsaWJyYXJ5LlJldmlld1Jl",
+            "c3VsdCIAEkQKCkVkaXRSZXZpZXcSGS5nYW1lbGlicmFyeS5SZXZpZXdSZWNv",
+            "cmQaGS5nYW1lbGlicmFyeS5SZXZpZXdSZXN1bHQiABJGCgxEZWxldGVSZXZp",
+            "ZXcSGS5nYW1lbGlicmFyeS5SZXZpZXdSZWNvcmQaGS5nYW1lbGlicmFyeS5S",
+            "ZXZpZXdSZXN1bHQiAEIvChNpby5ncnBjLmdhbWVsaWJyYXJ5QhBHYW1lTGli",
+            "cmFyeVByb3RvUAGiAgNHTEJiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -72,7 +84,10 @@ namespace Gamelibrary {
             new pbr::GeneratedClrTypeInfo(typeof(global::Gamelibrary.GenreResult), global::Gamelibrary.GenreResult.Parser, new[]{ "Genre", "Success", "ErrorMessage" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Gamelibrary.RatingsSearchRequest), global::Gamelibrary.RatingsSearchRequest.Parser, new[]{ "RatingId", "RatingName" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Gamelibrary.RatingRecord), global::Gamelibrary.RatingRecord.Parser, new[]{ "RatingId", "Name", "Description", "Symbol" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Gamelibrary.RatingResult), global::Gamelibrary.RatingResult.Parser, new[]{ "Rating", "Success", "ErrorMessage" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Gamelibrary.RatingResult), global::Gamelibrary.RatingResult.Parser, new[]{ "Rating", "Success", "ErrorMessage" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Gamelibrary.ReviewsSearchRequest), global::Gamelibrary.ReviewsSearchRequest.Parser, new[]{ "ReviewId", "ReviewName" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Gamelibrary.ReviewRecord), global::Gamelibrary.ReviewRecord.Parser, new[]{ "ReviewId", "Name", "Description", "Rating" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Gamelibrary.ReviewResult), global::Gamelibrary.ReviewResult.Parser, new[]{ "Review", "Success", "ErrorMessage" }, null, null, null)
           }));
     }
     #endregion
@@ -1690,6 +1705,567 @@ namespace Gamelibrary {
               rating_ = new global::Gamelibrary.RatingRecord();
             }
             input.ReadMessage(rating_);
+            break;
+          }
+          case 16: {
+            Success = input.ReadBool();
+            break;
+          }
+          case 26: {
+            ErrorMessage = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class ReviewsSearchRequest : pb::IMessage<ReviewsSearchRequest> {
+    private static readonly pb::MessageParser<ReviewsSearchRequest> _parser = new pb::MessageParser<ReviewsSearchRequest>(() => new ReviewsSearchRequest());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ReviewsSearchRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Gamelibrary.GamelibraryReflection.Descriptor.MessageTypes[9]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ReviewsSearchRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ReviewsSearchRequest(ReviewsSearchRequest other) : this() {
+      reviewId_ = other.reviewId_;
+      reviewName_ = other.reviewName_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ReviewsSearchRequest Clone() {
+      return new ReviewsSearchRequest(this);
+    }
+
+    /// <summary>Field number for the "review_id" field.</summary>
+    public const int ReviewIdFieldNumber = 1;
+    private long reviewId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long ReviewId {
+      get { return reviewId_; }
+      set {
+        reviewId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "review_name" field.</summary>
+    public const int ReviewNameFieldNumber = 2;
+    private string reviewName_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string ReviewName {
+      get { return reviewName_; }
+      set {
+        reviewName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ReviewsSearchRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ReviewsSearchRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (ReviewId != other.ReviewId) return false;
+      if (ReviewName != other.ReviewName) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (ReviewId != 0L) hash ^= ReviewId.GetHashCode();
+      if (ReviewName.Length != 0) hash ^= ReviewName.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (ReviewId != 0L) {
+        output.WriteRawTag(8);
+        output.WriteInt64(ReviewId);
+      }
+      if (ReviewName.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(ReviewName);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (ReviewId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(ReviewId);
+      }
+      if (ReviewName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(ReviewName);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ReviewsSearchRequest other) {
+      if (other == null) {
+        return;
+      }
+      if (other.ReviewId != 0L) {
+        ReviewId = other.ReviewId;
+      }
+      if (other.ReviewName.Length != 0) {
+        ReviewName = other.ReviewName;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            ReviewId = input.ReadInt64();
+            break;
+          }
+          case 18: {
+            ReviewName = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class ReviewRecord : pb::IMessage<ReviewRecord> {
+    private static readonly pb::MessageParser<ReviewRecord> _parser = new pb::MessageParser<ReviewRecord>(() => new ReviewRecord());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ReviewRecord> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Gamelibrary.GamelibraryReflection.Descriptor.MessageTypes[10]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ReviewRecord() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ReviewRecord(ReviewRecord other) : this() {
+      reviewId_ = other.reviewId_;
+      name_ = other.name_;
+      description_ = other.description_;
+      rating_ = other.rating_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ReviewRecord Clone() {
+      return new ReviewRecord(this);
+    }
+
+    /// <summary>Field number for the "review_id" field.</summary>
+    public const int ReviewIdFieldNumber = 1;
+    private long reviewId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long ReviewId {
+      get { return reviewId_; }
+      set {
+        reviewId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "name" field.</summary>
+    public const int NameFieldNumber = 2;
+    private string name_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Name {
+      get { return name_; }
+      set {
+        name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "description" field.</summary>
+    public const int DescriptionFieldNumber = 3;
+    private string description_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Description {
+      get { return description_; }
+      set {
+        description_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "Rating" field.</summary>
+    public const int RatingFieldNumber = 4;
+    private long rating_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long Rating {
+      get { return rating_; }
+      set {
+        rating_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ReviewRecord);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ReviewRecord other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (ReviewId != other.ReviewId) return false;
+      if (Name != other.Name) return false;
+      if (Description != other.Description) return false;
+      if (Rating != other.Rating) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (ReviewId != 0L) hash ^= ReviewId.GetHashCode();
+      if (Name.Length != 0) hash ^= Name.GetHashCode();
+      if (Description.Length != 0) hash ^= Description.GetHashCode();
+      if (Rating != 0L) hash ^= Rating.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (ReviewId != 0L) {
+        output.WriteRawTag(8);
+        output.WriteInt64(ReviewId);
+      }
+      if (Name.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Name);
+      }
+      if (Description.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(Description);
+      }
+      if (Rating != 0L) {
+        output.WriteRawTag(32);
+        output.WriteInt64(Rating);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (ReviewId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(ReviewId);
+      }
+      if (Name.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
+      }
+      if (Description.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Description);
+      }
+      if (Rating != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Rating);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ReviewRecord other) {
+      if (other == null) {
+        return;
+      }
+      if (other.ReviewId != 0L) {
+        ReviewId = other.ReviewId;
+      }
+      if (other.Name.Length != 0) {
+        Name = other.Name;
+      }
+      if (other.Description.Length != 0) {
+        Description = other.Description;
+      }
+      if (other.Rating != 0L) {
+        Rating = other.Rating;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            ReviewId = input.ReadInt64();
+            break;
+          }
+          case 18: {
+            Name = input.ReadString();
+            break;
+          }
+          case 26: {
+            Description = input.ReadString();
+            break;
+          }
+          case 32: {
+            Rating = input.ReadInt64();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class ReviewResult : pb::IMessage<ReviewResult> {
+    private static readonly pb::MessageParser<ReviewResult> _parser = new pb::MessageParser<ReviewResult>(() => new ReviewResult());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ReviewResult> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Gamelibrary.GamelibraryReflection.Descriptor.MessageTypes[11]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ReviewResult() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ReviewResult(ReviewResult other) : this() {
+      Review = other.review_ != null ? other.Review.Clone() : null;
+      success_ = other.success_;
+      errorMessage_ = other.errorMessage_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ReviewResult Clone() {
+      return new ReviewResult(this);
+    }
+
+    /// <summary>Field number for the "review" field.</summary>
+    public const int ReviewFieldNumber = 1;
+    private global::Gamelibrary.ReviewRecord review_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Gamelibrary.ReviewRecord Review {
+      get { return review_; }
+      set {
+        review_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "success" field.</summary>
+    public const int SuccessFieldNumber = 2;
+    private bool success_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Success {
+      get { return success_; }
+      set {
+        success_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "error_message" field.</summary>
+    public const int ErrorMessageFieldNumber = 3;
+    private string errorMessage_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string ErrorMessage {
+      get { return errorMessage_; }
+      set {
+        errorMessage_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ReviewResult);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ReviewResult other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!object.Equals(Review, other.Review)) return false;
+      if (Success != other.Success) return false;
+      if (ErrorMessage != other.ErrorMessage) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (review_ != null) hash ^= Review.GetHashCode();
+      if (Success != false) hash ^= Success.GetHashCode();
+      if (ErrorMessage.Length != 0) hash ^= ErrorMessage.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (review_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(Review);
+      }
+      if (Success != false) {
+        output.WriteRawTag(16);
+        output.WriteBool(Success);
+      }
+      if (ErrorMessage.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(ErrorMessage);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (review_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Review);
+      }
+      if (Success != false) {
+        size += 1 + 1;
+      }
+      if (ErrorMessage.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(ErrorMessage);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ReviewResult other) {
+      if (other == null) {
+        return;
+      }
+      if (other.review_ != null) {
+        if (review_ == null) {
+          review_ = new global::Gamelibrary.ReviewRecord();
+        }
+        Review.MergeFrom(other.Review);
+      }
+      if (other.Success != false) {
+        Success = other.Success;
+      }
+      if (other.ErrorMessage.Length != 0) {
+        ErrorMessage = other.ErrorMessage;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            if (review_ == null) {
+              review_ = new global::Gamelibrary.ReviewRecord();
+            }
+            input.ReadMessage(review_);
             break;
           }
           case 16: {

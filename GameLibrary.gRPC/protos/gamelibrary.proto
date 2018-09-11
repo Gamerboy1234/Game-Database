@@ -62,6 +62,22 @@ service GameLibrary {
 	// Delete a rating record
 	rpc DeleteRating(RatingRecord) returns (RatingResult) {}
 
+	///////////////////////////////////////////////////////////////
+	// Reviews
+	///////////////////////////////////////////////////////////////
+
+	// Obtains a list of reviews that match the request parameters.
+	// Streamed rather than returned at once (e.g. in a response message with a repeated field)
+	rpc SearchReviews(ReviewsSearchRequest) returns (stream ReviewRecord) {}
+
+	// Add a new review record
+	rpc AddReview(ReviewRecord) returns (ReviewResult) {}
+
+	// Edit a review record
+	rpc EditReview(ReviewRecord) returns (ReviewResult) {}
+
+	// Delete a review record
+	rpc DeleteReview(ReviewRecord) returns (ReviewResult) {}
 }
 
 ///////////////////////////////////////////////////////////////
@@ -124,6 +140,28 @@ message RatingRecord {
 
 message RatingResult {
 	RatingRecord rating = 1;
+	bool success = 2;
+	string error_message = 3;
+}
+
+///////////////////////////////////////////////////////////////
+// Reviews
+///////////////////////////////////////////////////////////////
+
+message ReviewsSearchRequest {
+	int64 review_id = 1;
+	string review_name = 2;
+}
+
+message ReviewRecord {
+	int64 review_id = 1;
+	string name = 2;
+	string description = 3;
+	int64 Rating = 4;
+}
+
+message ReviewResult {
+	ReviewRecord review = 1;
 	bool success = 2;
 	string error_message = 3;
 }

@@ -454,6 +454,152 @@ namespace GameLibrary.gRPC.Server
 
         #endregion Rating Methods
 
+        #region Review Methods
+
+        public override async Task SearchReviews(ReviewsSearchRequest request, IServerStreamWriter<ReviewRecord> responseStream, ServerCallContext context)
+        {
+            try
+            {
+                if (request != null)
+                {
+                    var errorMessage = "";
+
+                    var reviews = new ReviewList();
+
+                    if (request.ReviewId > 0)
+                    {
+                        var review = GameLibraryAgent.ModelAssembler.GetReviewById((int)request.ReviewId, ref errorMessage);
+
+                        if (review?.Id > 0)
+                        {
+                            reviews.Add(review);
+                        }
+                    }
+
+                    else if (!string.IsNullOrEmpty(request.ReviewName))
+                    {
+                        var review = GameLibraryAgent.ModelAssembler.GetReviewByName(request.ReviewName, ref errorMessage);
+
+                        if (!string.IsNullOrEmpty(review?.Name))
+                        {
+                            reviews.Add(review);
+                        }
+                    }
+
+                    else // Return all games
+                    {
+                        reviews = GameLibraryAgent.ModelAssembler.GetReviews() ?? new ReviewList();
+                    }
+                    if (reviews?.List?.Count > 0)
+                    {
+                        foreach (var review in reviews.List.Where(review => !string.IsNullOrEmpty(review.Name)))
+                        {
+                            await responseStream.WriteAsync(GrpcReview(review));
+                        }
+                    }
+                }
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+        }
+
+        public override Task<ReviewResult> AddReview(ReviewRecord request, ServerCallContext context)
+        {
+            var result = new ReviewResult();
+
+            try
+            {
+                var errorMessage = "";
+
+                var review = ReviewFromGrpc(request);
+
+                result.Success = GameLibraryAgent.ModelAssembler.AddOrEditReview(review, ref errorMessage);
+
+                result.Review = GrpcReview(review);
+                result.ErrorMessage = errorMessage ?? "";
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+
+            return Task.FromResult(result);
+        }
+
+        public override Task<ReviewResult> EditReview(ReviewRecord request, ServerCallContext context)
+        {
+            var result = new ReviewResult();
+
+            try
+            {
+                var errorMessage = "";
+
+                var review = ReviewFromGrpc(request);
+
+                result.Success = GameLibraryAgent.ModelAssembler.AddOrEditReview(review, ref errorMessage);
+
+                result.Review = GrpcReview(review);
+                result.ErrorMessage = errorMessage ?? "";
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+
+            return Task.FromResult(result);
+        }
+
+        public override Task<ReviewResult> DeleteReview(ReviewRecord request, ServerCallContext context)
+        {
+            var result = new ReviewResult();
+
+            try
+            {
+                var errorMessage = "";
+
+                var review = ReviewFromGrpc(request);
+
+                result.Success = GameLibraryAgent.ModelAssembler.DeleteReview(review.Id, ref errorMessage);
+
+                result.Review = GrpcReview(review);
+                result.ErrorMessage = errorMessage ?? "";
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+
+            return Task.FromResult(result);
+        }
+
+        #endregion Review Methods
+
         #region Private Methods
 
         private static GameRecord GrpcGame(Game game)
@@ -615,6 +761,66 @@ namespace GameLibrary.gRPC.Server
                         ratingRecord.Name ?? "",
                         ratingRecord.Description ?? "",
                         ratingRecord.Symbol ?? "");
+                }
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+
+            return result;
+        }
+
+        private static ReviewRecord GrpcReview(Review review)
+        {
+            var result = new ReviewRecord();
+
+            try
+            {
+                if (review != null)
+                {
+                    result = new ReviewRecord
+                    {
+                        ReviewId = review.Id,
+                        Name = review.Name ?? "",
+                        Description = review.Description ?? "",
+                        Rating = review.Reviewrating
+                    };
+                }
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+
+            return result;
+        }
+
+        private static Review ReviewFromGrpc(ReviewRecord reviewRecord)
+        {
+            var result = new Review();
+
+            try
+            {
+                if (reviewRecord != null)
+                {
+                    result = new Review(
+                        (int)reviewRecord.ReviewId,
+                        reviewRecord.Name ?? "",
+                        reviewRecord.Description ?? "",
+                        reviewRecord.Rating);
                 }
             }
 
