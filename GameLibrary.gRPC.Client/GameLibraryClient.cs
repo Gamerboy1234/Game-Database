@@ -631,6 +631,157 @@ namespace GameLibrary.gRPC.Client
 
         #endregion Review Methods
 
+        #region Platform Methods
+
+        public PlatformList SearchPlatforms(long platformId, string platformName)
+        {
+            var result = new PlatformList();
+
+            try
+            {
+                result = AsyncHelper.RunSync(() => SearchPlatformAsync(platformId, platformName));
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        public bool AddPlatform(Platform platform, ref string errorMessage)
+        {
+            var result = false;
+
+            try
+            {
+                if (_client != null)
+                {
+                    var platformResult = _client.AddPlatform(GrpcPlatform(platform));
+
+                    if (platformResult != null)
+                    {
+                        result = platformResult.Success;
+                        errorMessage = platformResult.ErrorMessage;
+                        platform.Id = (int)(platformResult.Platform?.PlatformId ?? 0);
+                    }
+                }
+
+                else
+                {
+                    errorMessage = "Unable to create gRPC client";
+                }
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        public bool EditPlatform(Platform platform, ref string errorMessage)
+        {
+            var result = false;
+
+            try
+            {
+                if (_client != null)
+                {
+                    var platformResult = _client.EditPlatform(GrpcPlatform(platform));
+
+                    if (platformResult != null)
+                    {
+                        result = platformResult.Success;
+                        errorMessage = platformResult.ErrorMessage;
+                    }
+                }
+
+                else
+                {
+                    errorMessage = "Unable to create gRPC client";
+                }
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        public bool DeletePlatform(long platformeId, ref string errorMessage)
+        {
+            var result = false;
+
+            try
+            {
+                if (_client != null)
+                {
+                    var platformResult = _client.DeletePlatform(GrpcPlatform(new Platform { Id = (int)platformeId }));
+
+                    if (platformResult != null)
+                    {
+                        result = platformResult.Success;
+                        errorMessage = platformResult.ErrorMessage;
+                    }
+                }
+
+                else
+                {
+                    errorMessage = "Unable to create gRPC client";
+                }
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        #endregion Platform Methods
+
         #region Private Methods
 
         private async Task<GameList> SearchGamesAsync(long gameId, string gameName)
@@ -969,6 +1120,94 @@ namespace GameLibrary.gRPC.Client
                         Name = review.Name ?? "",
                         Description = review.Description ?? "",
                         Rating = review.Reviewrating
+                    };
+                }
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+
+            return result;
+        }
+
+        private async Task<PlatformList> SearchPlatformAsync(long platformId, string platformName)
+        {
+            var result = new PlatformList();
+
+            try
+            {
+                var errorMessage = "";
+
+                if (_client != null)
+                {
+                    using (var platformResult = _client.SearchPlatforms(new PlatformsSearchRequest
+                    {
+                        PlatformId = platformId,
+                        PlatformName = platformName ?? ""
+                    }))
+                    {
+                        var responseStream = platformResult.ResponseStream;
+
+                        while (await responseStream.MoveNext())
+                        {
+                            var platformRecord = responseStream.Current;
+
+                            if (!string.IsNullOrEmpty(platformRecord?.Name))
+                            {
+                                result.Add(new Platform(
+                                    (int)platformRecord.PlatformId,
+                                    platformRecord.Name ?? "",
+                                    platformRecord.Maker ?? ""));
+                            }
+                        }
+                    }
+                }
+
+                else
+                {
+                    errorMessage = "Unable to create gRPC client";
+                }
+
+                result.ErrorMessage = errorMessage;
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        private static PlatformRecord GrpcPlatform(Platform platform)
+        {
+            var result = new PlatformRecord();
+
+            try
+            {
+                if (platform != null)
+                {
+                    result = new PlatformRecord
+                    {
+                        PlatformId = platform.Id,
+                        Name = platform.Name ?? "",
+                        Maker = platform.Maker ?? ""
                     };
                 }
             }

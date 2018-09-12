@@ -448,6 +448,107 @@ namespace GameLibrary.gRpc.Client.Test
 
             #endregion ReviewTest
 
+            #region PlatformTest
+
+            // Get all platforms
+
+            var platforms = client.SearchPlatforms(0, "");
+
+            Assert.IsNotNull(platforms);
+            Assert.AreEqual(platforms.List.Count, 0);
+
+
+            // Add a platform
+
+            var platform = new Platform(0, "Qbert", "A silly penguin");
+
+            errorMessage = "";
+            result = client.AddPlatform(platform, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(platform.Id > 0);
+
+
+            // Get the new platform by id.
+
+            platforms = client.SearchPlatforms(platform.Id, "");
+
+            Assert.IsNotNull(platform);
+            Assert.AreEqual(platforms.List.Count, 1);
+
+            var foundPlatform = platforms.List[0];
+
+            Assert.IsNotNull(foundPlatform);
+            Assert.AreEqual(foundPlatform.Id, platform.Id);
+
+
+            // Get the new platfrom by name.
+
+            platforms = client.SearchPlatforms(0, platform.Name);
+
+            Assert.IsNotNull(platforms);
+            Assert.AreEqual(platforms.List.Count, 1);
+
+            foundPlatform = platforms.List[0];
+
+            Assert.IsNotNull(foundPlatform);
+            Assert.AreEqual(foundPlatform.Name, platform.Name);
+
+
+            // Edit a platform
+
+            var editPlatfrom = new Platform(platform.Id, "Bilbo Baggins", "A silly hobbit who finds a ring");
+
+            errorMessage = "";
+            result = client.EditPlatform(editPlatfrom, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(editPlatfrom.Id > 0);
+
+
+            // Get the new platform by name.
+
+            platforms = client.SearchPlatforms(0, editPlatfrom.Name);
+
+            Assert.IsNotNull(platforms);
+            Assert.AreEqual(platforms.List.Count, 1);
+
+            foundPlatform = platforms.List[0];
+
+            Assert.IsNotNull(foundPlatform);
+            Assert.AreEqual(foundPlatform.Name, "Bilbo Baggins");
+            Assert.AreEqual(foundPlatform.Maker, "A silly hobbit who finds a ring");
+
+
+            // Get all platforms
+
+            platforms = client.SearchPlatforms(0, "");
+
+            Assert.IsNotNull(platforms);
+            Assert.AreEqual(platforms.List.Count, 1);
+
+
+            // Delete a platform
+
+            errorMessage = "";
+            result = client.DeletePlatform(foundPlatform.Id, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+
+            // Get all platforms
+
+            platforms = client.SearchPlatforms(0, "");
+
+            Assert.IsNotNull(platforms);
+            Assert.AreEqual(platforms.List.Count, 0);
+
+            #endregion PlatformTest
+
+
 
             // Shutdown the gRPC Web Services server.
             gameLibraryServer.ShutdownAsync().Wait();

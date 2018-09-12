@@ -78,6 +78,24 @@ service GameLibrary {
 
 	// Delete a review record
 	rpc DeleteReview(ReviewRecord) returns (ReviewResult) {}
+
+	///////////////////////////////////////////////////////////////
+	// Platforms
+	///////////////////////////////////////////////////////////////
+
+	// Obtains a list of platforms that match the request parameters.
+	// Streamed rather than returned at once (e.g. in a response message with a repeated field)
+	rpc SearchPlatforms(PlatformsSearchRequest) returns (stream PlatformRecord) {}
+
+	// Add a new platform record
+	rpc AddPlatform(PlatformRecord) returns (PlatformResult) {}
+
+	// Edit a platform record
+	rpc EditPlatform(PlatformRecord) returns (PlatformResult) {}
+
+	// Delete a platform record
+	rpc DeletePlatform(PlatformRecord) returns (PlatformResult) {}
+
 }
 
 ///////////////////////////////////////////////////////////////
@@ -162,6 +180,27 @@ message ReviewRecord {
 
 message ReviewResult {
 	ReviewRecord review = 1;
+	bool success = 2;
+	string error_message = 3;
+}
+
+///////////////////////////////////////////////////////////////
+// Platforms
+///////////////////////////////////////////////////////////////
+
+message PlatformsSearchRequest {
+	int64 platform_id = 1;
+	string platform_name = 2;
+}
+
+message PlatformRecord {
+	int64 platform_id = 1;
+	string name = 2;
+	string maker = 3;
+}
+
+message PlatformResult {
+	PlatformRecord platform = 1;
 	bool success = 2;
 	string error_message = 3;
 }

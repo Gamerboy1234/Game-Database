@@ -600,6 +600,153 @@ namespace GameLibrary.gRPC.Server
 
         #endregion Review Methods
 
+        #region Platform Methods
+
+        public override async Task SearchPlatforms(PlatformsSearchRequest request, IServerStreamWriter<PlatformRecord> responseStream, ServerCallContext context)
+        {
+            try
+            {
+                if (request != null)
+                {
+                    var errorMessage = "";
+
+                    var platforms = new PlatformList();
+
+                    if (request.PlatformId > 0)
+                    {
+                        var platform = GameLibraryAgent.ModelAssembler.GetPlatformById((int)request.PlatformId, ref errorMessage);
+
+                        if (platform?.Id > 0)
+                        {
+                            platforms.Add(platform);
+                        }
+                    }
+
+                    else if (!string.IsNullOrEmpty(request.PlatformName))
+                    {
+                        var platform = GameLibraryAgent.ModelAssembler.GetPlatfomrByName(request.PlatformName, ref errorMessage);
+
+                        if (!string.IsNullOrEmpty(platform?.Name))
+                        {
+                            platforms.Add(platform);
+                        }
+                    }
+
+                    else // Return all games
+                    {
+                        platforms = GameLibraryAgent.ModelAssembler.GetPlatforms() ?? new PlatformList();
+                    }
+
+                    if (platforms?.List?.Count > 0)
+                    {
+                        foreach (var platform in platforms.List.Where(platform => !string.IsNullOrEmpty(platform?.Name)))
+                        {
+                            await responseStream.WriteAsync(GrpcPlatform(platform));
+                        }
+                    }
+                }
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+        }
+
+        public override Task<PlatformResult> AddPlatform(PlatformRecord request, ServerCallContext context)
+        {
+            var result = new PlatformResult();
+
+            try
+            {
+                var errorMessage = "";
+
+                var platform = PlatformFromGrpc(request);
+
+                result.Success = GameLibraryAgent.ModelAssembler.AddOrEditPlatform(platform, ref errorMessage);
+
+                result.Platform = GrpcPlatform(platform);
+                result.ErrorMessage = errorMessage ?? "";
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+
+            return Task.FromResult(result);
+        }
+
+        public override Task<PlatformResult> EditPlatform(PlatformRecord request, ServerCallContext context)
+        {
+            var result = new PlatformResult();
+
+            try
+            {
+                var errorMessage = "";
+
+                var platform = PlatformFromGrpc(request);
+
+                result.Success = GameLibraryAgent.ModelAssembler.AddOrEditPlatform(platform, ref errorMessage);
+
+                result.Platform = GrpcPlatform(platform);
+                result.ErrorMessage = errorMessage ?? "";
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+
+            return Task.FromResult(result);
+        }
+
+        public override Task<PlatformResult> DeletePlatform(PlatformRecord request, ServerCallContext context)
+        {
+            var result = new PlatformResult();
+
+            try
+            {
+                var errorMessage = "";
+
+                var platform = PlatformFromGrpc(request);
+
+                result.Success = GameLibraryAgent.ModelAssembler.DeletePlatform(platform.Id, ref errorMessage);
+
+                result.Platform = GrpcPlatform(platform);
+                result.ErrorMessage = errorMessage ?? "";
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+
+            return Task.FromResult(result);
+        }
+
+        #endregion Platform Methods
+
         #region Private Methods
 
         private static GameRecord GrpcGame(Game game)
@@ -821,6 +968,64 @@ namespace GameLibrary.gRPC.Server
                         reviewRecord.Name ?? "",
                         reviewRecord.Description ?? "",
                         reviewRecord.Rating);
+                }
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+
+            return result;
+        }
+
+        private static PlatformRecord GrpcPlatform(Platform platform)
+        {
+            var result = new PlatformRecord();
+
+            try
+            {
+                if (platform != null)
+                {
+                    result = new PlatformRecord
+                    {
+                        PlatformId = platform.Id,
+                        Name = platform.Name ?? "",
+                        Maker = platform.Maker ?? ""
+                    };
+                }
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+
+            return result;
+        }
+
+        private static Platform PlatformFromGrpc(PlatformRecord platformRecord)
+        {
+            var result = new Platform();
+
+            try
+            {
+                if (platformRecord != null)
+                {
+                    result = new Platform(
+                        (int)platformRecord.PlatformId,
+                        platformRecord.Name ?? "",
+                        platformRecord.Maker ?? "");
                 }
             }
 
