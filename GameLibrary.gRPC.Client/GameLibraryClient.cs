@@ -782,6 +782,157 @@ namespace GameLibrary.gRPC.Client
 
         #endregion Platform Methods
 
+        #region GameGenre Methods
+
+        public GameGenreList SearchGameGenres(long gameGenreId)
+        {
+            var result = new GameGenreList();
+
+            try
+            {
+                result = AsyncHelper.RunSync(() => SearchGameGenresAsync(gameGenreId));
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        public bool AddGameGenre(GameGenre gameGenre, ref string errorMessage)
+        {
+            var result = false;
+
+            try
+            {
+                if (_client != null)
+                {
+                    var gamegenreResult = _client.AddGameGenre(GrpcGameGenre(gameGenre));
+
+                    if (gamegenreResult != null)
+                    {
+                        result = gamegenreResult.Success;
+                        errorMessage = gamegenreResult.ErrorMessage;
+                        gameGenre.Id = (int)(gamegenreResult.Gamegenre?.GamegenreId ?? 0);
+                    }
+                }
+
+                else
+                {
+                    errorMessage = "Unable to create gRPC client";
+                }
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        public bool EditGameGenre(GameGenre gameGenre, ref string errorMessage)
+        {
+            var result = false;
+
+            try
+            {
+                if (_client != null)
+                {
+                    var gamegenreResult = _client.EditGameGenre(GrpcGameGenre(gameGenre));
+
+                    if (gamegenreResult != null)
+                    {
+                        result = gamegenreResult.Success;
+                        errorMessage = gamegenreResult.ErrorMessage;
+                    }
+                }
+
+                else
+                {
+                    errorMessage = "Unable to create gRPC client";
+                }
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        public bool DeleteGameGenre(long gamegenreId, ref string errorMessage)
+        {
+            var result = false;
+
+            try
+            {
+                if (_client != null)
+                {
+                    var gamegenreResult = _client.DeleteGameGenre(GrpcGameGenre(new GameGenre { Id = (int)gamegenreId}));
+
+                    if (gamegenreResult != null)
+                    {
+                        result = gamegenreResult.Success;
+                        errorMessage = gamegenreResult.ErrorMessage;
+                    }
+                }
+
+                else
+                {
+                    errorMessage = "Unable to create gRPC client";
+                }
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        #endregion GameGenre Methods
+
         #region Private Methods
 
         private async Task<GameList> SearchGamesAsync(long gameId, string gameName)
@@ -1208,6 +1359,93 @@ namespace GameLibrary.gRPC.Client
                         PlatformId = platform.Id,
                         Name = platform.Name ?? "",
                         Maker = platform.Maker ?? ""
+                    };
+                }
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+
+            return result;
+        }
+
+        private async Task<GameGenreList> SearchGameGenresAsync(long gamegenreId)
+        {
+            var result = new GameGenreList();
+
+            try
+            {
+                var errorMessage = "";
+
+                if (_client != null)
+                {
+                    using (var gameResult = _client.SearchGameGenres(new GameGenresSearchRequest
+                    {
+                        GamegenreId = gamegenreId,
+                        }))
+                    {
+                        var responseStream = gameResult.ResponseStream;
+
+                        while (await responseStream.MoveNext())
+                        {
+                            var gameGenreRecord = responseStream.Current;
+
+                            if (gameGenreRecord.GamegenreId > 0)
+                            {
+                                result.Add(new GameGenre(
+                                    (int)gameGenreRecord.GamegenreId,
+                                    (int)gameGenreRecord.GameId,
+                                    (int)gameGenreRecord.GenreId));
+                            }
+                        }
+                    }
+                }
+
+                else
+                {
+                    errorMessage = "Unable to create gRPC client";
+                }
+
+                result.ErrorMessage = errorMessage;
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        private static GameGenreRecord GrpcGameGenre(GameGenre gameGenre)
+        {
+            var result = new GameGenreRecord();
+
+            try
+            {
+                if (gameGenre != null)
+                {
+                    result = new GameGenreRecord
+                    {
+                        GamegenreId = gameGenre.Id,
+                        GameId = gameGenre.GameId,
+                        GenreId = gameGenre.GenreId
                     };
                 }
             }

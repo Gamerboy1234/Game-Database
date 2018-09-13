@@ -96,6 +96,23 @@ service GameLibrary {
 	// Delete a platform record
 	rpc DeletePlatform(PlatformRecord) returns (PlatformResult) {}
 
+	///////////////////////////////////////////////////////////////
+	// GameGenres
+	///////////////////////////////////////////////////////////////
+
+	// Obtains a list of games that match the request parameters.
+	// Streamed rather than returned at once (e.g. in a response message with a repeated field)
+	rpc SearchGameGenres(GameGenresSearchRequest) returns (stream GameGenreRecord) {}
+
+	// Add a new gamegenre record
+	rpc AddGameGenre(GameGenreRecord) returns (GameGenreResult) {}
+
+	// Edit a gamegenre record
+	rpc EditGameGenre(GameGenreRecord) returns (GameGenreResult) {}
+
+	// Delete a gamegenre record
+	rpc DeleteGameGenre(GameGenreRecord) returns (GameGenreResult) {}
+
 }
 
 ///////////////////////////////////////////////////////////////
@@ -201,6 +218,27 @@ message PlatformRecord {
 
 message PlatformResult {
 	PlatformRecord platform = 1;
+	bool success = 2;
+	string error_message = 3;
+}
+
+///////////////////////////////////////////////////////////////
+// GameGenres
+///////////////////////////////////////////////////////////////
+
+message GameGenresSearchRequest {
+	int64 gamegenre_id = 1;
+}
+
+message GameGenreRecord {
+	
+	int64 gamegenre_id = 1;
+	int64 game_id = 2;
+	int64 genre_id = 3;
+}
+
+message GameGenreResult {
+	GameGenreRecord gamegenre = 1;
 	bool success = 2;
 	string error_message = 3;
 }

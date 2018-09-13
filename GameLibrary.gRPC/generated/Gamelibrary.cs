@@ -51,41 +51,53 @@ namespace Gamelibrary {
             "AxIMCgRuYW1lGAIgASgJEg0KBW1ha2VyGAMgASgJImcKDlBsYXRmb3JtUmVz",
             "dWx0Ei0KCHBsYXRmb3JtGAEgASgLMhsuZ2FtZWxpYnJhcnkuUGxhdGZvcm1S",
             "ZWNvcmQSDwoHc3VjY2VzcxgCIAEoCBIVCg1lcnJvcl9tZXNzYWdlGAMgASgJ",
-            "Mr8LCgtHYW1lTGlicmFyeRJLCgtTZWFyY2hHYW1lcxIfLmdhbWVsaWJyYXJ5",
-            "LkdhbWVzU2VhcmNoUmVxdWVzdBoXLmdhbWVsaWJyYXJ5LkdhbWVSZWNvcmQi",
-            "ADABEj0KB0FkZEdhbWUSFy5nYW1lbGlicmFyeS5HYW1lUmVjb3JkGhcuZ2Ft",
-            "ZWxpYnJhcnkuR2FtZVJlc3VsdCIAEj4KCEVkaXRHYW1lEhcuZ2FtZWxpYnJh",
-            "cnkuR2FtZVJlY29yZBoXLmdhbWVsaWJyYXJ5LkdhbWVSZXN1bHQiABJACgpE",
-            "ZWxldGVHYW1lEhcuZ2FtZWxpYnJhcnkuR2FtZVJlY29yZBoXLmdhbWVsaWJy",
-            "YXJ5LkdhbWVSZXN1bHQiABJOCgxTZWFyY2hHZW5yZXMSIC5nYW1lbGlicmFy",
-            "eS5HZW5yZXNTZWFyY2hSZXF1ZXN0GhguZ2FtZWxpYnJhcnkuR2VucmVSZWNv",
-            "cmQiADABEkAKCEFkZEdlbnJlEhguZ2FtZWxpYnJhcnkuR2VucmVSZWNvcmQa",
-            "GC5nYW1lbGlicmFyeS5HZW5yZVJlc3VsdCIAEkEKCUVkaXRHZW5yZRIYLmdh",
-            "bWVsaWJyYXJ5LkdlbnJlUmVjb3JkGhguZ2FtZWxpYnJhcnkuR2VucmVSZXN1",
-            "bHQiABJDCgtEZWxldGVHZW5yZRIYLmdhbWVsaWJyYXJ5LkdlbnJlUmVjb3Jk",
-            "GhguZ2FtZWxpYnJhcnkuR2VucmVSZXN1bHQiABJRCg1TZWFyY2hSYXRpbmdz",
-            "EiEuZ2FtZWxpYnJhcnkuUmF0aW5nc1NlYXJjaFJlcXVlc3QaGS5nYW1lbGli",
-            "cmFyeS5SYXRpbmdSZWNvcmQiADABEkMKCUFkZFJhdGluZxIZLmdhbWVsaWJy",
-            "YXJ5LlJhdGluZ1JlY29yZBoZLmdhbWVsaWJyYXJ5LlJhdGluZ1Jlc3VsdCIA",
-            "EkQKCkVkaXRSYXRpbmcSGS5nYW1lbGlicmFyeS5SYXRpbmdSZWNvcmQaGS5n",
-            "YW1lbGlicmFyeS5SYXRpbmdSZXN1bHQiABJGCgxEZWxldGVSYXRpbmcSGS5n",
-            "YW1lbGlicmFyeS5SYXRpbmdSZWNvcmQaGS5nYW1lbGlicmFyeS5SYXRpbmdS",
-            "ZXN1bHQiABJRCg1TZWFyY2hSZXZpZXdzEiEuZ2FtZWxpYnJhcnkuUmV2aWV3",
-            "c1NlYXJjaFJlcXVlc3QaGS5nYW1lbGlicmFyeS5SZXZpZXdSZWNvcmQiADAB",
-            "EkMKCUFkZFJldmlldxIZLmdhbWVsaWJyYXJ5LlJldmlld1JlY29yZBoZLmdh",
-            "bWVsaWJyYXJ5LlJldmlld1Jlc3VsdCIAEkQKCkVkaXRSZXZpZXcSGS5nYW1l",
-            "bGlicmFyeS5SZXZpZXdSZWNvcmQaGS5nYW1lbGlicmFyeS5SZXZpZXdSZXN1",
-            "bHQiABJGCgxEZWxldGVSZXZpZXcSGS5nYW1lbGlicmFyeS5SZXZpZXdSZWNv",
-            "cmQaGS5nYW1lbGlicmFyeS5SZXZpZXdSZXN1bHQiABJXCg9TZWFyY2hQbGF0",
-            "Zm9ybXMSIy5nYW1lbGlicmFyeS5QbGF0Zm9ybXNTZWFyY2hSZXF1ZXN0Ghsu",
-            "Z2FtZWxpYnJhcnkuUGxhdGZvcm1SZWNvcmQiADABEkkKC0FkZFBsYXRmb3Jt",
-            "EhsuZ2FtZWxpYnJhcnkuUGxhdGZvcm1SZWNvcmQaGy5nYW1lbGlicmFyeS5Q",
-            "bGF0Zm9ybVJlc3VsdCIAEkoKDEVkaXRQbGF0Zm9ybRIbLmdhbWVsaWJyYXJ5",
-            "LlBsYXRmb3JtUmVjb3JkGhsuZ2FtZWxpYnJhcnkuUGxhdGZvcm1SZXN1bHQi",
-            "ABJMCg5EZWxldGVQbGF0Zm9ybRIbLmdhbWVsaWJyYXJ5LlBsYXRmb3JtUmVj",
-            "b3JkGhsuZ2FtZWxpYnJhcnkuUGxhdGZvcm1SZXN1bHQiAEIvChNpby5ncnBj",
-            "LmdhbWVsaWJyYXJ5QhBHYW1lTGlicmFyeVByb3RvUAGiAgNHTEJiBnByb3Rv",
-            "Mw=="));
+            "Ii8KF0dhbWVHZW5yZXNTZWFyY2hSZXF1ZXN0EhQKDGdhbWVnZW5yZV9pZBgB",
+            "IAEoAyJKCg9HYW1lR2VucmVSZWNvcmQSFAoMZ2FtZWdlbnJlX2lkGAEgASgD",
+            "Eg8KB2dhbWVfaWQYAiABKAMSEAoIZ2VucmVfaWQYAyABKAMiagoPR2FtZUdl",
+            "bnJlUmVzdWx0Ei8KCWdhbWVnZW5yZRgBIAEoCzIcLmdhbWVsaWJyYXJ5Lkdh",
+            "bWVHZW5yZVJlY29yZBIPCgdzdWNjZXNzGAIgASgIEhUKDWVycm9yX21lc3Nh",
+            "Z2UYAyABKAkyiQ4KC0dhbWVMaWJyYXJ5EksKC1NlYXJjaEdhbWVzEh8uZ2Ft",
+            "ZWxpYnJhcnkuR2FtZXNTZWFyY2hSZXF1ZXN0GhcuZ2FtZWxpYnJhcnkuR2Ft",
+            "ZVJlY29yZCIAMAESPQoHQWRkR2FtZRIXLmdhbWVsaWJyYXJ5LkdhbWVSZWNv",
+            "cmQaFy5nYW1lbGlicmFyeS5HYW1lUmVzdWx0IgASPgoIRWRpdEdhbWUSFy5n",
+            "YW1lbGlicmFyeS5HYW1lUmVjb3JkGhcuZ2FtZWxpYnJhcnkuR2FtZVJlc3Vs",
+            "dCIAEkAKCkRlbGV0ZUdhbWUSFy5nYW1lbGlicmFyeS5HYW1lUmVjb3JkGhcu",
+            "Z2FtZWxpYnJhcnkuR2FtZVJlc3VsdCIAEk4KDFNlYXJjaEdlbnJlcxIgLmdh",
+            "bWVsaWJyYXJ5LkdlbnJlc1NlYXJjaFJlcXVlc3QaGC5nYW1lbGlicmFyeS5H",
+            "ZW5yZVJlY29yZCIAMAESQAoIQWRkR2VucmUSGC5nYW1lbGlicmFyeS5HZW5y",
+            "ZVJlY29yZBoYLmdhbWVsaWJyYXJ5LkdlbnJlUmVzdWx0IgASQQoJRWRpdEdl",
+            "bnJlEhguZ2FtZWxpYnJhcnkuR2VucmVSZWNvcmQaGC5nYW1lbGlicmFyeS5H",
+            "ZW5yZVJlc3VsdCIAEkMKC0RlbGV0ZUdlbnJlEhguZ2FtZWxpYnJhcnkuR2Vu",
+            "cmVSZWNvcmQaGC5nYW1lbGlicmFyeS5HZW5yZVJlc3VsdCIAElEKDVNlYXJj",
+            "aFJhdGluZ3MSIS5nYW1lbGlicmFyeS5SYXRpbmdzU2VhcmNoUmVxdWVzdBoZ",
+            "LmdhbWVsaWJyYXJ5LlJhdGluZ1JlY29yZCIAMAESQwoJQWRkUmF0aW5nEhku",
+            "Z2FtZWxpYnJhcnkuUmF0aW5nUmVjb3JkGhkuZ2FtZWxpYnJhcnkuUmF0aW5n",
+            "UmVzdWx0IgASRAoKRWRpdFJhdGluZxIZLmdhbWVsaWJyYXJ5LlJhdGluZ1Jl",
+            "Y29yZBoZLmdhbWVsaWJyYXJ5LlJhdGluZ1Jlc3VsdCIAEkYKDERlbGV0ZVJh",
+            "dGluZxIZLmdhbWVsaWJyYXJ5LlJhdGluZ1JlY29yZBoZLmdhbWVsaWJyYXJ5",
+            "LlJhdGluZ1Jlc3VsdCIAElEKDVNlYXJjaFJldmlld3MSIS5nYW1lbGlicmFy",
+            "eS5SZXZpZXdzU2VhcmNoUmVxdWVzdBoZLmdhbWVsaWJyYXJ5LlJldmlld1Jl",
+            "Y29yZCIAMAESQwoJQWRkUmV2aWV3EhkuZ2FtZWxpYnJhcnkuUmV2aWV3UmVj",
+            "b3JkGhkuZ2FtZWxpYnJhcnkuUmV2aWV3UmVzdWx0IgASRAoKRWRpdFJldmll",
+            "dxIZLmdhbWVsaWJyYXJ5LlJldmlld1JlY29yZBoZLmdhbWVsaWJyYXJ5LlJl",
+            "dmlld1Jlc3VsdCIAEkYKDERlbGV0ZVJldmlldxIZLmdhbWVsaWJyYXJ5LlJl",
+            "dmlld1JlY29yZBoZLmdhbWVsaWJyYXJ5LlJldmlld1Jlc3VsdCIAElcKD1Nl",
+            "YXJjaFBsYXRmb3JtcxIjLmdhbWVsaWJyYXJ5LlBsYXRmb3Jtc1NlYXJjaFJl",
+            "cXVlc3QaGy5nYW1lbGlicmFyeS5QbGF0Zm9ybVJlY29yZCIAMAESSQoLQWRk",
+            "UGxhdGZvcm0SGy5nYW1lbGlicmFyeS5QbGF0Zm9ybVJlY29yZBobLmdhbWVs",
+            "aWJyYXJ5LlBsYXRmb3JtUmVzdWx0IgASSgoMRWRpdFBsYXRmb3JtEhsuZ2Ft",
+            "ZWxpYnJhcnkuUGxhdGZvcm1SZWNvcmQaGy5nYW1lbGlicmFyeS5QbGF0Zm9y",
+            "bVJlc3VsdCIAEkwKDkRlbGV0ZVBsYXRmb3JtEhsuZ2FtZWxpYnJhcnkuUGxh",
+            "dGZvcm1SZWNvcmQaGy5nYW1lbGlicmFyeS5QbGF0Zm9ybVJlc3VsdCIAEloK",
+            "EFNlYXJjaEdhbWVHZW5yZXMSJC5nYW1lbGlicmFyeS5HYW1lR2VucmVzU2Vh",
+            "cmNoUmVxdWVzdBocLmdhbWVsaWJyYXJ5LkdhbWVHZW5yZVJlY29yZCIAMAES",
+            "TAoMQWRkR2FtZUdlbnJlEhwuZ2FtZWxpYnJhcnkuR2FtZUdlbnJlUmVjb3Jk",
+            "GhwuZ2FtZWxpYnJhcnkuR2FtZUdlbnJlUmVzdWx0IgASTQoNRWRpdEdhbWVH",
+            "ZW5yZRIcLmdhbWVsaWJyYXJ5LkdhbWVHZW5yZVJlY29yZBocLmdhbWVsaWJy",
+            "YXJ5LkdhbWVHZW5yZVJlc3VsdCIAEk8KD0RlbGV0ZUdhbWVHZW5yZRIcLmdh",
+            "bWVsaWJyYXJ5LkdhbWVHZW5yZVJlY29yZBocLmdhbWVsaWJyYXJ5LkdhbWVH",
+            "ZW5yZVJlc3VsdCIAQi8KE2lvLmdycGMuZ2FtZWxpYnJhcnlCEEdhbWVMaWJy",
+            "YXJ5UHJvdG9QAaICA0dMQmIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -103,7 +115,10 @@ namespace Gamelibrary {
             new pbr::GeneratedClrTypeInfo(typeof(global::Gamelibrary.ReviewResult), global::Gamelibrary.ReviewResult.Parser, new[]{ "Review", "Success", "ErrorMessage" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Gamelibrary.PlatformsSearchRequest), global::Gamelibrary.PlatformsSearchRequest.Parser, new[]{ "PlatformId", "PlatformName" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Gamelibrary.PlatformRecord), global::Gamelibrary.PlatformRecord.Parser, new[]{ "PlatformId", "Name", "Maker" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Gamelibrary.PlatformResult), global::Gamelibrary.PlatformResult.Parser, new[]{ "Platform", "Success", "ErrorMessage" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Gamelibrary.PlatformResult), global::Gamelibrary.PlatformResult.Parser, new[]{ "Platform", "Success", "ErrorMessage" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Gamelibrary.GameGenresSearchRequest), global::Gamelibrary.GameGenresSearchRequest.Parser, new[]{ "GamegenreId" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Gamelibrary.GameGenreRecord), global::Gamelibrary.GameGenreRecord.Parser, new[]{ "GamegenreId", "GameId", "GenreId" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Gamelibrary.GameGenreResult), global::Gamelibrary.GameGenreResult.Parser, new[]{ "Gamegenre", "Success", "ErrorMessage" }, null, null, null)
           }));
     }
     #endregion
@@ -2815,6 +2830,511 @@ namespace Gamelibrary {
               platform_ = new global::Gamelibrary.PlatformRecord();
             }
             input.ReadMessage(platform_);
+            break;
+          }
+          case 16: {
+            Success = input.ReadBool();
+            break;
+          }
+          case 26: {
+            ErrorMessage = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class GameGenresSearchRequest : pb::IMessage<GameGenresSearchRequest> {
+    private static readonly pb::MessageParser<GameGenresSearchRequest> _parser = new pb::MessageParser<GameGenresSearchRequest>(() => new GameGenresSearchRequest());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<GameGenresSearchRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Gamelibrary.GamelibraryReflection.Descriptor.MessageTypes[15]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GameGenresSearchRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GameGenresSearchRequest(GameGenresSearchRequest other) : this() {
+      gamegenreId_ = other.gamegenreId_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GameGenresSearchRequest Clone() {
+      return new GameGenresSearchRequest(this);
+    }
+
+    /// <summary>Field number for the "gamegenre_id" field.</summary>
+    public const int GamegenreIdFieldNumber = 1;
+    private long gamegenreId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long GamegenreId {
+      get { return gamegenreId_; }
+      set {
+        gamegenreId_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as GameGenresSearchRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(GameGenresSearchRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (GamegenreId != other.GamegenreId) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (GamegenreId != 0L) hash ^= GamegenreId.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (GamegenreId != 0L) {
+        output.WriteRawTag(8);
+        output.WriteInt64(GamegenreId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (GamegenreId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(GamegenreId);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(GameGenresSearchRequest other) {
+      if (other == null) {
+        return;
+      }
+      if (other.GamegenreId != 0L) {
+        GamegenreId = other.GamegenreId;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            GamegenreId = input.ReadInt64();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class GameGenreRecord : pb::IMessage<GameGenreRecord> {
+    private static readonly pb::MessageParser<GameGenreRecord> _parser = new pb::MessageParser<GameGenreRecord>(() => new GameGenreRecord());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<GameGenreRecord> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Gamelibrary.GamelibraryReflection.Descriptor.MessageTypes[16]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GameGenreRecord() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GameGenreRecord(GameGenreRecord other) : this() {
+      gamegenreId_ = other.gamegenreId_;
+      gameId_ = other.gameId_;
+      genreId_ = other.genreId_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GameGenreRecord Clone() {
+      return new GameGenreRecord(this);
+    }
+
+    /// <summary>Field number for the "gamegenre_id" field.</summary>
+    public const int GamegenreIdFieldNumber = 1;
+    private long gamegenreId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long GamegenreId {
+      get { return gamegenreId_; }
+      set {
+        gamegenreId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "game_id" field.</summary>
+    public const int GameIdFieldNumber = 2;
+    private long gameId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long GameId {
+      get { return gameId_; }
+      set {
+        gameId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "genre_id" field.</summary>
+    public const int GenreIdFieldNumber = 3;
+    private long genreId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long GenreId {
+      get { return genreId_; }
+      set {
+        genreId_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as GameGenreRecord);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(GameGenreRecord other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (GamegenreId != other.GamegenreId) return false;
+      if (GameId != other.GameId) return false;
+      if (GenreId != other.GenreId) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (GamegenreId != 0L) hash ^= GamegenreId.GetHashCode();
+      if (GameId != 0L) hash ^= GameId.GetHashCode();
+      if (GenreId != 0L) hash ^= GenreId.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (GamegenreId != 0L) {
+        output.WriteRawTag(8);
+        output.WriteInt64(GamegenreId);
+      }
+      if (GameId != 0L) {
+        output.WriteRawTag(16);
+        output.WriteInt64(GameId);
+      }
+      if (GenreId != 0L) {
+        output.WriteRawTag(24);
+        output.WriteInt64(GenreId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (GamegenreId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(GamegenreId);
+      }
+      if (GameId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(GameId);
+      }
+      if (GenreId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(GenreId);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(GameGenreRecord other) {
+      if (other == null) {
+        return;
+      }
+      if (other.GamegenreId != 0L) {
+        GamegenreId = other.GamegenreId;
+      }
+      if (other.GameId != 0L) {
+        GameId = other.GameId;
+      }
+      if (other.GenreId != 0L) {
+        GenreId = other.GenreId;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            GamegenreId = input.ReadInt64();
+            break;
+          }
+          case 16: {
+            GameId = input.ReadInt64();
+            break;
+          }
+          case 24: {
+            GenreId = input.ReadInt64();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class GameGenreResult : pb::IMessage<GameGenreResult> {
+    private static readonly pb::MessageParser<GameGenreResult> _parser = new pb::MessageParser<GameGenreResult>(() => new GameGenreResult());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<GameGenreResult> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Gamelibrary.GamelibraryReflection.Descriptor.MessageTypes[17]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GameGenreResult() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GameGenreResult(GameGenreResult other) : this() {
+      Gamegenre = other.gamegenre_ != null ? other.Gamegenre.Clone() : null;
+      success_ = other.success_;
+      errorMessage_ = other.errorMessage_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GameGenreResult Clone() {
+      return new GameGenreResult(this);
+    }
+
+    /// <summary>Field number for the "gamegenre" field.</summary>
+    public const int GamegenreFieldNumber = 1;
+    private global::Gamelibrary.GameGenreRecord gamegenre_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Gamelibrary.GameGenreRecord Gamegenre {
+      get { return gamegenre_; }
+      set {
+        gamegenre_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "success" field.</summary>
+    public const int SuccessFieldNumber = 2;
+    private bool success_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Success {
+      get { return success_; }
+      set {
+        success_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "error_message" field.</summary>
+    public const int ErrorMessageFieldNumber = 3;
+    private string errorMessage_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string ErrorMessage {
+      get { return errorMessage_; }
+      set {
+        errorMessage_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as GameGenreResult);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(GameGenreResult other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!object.Equals(Gamegenre, other.Gamegenre)) return false;
+      if (Success != other.Success) return false;
+      if (ErrorMessage != other.ErrorMessage) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (gamegenre_ != null) hash ^= Gamegenre.GetHashCode();
+      if (Success != false) hash ^= Success.GetHashCode();
+      if (ErrorMessage.Length != 0) hash ^= ErrorMessage.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (gamegenre_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(Gamegenre);
+      }
+      if (Success != false) {
+        output.WriteRawTag(16);
+        output.WriteBool(Success);
+      }
+      if (ErrorMessage.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(ErrorMessage);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (gamegenre_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Gamegenre);
+      }
+      if (Success != false) {
+        size += 1 + 1;
+      }
+      if (ErrorMessage.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(ErrorMessage);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(GameGenreResult other) {
+      if (other == null) {
+        return;
+      }
+      if (other.gamegenre_ != null) {
+        if (gamegenre_ == null) {
+          gamegenre_ = new global::Gamelibrary.GameGenreRecord();
+        }
+        Gamegenre.MergeFrom(other.Gamegenre);
+      }
+      if (other.Success != false) {
+        Success = other.Success;
+      }
+      if (other.ErrorMessage.Length != 0) {
+        ErrorMessage = other.ErrorMessage;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            if (gamegenre_ == null) {
+              gamegenre_ = new global::Gamelibrary.GameGenreRecord();
+            }
+            input.ReadMessage(gamegenre_);
             break;
           }
           case 16: {

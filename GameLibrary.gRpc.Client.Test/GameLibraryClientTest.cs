@@ -548,6 +548,154 @@ namespace GameLibrary.gRpc.Client.Test
 
             #endregion PlatformTest
 
+            #region GameGenreTest
+
+            // Get all GameGenres
+
+            var gameGenres = client.SearchGameGenres(0);
+
+            Assert.IsNotNull(gameGenres);
+            Assert.AreEqual(gameGenres.List.Count, 0);
+
+
+            // Add a game
+
+             game = new Game(0, "Qbert", "A silly penguin");
+
+             errorMessage = "";
+             result = client.AddGame(game, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(game.Id > 0);
+
+            // Add a edited game 
+
+             var editedgame = new Game(0, "Bob", "A silly duck");
+
+            errorMessage = "";
+            result = client.AddGame(editedgame, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(editedgame.Id > 0);
+
+            // Add a genre
+
+            genre = new Genre(0, "Qbert", "A silly penguin");
+
+            errorMessage = "";
+            result = client.AddGenre(genre, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(genre.Id > 0);
+
+            // Add a edited genre
+
+            var editedgenre = new Genre(0, "joe", "A silly hobo");
+
+            errorMessage = "";
+            result = client.AddGenre(editedgenre, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(editedgenre.Id > 0);
+
+            // Add a GameGenre
+
+            var gameGenre = new GameGenre(0, game.Id, genre.Id);
+
+            errorMessage = "";
+            result = client.AddGameGenre(gameGenre, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(gameGenre.Id > 0);
+
+
+            // Get the GameGenre by id.
+
+            
+            gameGenres = client.SearchGameGenres(gameGenre.Id);
+
+            Assert.IsNotNull(gameGenre);
+            Assert.AreEqual(gameGenres.List.Count, 1);
+
+            var foundgameGenre = gameGenres.List[0];
+
+            Assert.IsNotNull(foundgameGenre);
+            Assert.AreEqual(foundgameGenre.Id, gameGenre.Id);
+            
+            // Edit a GameGenre
+
+            var editgamegenre = new GameGenre(gameGenre.Id, editedgame.Id, editedgenre.Id);
+
+            errorMessage = "";
+            result = client.EditGameGenre(editgamegenre, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(editPlatfrom.Id > 0);
+
+            // Get all GameGenres
+
+            gameGenres = client.SearchGameGenres(0);
+
+            Assert.IsNotNull(gameGenres);
+            Assert.AreEqual(gameGenres.List.Count, 1);
+
+
+            // Delete a GameGenre
+
+            errorMessage = "";
+            result = client.DeleteGameGenre(foundgameGenre.Id, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+            // Delete a game
+
+            errorMessage = "";
+            result = client.DeleteGame(game.Id, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+            // Delete edited game
+
+            errorMessage = "";
+            result = client.DeleteGame(editedgame.Id, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+            // Delete a genre
+
+            errorMessage = "";
+            result = client.DeleteGenre(genre.Id, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+            // Delete edited genre
+
+            errorMessage = "";
+            result = client.DeleteGenre(editedgenre.Id, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+
+            // Get all Game Genres
+
+            gameGenres = client.SearchGameGenres(0);
+
+            Assert.IsNotNull(gameGenres);
+            Assert.AreEqual(gameGenres.List.Count, 0);
+
+            #endregion PlatformTest
+
 
 
             // Shutdown the gRPC Web Services server.
