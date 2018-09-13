@@ -33,6 +33,9 @@ namespace Gamelibrary {
     static readonly grpc::Marshaller<global::Gamelibrary.GameGenresSearchRequest> __Marshaller_gamelibrary_GameGenresSearchRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gamelibrary.GameGenresSearchRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Gamelibrary.GameGenreRecord> __Marshaller_gamelibrary_GameGenreRecord = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gamelibrary.GameGenreRecord.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Gamelibrary.GameGenreResult> __Marshaller_gamelibrary_GameGenreResult = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gamelibrary.GameGenreResult.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Gamelibrary.GamePlatformsSearchRequest> __Marshaller_gamelibrary_GamePlatformsSearchRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gamelibrary.GamePlatformsSearchRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Gamelibrary.GamePlatformRecord> __Marshaller_gamelibrary_GamePlatformRecord = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gamelibrary.GamePlatformRecord.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Gamelibrary.GamePlatformResult> __Marshaller_gamelibrary_GamePlatformResult = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gamelibrary.GamePlatformResult.Parser.ParseFrom);
 
     static readonly grpc::Method<global::Gamelibrary.GamesSearchRequest, global::Gamelibrary.GameRecord> __Method_SearchGames = new grpc::Method<global::Gamelibrary.GamesSearchRequest, global::Gamelibrary.GameRecord>(
         grpc::MethodType.ServerStreaming,
@@ -201,6 +204,34 @@ namespace Gamelibrary {
         "DeleteGameGenre",
         __Marshaller_gamelibrary_GameGenreRecord,
         __Marshaller_gamelibrary_GameGenreResult);
+
+    static readonly grpc::Method<global::Gamelibrary.GamePlatformsSearchRequest, global::Gamelibrary.GamePlatformRecord> __Method_SearchGamePlatforms = new grpc::Method<global::Gamelibrary.GamePlatformsSearchRequest, global::Gamelibrary.GamePlatformRecord>(
+        grpc::MethodType.ServerStreaming,
+        __ServiceName,
+        "SearchGamePlatforms",
+        __Marshaller_gamelibrary_GamePlatformsSearchRequest,
+        __Marshaller_gamelibrary_GamePlatformRecord);
+
+    static readonly grpc::Method<global::Gamelibrary.GamePlatformRecord, global::Gamelibrary.GamePlatformResult> __Method_AddGamePlatform = new grpc::Method<global::Gamelibrary.GamePlatformRecord, global::Gamelibrary.GamePlatformResult>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "AddGamePlatform",
+        __Marshaller_gamelibrary_GamePlatformRecord,
+        __Marshaller_gamelibrary_GamePlatformResult);
+
+    static readonly grpc::Method<global::Gamelibrary.GamePlatformRecord, global::Gamelibrary.GamePlatformResult> __Method_EditGamePlatform = new grpc::Method<global::Gamelibrary.GamePlatformRecord, global::Gamelibrary.GamePlatformResult>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "EditGamePlatform",
+        __Marshaller_gamelibrary_GamePlatformRecord,
+        __Marshaller_gamelibrary_GamePlatformResult);
+
+    static readonly grpc::Method<global::Gamelibrary.GamePlatformRecord, global::Gamelibrary.GamePlatformResult> __Method_DeleteGamePlatform = new grpc::Method<global::Gamelibrary.GamePlatformRecord, global::Gamelibrary.GamePlatformResult>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "DeleteGamePlatform",
+        __Marshaller_gamelibrary_GamePlatformRecord,
+        __Marshaller_gamelibrary_GamePlatformResult);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -483,6 +514,52 @@ namespace Gamelibrary {
       /// <param name="context">The context of the server-side call handler being invoked.</param>
       /// <returns>The response to send back to the client (wrapped by a task).</returns>
       public virtual global::System.Threading.Tasks.Task<global::Gamelibrary.GameGenreResult> DeleteGameGenre(global::Gamelibrary.GameGenreRecord request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      /// <summary>
+      /// Obtains a list of gameplatforms that match the request parameters.
+      /// Streamed rather than returned at once (e.g. in a response message with a repeated field)
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="responseStream">Used for sending responses back to the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>A task indicating completion of the handler.</returns>
+      public virtual global::System.Threading.Tasks.Task SearchGamePlatforms(global::Gamelibrary.GamePlatformsSearchRequest request, grpc::IServerStreamWriter<global::Gamelibrary.GamePlatformRecord> responseStream, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      /// <summary>
+      /// Add a new gameplatform record
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      public virtual global::System.Threading.Tasks.Task<global::Gamelibrary.GamePlatformResult> AddGamePlatform(global::Gamelibrary.GamePlatformRecord request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      /// <summary>
+      /// Edit a gameplatform record
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      public virtual global::System.Threading.Tasks.Task<global::Gamelibrary.GamePlatformResult> EditGamePlatform(global::Gamelibrary.GamePlatformRecord request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      /// <summary>
+      /// Delete a gameplatform record
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      public virtual global::System.Threading.Tasks.Task<global::Gamelibrary.GamePlatformResult> DeleteGamePlatform(global::Gamelibrary.GamePlatformRecord request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -1448,6 +1525,162 @@ namespace Gamelibrary {
       {
         return CallInvoker.AsyncUnaryCall(__Method_DeleteGameGenre, null, options, request);
       }
+      /// <summary>
+      /// Obtains a list of gameplatforms that match the request parameters.
+      /// Streamed rather than returned at once (e.g. in a response message with a repeated field)
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      public virtual grpc::AsyncServerStreamingCall<global::Gamelibrary.GamePlatformRecord> SearchGamePlatforms(global::Gamelibrary.GamePlatformsSearchRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return SearchGamePlatforms(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Obtains a list of gameplatforms that match the request parameters.
+      /// Streamed rather than returned at once (e.g. in a response message with a repeated field)
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      public virtual grpc::AsyncServerStreamingCall<global::Gamelibrary.GamePlatformRecord> SearchGamePlatforms(global::Gamelibrary.GamePlatformsSearchRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncServerStreamingCall(__Method_SearchGamePlatforms, null, options, request);
+      }
+      /// <summary>
+      /// Add a new gameplatform record
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
+      public virtual global::Gamelibrary.GamePlatformResult AddGamePlatform(global::Gamelibrary.GamePlatformRecord request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return AddGamePlatform(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Add a new gameplatform record
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
+      public virtual global::Gamelibrary.GamePlatformResult AddGamePlatform(global::Gamelibrary.GamePlatformRecord request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_AddGamePlatform, null, options, request);
+      }
+      /// <summary>
+      /// Add a new gameplatform record
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      public virtual grpc::AsyncUnaryCall<global::Gamelibrary.GamePlatformResult> AddGamePlatformAsync(global::Gamelibrary.GamePlatformRecord request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return AddGamePlatformAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Add a new gameplatform record
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      public virtual grpc::AsyncUnaryCall<global::Gamelibrary.GamePlatformResult> AddGamePlatformAsync(global::Gamelibrary.GamePlatformRecord request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_AddGamePlatform, null, options, request);
+      }
+      /// <summary>
+      /// Edit a gameplatform record
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
+      public virtual global::Gamelibrary.GamePlatformResult EditGamePlatform(global::Gamelibrary.GamePlatformRecord request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return EditGamePlatform(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Edit a gameplatform record
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
+      public virtual global::Gamelibrary.GamePlatformResult EditGamePlatform(global::Gamelibrary.GamePlatformRecord request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_EditGamePlatform, null, options, request);
+      }
+      /// <summary>
+      /// Edit a gameplatform record
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      public virtual grpc::AsyncUnaryCall<global::Gamelibrary.GamePlatformResult> EditGamePlatformAsync(global::Gamelibrary.GamePlatformRecord request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return EditGamePlatformAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Edit a gameplatform record
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      public virtual grpc::AsyncUnaryCall<global::Gamelibrary.GamePlatformResult> EditGamePlatformAsync(global::Gamelibrary.GamePlatformRecord request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_EditGamePlatform, null, options, request);
+      }
+      /// <summary>
+      /// Delete a gameplatform record
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
+      public virtual global::Gamelibrary.GamePlatformResult DeleteGamePlatform(global::Gamelibrary.GamePlatformRecord request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return DeleteGamePlatform(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Delete a gameplatform record
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
+      public virtual global::Gamelibrary.GamePlatformResult DeleteGamePlatform(global::Gamelibrary.GamePlatformRecord request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_DeleteGamePlatform, null, options, request);
+      }
+      /// <summary>
+      /// Delete a gameplatform record
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      public virtual grpc::AsyncUnaryCall<global::Gamelibrary.GamePlatformResult> DeleteGamePlatformAsync(global::Gamelibrary.GamePlatformRecord request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return DeleteGamePlatformAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Delete a gameplatform record
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      public virtual grpc::AsyncUnaryCall<global::Gamelibrary.GamePlatformResult> DeleteGamePlatformAsync(global::Gamelibrary.GamePlatformRecord request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_DeleteGamePlatform, null, options, request);
+      }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override GameLibraryClient NewInstance(ClientBaseConfiguration configuration)
       {
@@ -1483,7 +1716,11 @@ namespace Gamelibrary {
           .AddMethod(__Method_SearchGameGenres, serviceImpl.SearchGameGenres)
           .AddMethod(__Method_AddGameGenre, serviceImpl.AddGameGenre)
           .AddMethod(__Method_EditGameGenre, serviceImpl.EditGameGenre)
-          .AddMethod(__Method_DeleteGameGenre, serviceImpl.DeleteGameGenre).Build();
+          .AddMethod(__Method_DeleteGameGenre, serviceImpl.DeleteGameGenre)
+          .AddMethod(__Method_SearchGamePlatforms, serviceImpl.SearchGamePlatforms)
+          .AddMethod(__Method_AddGamePlatform, serviceImpl.AddGamePlatform)
+          .AddMethod(__Method_EditGamePlatform, serviceImpl.EditGamePlatform)
+          .AddMethod(__Method_DeleteGamePlatform, serviceImpl.DeleteGamePlatform).Build();
     }
 
   }

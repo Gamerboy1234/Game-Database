@@ -884,6 +884,143 @@ namespace GameLibrary.gRPC.Server
 
         #endregion GameGenre Methods
 
+        #region GamePlatform Methods
+
+        public override async Task SearchGamePlatforms(GamePlatformsSearchRequest request, IServerStreamWriter<GamePlatformRecord> responseStream, ServerCallContext context)
+        {
+            try
+            {
+                if (request != null)
+                {
+                    var errorMessage = "";
+
+                    var gamePlatforms = new GamePlatformList();
+
+                    if (request.GameplatformId > 0)
+                    {
+                        var gamePlatform = GameLibraryAgent.ModelAssembler.GetGamePlatformById((int)request.GameplatformId, ref errorMessage);
+
+                        if (gamePlatform?.Id > 0)
+                        {
+                            gamePlatforms.Add(gamePlatform);
+                        }
+                    }
+
+                    else // Return all gamegenres
+                    {
+                        gamePlatforms = GameLibraryAgent.ModelAssembler.GetGamePlatforms() ?? new GamePlatformList();
+                    }
+
+                    if (gamePlatforms?.List?.Count > 0)
+                    {
+                        foreach (var gamePlatform in gamePlatforms.List.Where(gamePlatform => gamePlatform?.Id > 0))
+                        {
+                            await responseStream.WriteAsync(GrpcGamePlatform(gamePlatform));
+                        }
+                    }
+                }
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+        }
+
+        public override Task<GamePlatformResult> AddGamePlatform(GamePlatformRecord request, ServerCallContext context)
+        {
+            var result = new GamePlatformResult();
+
+            try
+            {
+                var errorMessage = "";
+
+                var gamePlatform = GamePlatformFromGrpc(request);
+
+                result.Success = GameLibraryAgent.ModelAssembler.AddOrEditGamePlatform(gamePlatform, ref errorMessage);
+
+                result.Gameplatform = GrpcGamePlatform(gamePlatform);
+                result.ErrorMessage = errorMessage ?? "";
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+
+            return Task.FromResult(result);
+        }
+
+        public override Task<GamePlatformResult> EditGamePlatform(GamePlatformRecord request, ServerCallContext context)
+        {
+            var result = new GamePlatformResult();
+
+            try
+            {
+                var errorMessage = "";
+
+                var gamePlatform = GamePlatformFromGrpc(request);
+
+                result.Success = GameLibraryAgent.ModelAssembler.AddOrEditGamePlatform(gamePlatform, ref errorMessage);
+
+                result.Gameplatform = GrpcGamePlatform(gamePlatform);
+                result.ErrorMessage = errorMessage ?? "";
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+
+            return Task.FromResult(result);
+        }
+
+        public override Task<GamePlatformResult> DeleteGamePlatform(GamePlatformRecord request, ServerCallContext context)
+        {
+            var result = new GamePlatformResult();
+
+            try
+            {
+                var errorMessage = "";
+
+                var gamePlatform = GamePlatformFromGrpc(request);
+
+                result.Success = GameLibraryAgent.ModelAssembler.DeleteGamePlatforms(gamePlatform.Id, ref errorMessage);
+
+                result.Gameplatform = GrpcGamePlatform(gamePlatform);
+                result.ErrorMessage = errorMessage ?? "";
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+
+            return Task.FromResult(result);
+        }
+
+        #endregion GamePlatform Methods
+
         #region Private Methods
 
         private static GameRecord GrpcGame(Game game)
@@ -1220,6 +1357,64 @@ namespace GameLibrary.gRPC.Server
                         GamegenreId = gameGenre.Id,
                         GameId = gameGenre.GameId,
                         GenreId = gameGenre.GenreId
+                    };
+                }
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+
+            return result;
+        }
+
+        private static GamePlatform GamePlatformFromGrpc(GamePlatformRecord gameplatformRecord)
+        {
+            var result = new GamePlatform();
+
+            try
+            {
+                if (gameplatformRecord != null)
+                {
+                    result = new GamePlatform(
+                        (int)gameplatformRecord.GameplatformId,
+                        (int)gameplatformRecord.GameId,
+                        (int)gameplatformRecord.PlatformId);
+                }
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+
+            return result;
+        }
+
+        private static GamePlatformRecord GrpcGamePlatform(GamePlatform gamePlatform)
+        {
+            var result = new GamePlatformRecord();
+
+            try
+            {
+                if (gamePlatform != null)
+                {
+                    result = new GamePlatformRecord
+                    {
+                        GameplatformId = gamePlatform.Id,
+                        GameId = gamePlatform.GameId,
+                        PlatformId = gamePlatform.PlatformId
                     };
                 }
             }

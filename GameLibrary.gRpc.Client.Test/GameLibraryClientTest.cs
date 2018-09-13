@@ -696,6 +696,154 @@ namespace GameLibrary.gRpc.Client.Test
 
             #endregion PlatformTest
 
+            #region GamePlatformTest
+
+            // Get all GamePlatform
+
+            var gamePlatforms = client.SearchGamePlatforms(0);
+
+            Assert.IsNotNull(gamePlatforms);
+            Assert.AreEqual(gamePlatforms.List.Count, 0);
+
+
+            // Add a game
+
+            game = new Game(0, "Qbert", "A silly penguin");
+
+            errorMessage = "";
+            result = client.AddGame(game, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(game.Id > 0);
+
+            // Add a edited game 
+
+            editedgame = new Game(0, "Bob", "A silly duck");
+
+            errorMessage = "";
+            result = client.AddGame(editedgame, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(editedgame.Id > 0);
+
+            // Add a platform
+
+            platform = new Platform(0, "Qbert", "A silly penguin");
+
+            errorMessage = "";
+            result = client.AddPlatform(platform, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(platform.Id > 0);
+
+            // Add a edited platform
+
+            var editedplatform = new Platform(0, "joe", "A silly hobo");
+
+            errorMessage = "";
+            result = client.AddPlatform(editedplatform, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(editedplatform.Id > 0);
+
+            // Add a GamePlattform
+
+            var gamePlatform = new GamePlatform(0, game.Id, platform.Id);
+
+            errorMessage = "";
+            result = client.AddGamePlatform(gamePlatform, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(gamePlatform.Id > 0);
+
+
+            // Get the GamePlatform by id.
+
+
+            gamePlatforms = client.SearchGamePlatforms(gamePlatform.Id);
+
+            Assert.IsNotNull(gamePlatform);
+            Assert.AreEqual(gamePlatforms.List.Count, 1);
+
+            var foundgamePlatform = gamePlatforms.List[0];
+
+            Assert.IsNotNull(foundgamePlatform);
+            Assert.AreEqual(foundgamePlatform.Id, gamePlatform.Id);
+
+            // Edit a GamePlatform
+
+            var editgameplatform = new GamePlatform(gamePlatform.Id, editedgame.Id, editedplatform.Id);
+
+            errorMessage = "";
+            result = client.EditGamePlatform(editgameplatform, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(editPlatfrom.Id > 0);
+
+            // Get all GamePlatform
+
+            gamePlatforms = client.SearchGamePlatforms(0);
+
+            Assert.IsNotNull(gamePlatforms);
+            Assert.AreEqual(gamePlatforms.List.Count, 1);
+
+
+            // Delete a GamePlatform
+
+            errorMessage = "";
+            result = client.DeleteGamePlatform(foundgamePlatform.Id, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+            // Delete a game
+
+            errorMessage = "";
+            result = client.DeleteGame(game.Id, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+            // Delete edited game
+
+            errorMessage = "";
+            result = client.DeleteGame(editedgame.Id, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+            // Delete a platform
+
+            errorMessage = "";
+            result = client.DeletePlatform(platform.Id, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+            // Delete edited platform
+
+            errorMessage = "";
+            result = client.DeleteGenre(editedplatform.Id, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+
+            // Get all Game Platforms
+
+            gamePlatforms = client.SearchGamePlatforms(0);
+
+            Assert.IsNotNull(gamePlatforms);
+            Assert.AreEqual(gamePlatforms.List.Count, 0);
+
+            #endregion PlatformTest
+
 
 
             // Shutdown the gRPC Web Services server.
