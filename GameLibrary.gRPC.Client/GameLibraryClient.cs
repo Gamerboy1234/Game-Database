@@ -1084,6 +1084,308 @@ namespace GameLibrary.gRPC.Client
 
         #endregion GamePlatform Methods
 
+        #region GameReview Methods
+
+        public GameReviewList SearchGameReviews(long gameReview)
+        {
+            var result = new GameReviewList();
+
+            try
+            {
+                result = AsyncHelper.RunSync(() => SearchGameReviewsAsync(gameReview));
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        public bool AddGameReview(GameReview gameReview, ref string errorMessage)
+        {
+            var result = false;
+
+            try
+            {
+                if (_client != null)
+                {
+                    var gameplatformResult = _client.AddGameReview(GrpcGameReview(gameReview));
+
+                    if (gameplatformResult != null)
+                    {
+                        result = gameplatformResult.Success;
+                        errorMessage = gameplatformResult.ErrorMessage;
+                        gameReview.Id = (int)(gameplatformResult.Gamereview?.GamereviewId ?? 0);
+                    }
+                }
+
+                else
+                {
+                    errorMessage = "Unable to create gRPC client";
+                }
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        public bool EditGameReview(GameReview gameReview, ref string errorMessage)
+        {
+            var result = false;
+
+            try
+            {
+                if (_client != null)
+                {
+                    var gameplatformResult = _client.EditGameReview(GrpcGameReview(gameReview));
+
+                    if (gameplatformResult != null)
+                    {
+                        result = gameplatformResult.Success;
+                        errorMessage = gameplatformResult.ErrorMessage;
+                    }
+                }
+
+                else
+                {
+                    errorMessage = "Unable to create gRPC client";
+                }
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        public bool DeleteGameReview(long gameplatformId, ref string errorMessage)
+        {
+            var result = false;
+
+            try
+            {
+                if (_client != null)
+                {
+                    var gameplatformResult = _client.DeleteGameReview(GrpcGameReview(new GameReview { Id = (int)gameplatformId }));
+
+                    if (gameplatformResult != null)
+                    {
+                        result = gameplatformResult.Success;
+                        errorMessage = gameplatformResult.ErrorMessage;
+                    }
+                }
+
+                else
+                {
+                    errorMessage = "Unable to create gRPC client";
+                }
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        #endregion GameReview Methods
+
+        #region GameRating Methods
+
+        public GameRatingList SearchGameRatings(long gameRating)
+        {
+            var result = new GameRatingList();
+
+            try
+            {
+                result = AsyncHelper.RunSync(() => SearchGameRatingsAsync(gameRating));
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        public bool AddGameRating(GameRating gameRating, ref string errorMessage)
+        {
+            var result = false;
+
+            try
+            {
+                if (_client != null)
+                {
+                    var gameplatformResult = _client.AddGameRating(GrpcGameRating(gameRating));
+
+                    if (gameplatformResult != null)
+                    {
+                        result = gameplatformResult.Success;
+                        errorMessage = gameplatformResult.ErrorMessage;
+                        gameRating.Id = (int)(gameplatformResult.Gamerating?.GameratingId ?? 0);
+                    }
+                }
+
+                else
+                {
+                    errorMessage = "Unable to create gRPC client";
+                }
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        public bool EditGameRating(GameRating gameRating, ref string errorMessage)
+        {
+            var result = false;
+
+            try
+            {
+                if (_client != null)
+                {
+                    var gameplatformResult = _client.EditGameRating(GrpcGameRating(gameRating));
+
+                    if (gameplatformResult != null)
+                    {
+                        result = gameplatformResult.Success;
+                        errorMessage = gameplatformResult.ErrorMessage;
+                    }
+                }
+
+                else
+                {
+                    errorMessage = "Unable to create gRPC client";
+                }
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        public bool DeleteGameRating(long gameplatformId, ref string errorMessage)
+        {
+            var result = false;
+
+            try
+            {
+                if (_client != null)
+                {
+                    var gameplatformResult = _client.DeleteGameRating(GrpcGameRating(new GameRating { Id = (int)gameplatformId }));
+
+                    if (gameplatformResult != null)
+                    {
+                        result = gameplatformResult.Success;
+                        errorMessage = gameplatformResult.ErrorMessage;
+                    }
+                }
+
+                else
+                {
+                    errorMessage = "Unable to create gRPC client";
+                }
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        #endregion GameRating Methods
+
         #region Private Methods
 
         private async Task<GameList> SearchGamesAsync(long gameId, string gameName)
@@ -1546,14 +1848,14 @@ namespace GameLibrary.gRPC.Client
 
                         while (await responseStream.MoveNext())
                         {
-                            var gamePlatformRecord = responseStream.Current;
+                            var gameRatingRecord = responseStream.Current;
 
-                            if (gamePlatformRecord.GamegenreId > 0)
+                            if (gameRatingRecord.GamegenreId > 0)
                             {
                                 result.Add(new GameGenre(
-                                    (int)gamePlatformRecord.GamegenreId,
-                                    (int)gamePlatformRecord.GameId,
-                                    (int)gamePlatformRecord.GenreId));
+                                    (int)gameRatingRecord.GamegenreId,
+                                    (int)gameRatingRecord.GameId,
+                                    (int)gameRatingRecord.GenreId));
                             }
                         }
                     }
@@ -1696,6 +1998,185 @@ namespace GameLibrary.gRPC.Client
                 Log.Error(ex);
 
                 result.ErrorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        private static GameReviewRecord GrpcGameReview(GameReview gameReview)
+        {
+            var result = new GameReviewRecord();
+
+            try
+            {
+                if (gameReview != null)
+                {
+                    result = new GameReviewRecord
+                    {
+                        GamereviewId = gameReview.Id,
+                        GameId = gameReview.GameId,
+                        ReviewId = gameReview.ReviewId
+                    };
+                }
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+
+            return result;
+        }
+
+
+        private async Task<GameReviewList> SearchGameReviewsAsync(long gamereviewId)
+        {
+            var result = new GameReviewList();
+
+            try
+            {
+                var errorMessage = "";
+
+                if (_client != null)
+                {
+                    using (var gameplatformResult = _client.SearchGameReviews(new GameReviewsSearchRequest
+                    {
+                        GamereviewId = gamereviewId,
+                    }))
+                    {
+                        var responseStream = gameplatformResult.ResponseStream;
+
+                        while (await responseStream.MoveNext())
+                        {
+                            var gameReviewRecord = responseStream.Current;
+
+                            if (gameReviewRecord.GamereviewId > 0)
+                            {
+                                result.Add(new GameReview(
+                                    (int)gameReviewRecord.GamereviewId,
+                                    (int)gameReviewRecord.GameId,
+                                    (int)gameReviewRecord.ReviewId));
+                            }
+                        }
+                    }
+                }
+
+                else
+                {
+                    errorMessage = "Unable to create gRPC client";
+                }
+
+                result.ErrorMessage = errorMessage;
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        private async Task<GameRatingList> SearchGameRatingsAsync(long gameratingId)
+        {
+            var result = new GameRatingList();
+
+            try
+            {
+                var errorMessage = "";
+
+                if (_client != null)
+                {
+                    using (var gameResult = _client.SearchGameRatings(new GameRatingsSearchRequest
+                    {
+                        GameratingId = gameratingId,
+                        
+                    }))
+                    {
+                        var responseStream = gameResult.ResponseStream;
+
+                        while (await responseStream.MoveNext())
+                        {
+                            var gameratingRecord = responseStream.Current;
+
+                            if (gameratingRecord.GameratingId > 0)
+                            {
+                                result.Add(new GameRating(
+                                    (int)gameratingRecord.GameratingId,
+                                    (int)gameratingRecord.GameId,
+                                    (int)gameratingRecord.RatingId,
+                                    gameratingRecord.Notes ?? ""));
+                            }
+                        }
+                    }
+                }
+
+                else
+                {
+                    errorMessage = "Unable to create gRPC client";
+                }
+
+                result.ErrorMessage = errorMessage;
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        private static GameRatingRecord GrpcGameRating(GameRating gameRating)
+        {
+            var result = new GameRatingRecord();
+
+            try
+            {
+                if (gameRating != null)
+                {
+                    result = new GameRatingRecord
+                    {
+                        GameratingId = gameRating.Id,
+                        GameId = gameRating.GameId,
+                        RatingId = gameRating.RatingId,
+                        Notes = gameRating.Notes
+
+                    };
+                }
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
             }
 
             return result;

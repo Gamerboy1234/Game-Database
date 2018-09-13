@@ -829,7 +829,7 @@ namespace GameLibrary.gRpc.Client.Test
             // Delete edited platform
 
             errorMessage = "";
-            result = client.DeleteGenre(editedplatform.Id, ref errorMessage);
+            result = client.DeletePlatform(editedplatform.Id, ref errorMessage);
 
             Assert.IsTrue(result);
             Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
@@ -843,6 +843,302 @@ namespace GameLibrary.gRpc.Client.Test
             Assert.AreEqual(gamePlatforms.List.Count, 0);
 
             #endregion PlatformTest
+
+            #region GameReviewTest
+
+            // Get all GameReview
+
+            var gameReviews = client.SearchGameReviews(0);
+
+            Assert.IsNotNull(gameReviews);
+            Assert.AreEqual(gameReviews.List.Count, 0);
+
+
+            // Add a game
+
+            game = new Game(0, "Qbert", "A silly penguin");
+
+            errorMessage = "";
+            result = client.AddGame(game, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(game.Id > 0);
+
+            // Add a edited game 
+
+            editedgame = new Game(0, "Bob", "A silly duck");
+
+            errorMessage = "";
+            result = client.AddGame(editedgame, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(editedgame.Id > 0);
+
+            // Add a review
+
+            review = new Review(0, "Qbert", "A silly penguin", 5);
+
+            errorMessage = "";
+            result = client.AddReview(review, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(review.Id > 0);
+
+            // Add a edited review
+
+            var editedreview = new Review(0, "joe", "A silly hobo", 6);
+
+            errorMessage = "";
+            result = client.AddReview(editedreview, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(editedreview.Id > 0);
+
+            // Add a GameReview
+
+            var gameReview = new GameReview(0, game.Id, review.Id);
+
+            errorMessage = "";
+            result = client.AddGameReview(gameReview, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(gameReview.Id > 0);
+
+
+            // Get the GameReview by id.
+
+
+            gameReviews = client.SearchGameReviews(gameReview.Id);
+
+            Assert.IsNotNull(gameReview);
+            Assert.AreEqual(gameReviews.List.Count, 1);
+
+            var foundgameReview = gameReviews.List[0];
+
+            Assert.IsNotNull(foundgameReview);
+            Assert.AreEqual(foundgameReview.Id, gameReview.Id);
+
+            // Edit a GameReview
+
+            var editgamereview = new GameReview(gameReview.Id, editedgame.Id, editedreview.Id);
+
+            errorMessage = "";
+            result = client.EditGameReview(editgamereview, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(editPlatfrom.Id > 0);
+
+            // Get all GameReview
+
+            gameReviews = client.SearchGameReviews(0);
+
+            Assert.IsNotNull(gameReviews);
+            Assert.AreEqual(gameReviews.List.Count, 1);
+
+
+            // Delete a GameReview
+
+            errorMessage = "";
+            result = client.DeleteGameReview(foundgameReview.Id, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+            // Delete a game
+
+            errorMessage = "";
+            result = client.DeleteGame(game.Id, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+            // Delete edited game
+
+            errorMessage = "";
+            result = client.DeleteGame(editedgame.Id, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+            // Delete a review
+
+            errorMessage = "";
+            result = client.DeleteReview(review.Id, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+            // Delete edited review
+
+            errorMessage = "";
+            result = client.DeleteReview(editedreview.Id, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+
+            // Get all Game Reviews
+
+            gameReviews = client.SearchGameReviews(0);
+
+            Assert.IsNotNull(gameReviews);
+            Assert.AreEqual(gameReviews.List.Count, 0);
+
+            #endregion GameReviewTest
+
+            #region GameRatingTest
+
+            // Get all GameRating
+
+            var gameRatings = client.SearchGameRatings(0);
+
+            Assert.IsNotNull(gameReviews);
+            Assert.AreEqual(gameReviews.List.Count, 0);
+
+
+            // Add a game
+
+            game = new Game(0, "Qbert", "A silly penguin");
+
+            errorMessage = "";
+            result = client.AddGame(game, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(game.Id > 0);
+
+            // Add a edited game 
+
+            editedgame = new Game(0, "Bob", "A silly duck");
+
+            errorMessage = "";
+            result = client.AddGame(editedgame, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(editedgame.Id > 0);
+
+            // Add a rating
+
+            rating = new Rating(0, "Qbert", "A silly penguin", "joe");
+
+            errorMessage = "";
+            result = client.AddRating(rating, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(rating.Id > 0);
+
+            // Add a edited review
+
+            var editedrating = new Rating(0, "joe", "A silly hobo", "6");
+
+            errorMessage = "";
+            result = client.AddRating(editedrating, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(editedreview.Id > 0);
+
+            // Add a GameRating
+
+            var gameRating = new GameRating(0, game.Id, rating.Id, "note");
+
+            errorMessage = "";
+            result = client.AddGameRating(gameRating, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(gameRating.Id > 0);
+
+
+            // Get the GameRating by id.
+
+
+            gameRatings = client.SearchGameRatings(gameRating.Id);
+
+            Assert.IsNotNull(gameRating);
+            Assert.AreEqual(gameRatings.List.Count, 1);
+
+            var foundgameRating = gameRatings.List[0];
+
+            Assert.IsNotNull(foundgameRating);
+            Assert.AreEqual(foundgameRating.Id, gameRating.Id);
+
+            // Edit a GameRating
+
+            var editgamerating = new GameRating(gameRating.Id, editedgame.Id, editedrating.Id, "more notes");
+
+            errorMessage = "";
+            result = client.EditGameRating(editgamerating, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(editPlatfrom.Id > 0);
+
+            // Get all GameRating
+
+            gameRatings = client.SearchGameRatings(0);
+
+            Assert.IsNotNull(gameRatings);
+            Assert.AreEqual(gameRatings.List.Count, 1);
+
+
+            // Delete a GameRating
+
+            errorMessage = "";
+            result = client.DeleteGameRating(foundgameRating.Id, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+            // Delete a game
+
+            errorMessage = "";
+            result = client.DeleteGame(game.Id, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+            // Delete edited game
+
+            errorMessage = "";
+            result = client.DeleteGame(editedgame.Id, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+            // Delete a review
+
+            errorMessage = "";
+            result = client.DeleteRating(rating.Id, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+            // Delete edited review
+
+            errorMessage = "";
+            result = client.DeleteRating(editedrating.Id, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+
+            // Get all Game Ratings
+
+            gameRatings = client.SearchGameRatings(0);
+
+            Assert.IsNotNull(gameRatings);
+            Assert.AreEqual(gameRatings.List.Count, 0);
+
+            #endregion GameRatingTest
 
 
 

@@ -103,6 +103,8 @@ service GameLibrary {
 	// Obtains a list of games that match the request parameters.
 	// Streamed rather than returned at once (e.g. in a response message with a repeated field)
 	rpc SearchGameGenres(GameGenresSearchRequest) returns (stream GameGenreRecord) {}
+	rpc SearchGameGenresByGameId(GameGenresSearchRequest) returns (stream GameGenreRecord) {}
+	rpc SearchGameGenresByGenreId(GameGenresSearchRequest) returns (stream GameGenreRecord) {}
 
 	// Add a new gamegenre record
 	rpc AddGameGenre(GameGenreRecord) returns (GameGenreResult) {}
@@ -114,12 +116,14 @@ service GameLibrary {
 	rpc DeleteGameGenre(GameGenreRecord) returns (GameGenreResult) {}
 
 	///////////////////////////////////////////////////////////////
-	// GamePlattforms
+	// GamePlatforms
 	///////////////////////////////////////////////////////////////
 
 	// Obtains a list of gameplatforms that match the request parameters.
 	// Streamed rather than returned at once (e.g. in a response message with a repeated field)
 	rpc SearchGamePlatforms(GamePlatformsSearchRequest) returns (stream GamePlatformRecord) {}
+	rpc SearchGamePlatformsByGameId(GamePlatformsSearchRequest) returns (stream GamePlatformRecord) {}
+	rpc SearchGamePlatformsByPlatformId(GamePlatformsSearchRequest) returns (stream GamePlatformRecord) {}
 
 	// Add a new gameplatform record
 	rpc AddGamePlatform(GamePlatformRecord) returns (GamePlatformResult) {}
@@ -129,6 +133,66 @@ service GameLibrary {
 
 	// Delete a gameplatform record
 	rpc DeleteGamePlatform(GamePlatformRecord) returns (GamePlatformResult) {}
+
+	///////////////////////////////////////////////////////////////
+	// GameReviews
+	///////////////////////////////////////////////////////////////
+
+	// Obtains a list of gamereviews that match the request parameters.
+	// Streamed rather than returned at once (e.g. in a response message with a repeated field)
+	rpc SearchGameReviews(GameReviewsSearchRequest) returns (stream GameReviewRecord) {}
+	rpc SearchGameReviewByGameId(GameReviewsSearchRequest) returns (stream GameReviewRecord) {}
+	rpc SearchGameReviewByReviewId(GameReviewsSearchRequest) returns (stream GameReviewRecord) {}
+
+	// Add a new gamereview record
+	rpc AddGameReview(GameReviewRecord) returns (GameReviewResult) {}
+
+	// Edit a gamereview record
+	rpc EditGameReview(GameReviewRecord) returns (GameReviewResult) {}
+
+	// Delete a gamereview record
+	rpc DeleteGameReview(GameReviewRecord) returns (GameReviewResult) {}
+
+	///////////////////////////////////////////////////////////////
+	// GameRatings
+	///////////////////////////////////////////////////////////////
+
+	// Obtains a list of gameratings that match the request parameters.
+	// Streamed rather than returned at once (e.g. in a response message with a repeated field)
+	rpc SearchGameRatings(GameRatingsSearchRequest) returns (stream GameRatingRecord) {}
+	rpc SearchGameRatingByGameId(GameRatingsSearchRequest) returns (stream GameRatingRecord) {}
+	rpc SearchGameRatingByReviewId(GameRatingsSearchRequest) returns (stream GameRatingRecord) {}
+
+	// Add a new gamerating record
+	rpc AddGameRating(GameRatingRecord) returns (GameRatingResult) {}
+
+	// Edit a gamerating record
+	rpc EditGameRating(GameRatingRecord) returns (GameRatingResult) {}
+
+	// Delete a gamerating record
+	rpc DeleteGameRating(GameRatingRecord) returns (GameRatingResult) {}
+
+	
+	///////////////////////////////////////////////////////////////
+	// GameImages
+	///////////////////////////////////////////////////////////////
+
+	// Obtains a list of gameimages that match the request parameters.
+	// Streamed rather than returned at once (e.g. in a response message with a repeated field)
+	rpc SearchGameImages(GameImagesSearchRequest) returns (stream GameImageRecord) {}
+	rpc SearchGameImageByGameId(GameImagesSearchRequest) returns (stream GameImageRecord) {}
+	
+	// Add a new gameimage record
+	rpc AddGameImage(GameImageRecord) returns (GameImageResult) {}
+
+	// Edit a gameimage record
+	rpc EditGameImage(GameImageRecord) returns (GameImageResult) {}
+
+	// Delete a gameimage record
+	rpc DeleteGameImage(GameImageRecord) returns (GameImageResult) {}
+
+
+	
 
 }
 
@@ -247,6 +311,14 @@ message GameGenresSearchRequest {
 	int64 gamegenre_id = 1;
 }
 
+message GameGenresSearchRequestByGenreId {
+	int64 genre_id = 1;
+}
+
+message GameGenresSearchRequestByGameId {
+	int64 game_id = 1;
+}
+
 message GameGenreRecord {
 	
 	int64 gamegenre_id = 1;
@@ -268,6 +340,14 @@ message GamePlatformsSearchRequest {
 	int64 gameplatform_id = 1;
 }
 
+message GamePlatformsSearchRequestByGameId {
+	int64 game_id = 1;
+}
+
+message GamePlatformsSearchRequestByPlatformId {
+	int64 platform_id = 1;
+}
+
 message GamePlatformRecord {
 	
 	int64 gameplatform_id = 1;
@@ -280,3 +360,90 @@ message GamePlatformResult {
 	bool success = 2;
 	string error_message = 3;
 }
+
+///////////////////////////////////////////////////////////////
+// GameReviews
+///////////////////////////////////////////////////////////////
+
+message GameReviewsSearchRequestByReviewId {
+	int64 review_id = 1;
+}
+
+message GameReviewsSearchRequestByGameId {
+	int64 game_id = 1;
+}
+
+message GameReviewsSearchRequest {
+	int64 gamereview_id = 1;
+}
+
+message GameReviewRecord {
+	
+	int64 gamereview_id = 1;
+	int64 game_id = 2;
+	int64 review_id = 3;
+}
+
+message GameReviewResult {
+	GameReviewRecord gamereview = 1;
+	bool success = 2;
+	string error_message = 3;
+}
+
+///////////////////////////////////////////////////////////////
+// GameRatings
+///////////////////////////////////////////////////////////////
+
+message GameRatingsSearchRequestByRatingId {
+	int64 rating_id = 1;
+}
+
+message GameRatingsSearchRequestByGameId {
+	int64 game_id = 1;
+}
+
+message GameRatingsSearchRequest {
+	int64 gamerating_id = 1;
+}
+
+message GameRatingRecord {
+	
+	int64 gamerating_id = 1;
+	int64 game_id = 2;
+	int64 rating_id = 3;
+	string notes = 4;
+}
+
+message GameRatingResult {
+	GameRatingRecord gamerating = 1;
+	bool success = 2;
+	string error_message = 3;
+}
+
+///////////////////////////////////////////////////////////////
+// GameImages
+///////////////////////////////////////////////////////////////
+
+message GameImagesSearchRequestByGameId {
+	int64 game_id = 1;
+}
+
+message GameImagesSearchRequest {
+	int64 gameimage_id = 1;
+}
+
+message GameImageRecord {
+	
+	int64 gameimage_id = 1;
+	int64 game_id = 2;
+	byte[] image = 3; 
+	
+}
+
+message GameImageResult {
+	GameImageRecord gameimage = 1;
+	bool success = 2;
+	string error_message = 3;
+}
+
+
