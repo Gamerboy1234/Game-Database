@@ -1,5 +1,6 @@
 ﻿
 using System;
+using GameImageLibrary.Model;
 using GameLibrary.Core;
 using GameLibrary.gRPC.Client;
 using GameLibrary.gRPC.Server;
@@ -1151,7 +1152,7 @@ namespace GameLibrary.gRpc.Client.Test
 
             Assert.IsTrue(result);
             Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
-            Assert.IsTrue(editPlatfrom.Id > 0);
+            Assert.IsTrue(editgamerating.Id > 0);
 
             // Get all GameRating
 
@@ -1211,7 +1212,123 @@ namespace GameLibrary.gRpc.Client.Test
 
             #endregion GameRatingTest
 
+            #region GameImageTest
 
+            // Get all GameImages
+
+            var gameImages = client.SearchGameImages(0);
+
+            Assert.IsNotNull(gameReviews);
+            Assert.AreEqual(gameReviews.List.Count, 0);
+
+
+            // Add a game
+
+            game = new Game(0, "Qbert", "A silly penguin");
+
+            errorMessage = "";
+            result = client.AddGame(game, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(game.Id > 0);
+
+            // Add a edited game 
+
+            editedgame = new Game(0, "Bob", "A silly duck");
+
+            errorMessage = "";
+            result = client.AddGame(editedgame, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(editedgame.Id > 0);
+
+            // Add a GameImage
+
+            var gameImage = new GameImage(0, game.Id,null);
+
+            errorMessage = "";
+            result = client.AddGameImage(gameImage, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(gameImage.Id > 0);
+
+            // Get the GameImage by id.
+
+            gameImages = client.SearchGameImages(gameImage.Id);
+
+            Assert.IsNotNull(gameImage);
+            Assert.AreEqual(gameImages.List.Count, 1);
+
+            var foundgameImage = gameImages.List[0];
+
+            Assert.IsNotNull(foundgameImage);
+            Assert.AreEqual(foundgameImage.Id, gameImage.Id);
+
+            // Get the GameImage by game id.
+
+            gameImages = client.SearchGameImageByGameId(gameImage.GameId);
+
+            Assert.IsNotNull(gameImage);
+            Assert.AreEqual(gameImages.List.Count, 1);
+
+            foundgameImage = gameImages.List[0];
+
+            Assert.IsNotNull(foundgameImage);
+            Assert.AreEqual(foundgameImage.GameId, gameImage.GameId);
+            
+            // Edit a GameImage
+
+            var editgameImage = new GameImage(gameImage.Id, editedgame.Id,null);
+
+            errorMessage = "";
+            result = client.EditGameImage(editgameImage, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+            Assert.IsTrue(editgameImage.Id > 0);
+
+            // Get all GameImages
+
+            gameImages = client.SearchGameImages(0);
+
+            Assert.IsNotNull(gameImages);
+            Assert.AreEqual(gameImages.List.Count, 1);
+
+            // Delete a GameImage
+
+            errorMessage = "";
+            result = client.DeleteGameImage(foundgameImage.Id, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+            // Delete a game
+
+            errorMessage = "";
+            result = client.DeleteGame(game.Id, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+            // Delete edited game
+
+            errorMessage = "";
+            result = client.DeleteGame(editedgame.Id, ref errorMessage);
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
+
+            // Get all Game Ratings
+
+            gameImages = client.SearchGameImages(0);
+
+            Assert.IsNotNull(gameImages);
+            Assert.AreEqual(gameImages.List.Count, 0);
+
+            #endregion GameImageTest
 
             // Shutdown the gRPC Web Services server.
             gameLibraryServer.ShutdownAsync().Wait();
