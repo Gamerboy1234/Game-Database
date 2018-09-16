@@ -1038,19 +1038,19 @@ namespace GameLibrary.Core
             return result;
         }
 
-        public GameGenreList GetGenresOfGame(int gameId)
+        public GameGenreList GetGenresOfGame(int genreId)
         {
             var result = new GameGenreList();
 
             try
             {
-                if (gameId > 0)
+                if (genreId > 0)
                 {
                     if (ValidateDatabaseConnection())
                     {
                         var errorMessage = "";
 
-                        if ((DataSetUtility.ValidateQueryResults(_databaseConnection.ExecuteQuery(GameGenreList.GenerateSelectQueryByGameId(gameId), ref errorMessage), out var queryResults)))
+                        if ((DataSetUtility.ValidateQueryResults(_databaseConnection.ExecuteQuery(GameGenreList.GenerateSelectQueryByGenreId(genreId), ref errorMessage), out var queryResults)))
                         {
                             result = GameGenreList.FromDictionaryList(DataSetUtility.ToDictionaryList(queryResults));
                         }
@@ -1067,19 +1067,19 @@ namespace GameLibrary.Core
             return result;
         }
 
-        public GameGenreList GetGamesOfGenre(int genreId)
+        public GameGenreList GetGamesOfGenre(int gameId)
         {
             var result = new GameGenreList();
 
             try
             {
-                if (genreId > 0)
+                if (gameId > 0)
                 {
                     if (ValidateDatabaseConnection())
                     {
                         var errorMessage = "";
 
-                        if ((DataSetUtility.ValidateQueryResults(_databaseConnection.ExecuteQuery(GameGenreList.GenerateSelectQueryByGenreId(genreId), ref errorMessage), out var queryResults)))
+                        if ((DataSetUtility.ValidateQueryResults(_databaseConnection.ExecuteQuery(GameGenreList.GenerateSelectQueryByGameId(gameId), ref errorMessage), out var queryResults)))
                         {
                             result = GameGenreList.FromDictionaryList(DataSetUtility.ToDictionaryList(queryResults));
                         }

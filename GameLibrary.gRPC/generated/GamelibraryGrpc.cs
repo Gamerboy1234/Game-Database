@@ -32,9 +32,13 @@ namespace Gamelibrary {
     static readonly grpc::Marshaller<global::Gamelibrary.PlatformResult> __Marshaller_gamelibrary_PlatformResult = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gamelibrary.PlatformResult.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Gamelibrary.GameGenresSearchRequest> __Marshaller_gamelibrary_GameGenresSearchRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gamelibrary.GameGenresSearchRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Gamelibrary.GameGenreRecord> __Marshaller_gamelibrary_GameGenreRecord = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gamelibrary.GameGenreRecord.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Gamelibrary.GameGenresSearchRequestByGameId> __Marshaller_gamelibrary_GameGenresSearchRequestByGameId = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gamelibrary.GameGenresSearchRequestByGameId.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Gamelibrary.GameGenresSearchRequestByGenreId> __Marshaller_gamelibrary_GameGenresSearchRequestByGenreId = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gamelibrary.GameGenresSearchRequestByGenreId.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Gamelibrary.GameGenreResult> __Marshaller_gamelibrary_GameGenreResult = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gamelibrary.GameGenreResult.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Gamelibrary.GamePlatformsSearchRequest> __Marshaller_gamelibrary_GamePlatformsSearchRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gamelibrary.GamePlatformsSearchRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Gamelibrary.GamePlatformRecord> __Marshaller_gamelibrary_GamePlatformRecord = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gamelibrary.GamePlatformRecord.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Gamelibrary.GamePlatformsSearchRequestByGameId> __Marshaller_gamelibrary_GamePlatformsSearchRequestByGameId = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gamelibrary.GamePlatformsSearchRequestByGameId.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Gamelibrary.GamePlatformsSearchRequestByPlatformId> __Marshaller_gamelibrary_GamePlatformsSearchRequestByPlatformId = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gamelibrary.GamePlatformsSearchRequestByPlatformId.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Gamelibrary.GamePlatformResult> __Marshaller_gamelibrary_GamePlatformResult = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gamelibrary.GamePlatformResult.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Gamelibrary.SearchGameReviewsRequest> __Marshaller_gamelibrary_SearchGameReviewsRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gamelibrary.SearchGameReviewsRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Gamelibrary.GameReviewRecord> __Marshaller_gamelibrary_GameReviewRecord = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gamelibrary.GameReviewRecord.Parser.ParseFrom);
@@ -43,9 +47,12 @@ namespace Gamelibrary {
     static readonly grpc::Marshaller<global::Gamelibrary.GameReviewResult> __Marshaller_gamelibrary_GameReviewResult = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gamelibrary.GameReviewResult.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Gamelibrary.GameRatingsSearchRequest> __Marshaller_gamelibrary_GameRatingsSearchRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gamelibrary.GameRatingsSearchRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Gamelibrary.GameRatingRecord> __Marshaller_gamelibrary_GameRatingRecord = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gamelibrary.GameRatingRecord.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Gamelibrary.GameRatingsSearchRequestByGameId> __Marshaller_gamelibrary_GameRatingsSearchRequestByGameId = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gamelibrary.GameRatingsSearchRequestByGameId.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Gamelibrary.GameRatingsSearchRequestByRatingId> __Marshaller_gamelibrary_GameRatingsSearchRequestByRatingId = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gamelibrary.GameRatingsSearchRequestByRatingId.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Gamelibrary.GameRatingResult> __Marshaller_gamelibrary_GameRatingResult = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gamelibrary.GameRatingResult.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Gamelibrary.GameImagesSearchRequest> __Marshaller_gamelibrary_GameImagesSearchRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gamelibrary.GameImagesSearchRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Gamelibrary.GameImageRecord> __Marshaller_gamelibrary_GameImageRecord = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gamelibrary.GameImageRecord.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Gamelibrary.GameImagesSearchRequestByGameId> __Marshaller_gamelibrary_GameImagesSearchRequestByGameId = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gamelibrary.GameImagesSearchRequestByGameId.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Gamelibrary.GameImageResult> __Marshaller_gamelibrary_GameImageResult = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gamelibrary.GameImageResult.Parser.ParseFrom);
 
     static readonly grpc::Method<global::Gamelibrary.GamesSearchRequest, global::Gamelibrary.GameRecord> __Method_SearchGames = new grpc::Method<global::Gamelibrary.GamesSearchRequest, global::Gamelibrary.GameRecord>(
@@ -195,18 +202,18 @@ namespace Gamelibrary {
         __Marshaller_gamelibrary_GameGenresSearchRequest,
         __Marshaller_gamelibrary_GameGenreRecord);
 
-    static readonly grpc::Method<global::Gamelibrary.GameGenresSearchRequest, global::Gamelibrary.GameGenreRecord> __Method_SearchGameGenresByGameId = new grpc::Method<global::Gamelibrary.GameGenresSearchRequest, global::Gamelibrary.GameGenreRecord>(
+    static readonly grpc::Method<global::Gamelibrary.GameGenresSearchRequestByGameId, global::Gamelibrary.GameGenreRecord> __Method_SearchGameGenresByGameId = new grpc::Method<global::Gamelibrary.GameGenresSearchRequestByGameId, global::Gamelibrary.GameGenreRecord>(
         grpc::MethodType.ServerStreaming,
         __ServiceName,
         "SearchGameGenresByGameId",
-        __Marshaller_gamelibrary_GameGenresSearchRequest,
+        __Marshaller_gamelibrary_GameGenresSearchRequestByGameId,
         __Marshaller_gamelibrary_GameGenreRecord);
 
-    static readonly grpc::Method<global::Gamelibrary.GameGenresSearchRequest, global::Gamelibrary.GameGenreRecord> __Method_SearchGameGenresByGenreId = new grpc::Method<global::Gamelibrary.GameGenresSearchRequest, global::Gamelibrary.GameGenreRecord>(
+    static readonly grpc::Method<global::Gamelibrary.GameGenresSearchRequestByGenreId, global::Gamelibrary.GameGenreRecord> __Method_SearchGameGenresByGenreId = new grpc::Method<global::Gamelibrary.GameGenresSearchRequestByGenreId, global::Gamelibrary.GameGenreRecord>(
         grpc::MethodType.ServerStreaming,
         __ServiceName,
         "SearchGameGenresByGenreId",
-        __Marshaller_gamelibrary_GameGenresSearchRequest,
+        __Marshaller_gamelibrary_GameGenresSearchRequestByGenreId,
         __Marshaller_gamelibrary_GameGenreRecord);
 
     static readonly grpc::Method<global::Gamelibrary.GameGenreRecord, global::Gamelibrary.GameGenreResult> __Method_AddGameGenre = new grpc::Method<global::Gamelibrary.GameGenreRecord, global::Gamelibrary.GameGenreResult>(
@@ -237,18 +244,18 @@ namespace Gamelibrary {
         __Marshaller_gamelibrary_GamePlatformsSearchRequest,
         __Marshaller_gamelibrary_GamePlatformRecord);
 
-    static readonly grpc::Method<global::Gamelibrary.GamePlatformsSearchRequest, global::Gamelibrary.GamePlatformRecord> __Method_SearchGamePlatformsByGameId = new grpc::Method<global::Gamelibrary.GamePlatformsSearchRequest, global::Gamelibrary.GamePlatformRecord>(
+    static readonly grpc::Method<global::Gamelibrary.GamePlatformsSearchRequestByGameId, global::Gamelibrary.GamePlatformRecord> __Method_SearchGamePlatformsByGameId = new grpc::Method<global::Gamelibrary.GamePlatformsSearchRequestByGameId, global::Gamelibrary.GamePlatformRecord>(
         grpc::MethodType.ServerStreaming,
         __ServiceName,
         "SearchGamePlatformsByGameId",
-        __Marshaller_gamelibrary_GamePlatformsSearchRequest,
+        __Marshaller_gamelibrary_GamePlatformsSearchRequestByGameId,
         __Marshaller_gamelibrary_GamePlatformRecord);
 
-    static readonly grpc::Method<global::Gamelibrary.GamePlatformsSearchRequest, global::Gamelibrary.GamePlatformRecord> __Method_SearchGamePlatformsByPlatformId = new grpc::Method<global::Gamelibrary.GamePlatformsSearchRequest, global::Gamelibrary.GamePlatformRecord>(
+    static readonly grpc::Method<global::Gamelibrary.GamePlatformsSearchRequestByPlatformId, global::Gamelibrary.GamePlatformRecord> __Method_SearchGamePlatformsByPlatformId = new grpc::Method<global::Gamelibrary.GamePlatformsSearchRequestByPlatformId, global::Gamelibrary.GamePlatformRecord>(
         grpc::MethodType.ServerStreaming,
         __ServiceName,
         "SearchGamePlatformsByPlatformId",
-        __Marshaller_gamelibrary_GamePlatformsSearchRequest,
+        __Marshaller_gamelibrary_GamePlatformsSearchRequestByPlatformId,
         __Marshaller_gamelibrary_GamePlatformRecord);
 
     static readonly grpc::Method<global::Gamelibrary.GamePlatformRecord, global::Gamelibrary.GamePlatformResult> __Method_AddGamePlatform = new grpc::Method<global::Gamelibrary.GamePlatformRecord, global::Gamelibrary.GamePlatformResult>(
@@ -321,18 +328,18 @@ namespace Gamelibrary {
         __Marshaller_gamelibrary_GameRatingsSearchRequest,
         __Marshaller_gamelibrary_GameRatingRecord);
 
-    static readonly grpc::Method<global::Gamelibrary.GameRatingsSearchRequest, global::Gamelibrary.GameRatingRecord> __Method_SearchGameRatingByGameId = new grpc::Method<global::Gamelibrary.GameRatingsSearchRequest, global::Gamelibrary.GameRatingRecord>(
+    static readonly grpc::Method<global::Gamelibrary.GameRatingsSearchRequestByGameId, global::Gamelibrary.GameRatingRecord> __Method_SearchGameRatingByGameId = new grpc::Method<global::Gamelibrary.GameRatingsSearchRequestByGameId, global::Gamelibrary.GameRatingRecord>(
         grpc::MethodType.ServerStreaming,
         __ServiceName,
         "SearchGameRatingByGameId",
-        __Marshaller_gamelibrary_GameRatingsSearchRequest,
+        __Marshaller_gamelibrary_GameRatingsSearchRequestByGameId,
         __Marshaller_gamelibrary_GameRatingRecord);
 
-    static readonly grpc::Method<global::Gamelibrary.GameRatingsSearchRequest, global::Gamelibrary.GameRatingRecord> __Method_SearchGameRatingByReviewId = new grpc::Method<global::Gamelibrary.GameRatingsSearchRequest, global::Gamelibrary.GameRatingRecord>(
+    static readonly grpc::Method<global::Gamelibrary.GameRatingsSearchRequestByRatingId, global::Gamelibrary.GameRatingRecord> __Method_SearchGameRatingByRatingId = new grpc::Method<global::Gamelibrary.GameRatingsSearchRequestByRatingId, global::Gamelibrary.GameRatingRecord>(
         grpc::MethodType.ServerStreaming,
         __ServiceName,
-        "SearchGameRatingByReviewId",
-        __Marshaller_gamelibrary_GameRatingsSearchRequest,
+        "SearchGameRatingByRatingId",
+        __Marshaller_gamelibrary_GameRatingsSearchRequestByRatingId,
         __Marshaller_gamelibrary_GameRatingRecord);
 
     static readonly grpc::Method<global::Gamelibrary.GameRatingRecord, global::Gamelibrary.GameRatingResult> __Method_AddGameRating = new grpc::Method<global::Gamelibrary.GameRatingRecord, global::Gamelibrary.GameRatingResult>(
@@ -363,11 +370,11 @@ namespace Gamelibrary {
         __Marshaller_gamelibrary_GameImagesSearchRequest,
         __Marshaller_gamelibrary_GameImageRecord);
 
-    static readonly grpc::Method<global::Gamelibrary.GameImagesSearchRequest, global::Gamelibrary.GameImageRecord> __Method_SearchGameImageByGameId = new grpc::Method<global::Gamelibrary.GameImagesSearchRequest, global::Gamelibrary.GameImageRecord>(
+    static readonly grpc::Method<global::Gamelibrary.GameImagesSearchRequestByGameId, global::Gamelibrary.GameImageRecord> __Method_SearchGameImageByGameId = new grpc::Method<global::Gamelibrary.GameImagesSearchRequestByGameId, global::Gamelibrary.GameImageRecord>(
         grpc::MethodType.ServerStreaming,
         __ServiceName,
         "SearchGameImageByGameId",
-        __Marshaller_gamelibrary_GameImagesSearchRequest,
+        __Marshaller_gamelibrary_GameImagesSearchRequestByGameId,
         __Marshaller_gamelibrary_GameImageRecord);
 
     static readonly grpc::Method<global::Gamelibrary.GameImageRecord, global::Gamelibrary.GameImageResult> __Method_AddGameImage = new grpc::Method<global::Gamelibrary.GameImageRecord, global::Gamelibrary.GameImageResult>(
@@ -643,12 +650,12 @@ namespace Gamelibrary {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task SearchGameGenresByGameId(global::Gamelibrary.GameGenresSearchRequest request, grpc::IServerStreamWriter<global::Gamelibrary.GameGenreRecord> responseStream, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task SearchGameGenresByGameId(global::Gamelibrary.GameGenresSearchRequestByGameId request, grpc::IServerStreamWriter<global::Gamelibrary.GameGenreRecord> responseStream, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task SearchGameGenresByGenreId(global::Gamelibrary.GameGenresSearchRequest request, grpc::IServerStreamWriter<global::Gamelibrary.GameGenreRecord> responseStream, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task SearchGameGenresByGenreId(global::Gamelibrary.GameGenresSearchRequestByGenreId request, grpc::IServerStreamWriter<global::Gamelibrary.GameGenreRecord> responseStream, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -699,12 +706,12 @@ namespace Gamelibrary {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task SearchGamePlatformsByGameId(global::Gamelibrary.GamePlatformsSearchRequest request, grpc::IServerStreamWriter<global::Gamelibrary.GamePlatformRecord> responseStream, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task SearchGamePlatformsByGameId(global::Gamelibrary.GamePlatformsSearchRequestByGameId request, grpc::IServerStreamWriter<global::Gamelibrary.GamePlatformRecord> responseStream, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task SearchGamePlatformsByPlatformId(global::Gamelibrary.GamePlatformsSearchRequest request, grpc::IServerStreamWriter<global::Gamelibrary.GamePlatformRecord> responseStream, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task SearchGamePlatformsByPlatformId(global::Gamelibrary.GamePlatformsSearchRequestByPlatformId request, grpc::IServerStreamWriter<global::Gamelibrary.GamePlatformRecord> responseStream, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -811,12 +818,12 @@ namespace Gamelibrary {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task SearchGameRatingByGameId(global::Gamelibrary.GameRatingsSearchRequest request, grpc::IServerStreamWriter<global::Gamelibrary.GameRatingRecord> responseStream, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task SearchGameRatingByGameId(global::Gamelibrary.GameRatingsSearchRequestByGameId request, grpc::IServerStreamWriter<global::Gamelibrary.GameRatingRecord> responseStream, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task SearchGameRatingByReviewId(global::Gamelibrary.GameRatingsSearchRequest request, grpc::IServerStreamWriter<global::Gamelibrary.GameRatingRecord> responseStream, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task SearchGameRatingByRatingId(global::Gamelibrary.GameRatingsSearchRequestByRatingId request, grpc::IServerStreamWriter<global::Gamelibrary.GameRatingRecord> responseStream, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -867,7 +874,7 @@ namespace Gamelibrary {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task SearchGameImageByGameId(global::Gamelibrary.GameImagesSearchRequest request, grpc::IServerStreamWriter<global::Gamelibrary.GameImageRecord> responseStream, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task SearchGameImageByGameId(global::Gamelibrary.GameImagesSearchRequestByGameId request, grpc::IServerStreamWriter<global::Gamelibrary.GameImageRecord> responseStream, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -1734,19 +1741,19 @@ namespace Gamelibrary {
       {
         return CallInvoker.AsyncServerStreamingCall(__Method_SearchGameGenres, null, options, request);
       }
-      public virtual grpc::AsyncServerStreamingCall<global::Gamelibrary.GameGenreRecord> SearchGameGenresByGameId(global::Gamelibrary.GameGenresSearchRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncServerStreamingCall<global::Gamelibrary.GameGenreRecord> SearchGameGenresByGameId(global::Gamelibrary.GameGenresSearchRequestByGameId request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return SearchGameGenresByGameId(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncServerStreamingCall<global::Gamelibrary.GameGenreRecord> SearchGameGenresByGameId(global::Gamelibrary.GameGenresSearchRequest request, grpc::CallOptions options)
+      public virtual grpc::AsyncServerStreamingCall<global::Gamelibrary.GameGenreRecord> SearchGameGenresByGameId(global::Gamelibrary.GameGenresSearchRequestByGameId request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncServerStreamingCall(__Method_SearchGameGenresByGameId, null, options, request);
       }
-      public virtual grpc::AsyncServerStreamingCall<global::Gamelibrary.GameGenreRecord> SearchGameGenresByGenreId(global::Gamelibrary.GameGenresSearchRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncServerStreamingCall<global::Gamelibrary.GameGenreRecord> SearchGameGenresByGenreId(global::Gamelibrary.GameGenresSearchRequestByGenreId request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return SearchGameGenresByGenreId(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncServerStreamingCall<global::Gamelibrary.GameGenreRecord> SearchGameGenresByGenreId(global::Gamelibrary.GameGenresSearchRequest request, grpc::CallOptions options)
+      public virtual grpc::AsyncServerStreamingCall<global::Gamelibrary.GameGenreRecord> SearchGameGenresByGenreId(global::Gamelibrary.GameGenresSearchRequestByGenreId request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncServerStreamingCall(__Method_SearchGameGenresByGenreId, null, options, request);
       }
@@ -1906,19 +1913,19 @@ namespace Gamelibrary {
       {
         return CallInvoker.AsyncServerStreamingCall(__Method_SearchGamePlatforms, null, options, request);
       }
-      public virtual grpc::AsyncServerStreamingCall<global::Gamelibrary.GamePlatformRecord> SearchGamePlatformsByGameId(global::Gamelibrary.GamePlatformsSearchRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncServerStreamingCall<global::Gamelibrary.GamePlatformRecord> SearchGamePlatformsByGameId(global::Gamelibrary.GamePlatformsSearchRequestByGameId request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return SearchGamePlatformsByGameId(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncServerStreamingCall<global::Gamelibrary.GamePlatformRecord> SearchGamePlatformsByGameId(global::Gamelibrary.GamePlatformsSearchRequest request, grpc::CallOptions options)
+      public virtual grpc::AsyncServerStreamingCall<global::Gamelibrary.GamePlatformRecord> SearchGamePlatformsByGameId(global::Gamelibrary.GamePlatformsSearchRequestByGameId request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncServerStreamingCall(__Method_SearchGamePlatformsByGameId, null, options, request);
       }
-      public virtual grpc::AsyncServerStreamingCall<global::Gamelibrary.GamePlatformRecord> SearchGamePlatformsByPlatformId(global::Gamelibrary.GamePlatformsSearchRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncServerStreamingCall<global::Gamelibrary.GamePlatformRecord> SearchGamePlatformsByPlatformId(global::Gamelibrary.GamePlatformsSearchRequestByPlatformId request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return SearchGamePlatformsByPlatformId(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncServerStreamingCall<global::Gamelibrary.GamePlatformRecord> SearchGamePlatformsByPlatformId(global::Gamelibrary.GamePlatformsSearchRequest request, grpc::CallOptions options)
+      public virtual grpc::AsyncServerStreamingCall<global::Gamelibrary.GamePlatformRecord> SearchGamePlatformsByPlatformId(global::Gamelibrary.GamePlatformsSearchRequestByPlatformId request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncServerStreamingCall(__Method_SearchGamePlatformsByPlatformId, null, options, request);
       }
@@ -2250,21 +2257,21 @@ namespace Gamelibrary {
       {
         return CallInvoker.AsyncServerStreamingCall(__Method_SearchGameRatings, null, options, request);
       }
-      public virtual grpc::AsyncServerStreamingCall<global::Gamelibrary.GameRatingRecord> SearchGameRatingByGameId(global::Gamelibrary.GameRatingsSearchRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncServerStreamingCall<global::Gamelibrary.GameRatingRecord> SearchGameRatingByGameId(global::Gamelibrary.GameRatingsSearchRequestByGameId request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return SearchGameRatingByGameId(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncServerStreamingCall<global::Gamelibrary.GameRatingRecord> SearchGameRatingByGameId(global::Gamelibrary.GameRatingsSearchRequest request, grpc::CallOptions options)
+      public virtual grpc::AsyncServerStreamingCall<global::Gamelibrary.GameRatingRecord> SearchGameRatingByGameId(global::Gamelibrary.GameRatingsSearchRequestByGameId request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncServerStreamingCall(__Method_SearchGameRatingByGameId, null, options, request);
       }
-      public virtual grpc::AsyncServerStreamingCall<global::Gamelibrary.GameRatingRecord> SearchGameRatingByReviewId(global::Gamelibrary.GameRatingsSearchRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncServerStreamingCall<global::Gamelibrary.GameRatingRecord> SearchGameRatingByRatingId(global::Gamelibrary.GameRatingsSearchRequestByRatingId request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
-        return SearchGameRatingByReviewId(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+        return SearchGameRatingByRatingId(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncServerStreamingCall<global::Gamelibrary.GameRatingRecord> SearchGameRatingByReviewId(global::Gamelibrary.GameRatingsSearchRequest request, grpc::CallOptions options)
+      public virtual grpc::AsyncServerStreamingCall<global::Gamelibrary.GameRatingRecord> SearchGameRatingByRatingId(global::Gamelibrary.GameRatingsSearchRequestByRatingId request, grpc::CallOptions options)
       {
-        return CallInvoker.AsyncServerStreamingCall(__Method_SearchGameRatingByReviewId, null, options, request);
+        return CallInvoker.AsyncServerStreamingCall(__Method_SearchGameRatingByRatingId, null, options, request);
       }
       /// <summary>
       /// Add a new gamerating record
@@ -2422,11 +2429,11 @@ namespace Gamelibrary {
       {
         return CallInvoker.AsyncServerStreamingCall(__Method_SearchGameImages, null, options, request);
       }
-      public virtual grpc::AsyncServerStreamingCall<global::Gamelibrary.GameImageRecord> SearchGameImageByGameId(global::Gamelibrary.GameImagesSearchRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncServerStreamingCall<global::Gamelibrary.GameImageRecord> SearchGameImageByGameId(global::Gamelibrary.GameImagesSearchRequestByGameId request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return SearchGameImageByGameId(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncServerStreamingCall<global::Gamelibrary.GameImageRecord> SearchGameImageByGameId(global::Gamelibrary.GameImagesSearchRequest request, grpc::CallOptions options)
+      public virtual grpc::AsyncServerStreamingCall<global::Gamelibrary.GameImageRecord> SearchGameImageByGameId(global::Gamelibrary.GameImagesSearchRequestByGameId request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncServerStreamingCall(__Method_SearchGameImageByGameId, null, options, request);
       }
@@ -2614,7 +2621,7 @@ namespace Gamelibrary {
           .AddMethod(__Method_DeleteGameReview, serviceImpl.DeleteGameReview)
           .AddMethod(__Method_SearchGameRatings, serviceImpl.SearchGameRatings)
           .AddMethod(__Method_SearchGameRatingByGameId, serviceImpl.SearchGameRatingByGameId)
-          .AddMethod(__Method_SearchGameRatingByReviewId, serviceImpl.SearchGameRatingByReviewId)
+          .AddMethod(__Method_SearchGameRatingByRatingId, serviceImpl.SearchGameRatingByRatingId)
           .AddMethod(__Method_AddGameRating, serviceImpl.AddGameRating)
           .AddMethod(__Method_EditGameRating, serviceImpl.EditGameRating)
           .AddMethod(__Method_DeleteGameRating, serviceImpl.DeleteGameRating)

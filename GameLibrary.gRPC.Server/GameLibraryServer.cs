@@ -751,6 +751,74 @@ namespace GameLibrary.gRPC.Server
 
         #region GameGenre Methods
 
+        public override async Task SearchGameGenresByGenreId(GameGenresSearchRequestByGenreId request, IServerStreamWriter<GameGenreRecord> responseStream, ServerCallContext context)
+        {
+            try
+            {
+                if (request != null)
+                {
+                    GameGenreList gameGenres = null;
+
+                    if (request.GenreId > 0)
+                    {
+                        gameGenres = GameLibraryAgent.ModelAssembler.GetGenresOfGame((int)request.GenreId);
+                    }
+
+                    if (gameGenres?.List?.Count > 0)
+                    {
+                        foreach (var gameGenre in gameGenres.List.Where(gameGenre => gameGenre?.Id > 0))
+                        {
+                            await responseStream.WriteAsync(GrpcGameGenre(gameGenre));
+                        }
+                    }
+                }
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+        }
+
+        public override async Task SearchGameGenresByGameId(GameGenresSearchRequestByGameId request, IServerStreamWriter<GameGenreRecord> responseStream, ServerCallContext context)
+        {
+            try
+            {
+                if (request != null)
+                {
+                    GameGenreList gameGenres = null;
+
+                    if (request.GameId > 0)
+                    {
+                        gameGenres = GameLibraryAgent.ModelAssembler.GetGamesOfGenre((int)request.GameId);
+                    }
+
+                    if (gameGenres?.List?.Count > 0)
+                    {
+                        foreach (var gameGenre in gameGenres.List.Where(gameGenre => gameGenre?.Id > 0))
+                        {
+                            await responseStream.WriteAsync(GrpcGameGenre(gameGenre));
+                        }
+                    }
+                }
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+        }
+
         public override async Task SearchGameGenres(GameGenresSearchRequest request, IServerStreamWriter<GameGenreRecord> responseStream, ServerCallContext context)
         {
             try
@@ -911,6 +979,74 @@ namespace GameLibrary.gRPC.Server
                     else // Return all gamegenres
                     {
                         gamePlatforms = GameLibraryAgent.ModelAssembler.GetGamePlatforms() ?? new GamePlatformList();
+                    }
+
+                    if (gamePlatforms?.List?.Count > 0)
+                    {
+                        foreach (var gamePlatform in gamePlatforms.List.Where(gamePlatform => gamePlatform?.Id > 0))
+                        {
+                            await responseStream.WriteAsync(GrpcGamePlatform(gamePlatform));
+                        }
+                    }
+                }
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+        }
+
+        public override async Task SearchGamePlatformsByGameId(GamePlatformsSearchRequestByGameId request, IServerStreamWriter<GamePlatformRecord> responseStream, ServerCallContext context)
+        {
+            try
+            {
+                if (request != null)
+                {
+                    GamePlatformList gamePlatforms = null;
+
+                    if (request.GameId > 0)
+                    {
+                        gamePlatforms = GameLibraryAgent.ModelAssembler.GetGamesofPlatform((int)request.GameId);
+                    }
+
+                    if (gamePlatforms?.List?.Count > 0)
+                    {
+                        foreach (var gamePlatform in gamePlatforms.List.Where(gamePlatform => gamePlatform?.Id > 0))
+                        {
+                            await responseStream.WriteAsync(GrpcGamePlatform(gamePlatform));
+                        }
+                    }
+                }
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+        }
+
+        public override async Task SearchGamePlatformsByPlatformId(GamePlatformsSearchRequestByPlatformId request, IServerStreamWriter<GamePlatformRecord> responseStream, ServerCallContext context)
+        {
+            try
+            {
+                if (request != null)
+                {
+                    GamePlatformList gamePlatforms = null;
+
+                    if (request.PlatformId > 0)
+                    {
+                        gamePlatforms = GameLibraryAgent.ModelAssembler.GetPlatformsOfGame((int)request.PlatformId);
                     }
 
                     if (gamePlatforms?.List?.Count > 0)
@@ -1225,10 +1361,44 @@ namespace GameLibrary.gRPC.Server
 
             return Task.FromResult(result);
         }
-        
+
         #endregion GameReview Methods
 
         #region GameImage Methods
+
+        public override async Task SearchGameImageByGameId(GameImagesSearchRequestByGameId request, IServerStreamWriter<GameImageRecord> responseStream, ServerCallContext context)
+        {
+            try
+            {
+                if (request != null)
+                {
+                    GameImageList gameImages = null;
+
+                    if (request.GameId > 0)
+                    {
+                        gameImages = GameLibraryAgent.ModelAssembler.GetGamesOfImage((int)request.GameId);
+                    }
+
+                    if (gameImages?.List?.Count > 0)
+                    {
+                        foreach (var gameImage in gameImages.List.Where(gameImage => gameImage?.Id > 0))
+                        {
+                            await responseStream.WriteAsync(GrpcGameImage(gameImage));
+                        }
+                    }
+                }
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+        }
 
         public override async Task SearchGameImages(GameImagesSearchRequest request, IServerStreamWriter<GameImageRecord> responseStream, ServerCallContext context)
         {
@@ -1363,8 +1533,213 @@ namespace GameLibrary.gRPC.Server
             return Task.FromResult(result);
         }
 
-       
+
         #endregion GameImage Methods
+
+        #region GameRating Methods
+
+        public override async Task SearchGameRatingByGameId(GameRatingsSearchRequestByGameId request, IServerStreamWriter<GameRatingRecord> responseStream, ServerCallContext context)
+        {
+            try
+            {
+                if (request != null)
+                {
+                    GameRatingList gameRating = null;
+
+                    if (request.GameId > 0)
+                    {
+                        gameRating = GameLibraryAgent.ModelAssembler.GetGamesOfRating((int)request.GameId);
+                    }
+
+                    if (gameRating?.List?.Count > 0)
+                    {
+                        foreach (var gamerating in gameRating.List.Where(gamerating => gamerating?.Id > 0))
+                        {
+                            await responseStream.WriteAsync(GrpcGameRating(gamerating));
+                        }
+                    }
+                }
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+        }
+
+        public override async Task SearchGameRatingByRatingId(GameRatingsSearchRequestByRatingId request, IServerStreamWriter<GameRatingRecord> responseStream, ServerCallContext context)
+        {
+            try
+            {
+                if (request != null)
+                {
+                    GameRatingList gameRatings = null;
+
+                    if (request.RatingId > 0)
+                    {
+                        gameRatings = GameLibraryAgent.ModelAssembler.GetRatingsOfGame((int)request.RatingId);
+                    }
+
+                    if (gameRatings?.List?.Count > 0)
+                    {
+                        foreach (var gameRating in gameRatings.List.Where(gameRating => gameRating?.Id > 0))
+                        {
+                            await responseStream.WriteAsync(GrpcGameRating(gameRating));
+                        }
+                    }
+                }
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+        }
+
+        public override async Task SearchGameRatings(GameRatingsSearchRequest request, IServerStreamWriter<GameRatingRecord> responseStream, ServerCallContext context)
+        {
+            try
+            {
+                if (request != null)
+                {
+                    var errorMessage = "";
+
+                    var gameRatings = new GameRatingList();
+
+                    if (request.GameratingId > 0)
+                    {
+                        var gameRating = GameLibraryAgent.ModelAssembler.GetGameRatingById((int)request.GameratingId, ref errorMessage);
+
+                        if (gameRating?.Id > 0)
+                        {
+                            gameRatings.Add(gameRating);
+                        }
+                    }
+
+                    else // Return all gameratings
+                    {
+                        gameRatings = GameLibraryAgent.ModelAssembler.GetGameRatings() ?? new GameRatingList();
+                    }
+
+                    if (gameRatings?.List?.Count > 0)
+                    {
+                        foreach (var gameRating in gameRatings.List.Where(gameRating => gameRating?.Id > 0))
+                        {
+                            await responseStream.WriteAsync(GrpcGameRating(gameRating));
+                        }
+                    }
+                }
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+        }
+
+        public override Task<GameRatingResult> AddGameRating(GameRatingRecord request, ServerCallContext context)
+        {
+            var result = new GameRatingResult();
+
+            try
+            {
+                var errorMessage = "";
+
+                var gameRating = GameRatingFromGrpc(request);
+
+                result.Success = GameLibraryAgent.ModelAssembler.AddOrEditGameRating(gameRating, ref errorMessage);
+
+                result.Gamerating = GrpcGameRating(gameRating);
+                result.ErrorMessage = errorMessage ?? "";
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+
+            return Task.FromResult(result);
+        }
+
+        public override Task<GameRatingResult> EditGameRating(GameRatingRecord request, ServerCallContext context)
+        {
+            var result = new GameRatingResult();
+
+            try
+            {
+                var errorMessage = "";
+
+                var gameRating = GameRatingFromGrpc(request);
+
+                result.Success = GameLibraryAgent.ModelAssembler.AddOrEditGameRating(gameRating, ref errorMessage);
+
+                result.Gamerating = GrpcGameRating(gameRating);
+                result.ErrorMessage = errorMessage ?? "";
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+
+            return Task.FromResult(result);
+        }
+
+        public override Task<GameRatingResult> DeleteGameRating(GameRatingRecord request, ServerCallContext context)
+        {
+            var result = new GameRatingResult();
+
+            try
+            {
+                var errorMessage = "";
+
+                var gameRating = GameRatingFromGrpc(request);
+
+                result.Success = GameLibraryAgent.ModelAssembler.DeleteGameRating(gameRating.Id, ref errorMessage);
+
+                result.Gamerating = GrpcGameRating(gameRating);
+                result.ErrorMessage = errorMessage ?? "";
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+
+            return Task.FromResult(result);
+        }
+
+        #endregion GameRating Methods
 
         #region Private Methods
 

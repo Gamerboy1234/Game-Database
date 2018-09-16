@@ -103,8 +103,8 @@ service GameLibrary {
 	// Obtains a list of games that match the request parameters.
 	// Streamed rather than returned at once (e.g. in a response message with a repeated field)
 	rpc SearchGameGenres(GameGenresSearchRequest) returns (stream GameGenreRecord) {}
-	rpc SearchGameGenresByGameId(GameGenresSearchRequest) returns (stream GameGenreRecord) {}
-	rpc SearchGameGenresByGenreId(GameGenresSearchRequest) returns (stream GameGenreRecord) {}
+	rpc SearchGameGenresByGameId(GameGenresSearchRequestByGameId) returns (stream GameGenreRecord) {}
+	rpc SearchGameGenresByGenreId(GameGenresSearchRequestByGenreId) returns (stream GameGenreRecord) {}
 
 	// Add a new gamegenre record
 	rpc AddGameGenre(GameGenreRecord) returns (GameGenreResult) {}
@@ -122,8 +122,8 @@ service GameLibrary {
 	// Obtains a list of gameplatforms that match the request parameters.
 	// Streamed rather than returned at once (e.g. in a response message with a repeated field)
 	rpc SearchGamePlatforms(GamePlatformsSearchRequest) returns (stream GamePlatformRecord) {}
-	rpc SearchGamePlatformsByGameId(GamePlatformsSearchRequest) returns (stream GamePlatformRecord) {}
-	rpc SearchGamePlatformsByPlatformId(GamePlatformsSearchRequest) returns (stream GamePlatformRecord) {}
+	rpc SearchGamePlatformsByGameId(GamePlatformsSearchRequestByGameId) returns (stream GamePlatformRecord) {}
+	rpc SearchGamePlatformsByPlatformId(GamePlatformsSearchRequestByPlatformId) returns (stream GamePlatformRecord) {}
 
 	// Add a new gameplatform record
 	rpc AddGamePlatform(GamePlatformRecord) returns (GamePlatformResult) {}
@@ -160,8 +160,8 @@ service GameLibrary {
 	// Obtains a list of gameratings that match the request parameters.
 	// Streamed rather than returned at once (e.g. in a response message with a repeated field)
 	rpc SearchGameRatings(GameRatingsSearchRequest) returns (stream GameRatingRecord) {}
-	rpc SearchGameRatingByGameId(GameRatingsSearchRequest) returns (stream GameRatingRecord) {}
-	rpc SearchGameRatingByReviewId(GameRatingsSearchRequest) returns (stream GameRatingRecord) {}
+	rpc SearchGameRatingByGameId(GameRatingsSearchRequestByGameId) returns (stream GameRatingRecord) {}
+	rpc SearchGameRatingByRatingId(GameRatingsSearchRequestByRatingId) returns (stream GameRatingRecord) {}
 
 	// Add a new gamerating record
 	rpc AddGameRating(GameRatingRecord) returns (GameRatingResult) {}
@@ -180,7 +180,7 @@ service GameLibrary {
 	// Obtains a list of gameimages that match the request parameters.
 	// Streamed rather than returned at once (e.g. in a response message with a repeated field)
 	rpc SearchGameImages(GameImagesSearchRequest) returns (stream GameImageRecord) {}
-	rpc SearchGameImageByGameId(GameImagesSearchRequest) returns (stream GameImageRecord) {}
+	rpc SearchGameImageByGameId(GameImagesSearchRequestByGameId) returns (stream GameImageRecord) {}
 	
 	// Add a new gameimage record
 	rpc AddGameImage(GameImageRecord) returns (GameImageResult) {}

@@ -22,7 +22,6 @@ namespace GameLibrary.gRpc.Client.Test
 
         #endregion Constants
 
-
         #region Test Cases
 
         [TestMethod]
@@ -626,7 +625,27 @@ namespace GameLibrary.gRpc.Client.Test
 
             Assert.IsNotNull(foundgameGenre);
             Assert.AreEqual(foundgameGenre.Id, gameGenre.Id);
-            
+
+            // Get the GameReview by GameId
+
+            gameGenres = client.SearchGameGenreByGameId(gameGenre.GameId);
+
+            Assert.IsNotNull(gameGenre);
+            Assert.AreEqual(gameGenres.List.Count, 0);
+
+            Assert.IsNotNull(foundgameGenre);
+            Assert.AreEqual(foundgameGenre.GameId, foundgameGenre.GameId);
+
+            // Get the GameReview by GenreId
+
+            gameGenres = client.SearchGameGenreByGenreId(gameGenre.GenreId);
+
+            Assert.IsNotNull(gameGenre);
+            Assert.AreEqual(gameGenres.List.Count, 0);
+
+            Assert.IsNotNull(foundgameGenre);
+            Assert.AreEqual(foundgameGenre.GenreId, foundgameGenre.GenreId);
+
             // Edit a GameGenre
 
             var editgamegenre = new GameGenre(gameGenre.Id, editedgame.Id, editedgenre.Id);
@@ -775,6 +794,26 @@ namespace GameLibrary.gRpc.Client.Test
             Assert.IsNotNull(foundgamePlatform);
             Assert.AreEqual(foundgamePlatform.Id, gamePlatform.Id);
 
+            // Get GamePlatform by game id
+
+            gamePlatforms = client.SearchGamePlatformByGameId(gamePlatform.GameId);
+
+            Assert.IsNotNull(gamePlatform);
+            Assert.AreEqual(gamePlatforms.List.Count, 0);
+
+            Assert.IsNotNull(foundgamePlatform);
+            Assert.AreEqual(foundgamePlatform.GameId, gamePlatform.GameId);
+
+            // Get GamePlatform by platform id
+
+            gamePlatforms = client.SearchGamePlatformByPlatformId(gamePlatform.PlatformId);
+
+            Assert.IsNotNull(gamePlatform);
+            Assert.AreEqual(gamePlatforms.List.Count, 0);
+
+            Assert.IsNotNull(foundgamePlatform);
+            Assert.AreEqual(foundgamePlatform.PlatformId, gamePlatform.PlatformId);
+
             // Edit a GamePlatform
 
             var editgameplatform = new GamePlatform(gamePlatform.Id, editedgame.Id, editedplatform.Id);
@@ -909,9 +948,7 @@ namespace GameLibrary.gRpc.Client.Test
             Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
             Assert.IsTrue(gameReview.Id > 0);
 
-
             // Get the GameReview by id.
-
 
             gameReviews = client.SearchGameReviews(gameReview.Id);
 
@@ -1078,9 +1115,7 @@ namespace GameLibrary.gRpc.Client.Test
             Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
             Assert.IsTrue(gameRating.Id > 0);
 
-
             // Get the GameRating by id.
-
 
             gameRatings = client.SearchGameRatings(gameRating.Id);
 
@@ -1091,6 +1126,26 @@ namespace GameLibrary.gRpc.Client.Test
 
             Assert.IsNotNull(foundgameRating);
             Assert.AreEqual(foundgameRating.Id, gameRating.Id);
+
+            // Get the GameRating by game id.
+
+            gameRatings = client.SearchGameRatingByGameId(gameRating.GameId);
+
+            Assert.IsNotNull(gameRating);
+            Assert.AreEqual(gameRatings.List.Count, 0);
+
+            Assert.IsNotNull(foundgameRating);
+            Assert.AreEqual(foundgameRating.GameId, gameRating.GameId);
+
+            // Get the GameRating by game id.
+
+            gameRatings = client.SearchGameRatingByRatingId(gameRating.RatingId);
+
+            Assert.IsNotNull(gameRating);
+            Assert.AreEqual(gameRatings.List.Count, 0);
+
+            Assert.IsNotNull(foundgameRating);
+            Assert.AreEqual(foundgameRating.RatingId, gameRating.RatingId);
 
             // Edit a GameRating
 

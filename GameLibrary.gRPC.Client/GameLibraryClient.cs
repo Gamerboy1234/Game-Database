@@ -786,6 +786,58 @@ namespace GameLibrary.gRPC.Client
 
         #region GameGenre Methods
 
+        public GameGenreList SearchGameGenreByGenreId(long genreId)
+        {
+            var result = new GameGenreList();
+
+            try
+            {
+                result = AsyncHelper.RunSync(() => SearchGameGenreByGenreIdAsync(genreId));
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        public GameGenreList SearchGameGenreByGameId(long gameId)
+        {
+            var result = new GameGenreList();
+
+            try
+            {
+                result = AsyncHelper.RunSync(() => SearchGameGenreByGameIdAsync(gameId));
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
         public GameGenreList SearchGameGenres(long gameGenreId)
         {
             var result = new GameGenreList();
@@ -936,6 +988,58 @@ namespace GameLibrary.gRPC.Client
         #endregion GameGenre Methods
 
         #region GamePlatform Methods
+
+        public GamePlatformList SearchGamePlatformByPlatformId(long platformId)
+        {
+            var result = new GamePlatformList();
+
+            try
+            {
+                result = AsyncHelper.RunSync(() => SearchGamePlatformByPlatformIdAsync(platformId));
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        public GamePlatformList SearchGamePlatformByGameId(long gameId)
+        {
+            var result = new GamePlatformList();
+
+            try
+            {
+                result = AsyncHelper.RunSync(() => SearchGamePlatformByGameIdAsync(gameId));
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            return result;
+        }
 
         public GamePlatformList SearchGamePlatforms(long gamePlatformId)
         {
@@ -1291,6 +1395,58 @@ namespace GameLibrary.gRPC.Client
 
         #region GameRating Methods
 
+        public GameRatingList SearchGameRatingByRatingId(long ratingId)
+        {
+            var result = new GameRatingList();
+
+            try
+            {
+                result = AsyncHelper.RunSync(() => SearchGameRatingByRatingIdAsync(ratingId));
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        public GameRatingList SearchGameRatingByGameId(long gameId)
+        {
+            var result = new GameRatingList();
+
+            try
+            {
+                result = AsyncHelper.RunSync(() => SearchGameRatingByGameIdAsync(gameId));
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
         public GameRatingList SearchGameRatings(long gameRating)
         {
             var result = new GameRatingList();
@@ -1439,6 +1595,183 @@ namespace GameLibrary.gRPC.Client
         }
 
         #endregion GameRating Methods
+
+        #region GameImage Methods
+
+        public GameImageList SearchGameImages(long gameImageId)
+        {
+            var result = new GameImageList();
+
+            try
+            {
+                result = AsyncHelper.RunSync(() => SearchGameImagesAsync(gameImageId));
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        public GameImageList SearchGameImageByGameId(long gameId)
+        {
+            var result = new GameImageList();
+
+            try
+            {
+                result = AsyncHelper.RunSync(() => SearchGameImagesByGameIdAsync(gameId));
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        public bool AddGameImage(GameImage gameImage, ref string errorMessage)
+        {
+            var result = false;
+
+            try
+            {
+                if (_client != null)
+                {
+                    var gameImageResult = _client.AddGameImage(GrpcGameImage(gameImage));
+
+                    if (gameImageResult != null)
+                    {
+                        result = gameImageResult.Success;
+                        errorMessage = gameImageResult.ErrorMessage;
+                        gameImage.Id = (int)(gameImageResult.Gameimage?.GameimageId ?? 0);
+                    }
+                }
+
+                else
+                {
+                    errorMessage = "Unable to create gRPC client";
+                }
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        public bool EditGameImage(GameImage gameImage, ref string errorMessage)
+        {
+            var result = false;
+
+            try
+            {
+                if (_client != null)
+                {
+                    var gameImageResult = _client.EditGameImage(GrpcGameImage(gameImage));
+
+                    if (gameImageResult != null)
+                    {
+                        result = gameImageResult.Success;
+                        errorMessage = gameImageResult.ErrorMessage;
+                    }
+                }
+
+                else
+                {
+                    errorMessage = "Unable to create gRPC client";
+                }
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        public bool DeleteGameImage(long gameImageId, ref string errorMessage)
+        {
+            var result = false;
+
+            try
+            {
+                if (_client != null)
+                {
+                    var gameImageResult = _client.DeleteGameImage(GrpcGameImage(new GameImage { Id = (int)gameImageId }));
+
+                    if (gameImageResult != null)
+                    {
+                        result = gameImageResult.Success;
+                        errorMessage = gameImageResult.ErrorMessage;
+                    }
+                }
+
+                else
+                {
+                    errorMessage = "Unable to create gRPC client";
+                }
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                errorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        #endregion GameImage Methods
 
         #region Private Methods
 
@@ -2317,6 +2650,360 @@ namespace GameLibrary.gRPC.Client
             return result;
         }
 
+        private async Task<GameRatingList> SearchGameRatingByGameIdAsync(long gameId)
+        {
+            var result = new GameRatingList();
+
+            try
+            {
+                var errorMessage = "";
+
+                if (_client != null)
+                {
+                    using (var gameResult = _client.SearchGameRatingByGameId(new GameRatingsSearchRequestByGameId
+                    {
+                        GameId = gameId,
+
+                    }))
+                    {
+                        var responseStream = gameResult.ResponseStream;
+
+                        while (await responseStream.MoveNext())
+                        {
+                            var gameratingRecord = responseStream.Current;
+
+                            if (gameratingRecord.GameratingId > 0)
+                            {
+                                result.Add(new GameRating(
+                                    (int)gameratingRecord.GameratingId,
+                                    (int)gameratingRecord.GameId,
+                                    (int)gameratingRecord.RatingId,
+                                    gameratingRecord.Notes ?? ""));
+                            }
+                        }
+                    }
+                }
+
+                else
+                {
+                    errorMessage = "Unable to create gRPC client";
+                }
+
+                result.ErrorMessage = errorMessage;
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+         private async Task<GameGenreList> SearchGameGenreByGameIdAsync(long gameId)
+        {
+            var result = new GameGenreList();
+
+            try
+            {
+                var errorMessage = "";
+
+                if (_client != null)
+                {
+                    using (var gameResult = _client.SearchGameGenresByGameId(new GameGenresSearchRequestByGameId
+                    {
+                        GameId = gameId,
+
+                    }))
+                    {
+                        var responseStream = gameResult.ResponseStream;
+
+                        while (await responseStream.MoveNext())
+                        {
+                            var gamegenreRecord = responseStream.Current;
+
+                            if (gamegenreRecord.GamegenreId > 0)
+                            {
+                                result.Add(new GameGenre(
+                                    (int)gamegenreRecord.GamegenreId,
+                                    (int)gamegenreRecord.GameId,
+                                    (int)gamegenreRecord.GenreId
+                                    ));
+                            }
+                        }
+                    }
+                }
+
+                else
+                {
+                    errorMessage = "Unable to create gRPC client";
+                }
+
+                result.ErrorMessage = errorMessage;
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        private async Task<GameGenreList> SearchGameGenreByGenreIdAsync(long genreId)
+        {
+            var result = new GameGenreList();
+
+            try
+            {
+                var errorMessage = "";
+
+                if (_client != null)
+                {
+                    using (var gameResult = _client.SearchGameGenresByGenreId(new GameGenresSearchRequestByGenreId
+                    {
+                        GenreId = genreId,
+
+                    }))
+                    {
+                        var responseStream = gameResult.ResponseStream;
+
+                        while (await responseStream.MoveNext())
+                        {
+                            var gamegenreRecord = responseStream.Current;
+
+                            if (gamegenreRecord.GamegenreId > 0)
+                            {
+                                result.Add(new GameGenre(
+                                    (int)gamegenreRecord.GamegenreId,
+                                    (int)gamegenreRecord.GameId,
+                                    (int)gamegenreRecord.GenreId
+                                    ));
+                            }
+                        }
+                    }
+                }
+
+                else
+                {
+                    errorMessage = "Unable to create gRPC client";
+                }
+
+                result.ErrorMessage = errorMessage;
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        private async Task<GameRatingList> SearchGameRatingByRatingIdAsync(long ratingId)
+        {
+            var result = new GameRatingList();
+
+            try
+            {
+                var errorMessage = "";
+
+                if (_client != null)
+                {
+                    using (var gameResult = _client.SearchGameRatingByRatingId(new GameRatingsSearchRequestByRatingId
+                    {
+                        RatingId = ratingId,
+
+                    }))
+                    {
+                        var responseStream = gameResult.ResponseStream;
+
+                        while (await responseStream.MoveNext())
+                        {
+                            var gameratingRecord = responseStream.Current;
+
+                            if (gameratingRecord.GameratingId > 0)
+                            {
+                                result.Add(new GameRating(
+                                    (int)gameratingRecord.GameratingId,
+                                    (int)gameratingRecord.GameId,
+                                    (int)gameratingRecord.RatingId,
+                                    gameratingRecord.Notes ?? ""));
+                            }
+                        }
+                    }
+                }
+
+                else
+                {
+                    errorMessage = "Unable to create gRPC client";
+                }
+
+                result.ErrorMessage = errorMessage;
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        private async Task<GamePlatformList> SearchGamePlatformByGameIdAsync(long gameId)
+        {
+            var result = new GamePlatformList();
+
+            try
+            {
+                var errorMessage = "";
+
+                if (_client != null)
+                {
+                    using (var gameResult = _client.SearchGamePlatformsByGameId(new GamePlatformsSearchRequestByGameId
+                    {
+                        GameId = gameId,
+
+                    }))
+                    {
+                        var responseStream = gameResult.ResponseStream;
+
+                        while (await responseStream.MoveNext())
+                        {
+                            var gameplatformRecord = responseStream.Current;
+
+                            if (gameplatformRecord.GameplatformId > 0)
+                            {
+                                result.Add(new GamePlatform(
+                                    (int)gameplatformRecord.GameplatformId,
+                                    (int)gameplatformRecord.GameId,
+                                    (int)gameplatformRecord.PlatformId
+                                    ));
+                            }
+                        }
+                    }
+                }
+
+                else
+                {
+                    errorMessage = "Unable to create gRPC client";
+                }
+
+                result.ErrorMessage = errorMessage;
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        private async Task<GamePlatformList> SearchGamePlatformByPlatformIdAsync(long platformId)
+        {
+            var result = new GamePlatformList();
+
+            try
+            {
+                var errorMessage = "";
+
+                if (_client != null)
+                {
+                    using (var gameResult = _client.SearchGamePlatformsByPlatformId(new GamePlatformsSearchRequestByPlatformId
+                    {
+                        PlatformId = platformId,
+
+                    }))
+                    {
+                        var responseStream = gameResult.ResponseStream;
+
+                        while (await responseStream.MoveNext())
+                        {
+                            var gameplatformRecord = responseStream.Current;
+
+                            if (gameplatformRecord.GameplatformId > 0)
+                            {
+                                result.Add(new GamePlatform(
+                                    (int)gameplatformRecord.GameplatformId,
+                                    (int)gameplatformRecord.GameId,
+                                    (int)gameplatformRecord.PlatformId
+                                    ));
+                            }
+                        }
+                    }
+                }
+
+                else
+                {
+                    errorMessage = "Unable to create gRPC client";
+                }
+
+                result.ErrorMessage = errorMessage;
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
         private static GameRatingRecord GrpcGameRating(GameRating gameRating)
         {
             var result = new GameRatingRecord();
@@ -2378,6 +3065,136 @@ namespace GameLibrary.gRPC.Client
             catch (Exception ex)
             {
                 Log.Error(ex);
+            }
+
+            return result;
+        }
+
+        private async Task<GameImageList> SearchGameImagesByGameIdAsync(long gameId)
+        {
+            var result = new GameImageList();
+
+            try
+            {
+                var errorMessage = "";
+
+                if (_client != null)
+                {
+                    using (var gameimageResult = _client.SearchGameImageByGameId(new GameImagesSearchRequestByGameId
+                    {
+                        GameId = gameId
+                    }))
+                    {
+                        var responseStream = gameimageResult.ResponseStream;
+
+                        while (await responseStream.MoveNext())
+                        {
+                            var gameImageRecord = responseStream.Current;
+
+                            if (gameImageRecord.GameimageId > 0)
+                            {
+                                if (gameImageRecord != null)
+                                {
+                                    result.Add(new GameImage((int)gameImageRecord.GameimageId, (int)gameImageRecord.GameimageId, null));
+                                        
+                                }
+
+                                if (gameImageRecord.Image != null)
+                                {
+
+                                    result.Add(new GameImage((int)gameImageRecord.GameimageId, (int)gameImageRecord.GameimageId, gameImageRecord.Image.ToByteArray()));
+
+                                }
+                            }
+                        }
+                    }
+                }
+
+                else
+                {
+                    errorMessage = "Unable to create gRPC client";
+                }
+
+                result.ErrorMessage = errorMessage;
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        private async Task<GameImageList> SearchGameImagesAsync(long gameimageId)
+        {
+            var result = new GameImageList();
+
+            try
+            {
+                var errorMessage = "";
+
+                if (_client != null)
+                {
+                    using (var gameimageResult = _client.SearchGameImages(new GameImagesSearchRequest
+                    {
+                        GameimageId = gameimageId
+                    }))
+                    {
+                        var responseStream = gameimageResult.ResponseStream;
+
+                        while (await responseStream.MoveNext())
+                        {
+                            var gameImageRecord = responseStream.Current;
+
+                            if (gameImageRecord.GameimageId > 0)
+                            {
+                                if (gameImageRecord != null)
+                                {
+                                    result.Add(new GameImage((int)gameImageRecord.GameimageId, (int)gameImageRecord.GameimageId, null));
+
+                                }
+
+                                if (gameImageRecord.Image != null)
+                                {
+
+                                    result.Add(new GameImage((int)gameImageRecord.GameimageId, (int)gameImageRecord.GameimageId, gameImageRecord.Image.ToByteArray()));
+
+                                }
+                            }
+                        }
+                    }
+                }
+
+                else
+                {
+                    errorMessage = "Unable to create gRPC client";
+                }
+
+                result.ErrorMessage = errorMessage;
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
             }
 
             return result;
