@@ -923,6 +923,27 @@ namespace GameLibrary.gRpc.Client.Test
             Assert.IsNotNull(foundgameReview);
             Assert.AreEqual(foundgameReview.Id, gameReview.Id);
 
+
+            // Get the GameReview by GameId
+
+            gameReviews = client.SearchGameReviewsByGameId(gameReview.GameId);
+
+            Assert.IsNotNull(gameReview);
+            Assert.AreEqual(gameReviews.List.Count, 0);
+
+            Assert.IsNotNull(foundgameReview);
+            Assert.AreEqual(foundgameReview.GameId, gameReview.GameId);
+
+            // Get the GameReview by ReviewId
+
+            gameReviews = client.SearchGameReviewsByReviewId(gameReview.ReviewId);
+
+            Assert.IsNotNull(gameReview);
+            Assert.AreEqual(gameReviews.List.Count, 0);
+
+            Assert.IsNotNull(foundgameReview);
+            Assert.AreEqual(foundgameReview.ReviewId, gameReview.ReviewId);
+
             // Edit a GameReview
 
             var editgamereview = new GameReview(gameReview.Id, editedgame.Id, editedreview.Id);
@@ -932,7 +953,7 @@ namespace GameLibrary.gRpc.Client.Test
 
             Assert.IsTrue(result);
             Assert.IsTrue(string.IsNullOrEmpty(errorMessage));
-            Assert.IsTrue(editPlatfrom.Id > 0);
+            Assert.IsTrue(editgamereview.Id > 0);
 
             // Get all GameReview
 

@@ -140,9 +140,9 @@ service GameLibrary {
 
 	// Obtains a list of gamereviews that match the request parameters.
 	// Streamed rather than returned at once (e.g. in a response message with a repeated field)
-	rpc SearchGameReviews(GameReviewsSearchRequest) returns (stream GameReviewRecord) {}
-	rpc SearchGameReviewByGameId(GameReviewsSearchRequest) returns (stream GameReviewRecord) {}
-	rpc SearchGameReviewByReviewId(GameReviewsSearchRequest) returns (stream GameReviewRecord) {}
+	rpc SearchGameReviews(SearchGameReviewsRequest) returns (stream GameReviewRecord) {}
+	rpc SearchGameReviewByGameId(SearchGameReviewByGameIdRequest) returns (stream GameReviewRecord) {}
+	rpc SearchGameReviewByReviewId(SearchGameReviewByReviewIdRequest) returns (stream GameReviewRecord) {}
 
 	// Add a new gamereview record
 	rpc AddGameReview(GameReviewRecord) returns (GameReviewResult) {}
@@ -365,15 +365,15 @@ message GamePlatformResult {
 // GameReviews
 ///////////////////////////////////////////////////////////////
 
-message GameReviewsSearchRequestByReviewId {
+message SearchGameReviewByReviewIdRequest {
 	int64 review_id = 1;
 }
 
-message GameReviewsSearchRequestByGameId {
+message SearchGameReviewByGameIdRequest {
 	int64 game_id = 1;
 }
 
-message GameReviewsSearchRequest {
+message SearchGameReviewsRequest {
 	int64 gamereview_id = 1;
 }
 
@@ -436,7 +436,7 @@ message GameImageRecord {
 	
 	int64 gameimage_id = 1;
 	int64 game_id = 2;
-	byte[] image = 3; 
+	bytes image = 3; 
 	
 }
 

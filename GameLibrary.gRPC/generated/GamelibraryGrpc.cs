@@ -36,8 +36,10 @@ namespace Gamelibrary {
     static readonly grpc::Marshaller<global::Gamelibrary.GamePlatformsSearchRequest> __Marshaller_gamelibrary_GamePlatformsSearchRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gamelibrary.GamePlatformsSearchRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Gamelibrary.GamePlatformRecord> __Marshaller_gamelibrary_GamePlatformRecord = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gamelibrary.GamePlatformRecord.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Gamelibrary.GamePlatformResult> __Marshaller_gamelibrary_GamePlatformResult = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gamelibrary.GamePlatformResult.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::Gamelibrary.GameReviewsSearchRequest> __Marshaller_gamelibrary_GameReviewsSearchRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gamelibrary.GameReviewsSearchRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Gamelibrary.SearchGameReviewsRequest> __Marshaller_gamelibrary_SearchGameReviewsRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gamelibrary.SearchGameReviewsRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Gamelibrary.GameReviewRecord> __Marshaller_gamelibrary_GameReviewRecord = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gamelibrary.GameReviewRecord.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Gamelibrary.SearchGameReviewByGameIdRequest> __Marshaller_gamelibrary_SearchGameReviewByGameIdRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gamelibrary.SearchGameReviewByGameIdRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Gamelibrary.SearchGameReviewByReviewIdRequest> __Marshaller_gamelibrary_SearchGameReviewByReviewIdRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gamelibrary.SearchGameReviewByReviewIdRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Gamelibrary.GameReviewResult> __Marshaller_gamelibrary_GameReviewResult = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gamelibrary.GameReviewResult.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Gamelibrary.GameRatingsSearchRequest> __Marshaller_gamelibrary_GameRatingsSearchRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gamelibrary.GameRatingsSearchRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Gamelibrary.GameRatingRecord> __Marshaller_gamelibrary_GameRatingRecord = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Gamelibrary.GameRatingRecord.Parser.ParseFrom);
@@ -270,25 +272,25 @@ namespace Gamelibrary {
         __Marshaller_gamelibrary_GamePlatformRecord,
         __Marshaller_gamelibrary_GamePlatformResult);
 
-    static readonly grpc::Method<global::Gamelibrary.GameReviewsSearchRequest, global::Gamelibrary.GameReviewRecord> __Method_SearchGameReviews = new grpc::Method<global::Gamelibrary.GameReviewsSearchRequest, global::Gamelibrary.GameReviewRecord>(
+    static readonly grpc::Method<global::Gamelibrary.SearchGameReviewsRequest, global::Gamelibrary.GameReviewRecord> __Method_SearchGameReviews = new grpc::Method<global::Gamelibrary.SearchGameReviewsRequest, global::Gamelibrary.GameReviewRecord>(
         grpc::MethodType.ServerStreaming,
         __ServiceName,
         "SearchGameReviews",
-        __Marshaller_gamelibrary_GameReviewsSearchRequest,
+        __Marshaller_gamelibrary_SearchGameReviewsRequest,
         __Marshaller_gamelibrary_GameReviewRecord);
 
-    static readonly grpc::Method<global::Gamelibrary.GameReviewsSearchRequest, global::Gamelibrary.GameReviewRecord> __Method_SearchGameReviewByGameId = new grpc::Method<global::Gamelibrary.GameReviewsSearchRequest, global::Gamelibrary.GameReviewRecord>(
+    static readonly grpc::Method<global::Gamelibrary.SearchGameReviewByGameIdRequest, global::Gamelibrary.GameReviewRecord> __Method_SearchGameReviewByGameId = new grpc::Method<global::Gamelibrary.SearchGameReviewByGameIdRequest, global::Gamelibrary.GameReviewRecord>(
         grpc::MethodType.ServerStreaming,
         __ServiceName,
         "SearchGameReviewByGameId",
-        __Marshaller_gamelibrary_GameReviewsSearchRequest,
+        __Marshaller_gamelibrary_SearchGameReviewByGameIdRequest,
         __Marshaller_gamelibrary_GameReviewRecord);
 
-    static readonly grpc::Method<global::Gamelibrary.GameReviewsSearchRequest, global::Gamelibrary.GameReviewRecord> __Method_SearchGameReviewByReviewId = new grpc::Method<global::Gamelibrary.GameReviewsSearchRequest, global::Gamelibrary.GameReviewRecord>(
+    static readonly grpc::Method<global::Gamelibrary.SearchGameReviewByReviewIdRequest, global::Gamelibrary.GameReviewRecord> __Method_SearchGameReviewByReviewId = new grpc::Method<global::Gamelibrary.SearchGameReviewByReviewIdRequest, global::Gamelibrary.GameReviewRecord>(
         grpc::MethodType.ServerStreaming,
         __ServiceName,
         "SearchGameReviewByReviewId",
-        __Marshaller_gamelibrary_GameReviewsSearchRequest,
+        __Marshaller_gamelibrary_SearchGameReviewByReviewIdRequest,
         __Marshaller_gamelibrary_GameReviewRecord);
 
     static readonly grpc::Method<global::Gamelibrary.GameReviewRecord, global::Gamelibrary.GameReviewResult> __Method_AddGameReview = new grpc::Method<global::Gamelibrary.GameReviewRecord, global::Gamelibrary.GameReviewResult>(
@@ -748,17 +750,17 @@ namespace Gamelibrary {
       /// <param name="responseStream">Used for sending responses back to the client.</param>
       /// <param name="context">The context of the server-side call handler being invoked.</param>
       /// <returns>A task indicating completion of the handler.</returns>
-      public virtual global::System.Threading.Tasks.Task SearchGameReviews(global::Gamelibrary.GameReviewsSearchRequest request, grpc::IServerStreamWriter<global::Gamelibrary.GameReviewRecord> responseStream, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task SearchGameReviews(global::Gamelibrary.SearchGameReviewsRequest request, grpc::IServerStreamWriter<global::Gamelibrary.GameReviewRecord> responseStream, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task SearchGameReviewByGameId(global::Gamelibrary.GameReviewsSearchRequest request, grpc::IServerStreamWriter<global::Gamelibrary.GameReviewRecord> responseStream, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task SearchGameReviewByGameId(global::Gamelibrary.SearchGameReviewByGameIdRequest request, grpc::IServerStreamWriter<global::Gamelibrary.GameReviewRecord> responseStream, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task SearchGameReviewByReviewId(global::Gamelibrary.GameReviewsSearchRequest request, grpc::IServerStreamWriter<global::Gamelibrary.GameReviewRecord> responseStream, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task SearchGameReviewByReviewId(global::Gamelibrary.SearchGameReviewByReviewIdRequest request, grpc::IServerStreamWriter<global::Gamelibrary.GameReviewRecord> responseStream, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -2061,7 +2063,7 @@ namespace Gamelibrary {
       /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
       /// <param name="cancellationToken">An optional token for canceling the call.</param>
       /// <returns>The call object.</returns>
-      public virtual grpc::AsyncServerStreamingCall<global::Gamelibrary.GameReviewRecord> SearchGameReviews(global::Gamelibrary.GameReviewsSearchRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncServerStreamingCall<global::Gamelibrary.GameReviewRecord> SearchGameReviews(global::Gamelibrary.SearchGameReviewsRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return SearchGameReviews(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
@@ -2072,23 +2074,23 @@ namespace Gamelibrary {
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
       /// <returns>The call object.</returns>
-      public virtual grpc::AsyncServerStreamingCall<global::Gamelibrary.GameReviewRecord> SearchGameReviews(global::Gamelibrary.GameReviewsSearchRequest request, grpc::CallOptions options)
+      public virtual grpc::AsyncServerStreamingCall<global::Gamelibrary.GameReviewRecord> SearchGameReviews(global::Gamelibrary.SearchGameReviewsRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncServerStreamingCall(__Method_SearchGameReviews, null, options, request);
       }
-      public virtual grpc::AsyncServerStreamingCall<global::Gamelibrary.GameReviewRecord> SearchGameReviewByGameId(global::Gamelibrary.GameReviewsSearchRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncServerStreamingCall<global::Gamelibrary.GameReviewRecord> SearchGameReviewByGameId(global::Gamelibrary.SearchGameReviewByGameIdRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return SearchGameReviewByGameId(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncServerStreamingCall<global::Gamelibrary.GameReviewRecord> SearchGameReviewByGameId(global::Gamelibrary.GameReviewsSearchRequest request, grpc::CallOptions options)
+      public virtual grpc::AsyncServerStreamingCall<global::Gamelibrary.GameReviewRecord> SearchGameReviewByGameId(global::Gamelibrary.SearchGameReviewByGameIdRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncServerStreamingCall(__Method_SearchGameReviewByGameId, null, options, request);
       }
-      public virtual grpc::AsyncServerStreamingCall<global::Gamelibrary.GameReviewRecord> SearchGameReviewByReviewId(global::Gamelibrary.GameReviewsSearchRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncServerStreamingCall<global::Gamelibrary.GameReviewRecord> SearchGameReviewByReviewId(global::Gamelibrary.SearchGameReviewByReviewIdRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return SearchGameReviewByReviewId(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncServerStreamingCall<global::Gamelibrary.GameReviewRecord> SearchGameReviewByReviewId(global::Gamelibrary.GameReviewsSearchRequest request, grpc::CallOptions options)
+      public virtual grpc::AsyncServerStreamingCall<global::Gamelibrary.GameReviewRecord> SearchGameReviewByReviewId(global::Gamelibrary.SearchGameReviewByReviewIdRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncServerStreamingCall(__Method_SearchGameReviewByReviewId, null, options, request);
       }

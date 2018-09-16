@@ -3,8 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GameImageLibrary.Model;
 using Gamelibrary;
 using GameLibrary.Model;
+using Google.Protobuf;
 using Grpc.Core;
 using Logger;
 using Utilities;
@@ -1112,6 +1114,58 @@ namespace GameLibrary.gRPC.Client
             return result;
         }
 
+        public GameReviewList SearchGameReviewsByGameId(long gameReview)
+        {
+            var result = new GameReviewList();
+
+            try
+            {
+                result = AsyncHelper.RunSync(() => SearchGameReviewByGameId(gameReview));
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        public GameReviewList SearchGameReviewsByReviewId(long gameReview)
+        {
+            var result = new GameReviewList();
+
+            try
+            {
+                result = AsyncHelper.RunSync(() => SearchGameReviewByReviewId(gameReview));
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
         public bool AddGameReview(GameReview gameReview, ref string errorMessage)
         {
             var result = false;
@@ -2033,7 +2087,6 @@ namespace GameLibrary.gRPC.Client
             return result;
         }
 
-
         private async Task<GameReviewList> SearchGameReviewsAsync(long gamereviewId)
         {
             var result = new GameReviewList();
@@ -2044,9 +2097,123 @@ namespace GameLibrary.gRPC.Client
 
                 if (_client != null)
                 {
-                    using (var gameplatformResult = _client.SearchGameReviews(new GameReviewsSearchRequest
+                    using (var gameplatformResult = _client.SearchGameReviews(new SearchGameReviewsRequest
                     {
                         GamereviewId = gamereviewId,
+                    }))
+                    {
+                        var responseStream = gameplatformResult.ResponseStream;
+
+                        while (await responseStream.MoveNext())
+                        {
+                            var gameReviewRecord = responseStream.Current;
+
+                            if (gameReviewRecord.GamereviewId > 0)
+                            {
+                                result.Add(new GameReview(
+                                    (int)gameReviewRecord.GamereviewId,
+                                    (int)gameReviewRecord.GameId,
+                                    (int)gameReviewRecord.ReviewId));
+                            }
+                        }
+                    }
+                }
+
+                else
+                {
+                    errorMessage = "Unable to create gRPC client";
+                }
+
+                result.ErrorMessage = errorMessage;
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        private async Task<GameReviewList> SearchGameReviewByGameId(long gameId)
+        {
+            var result = new GameReviewList();
+
+            try
+            {
+                var errorMessage = "";
+
+                if (_client != null)
+                {
+                    using (var gameplatformResult = _client.SearchGameReviewByGameId(new SearchGameReviewByGameIdRequest
+                    {
+                        GameId = gameId
+                    }))
+                    {
+                        var responseStream = gameplatformResult.ResponseStream;
+
+                        while (await responseStream.MoveNext())
+                        {
+                            var gameReviewRecord = responseStream.Current;
+
+                            if (gameReviewRecord.GamereviewId > 0)
+                            {
+                                result.Add(new GameReview(
+                                    (int)gameReviewRecord.GamereviewId,
+                                    (int)gameReviewRecord.GameId,
+                                    (int)gameReviewRecord.ReviewId));
+                            }
+                        }
+                    }
+                }
+
+                else
+                {
+                    errorMessage = "Unable to create gRPC client";
+                }
+
+                result.ErrorMessage = errorMessage;
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+                result.ErrorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        private async Task<GameReviewList> SearchGameReviewByReviewId(long reviewId)
+        {
+            var result = new GameReviewList();
+
+            try
+            {
+                var errorMessage = "";
+
+                if (_client != null)
+                {
+                    using (var gameplatformResult = _client.SearchGameReviewByReviewId(new SearchGameReviewByReviewIdRequest
+                    {
+                        ReviewId = reviewId
                     }))
                     {
                         var responseStream = gameplatformResult.ResponseStream;
@@ -2166,6 +2333,40 @@ namespace GameLibrary.gRPC.Client
                         Notes = gameRating.Notes
 
                     };
+                }
+            }
+
+            catch (RpcException ex)
+            {
+                Log.Error(ex);
+            }
+
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+
+            return result;
+        }
+
+        private static GameImageRecord GrpcGameImage(GameImage gameImage)
+        {
+            var result = new GameImageRecord();
+
+            try
+            {
+                if (gameImage != null)
+                {
+                    result = new GameImageRecord
+                    {
+                        GameimageId = gameImage.Id,
+                        GameId = gameImage.GameId
+                    };
+
+                    if (gameImage.Image != null)
+                    {
+                        result.Image = ByteString.CopyFrom(gameImage.Image);
+                    }
                 }
             }
 

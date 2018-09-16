@@ -1568,19 +1568,19 @@ namespace GameLibrary.Core
             return result;
         }
 
-        public GameReviewList GetGamesofReview(int gameId)
+        public GameReviewList GetGamesofReview(int reviewId)
         {
             var result = new GameReviewList();
 
             try
             {
-                if (gameId > 0)
+                if (reviewId > 0)
                 {
                     if (ValidateDatabaseConnection())
                     {
                         var errorMessage = "";
 
-                        if ((DataSetUtility.ValidateQueryResults(_databaseConnection.ExecuteQuery(GameReviewList.GenerateSelectQueryByGameId(gameId), ref errorMessage), out var queryResults)))
+                        if ((DataSetUtility.ValidateQueryResults(_databaseConnection.ExecuteQuery(GameReviewList.GenerateSelectQueryByGameId(reviewId), ref errorMessage), out var queryResults)))
                         {
                             result = GameReviewList.FromDictionaryList(DataSetUtility.ToDictionaryList(queryResults));
                         }

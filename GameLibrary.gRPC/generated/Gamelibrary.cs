@@ -66,122 +66,123 @@ namespace Gamelibrary {
             "bWVwbGF0Zm9ybV9pZBgBIAEoAxIPCgdnYW1lX2lkGAIgASgDEhMKC3BsYXRm",
             "b3JtX2lkGAMgASgDInMKEkdhbWVQbGF0Zm9ybVJlc3VsdBI1CgxnYW1lcGxh",
             "dGZvcm0YASABKAsyHy5nYW1lbGlicmFyeS5HYW1lUGxhdGZvcm1SZWNvcmQS",
-            "DwoHc3VjY2VzcxgCIAEoCBIVCg1lcnJvcl9tZXNzYWdlGAMgASgJIjcKIkdh",
-            "bWVSZXZpZXdzU2VhcmNoUmVxdWVzdEJ5UmV2aWV3SWQSEQoJcmV2aWV3X2lk",
-            "GAEgASgDIjMKIEdhbWVSZXZpZXdzU2VhcmNoUmVxdWVzdEJ5R2FtZUlkEg8K",
-            "B2dhbWVfaWQYASABKAMiMQoYR2FtZVJldmlld3NTZWFyY2hSZXF1ZXN0EhUK",
-            "DWdhbWVyZXZpZXdfaWQYASABKAMiTQoQR2FtZVJldmlld1JlY29yZBIVCg1n",
-            "YW1lcmV2aWV3X2lkGAEgASgDEg8KB2dhbWVfaWQYAiABKAMSEQoJcmV2aWV3",
-            "X2lkGAMgASgDIm0KEEdhbWVSZXZpZXdSZXN1bHQSMQoKZ2FtZXJldmlldxgB",
-            "IAEoCzIdLmdhbWVsaWJyYXJ5LkdhbWVSZXZpZXdSZWNvcmQSDwoHc3VjY2Vz",
-            "cxgCIAEoCBIVCg1lcnJvcl9tZXNzYWdlGAMgASgJIjcKIkdhbWVSYXRpbmdz",
-            "U2VhcmNoUmVxdWVzdEJ5UmF0aW5nSWQSEQoJcmF0aW5nX2lkGAEgASgDIjMK",
-            "IEdhbWVSYXRpbmdzU2VhcmNoUmVxdWVzdEJ5R2FtZUlkEg8KB2dhbWVfaWQY",
-            "ASABKAMiMQoYR2FtZVJhdGluZ3NTZWFyY2hSZXF1ZXN0EhUKDWdhbWVyYXRp",
-            "bmdfaWQYASABKAMiXAoQR2FtZVJhdGluZ1JlY29yZBIVCg1nYW1lcmF0aW5n",
-            "X2lkGAEgASgDEg8KB2dhbWVfaWQYAiABKAMSEQoJcmF0aW5nX2lkGAMgASgD",
-            "Eg0KBW5vdGVzGAQgASgJIm0KEEdhbWVSYXRpbmdSZXN1bHQSMQoKZ2FtZXJh",
-            "dGluZxgBIAEoCzIdLmdhbWVsaWJyYXJ5LkdhbWVSYXRpbmdSZWNvcmQSDwoH",
-            "c3VjY2VzcxgCIAEoCBIVCg1lcnJvcl9tZXNzYWdlGAMgASgJIjIKH0dhbWVJ",
-            "bWFnZXNTZWFyY2hSZXF1ZXN0QnlHYW1lSWQSDwoHZ2FtZV9pZBgBIAEoAyIv",
-            "ChdHYW1lSW1hZ2VzU2VhcmNoUmVxdWVzdBIUCgxnYW1laW1hZ2VfaWQYASAB",
-            "KAMiOAoPR2FtZUltYWdlUmVjb3JkEhQKDGdhbWVpbWFnZV9pZBgBIAEoAxIP",
-            "CgdnYW1lX2lkGAIgASgDImoKD0dhbWVJbWFnZVJlc3VsdBIvCglnYW1laW1h",
-            "Z2UYASABKAsyHC5nYW1lbGlicmFyeS5HYW1lSW1hZ2VSZWNvcmQSDwoHc3Vj",
-            "Y2VzcxgCIAEoCBIVCg1lcnJvcl9tZXNzYWdlGAMgASgJMpMgCgtHYW1lTGli",
-            "cmFyeRJLCgtTZWFyY2hHYW1lcxIfLmdhbWVsaWJyYXJ5LkdhbWVzU2VhcmNo",
-            "UmVxdWVzdBoXLmdhbWVsaWJyYXJ5LkdhbWVSZWNvcmQiADABEj0KB0FkZEdh",
-            "bWUSFy5nYW1lbGlicmFyeS5HYW1lUmVjb3JkGhcuZ2FtZWxpYnJhcnkuR2Ft",
-            "ZVJlc3VsdCIAEj4KCEVkaXRHYW1lEhcuZ2FtZWxpYnJhcnkuR2FtZVJlY29y",
-            "ZBoXLmdhbWVsaWJyYXJ5LkdhbWVSZXN1bHQiABJACgpEZWxldGVHYW1lEhcu",
-            "Z2FtZWxpYnJhcnkuR2FtZVJlY29yZBoXLmdhbWVsaWJyYXJ5LkdhbWVSZXN1",
-            "bHQiABJOCgxTZWFyY2hHZW5yZXMSIC5nYW1lbGlicmFyeS5HZW5yZXNTZWFy",
-            "Y2hSZXF1ZXN0GhguZ2FtZWxpYnJhcnkuR2VucmVSZWNvcmQiADABEkAKCEFk",
-            "ZEdlbnJlEhguZ2FtZWxpYnJhcnkuR2VucmVSZWNvcmQaGC5nYW1lbGlicmFy",
-            "eS5HZW5yZVJlc3VsdCIAEkEKCUVkaXRHZW5yZRIYLmdhbWVsaWJyYXJ5Lkdl",
-            "bnJlUmVjb3JkGhguZ2FtZWxpYnJhcnkuR2VucmVSZXN1bHQiABJDCgtEZWxl",
-            "dGVHZW5yZRIYLmdhbWVsaWJyYXJ5LkdlbnJlUmVjb3JkGhguZ2FtZWxpYnJh",
-            "cnkuR2VucmVSZXN1bHQiABJRCg1TZWFyY2hSYXRpbmdzEiEuZ2FtZWxpYnJh",
-            "cnkuUmF0aW5nc1NlYXJjaFJlcXVlc3QaGS5nYW1lbGlicmFyeS5SYXRpbmdS",
-            "ZWNvcmQiADABEkMKCUFkZFJhdGluZxIZLmdhbWVsaWJyYXJ5LlJhdGluZ1Jl",
-            "Y29yZBoZLmdhbWVsaWJyYXJ5LlJhdGluZ1Jlc3VsdCIAEkQKCkVkaXRSYXRp",
-            "bmcSGS5nYW1lbGlicmFyeS5SYXRpbmdSZWNvcmQaGS5nYW1lbGlicmFyeS5S",
-            "YXRpbmdSZXN1bHQiABJGCgxEZWxldGVSYXRpbmcSGS5nYW1lbGlicmFyeS5S",
-            "YXRpbmdSZWNvcmQaGS5nYW1lbGlicmFyeS5SYXRpbmdSZXN1bHQiABJRCg1T",
-            "ZWFyY2hSZXZpZXdzEiEuZ2FtZWxpYnJhcnkuUmV2aWV3c1NlYXJjaFJlcXVl",
-            "c3QaGS5nYW1lbGlicmFyeS5SZXZpZXdSZWNvcmQiADABEkMKCUFkZFJldmll",
-            "dxIZLmdhbWVsaWJyYXJ5LlJldmlld1JlY29yZBoZLmdhbWVsaWJyYXJ5LlJl",
-            "dmlld1Jlc3VsdCIAEkQKCkVkaXRSZXZpZXcSGS5nYW1lbGlicmFyeS5SZXZp",
-            "ZXdSZWNvcmQaGS5nYW1lbGlicmFyeS5SZXZpZXdSZXN1bHQiABJGCgxEZWxl",
-            "dGVSZXZpZXcSGS5nYW1lbGlicmFyeS5SZXZpZXdSZWNvcmQaGS5nYW1lbGli",
-            "cmFyeS5SZXZpZXdSZXN1bHQiABJXCg9TZWFyY2hQbGF0Zm9ybXMSIy5nYW1l",
-            "bGlicmFyeS5QbGF0Zm9ybXNTZWFyY2hSZXF1ZXN0GhsuZ2FtZWxpYnJhcnku",
-            "UGxhdGZvcm1SZWNvcmQiADABEkkKC0FkZFBsYXRmb3JtEhsuZ2FtZWxpYnJh",
-            "cnkuUGxhdGZvcm1SZWNvcmQaGy5nYW1lbGlicmFyeS5QbGF0Zm9ybVJlc3Vs",
-            "dCIAEkoKDEVkaXRQbGF0Zm9ybRIbLmdhbWVsaWJyYXJ5LlBsYXRmb3JtUmVj",
-            "b3JkGhsuZ2FtZWxpYnJhcnkuUGxhdGZvcm1SZXN1bHQiABJMCg5EZWxldGVQ",
-            "bGF0Zm9ybRIbLmdhbWVsaWJyYXJ5LlBsYXRmb3JtUmVjb3JkGhsuZ2FtZWxp",
-            "YnJhcnkuUGxhdGZvcm1SZXN1bHQiABJaChBTZWFyY2hHYW1lR2VucmVzEiQu",
-            "Z2FtZWxpYnJhcnkuR2FtZUdlbnJlc1NlYXJjaFJlcXVlc3QaHC5nYW1lbGli",
-            "cmFyeS5HYW1lR2VucmVSZWNvcmQiADABEmIKGFNlYXJjaEdhbWVHZW5yZXNC",
-            "eUdhbWVJZBIkLmdhbWVsaWJyYXJ5LkdhbWVHZW5yZXNTZWFyY2hSZXF1ZXN0",
-            "GhwuZ2FtZWxpYnJhcnkuR2FtZUdlbnJlUmVjb3JkIgAwARJjChlTZWFyY2hH",
-            "YW1lR2VucmVzQnlHZW5yZUlkEiQuZ2FtZWxpYnJhcnkuR2FtZUdlbnJlc1Nl",
-            "YXJjaFJlcXVlc3QaHC5nYW1lbGlicmFyeS5HYW1lR2VucmVSZWNvcmQiADAB",
-            "EkwKDEFkZEdhbWVHZW5yZRIcLmdhbWVsaWJyYXJ5LkdhbWVHZW5yZVJlY29y",
-            "ZBocLmdhbWVsaWJyYXJ5LkdhbWVHZW5yZVJlc3VsdCIAEk0KDUVkaXRHYW1l",
-            "R2VucmUSHC5nYW1lbGlicmFyeS5HYW1lR2VucmVSZWNvcmQaHC5nYW1lbGli",
-            "cmFyeS5HYW1lR2VucmVSZXN1bHQiABJPCg9EZWxldGVHYW1lR2VucmUSHC5n",
-            "YW1lbGlicmFyeS5HYW1lR2VucmVSZWNvcmQaHC5nYW1lbGlicmFyeS5HYW1l",
-            "R2VucmVSZXN1bHQiABJjChNTZWFyY2hHYW1lUGxhdGZvcm1zEicuZ2FtZWxp",
-            "YnJhcnkuR2FtZVBsYXRmb3Jtc1NlYXJjaFJlcXVlc3QaHy5nYW1lbGlicmFy",
-            "eS5HYW1lUGxhdGZvcm1SZWNvcmQiADABEmsKG1NlYXJjaEdhbWVQbGF0Zm9y",
-            "bXNCeUdhbWVJZBInLmdhbWVsaWJyYXJ5LkdhbWVQbGF0Zm9ybXNTZWFyY2hS",
-            "ZXF1ZXN0Gh8uZ2FtZWxpYnJhcnkuR2FtZVBsYXRmb3JtUmVjb3JkIgAwARJv",
-            "Ch9TZWFyY2hHYW1lUGxhdGZvcm1zQnlQbGF0Zm9ybUlkEicuZ2FtZWxpYnJh",
-            "cnkuR2FtZVBsYXRmb3Jtc1NlYXJjaFJlcXVlc3QaHy5nYW1lbGlicmFyeS5H",
-            "YW1lUGxhdGZvcm1SZWNvcmQiADABElUKD0FkZEdhbWVQbGF0Zm9ybRIfLmdh",
-            "bWVsaWJyYXJ5LkdhbWVQbGF0Zm9ybVJlY29yZBofLmdhbWVsaWJyYXJ5Lkdh",
-            "bWVQbGF0Zm9ybVJlc3VsdCIAElYKEEVkaXRHYW1lUGxhdGZvcm0SHy5nYW1l",
-            "bGlicmFyeS5HYW1lUGxhdGZvcm1SZWNvcmQaHy5nYW1lbGlicmFyeS5HYW1l",
-            "UGxhdGZvcm1SZXN1bHQiABJYChJEZWxldGVHYW1lUGxhdGZvcm0SHy5nYW1l",
-            "bGlicmFyeS5HYW1lUGxhdGZvcm1SZWNvcmQaHy5nYW1lbGlicmFyeS5HYW1l",
-            "UGxhdGZvcm1SZXN1bHQiABJdChFTZWFyY2hHYW1lUmV2aWV3cxIlLmdhbWVs",
-            "aWJyYXJ5LkdhbWVSZXZpZXdzU2VhcmNoUmVxdWVzdBodLmdhbWVsaWJyYXJ5",
-            "LkdhbWVSZXZpZXdSZWNvcmQiADABEmQKGFNlYXJjaEdhbWVSZXZpZXdCeUdh",
-            "bWVJZBIlLmdhbWVsaWJyYXJ5LkdhbWVSZXZpZXdzU2VhcmNoUmVxdWVzdBod",
-            "LmdhbWVsaWJyYXJ5LkdhbWVSZXZpZXdSZWNvcmQiADABEmYKGlNlYXJjaEdh",
-            "bWVSZXZpZXdCeVJldmlld0lkEiUuZ2FtZWxpYnJhcnkuR2FtZVJldmlld3NT",
-            "ZWFyY2hSZXF1ZXN0Gh0uZ2FtZWxpYnJhcnkuR2FtZVJldmlld1JlY29yZCIA",
-            "MAESTwoNQWRkR2FtZVJldmlldxIdLmdhbWVsaWJyYXJ5LkdhbWVSZXZpZXdS",
-            "ZWNvcmQaHS5nYW1lbGlicmFyeS5HYW1lUmV2aWV3UmVzdWx0IgASUAoORWRp",
-            "dEdhbWVSZXZpZXcSHS5nYW1lbGlicmFyeS5HYW1lUmV2aWV3UmVjb3JkGh0u",
-            "Z2FtZWxpYnJhcnkuR2FtZVJldmlld1Jlc3VsdCIAElIKEERlbGV0ZUdhbWVS",
-            "ZXZpZXcSHS5nYW1lbGlicmFyeS5HYW1lUmV2aWV3UmVjb3JkGh0uZ2FtZWxp",
-            "YnJhcnkuR2FtZVJldmlld1Jlc3VsdCIAEl0KEVNlYXJjaEdhbWVSYXRpbmdz",
-            "EiUuZ2FtZWxpYnJhcnkuR2FtZVJhdGluZ3NTZWFyY2hSZXF1ZXN0Gh0uZ2Ft",
-            "ZWxpYnJhcnkuR2FtZVJhdGluZ1JlY29yZCIAMAESZAoYU2VhcmNoR2FtZVJh",
-            "dGluZ0J5R2FtZUlkEiUuZ2FtZWxpYnJhcnkuR2FtZVJhdGluZ3NTZWFyY2hS",
-            "ZXF1ZXN0Gh0uZ2FtZWxpYnJhcnkuR2FtZVJhdGluZ1JlY29yZCIAMAESZgoa",
-            "U2VhcmNoR2FtZVJhdGluZ0J5UmV2aWV3SWQSJS5nYW1lbGlicmFyeS5HYW1l",
-            "UmF0aW5nc1NlYXJjaFJlcXVlc3QaHS5nYW1lbGlicmFyeS5HYW1lUmF0aW5n",
-            "UmVjb3JkIgAwARJPCg1BZGRHYW1lUmF0aW5nEh0uZ2FtZWxpYnJhcnkuR2Ft",
-            "ZVJhdGluZ1JlY29yZBodLmdhbWVsaWJyYXJ5LkdhbWVSYXRpbmdSZXN1bHQi",
-            "ABJQCg5FZGl0R2FtZVJhdGluZxIdLmdhbWVsaWJyYXJ5LkdhbWVSYXRpbmdS",
-            "ZWNvcmQaHS5nYW1lbGlicmFyeS5HYW1lUmF0aW5nUmVzdWx0IgASUgoQRGVs",
-            "ZXRlR2FtZVJhdGluZxIdLmdhbWVsaWJyYXJ5LkdhbWVSYXRpbmdSZWNvcmQa",
-            "HS5nYW1lbGlicmFyeS5HYW1lUmF0aW5nUmVzdWx0IgASWgoQU2VhcmNoR2Ft",
-            "ZUltYWdlcxIkLmdhbWVsaWJyYXJ5LkdhbWVJbWFnZXNTZWFyY2hSZXF1ZXN0",
-            "GhwuZ2FtZWxpYnJhcnkuR2FtZUltYWdlUmVjb3JkIgAwARJhChdTZWFyY2hH",
-            "YW1lSW1hZ2VCeUdhbWVJZBIkLmdhbWVsaWJyYXJ5LkdhbWVJbWFnZXNTZWFy",
-            "Y2hSZXF1ZXN0GhwuZ2FtZWxpYnJhcnkuR2FtZUltYWdlUmVjb3JkIgAwARJM",
-            "CgxBZGRHYW1lSW1hZ2USHC5nYW1lbGlicmFyeS5HYW1lSW1hZ2VSZWNvcmQa",
-            "HC5nYW1lbGlicmFyeS5HYW1lSW1hZ2VSZXN1bHQiABJNCg1FZGl0R2FtZUlt",
-            "YWdlEhwuZ2FtZWxpYnJhcnkuR2FtZUltYWdlUmVjb3JkGhwuZ2FtZWxpYnJh",
-            "cnkuR2FtZUltYWdlUmVzdWx0IgASTwoPRGVsZXRlR2FtZUltYWdlEhwuZ2Ft",
-            "ZWxpYnJhcnkuR2FtZUltYWdlUmVjb3JkGhwuZ2FtZWxpYnJhcnkuR2FtZUlt",
-            "YWdlUmVzdWx0IgBCLwoTaW8uZ3JwYy5nYW1lbGlicmFyeUIQR2FtZUxpYnJh",
-            "cnlQcm90b1ABogIDR0xCYgZwcm90bzM="));
+            "DwoHc3VjY2VzcxgCIAEoCBIVCg1lcnJvcl9tZXNzYWdlGAMgASgJIjYKIVNl",
+            "YXJjaEdhbWVSZXZpZXdCeVJldmlld0lkUmVxdWVzdBIRCglyZXZpZXdfaWQY",
+            "ASABKAMiMgofU2VhcmNoR2FtZVJldmlld0J5R2FtZUlkUmVxdWVzdBIPCgdn",
+            "YW1lX2lkGAEgASgDIjEKGFNlYXJjaEdhbWVSZXZpZXdzUmVxdWVzdBIVCg1n",
+            "YW1lcmV2aWV3X2lkGAEgASgDIk0KEEdhbWVSZXZpZXdSZWNvcmQSFQoNZ2Ft",
+            "ZXJldmlld19pZBgBIAEoAxIPCgdnYW1lX2lkGAIgASgDEhEKCXJldmlld19p",
+            "ZBgDIAEoAyJtChBHYW1lUmV2aWV3UmVzdWx0EjEKCmdhbWVyZXZpZXcYASAB",
+            "KAsyHS5nYW1lbGlicmFyeS5HYW1lUmV2aWV3UmVjb3JkEg8KB3N1Y2Nlc3MY",
+            "AiABKAgSFQoNZXJyb3JfbWVzc2FnZRgDIAEoCSI3CiJHYW1lUmF0aW5nc1Nl",
+            "YXJjaFJlcXVlc3RCeVJhdGluZ0lkEhEKCXJhdGluZ19pZBgBIAEoAyIzCiBH",
+            "YW1lUmF0aW5nc1NlYXJjaFJlcXVlc3RCeUdhbWVJZBIPCgdnYW1lX2lkGAEg",
+            "ASgDIjEKGEdhbWVSYXRpbmdzU2VhcmNoUmVxdWVzdBIVCg1nYW1lcmF0aW5n",
+            "X2lkGAEgASgDIlwKEEdhbWVSYXRpbmdSZWNvcmQSFQoNZ2FtZXJhdGluZ19p",
+            "ZBgBIAEoAxIPCgdnYW1lX2lkGAIgASgDEhEKCXJhdGluZ19pZBgDIAEoAxIN",
+            "CgVub3RlcxgEIAEoCSJtChBHYW1lUmF0aW5nUmVzdWx0EjEKCmdhbWVyYXRp",
+            "bmcYASABKAsyHS5nYW1lbGlicmFyeS5HYW1lUmF0aW5nUmVjb3JkEg8KB3N1",
+            "Y2Nlc3MYAiABKAgSFQoNZXJyb3JfbWVzc2FnZRgDIAEoCSIyCh9HYW1lSW1h",
+            "Z2VzU2VhcmNoUmVxdWVzdEJ5R2FtZUlkEg8KB2dhbWVfaWQYASABKAMiLwoX",
+            "R2FtZUltYWdlc1NlYXJjaFJlcXVlc3QSFAoMZ2FtZWltYWdlX2lkGAEgASgD",
+            "IkcKD0dhbWVJbWFnZVJlY29yZBIUCgxnYW1laW1hZ2VfaWQYASABKAMSDwoH",
+            "Z2FtZV9pZBgCIAEoAxINCgVpbWFnZRgDIAEoDCJqCg9HYW1lSW1hZ2VSZXN1",
+            "bHQSLwoJZ2FtZWltYWdlGAEgASgLMhwuZ2FtZWxpYnJhcnkuR2FtZUltYWdl",
+            "UmVjb3JkEg8KB3N1Y2Nlc3MYAiABKAgSFQoNZXJyb3JfbWVzc2FnZRgDIAEo",
+            "CTKjIAoLR2FtZUxpYnJhcnkSSwoLU2VhcmNoR2FtZXMSHy5nYW1lbGlicmFy",
+            "eS5HYW1lc1NlYXJjaFJlcXVlc3QaFy5nYW1lbGlicmFyeS5HYW1lUmVjb3Jk",
+            "IgAwARI9CgdBZGRHYW1lEhcuZ2FtZWxpYnJhcnkuR2FtZVJlY29yZBoXLmdh",
+            "bWVsaWJyYXJ5LkdhbWVSZXN1bHQiABI+CghFZGl0R2FtZRIXLmdhbWVsaWJy",
+            "YXJ5LkdhbWVSZWNvcmQaFy5nYW1lbGlicmFyeS5HYW1lUmVzdWx0IgASQAoK",
+            "RGVsZXRlR2FtZRIXLmdhbWVsaWJyYXJ5LkdhbWVSZWNvcmQaFy5nYW1lbGli",
+            "cmFyeS5HYW1lUmVzdWx0IgASTgoMU2VhcmNoR2VucmVzEiAuZ2FtZWxpYnJh",
+            "cnkuR2VucmVzU2VhcmNoUmVxdWVzdBoYLmdhbWVsaWJyYXJ5LkdlbnJlUmVj",
+            "b3JkIgAwARJACghBZGRHZW5yZRIYLmdhbWVsaWJyYXJ5LkdlbnJlUmVjb3Jk",
+            "GhguZ2FtZWxpYnJhcnkuR2VucmVSZXN1bHQiABJBCglFZGl0R2VucmUSGC5n",
+            "YW1lbGlicmFyeS5HZW5yZVJlY29yZBoYLmdhbWVsaWJyYXJ5LkdlbnJlUmVz",
+            "dWx0IgASQwoLRGVsZXRlR2VucmUSGC5nYW1lbGlicmFyeS5HZW5yZVJlY29y",
+            "ZBoYLmdhbWVsaWJyYXJ5LkdlbnJlUmVzdWx0IgASUQoNU2VhcmNoUmF0aW5n",
+            "cxIhLmdhbWVsaWJyYXJ5LlJhdGluZ3NTZWFyY2hSZXF1ZXN0GhkuZ2FtZWxp",
+            "YnJhcnkuUmF0aW5nUmVjb3JkIgAwARJDCglBZGRSYXRpbmcSGS5nYW1lbGli",
+            "cmFyeS5SYXRpbmdSZWNvcmQaGS5nYW1lbGlicmFyeS5SYXRpbmdSZXN1bHQi",
+            "ABJECgpFZGl0UmF0aW5nEhkuZ2FtZWxpYnJhcnkuUmF0aW5nUmVjb3JkGhku",
+            "Z2FtZWxpYnJhcnkuUmF0aW5nUmVzdWx0IgASRgoMRGVsZXRlUmF0aW5nEhku",
+            "Z2FtZWxpYnJhcnkuUmF0aW5nUmVjb3JkGhkuZ2FtZWxpYnJhcnkuUmF0aW5n",
+            "UmVzdWx0IgASUQoNU2VhcmNoUmV2aWV3cxIhLmdhbWVsaWJyYXJ5LlJldmll",
+            "d3NTZWFyY2hSZXF1ZXN0GhkuZ2FtZWxpYnJhcnkuUmV2aWV3UmVjb3JkIgAw",
+            "ARJDCglBZGRSZXZpZXcSGS5nYW1lbGlicmFyeS5SZXZpZXdSZWNvcmQaGS5n",
+            "YW1lbGlicmFyeS5SZXZpZXdSZXN1bHQiABJECgpFZGl0UmV2aWV3EhkuZ2Ft",
+            "ZWxpYnJhcnkuUmV2aWV3UmVjb3JkGhkuZ2FtZWxpYnJhcnkuUmV2aWV3UmVz",
+            "dWx0IgASRgoMRGVsZXRlUmV2aWV3EhkuZ2FtZWxpYnJhcnkuUmV2aWV3UmVj",
+            "b3JkGhkuZ2FtZWxpYnJhcnkuUmV2aWV3UmVzdWx0IgASVwoPU2VhcmNoUGxh",
+            "dGZvcm1zEiMuZ2FtZWxpYnJhcnkuUGxhdGZvcm1zU2VhcmNoUmVxdWVzdBob",
+            "LmdhbWVsaWJyYXJ5LlBsYXRmb3JtUmVjb3JkIgAwARJJCgtBZGRQbGF0Zm9y",
+            "bRIbLmdhbWVsaWJyYXJ5LlBsYXRmb3JtUmVjb3JkGhsuZ2FtZWxpYnJhcnku",
+            "UGxhdGZvcm1SZXN1bHQiABJKCgxFZGl0UGxhdGZvcm0SGy5nYW1lbGlicmFy",
+            "eS5QbGF0Zm9ybVJlY29yZBobLmdhbWVsaWJyYXJ5LlBsYXRmb3JtUmVzdWx0",
+            "IgASTAoORGVsZXRlUGxhdGZvcm0SGy5nYW1lbGlicmFyeS5QbGF0Zm9ybVJl",
+            "Y29yZBobLmdhbWVsaWJyYXJ5LlBsYXRmb3JtUmVzdWx0IgASWgoQU2VhcmNo",
+            "R2FtZUdlbnJlcxIkLmdhbWVsaWJyYXJ5LkdhbWVHZW5yZXNTZWFyY2hSZXF1",
+            "ZXN0GhwuZ2FtZWxpYnJhcnkuR2FtZUdlbnJlUmVjb3JkIgAwARJiChhTZWFy",
+            "Y2hHYW1lR2VucmVzQnlHYW1lSWQSJC5nYW1lbGlicmFyeS5HYW1lR2VucmVz",
+            "U2VhcmNoUmVxdWVzdBocLmdhbWVsaWJyYXJ5LkdhbWVHZW5yZVJlY29yZCIA",
+            "MAESYwoZU2VhcmNoR2FtZUdlbnJlc0J5R2VucmVJZBIkLmdhbWVsaWJyYXJ5",
+            "LkdhbWVHZW5yZXNTZWFyY2hSZXF1ZXN0GhwuZ2FtZWxpYnJhcnkuR2FtZUdl",
+            "bnJlUmVjb3JkIgAwARJMCgxBZGRHYW1lR2VucmUSHC5nYW1lbGlicmFyeS5H",
+            "YW1lR2VucmVSZWNvcmQaHC5nYW1lbGlicmFyeS5HYW1lR2VucmVSZXN1bHQi",
+            "ABJNCg1FZGl0R2FtZUdlbnJlEhwuZ2FtZWxpYnJhcnkuR2FtZUdlbnJlUmVj",
+            "b3JkGhwuZ2FtZWxpYnJhcnkuR2FtZUdlbnJlUmVzdWx0IgASTwoPRGVsZXRl",
+            "R2FtZUdlbnJlEhwuZ2FtZWxpYnJhcnkuR2FtZUdlbnJlUmVjb3JkGhwuZ2Ft",
+            "ZWxpYnJhcnkuR2FtZUdlbnJlUmVzdWx0IgASYwoTU2VhcmNoR2FtZVBsYXRm",
+            "b3JtcxInLmdhbWVsaWJyYXJ5LkdhbWVQbGF0Zm9ybXNTZWFyY2hSZXF1ZXN0",
+            "Gh8uZ2FtZWxpYnJhcnkuR2FtZVBsYXRmb3JtUmVjb3JkIgAwARJrChtTZWFy",
+            "Y2hHYW1lUGxhdGZvcm1zQnlHYW1lSWQSJy5nYW1lbGlicmFyeS5HYW1lUGxh",
+            "dGZvcm1zU2VhcmNoUmVxdWVzdBofLmdhbWVsaWJyYXJ5LkdhbWVQbGF0Zm9y",
+            "bVJlY29yZCIAMAESbwofU2VhcmNoR2FtZVBsYXRmb3Jtc0J5UGxhdGZvcm1J",
+            "ZBInLmdhbWVsaWJyYXJ5LkdhbWVQbGF0Zm9ybXNTZWFyY2hSZXF1ZXN0Gh8u",
+            "Z2FtZWxpYnJhcnkuR2FtZVBsYXRmb3JtUmVjb3JkIgAwARJVCg9BZGRHYW1l",
+            "UGxhdGZvcm0SHy5nYW1lbGlicmFyeS5HYW1lUGxhdGZvcm1SZWNvcmQaHy5n",
+            "YW1lbGlicmFyeS5HYW1lUGxhdGZvcm1SZXN1bHQiABJWChBFZGl0R2FtZVBs",
+            "YXRmb3JtEh8uZ2FtZWxpYnJhcnkuR2FtZVBsYXRmb3JtUmVjb3JkGh8uZ2Ft",
+            "ZWxpYnJhcnkuR2FtZVBsYXRmb3JtUmVzdWx0IgASWAoSRGVsZXRlR2FtZVBs",
+            "YXRmb3JtEh8uZ2FtZWxpYnJhcnkuR2FtZVBsYXRmb3JtUmVjb3JkGh8uZ2Ft",
+            "ZWxpYnJhcnkuR2FtZVBsYXRmb3JtUmVzdWx0IgASXQoRU2VhcmNoR2FtZVJl",
+            "dmlld3MSJS5nYW1lbGlicmFyeS5TZWFyY2hHYW1lUmV2aWV3c1JlcXVlc3Qa",
+            "HS5nYW1lbGlicmFyeS5HYW1lUmV2aWV3UmVjb3JkIgAwARJrChhTZWFyY2hH",
+            "YW1lUmV2aWV3QnlHYW1lSWQSLC5nYW1lbGlicmFyeS5TZWFyY2hHYW1lUmV2",
+            "aWV3QnlHYW1lSWRSZXF1ZXN0Gh0uZ2FtZWxpYnJhcnkuR2FtZVJldmlld1Jl",
+            "Y29yZCIAMAESbwoaU2VhcmNoR2FtZVJldmlld0J5UmV2aWV3SWQSLi5nYW1l",
+            "bGlicmFyeS5TZWFyY2hHYW1lUmV2aWV3QnlSZXZpZXdJZFJlcXVlc3QaHS5n",
+            "YW1lbGlicmFyeS5HYW1lUmV2aWV3UmVjb3JkIgAwARJPCg1BZGRHYW1lUmV2",
+            "aWV3Eh0uZ2FtZWxpYnJhcnkuR2FtZVJldmlld1JlY29yZBodLmdhbWVsaWJy",
+            "YXJ5LkdhbWVSZXZpZXdSZXN1bHQiABJQCg5FZGl0R2FtZVJldmlldxIdLmdh",
+            "bWVsaWJyYXJ5LkdhbWVSZXZpZXdSZWNvcmQaHS5nYW1lbGlicmFyeS5HYW1l",
+            "UmV2aWV3UmVzdWx0IgASUgoQRGVsZXRlR2FtZVJldmlldxIdLmdhbWVsaWJy",
+            "YXJ5LkdhbWVSZXZpZXdSZWNvcmQaHS5nYW1lbGlicmFyeS5HYW1lUmV2aWV3",
+            "UmVzdWx0IgASXQoRU2VhcmNoR2FtZVJhdGluZ3MSJS5nYW1lbGlicmFyeS5H",
+            "YW1lUmF0aW5nc1NlYXJjaFJlcXVlc3QaHS5nYW1lbGlicmFyeS5HYW1lUmF0",
+            "aW5nUmVjb3JkIgAwARJkChhTZWFyY2hHYW1lUmF0aW5nQnlHYW1lSWQSJS5n",
+            "YW1lbGlicmFyeS5HYW1lUmF0aW5nc1NlYXJjaFJlcXVlc3QaHS5nYW1lbGli",
+            "cmFyeS5HYW1lUmF0aW5nUmVjb3JkIgAwARJmChpTZWFyY2hHYW1lUmF0aW5n",
+            "QnlSZXZpZXdJZBIlLmdhbWVsaWJyYXJ5LkdhbWVSYXRpbmdzU2VhcmNoUmVx",
+            "dWVzdBodLmdhbWVsaWJyYXJ5LkdhbWVSYXRpbmdSZWNvcmQiADABEk8KDUFk",
+            "ZEdhbWVSYXRpbmcSHS5nYW1lbGlicmFyeS5HYW1lUmF0aW5nUmVjb3JkGh0u",
+            "Z2FtZWxpYnJhcnkuR2FtZVJhdGluZ1Jlc3VsdCIAElAKDkVkaXRHYW1lUmF0",
+            "aW5nEh0uZ2FtZWxpYnJhcnkuR2FtZVJhdGluZ1JlY29yZBodLmdhbWVsaWJy",
+            "YXJ5LkdhbWVSYXRpbmdSZXN1bHQiABJSChBEZWxldGVHYW1lUmF0aW5nEh0u",
+            "Z2FtZWxpYnJhcnkuR2FtZVJhdGluZ1JlY29yZBodLmdhbWVsaWJyYXJ5Lkdh",
+            "bWVSYXRpbmdSZXN1bHQiABJaChBTZWFyY2hHYW1lSW1hZ2VzEiQuZ2FtZWxp",
+            "YnJhcnkuR2FtZUltYWdlc1NlYXJjaFJlcXVlc3QaHC5nYW1lbGlicmFyeS5H",
+            "YW1lSW1hZ2VSZWNvcmQiADABEmEKF1NlYXJjaEdhbWVJbWFnZUJ5R2FtZUlk",
+            "EiQuZ2FtZWxpYnJhcnkuR2FtZUltYWdlc1NlYXJjaFJlcXVlc3QaHC5nYW1l",
+            "bGlicmFyeS5HYW1lSW1hZ2VSZWNvcmQiADABEkwKDEFkZEdhbWVJbWFnZRIc",
+            "LmdhbWVsaWJyYXJ5LkdhbWVJbWFnZVJlY29yZBocLmdhbWVsaWJyYXJ5Lkdh",
+            "bWVJbWFnZVJlc3VsdCIAEk0KDUVkaXRHYW1lSW1hZ2USHC5nYW1lbGlicmFy",
+            "eS5HYW1lSW1hZ2VSZWNvcmQaHC5nYW1lbGlicmFyeS5HYW1lSW1hZ2VSZXN1",
+            "bHQiABJPCg9EZWxldGVHYW1lSW1hZ2USHC5nYW1lbGlicmFyeS5HYW1lSW1h",
+            "Z2VSZWNvcmQaHC5nYW1lbGlicmFyeS5HYW1lSW1hZ2VSZXN1bHQiAEIvChNp",
+            "by5ncnBjLmdhbWVsaWJyYXJ5QhBHYW1lTGlicmFyeVByb3RvUAGiAgNHTEJi",
+            "BnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -210,9 +211,9 @@ namespace Gamelibrary {
             new pbr::GeneratedClrTypeInfo(typeof(global::Gamelibrary.GamePlatformsSearchRequestByPlatformId), global::Gamelibrary.GamePlatformsSearchRequestByPlatformId.Parser, new[]{ "PlatformId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Gamelibrary.GamePlatformRecord), global::Gamelibrary.GamePlatformRecord.Parser, new[]{ "GameplatformId", "GameId", "PlatformId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Gamelibrary.GamePlatformResult), global::Gamelibrary.GamePlatformResult.Parser, new[]{ "Gameplatform", "Success", "ErrorMessage" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Gamelibrary.GameReviewsSearchRequestByReviewId), global::Gamelibrary.GameReviewsSearchRequestByReviewId.Parser, new[]{ "ReviewId" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Gamelibrary.GameReviewsSearchRequestByGameId), global::Gamelibrary.GameReviewsSearchRequestByGameId.Parser, new[]{ "GameId" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Gamelibrary.GameReviewsSearchRequest), global::Gamelibrary.GameReviewsSearchRequest.Parser, new[]{ "GamereviewId" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Gamelibrary.SearchGameReviewByReviewIdRequest), global::Gamelibrary.SearchGameReviewByReviewIdRequest.Parser, new[]{ "ReviewId" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Gamelibrary.SearchGameReviewByGameIdRequest), global::Gamelibrary.SearchGameReviewByGameIdRequest.Parser, new[]{ "GameId" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Gamelibrary.SearchGameReviewsRequest), global::Gamelibrary.SearchGameReviewsRequest.Parser, new[]{ "GamereviewId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Gamelibrary.GameReviewRecord), global::Gamelibrary.GameReviewRecord.Parser, new[]{ "GamereviewId", "GameId", "ReviewId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Gamelibrary.GameReviewResult), global::Gamelibrary.GameReviewResult.Parser, new[]{ "Gamereview", "Success", "ErrorMessage" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Gamelibrary.GameRatingsSearchRequestByRatingId), global::Gamelibrary.GameRatingsSearchRequestByRatingId.Parser, new[]{ "RatingId" }, null, null, null),
@@ -222,7 +223,7 @@ namespace Gamelibrary {
             new pbr::GeneratedClrTypeInfo(typeof(global::Gamelibrary.GameRatingResult), global::Gamelibrary.GameRatingResult.Parser, new[]{ "Gamerating", "Success", "ErrorMessage" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Gamelibrary.GameImagesSearchRequestByGameId), global::Gamelibrary.GameImagesSearchRequestByGameId.Parser, new[]{ "GameId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Gamelibrary.GameImagesSearchRequest), global::Gamelibrary.GameImagesSearchRequest.Parser, new[]{ "GameimageId" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Gamelibrary.GameImageRecord), global::Gamelibrary.GameImageRecord.Parser, new[]{ "GameimageId", "GameId" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Gamelibrary.GameImageRecord), global::Gamelibrary.GameImageRecord.Parser, new[]{ "GameimageId", "GameId", "Image" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Gamelibrary.GameImageResult), global::Gamelibrary.GameImageResult.Parser, new[]{ "Gameimage", "Success", "ErrorMessage" }, null, null, null)
           }));
     }
@@ -4477,11 +4478,11 @@ namespace Gamelibrary {
 
   }
 
-  public sealed partial class GameReviewsSearchRequestByReviewId : pb::IMessage<GameReviewsSearchRequestByReviewId> {
-    private static readonly pb::MessageParser<GameReviewsSearchRequestByReviewId> _parser = new pb::MessageParser<GameReviewsSearchRequestByReviewId>(() => new GameReviewsSearchRequestByReviewId());
+  public sealed partial class SearchGameReviewByReviewIdRequest : pb::IMessage<SearchGameReviewByReviewIdRequest> {
+    private static readonly pb::MessageParser<SearchGameReviewByReviewIdRequest> _parser = new pb::MessageParser<SearchGameReviewByReviewIdRequest>(() => new SearchGameReviewByReviewIdRequest());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<GameReviewsSearchRequestByReviewId> Parser { get { return _parser; } }
+    public static pb::MessageParser<SearchGameReviewByReviewIdRequest> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -4494,21 +4495,21 @@ namespace Gamelibrary {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public GameReviewsSearchRequestByReviewId() {
+    public SearchGameReviewByReviewIdRequest() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public GameReviewsSearchRequestByReviewId(GameReviewsSearchRequestByReviewId other) : this() {
+    public SearchGameReviewByReviewIdRequest(SearchGameReviewByReviewIdRequest other) : this() {
       reviewId_ = other.reviewId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public GameReviewsSearchRequestByReviewId Clone() {
-      return new GameReviewsSearchRequestByReviewId(this);
+    public SearchGameReviewByReviewIdRequest Clone() {
+      return new SearchGameReviewByReviewIdRequest(this);
     }
 
     /// <summary>Field number for the "review_id" field.</summary>
@@ -4524,11 +4525,11 @@ namespace Gamelibrary {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as GameReviewsSearchRequestByReviewId);
+      return Equals(other as SearchGameReviewByReviewIdRequest);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(GameReviewsSearchRequestByReviewId other) {
+    public bool Equals(SearchGameReviewByReviewIdRequest other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -4578,7 +4579,7 @@ namespace Gamelibrary {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(GameReviewsSearchRequestByReviewId other) {
+    public void MergeFrom(SearchGameReviewByReviewIdRequest other) {
       if (other == null) {
         return;
       }
@@ -4606,11 +4607,11 @@ namespace Gamelibrary {
 
   }
 
-  public sealed partial class GameReviewsSearchRequestByGameId : pb::IMessage<GameReviewsSearchRequestByGameId> {
-    private static readonly pb::MessageParser<GameReviewsSearchRequestByGameId> _parser = new pb::MessageParser<GameReviewsSearchRequestByGameId>(() => new GameReviewsSearchRequestByGameId());
+  public sealed partial class SearchGameReviewByGameIdRequest : pb::IMessage<SearchGameReviewByGameIdRequest> {
+    private static readonly pb::MessageParser<SearchGameReviewByGameIdRequest> _parser = new pb::MessageParser<SearchGameReviewByGameIdRequest>(() => new SearchGameReviewByGameIdRequest());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<GameReviewsSearchRequestByGameId> Parser { get { return _parser; } }
+    public static pb::MessageParser<SearchGameReviewByGameIdRequest> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -4623,21 +4624,21 @@ namespace Gamelibrary {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public GameReviewsSearchRequestByGameId() {
+    public SearchGameReviewByGameIdRequest() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public GameReviewsSearchRequestByGameId(GameReviewsSearchRequestByGameId other) : this() {
+    public SearchGameReviewByGameIdRequest(SearchGameReviewByGameIdRequest other) : this() {
       gameId_ = other.gameId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public GameReviewsSearchRequestByGameId Clone() {
-      return new GameReviewsSearchRequestByGameId(this);
+    public SearchGameReviewByGameIdRequest Clone() {
+      return new SearchGameReviewByGameIdRequest(this);
     }
 
     /// <summary>Field number for the "game_id" field.</summary>
@@ -4653,11 +4654,11 @@ namespace Gamelibrary {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as GameReviewsSearchRequestByGameId);
+      return Equals(other as SearchGameReviewByGameIdRequest);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(GameReviewsSearchRequestByGameId other) {
+    public bool Equals(SearchGameReviewByGameIdRequest other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -4707,7 +4708,7 @@ namespace Gamelibrary {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(GameReviewsSearchRequestByGameId other) {
+    public void MergeFrom(SearchGameReviewByGameIdRequest other) {
       if (other == null) {
         return;
       }
@@ -4735,11 +4736,11 @@ namespace Gamelibrary {
 
   }
 
-  public sealed partial class GameReviewsSearchRequest : pb::IMessage<GameReviewsSearchRequest> {
-    private static readonly pb::MessageParser<GameReviewsSearchRequest> _parser = new pb::MessageParser<GameReviewsSearchRequest>(() => new GameReviewsSearchRequest());
+  public sealed partial class SearchGameReviewsRequest : pb::IMessage<SearchGameReviewsRequest> {
+    private static readonly pb::MessageParser<SearchGameReviewsRequest> _parser = new pb::MessageParser<SearchGameReviewsRequest>(() => new SearchGameReviewsRequest());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<GameReviewsSearchRequest> Parser { get { return _parser; } }
+    public static pb::MessageParser<SearchGameReviewsRequest> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -4752,21 +4753,21 @@ namespace Gamelibrary {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public GameReviewsSearchRequest() {
+    public SearchGameReviewsRequest() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public GameReviewsSearchRequest(GameReviewsSearchRequest other) : this() {
+    public SearchGameReviewsRequest(SearchGameReviewsRequest other) : this() {
       gamereviewId_ = other.gamereviewId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public GameReviewsSearchRequest Clone() {
-      return new GameReviewsSearchRequest(this);
+    public SearchGameReviewsRequest Clone() {
+      return new SearchGameReviewsRequest(this);
     }
 
     /// <summary>Field number for the "gamereview_id" field.</summary>
@@ -4782,11 +4783,11 @@ namespace Gamelibrary {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as GameReviewsSearchRequest);
+      return Equals(other as SearchGameReviewsRequest);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(GameReviewsSearchRequest other) {
+    public bool Equals(SearchGameReviewsRequest other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -4836,7 +4837,7 @@ namespace Gamelibrary {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(GameReviewsSearchRequest other) {
+    public void MergeFrom(SearchGameReviewsRequest other) {
       if (other == null) {
         return;
       }
@@ -6316,6 +6317,7 @@ namespace Gamelibrary {
     public GameImageRecord(GameImageRecord other) : this() {
       gameimageId_ = other.gameimageId_;
       gameId_ = other.gameId_;
+      image_ = other.image_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -6346,6 +6348,17 @@ namespace Gamelibrary {
       }
     }
 
+    /// <summary>Field number for the "image" field.</summary>
+    public const int ImageFieldNumber = 3;
+    private pb::ByteString image_ = pb::ByteString.Empty;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pb::ByteString Image {
+      get { return image_; }
+      set {
+        image_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as GameImageRecord);
@@ -6361,6 +6374,7 @@ namespace Gamelibrary {
       }
       if (GameimageId != other.GameimageId) return false;
       if (GameId != other.GameId) return false;
+      if (Image != other.Image) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -6369,6 +6383,7 @@ namespace Gamelibrary {
       int hash = 1;
       if (GameimageId != 0L) hash ^= GameimageId.GetHashCode();
       if (GameId != 0L) hash ^= GameId.GetHashCode();
+      if (Image.Length != 0) hash ^= Image.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -6390,6 +6405,10 @@ namespace Gamelibrary {
         output.WriteRawTag(16);
         output.WriteInt64(GameId);
       }
+      if (Image.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteBytes(Image);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -6403,6 +6422,9 @@ namespace Gamelibrary {
       }
       if (GameId != 0L) {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(GameId);
+      }
+      if (Image.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(Image);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -6421,6 +6443,9 @@ namespace Gamelibrary {
       if (other.GameId != 0L) {
         GameId = other.GameId;
       }
+      if (other.Image.Length != 0) {
+        Image = other.Image;
+      }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -6438,6 +6463,10 @@ namespace Gamelibrary {
           }
           case 16: {
             GameId = input.ReadInt64();
+            break;
+          }
+          case 26: {
+            Image = input.ReadBytes();
             break;
           }
         }
