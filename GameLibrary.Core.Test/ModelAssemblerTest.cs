@@ -792,7 +792,7 @@ namespace GenreLibrary.Core.Test
 
             // find gameGenre by gameId
 
-            var foundgameGenres = modelAssembler.GetGenresOfGame(gameGenre.GameId);
+            var foundgameGenres = modelAssembler.GetGamesOfGenre(gameGenre.GameId);
 
             Assert.IsNotNull(foundgameGenre);
             Assert.IsTrue(string.IsNullOrEmpty(foundgameGenres.ErrorMessage));
@@ -800,7 +800,7 @@ namespace GenreLibrary.Core.Test
 
             // find gameGenre by genreId
 
-            foundgameGenres = modelAssembler.GetGamesOfGenre(gameGenre.GenreId);
+            foundgameGenres = modelAssembler.GetGenresOfGame(gameGenre.GenreId);
 
             Assert.IsNotNull(foundgameGenre);
             Assert.IsTrue(string.IsNullOrEmpty(foundgameGenres.ErrorMessage));

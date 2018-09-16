@@ -631,7 +631,7 @@ namespace GameLibrary.gRpc.Client.Test
             gameGenres = client.SearchGameGenreByGameId(gameGenre.GameId);
 
             Assert.IsNotNull(gameGenre);
-            Assert.AreEqual(gameGenres.List.Count, 0);
+            Assert.AreEqual(gameGenres.List.Count, 1);
 
             Assert.IsNotNull(foundgameGenre);
             Assert.AreEqual(foundgameGenre.GameId, foundgameGenre.GameId);
@@ -641,8 +641,7 @@ namespace GameLibrary.gRpc.Client.Test
             gameGenres = client.SearchGameGenreByGenreId(gameGenre.GenreId);
 
             Assert.IsNotNull(gameGenre);
-            Assert.AreEqual(gameGenres.List.Count, 0);
-
+            
             Assert.IsNotNull(foundgameGenre);
             Assert.AreEqual(foundgameGenre.GenreId, foundgameGenre.GenreId);
 
@@ -799,8 +798,7 @@ namespace GameLibrary.gRpc.Client.Test
             gamePlatforms = client.SearchGamePlatformByGameId(gamePlatform.GameId);
 
             Assert.IsNotNull(gamePlatform);
-            Assert.AreEqual(gamePlatforms.List.Count, 0);
-
+           
             Assert.IsNotNull(foundgamePlatform);
             Assert.AreEqual(foundgamePlatform.GameId, gamePlatform.GameId);
 
@@ -809,8 +807,7 @@ namespace GameLibrary.gRpc.Client.Test
             gamePlatforms = client.SearchGamePlatformByPlatformId(gamePlatform.PlatformId);
 
             Assert.IsNotNull(gamePlatform);
-            Assert.AreEqual(gamePlatforms.List.Count, 0);
-
+           
             Assert.IsNotNull(foundgamePlatform);
             Assert.AreEqual(foundgamePlatform.PlatformId, gamePlatform.PlatformId);
 
@@ -1132,8 +1129,7 @@ namespace GameLibrary.gRpc.Client.Test
             gameRatings = client.SearchGameRatingByGameId(gameRating.GameId);
 
             Assert.IsNotNull(gameRating);
-            Assert.AreEqual(gameRatings.List.Count, 0);
-
+           
             Assert.IsNotNull(foundgameRating);
             Assert.AreEqual(foundgameRating.GameId, gameRating.GameId);
 
@@ -1142,8 +1138,7 @@ namespace GameLibrary.gRpc.Client.Test
             gameRatings = client.SearchGameRatingByRatingId(gameRating.RatingId);
 
             Assert.IsNotNull(gameRating);
-            Assert.AreEqual(gameRatings.List.Count, 0);
-
+            
             Assert.IsNotNull(foundgameRating);
             Assert.AreEqual(foundgameRating.RatingId, gameRating.RatingId);
 
