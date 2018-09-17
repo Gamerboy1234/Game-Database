@@ -3095,14 +3095,14 @@ namespace GameLibrary.gRPC.Client
                             {
                                 if (gameImageRecord != null)
                                 {
-                                    result.Add(new GameImage((int)gameImageRecord.GameimageId, (int)gameImageRecord.GameimageId, null));
+                                    result.Add(new GameImage((int)gameImageRecord.GameimageId, (int)gameImageRecord.GameId, null));
                                         
                                 }
 
                                 if (gameImageRecord.Image != null)
                                 {
 
-                                    result.Add(new GameImage((int)gameImageRecord.GameimageId, (int)gameImageRecord.GameimageId, gameImageRecord.Image.ToByteArray()));
+                                    result.Add(new GameImage((int)gameImageRecord.GameimageId, (int)gameImageRecord.GameId, gameImageRecord.Image.ToByteArray()));
 
                                 }
                             }
